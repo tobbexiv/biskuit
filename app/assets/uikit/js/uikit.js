@@ -3366,7 +3366,7 @@
             active    : 0,
             animation : false,
             duration  : 200,
-            swiping   : true
+            swiping   : false
         },
 
         animating: false,
