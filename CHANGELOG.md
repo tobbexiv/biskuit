@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.18 (December 7, 2019)
+
+### Changed
+- Upgrade uikit to version 2.27.5 (https://github.com/mirkobrombin/pagekit/issues/11)
+- Added the possibility to nicely integrate an amphtml link (https://github.com/mirkobrombin/pagekit/issues/3)
+- Changed primary color in backend
+- Added GitHub reference in backend
+
+### Security
+- Upgrade symfony/http-foundation to version 3.4.35 https://github.com/mirkobrombin/pagekit/issues/14
+
+### Fixed
+- Disabled swipe on text selection https://github.com/mirkobrombin/pagekit/issues/1
+- Avoid setting cookie_path if session was already started https://github.com/mirkobrombin/pagekit/issues/2
+- Exception: Warning: filemtime().. https://github.com/mirkobrombin/pagekit/issues/4
+- Unknown database type enum requested https://github.com/mirkobrombin/pagekit/issues/5
+- Fix heading anchor parsing in the Render.php https://github.com/mirkobrombin/pagekit/issues/6
+- Warning: "continue" targeting switch is equivalent to "break".. https://github.com/mirkobrombin/pagekit/issues/12
+
 ## 1.0.17 (July 11, 2019)
 
 ### Added
