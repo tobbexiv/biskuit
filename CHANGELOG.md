@@ -4,6 +4,10 @@
 
 ### Changed
 - Upgrade uikit to version 2.27.5 (https://github.com/mirkobrombin/pagekit/issues/11)
+- Upgrade composer to version 1.9
+- Upgrade symfony to version 4.3
+- Upgrade twig to version 2.11
+- Updated other dependencies
 - Added the possibility to nicely integrate an amphtml link (https://github.com/mirkobrombin/pagekit/issues/3)
 - Changed primary color in backend
 - Added GitHub reference in backend
