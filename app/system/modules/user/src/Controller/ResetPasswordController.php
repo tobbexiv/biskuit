@@ -43,33 +43,30 @@ class ResetPasswordController
                 throw new Exception(__('Enter a valid email address.'));
             }
 
-            if (!$user = User::findByEmail($email)) {
-                throw new Exception(__('Unknown email address.'));
+            if ($user = User::findByEmail($email)) {
+                if ($user->isBlocked()) {
+                    throw new Exception(__('Your account has not been activated or is blocked.'));
+                }
+
+                $key = App::get('auth.random')->generateString(32);
+                $url = App::url('@user/resetpassword/confirm', compact('key'), 0);
+
+                try {
+
+                    $mail = App::mailer()->create();
+                    $mail->setTo($user->email)
+                        ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
+                        ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
+                        ->send();
+
+                } catch (\Exception $e) {
+                    throw new Exception(__('Unable to send confirmation link.'));
+                }
+                $user->activation = $key;
+                $user->save();
             }
 
-            if ($user->isBlocked()) {
-                throw new Exception(__('Your account has not been activated or is blocked.'));
-            }
-
-            $key = App::get('auth.random')->generateString(32);
-            $url = App::url('@user/resetpassword/confirm', compact('key'), 0);
-
-            try {
-
-                $mail = App::mailer()->create();
-                $mail->setTo($user->email)
-                    ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
-                    ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
-                    ->send();
-
-            } catch (\Exception $e) {
-                throw new Exception(__('Unable to send confirmation link.'));
-            }
-
-            $user->activation = $key;
-            $user->save();
-
-            App::message()->success(__('Check your email for the confirmation link.'));
+            App::message()->success(__('If mail exists, you should have received a confirmation link.'));
 
             return App::redirect('@user/login');
 
