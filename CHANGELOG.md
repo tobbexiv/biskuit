@@ -14,7 +14,7 @@
 
 ### Security
 - Upgrade symfony/http-foundation to version 3.4.35 https://github.com/mirkobrombin/pagekit/issues/14
-
+- Password recovery allows user account enumeration https://github.com/mirkobrombin/pagekit/issues/10
 ### Fixed
 - Disabled swipe on text selection https://github.com/mirkobrombin/pagekit/issues/1
 - Avoid setting cookie_path if session was already started https://github.com/mirkobrombin/pagekit/issues/2
