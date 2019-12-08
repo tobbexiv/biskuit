@@ -9,12 +9,14 @@
 - Upgrade twig to version 2.11
 - Updated other dependencies
 - Added the possibility to nicely integrate an amphtml link (https://github.com/mirkobrombin/pagekit/issues/3)
+- Added support for webp in finder
 - Changed primary color in backend
 - Added GitHub reference in backend
 
 ### Security
 - Upgrade symfony/http-foundation to version 3.4.35 https://github.com/mirkobrombin/pagekit/issues/14
 - Password recovery allows user account enumeration https://github.com/mirkobrombin/pagekit/issues/10
+
 ### Fixed
 - Disabled swipe on text selection https://github.com/mirkobrombin/pagekit/issues/1
 - Avoid setting cookie_path if session was already started https://github.com/mirkobrombin/pagekit/issues/2
