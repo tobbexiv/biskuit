@@ -1,9 +1,9 @@
 [![biskuit Banner](https://raw.githubusercontent.com/mirkobrombin/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/mirkobrombin/pagekit)
 
-# Pagekit unofficial
-Pagekit is a modular and lightweight CMS built with Symfony components and Vue.js.
+# bis[ku]it (Pagekit unofficial)
+bis[ku]it is a modular and lightweight CMS built with Symfony components and Vue.js.
 
-This unofficial version was created to solve various problems. Mainly born for linuxhub.it, a portal that uses PageKit.
+This unofficial version of Pagekit was created to solve various problems. Mainly born for linuxhub.it, a portal that uses PageKit.
 
 The purpose is to solve various problems without introducing new features that could alter the structure of PageKit, allowing the update to the official branch in the future. However it is not said that in the future it is compatible with official updates and could take a completely different path.
 
