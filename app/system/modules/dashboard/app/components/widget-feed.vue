@@ -96,7 +96,7 @@
             },
             defaults: {
                 count: 5,
-                url: 'http://biskuit.org/blog/feed',
+                url: 'https://biskuit.org/blog/feed',
                 content: ''
             }
 
