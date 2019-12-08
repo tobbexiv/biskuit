@@ -472,7 +472,7 @@ class PagekitRequirements extends RequirementCollection
             );
         }
 
-        if (strpos(strtolower($_SERVER["SERVER_SOFTWARE"]), 'nginx')) {
+        if (strpos(strtolower($_SERVER["SERVER_SOFTWARE"]), 'nginx') === false) {
             $this->addRequirement(
                 file_exists("$path/.htaccess"),
                 ".htaccess does not exist",
