@@ -30,6 +30,30 @@ composer install
 ```
 Continue installing from browser.
 
+## Nginx configuration (optional)
+In Nginx the .htaccess files are not supported, below the instructions for the Nginx configuration:
+```
+location / {
+    location ~* ^.+\.(jpeg|jpg|png|gif|bmp|ico|svg|css|js)$ {
+        expires     max;
+    }
+    try_files $uri $uri/ /index.php$is_args$args;
+}
+
+location ~ ^/index\.php(/|$) {
+    fastcgi_pass   YOUR_SOCK;
+    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+    include /etc/nginx/fastcgi_params; # this may be different
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_param HTTP_MOD_REWRITE On;
+}
+
+location ~ \.php$ {
+    return 404;
+}
+
+```
+
 ## CLI
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
