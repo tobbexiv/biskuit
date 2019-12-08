@@ -1,4 +1,4 @@
-[![Pagekit Banner](https://raw.githubusercontent.com/mirkobrombin/biskuit-assets/master/brand/biskuit-cover.png)](https://github.com/mirkobrombin/pagekit)
+[![biskuit Banner](https://raw.githubusercontent.com/mirkobrombin/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/mirkobrombin/pagekit)
 
 # Pagekit unofficial
 Pagekit is a modular and lightweight CMS built with Symfony components and Vue.js.
