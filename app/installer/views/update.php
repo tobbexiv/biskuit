@@ -26,6 +26,7 @@
                 <span>{{ 'Update' | trans }}</span>
             </a>
             <a class="uk-button" :href="update.url">{{ 'Download %version%' | trans update }}</a>
+            <a class="uk-button" href="https://github.com/mirkobrombin/pagekit">{{ 'Source code' | trans update }}</a>
         </p>
 
         <hr class="uk-margin-large">
