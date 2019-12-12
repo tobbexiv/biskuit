@@ -36,7 +36,7 @@
                     </div>
                     <div class="tm-contrast">
 
-                        <ul class="uk-grid uk-grid-small uk-flex-middle">
+			<ul class="uk-grid uk-grid-small uk-flex-middle">
                             <li><a class="tm-icon-github uk-icon-github" href="https://github.com/mirkobrombin/pagekit" :title="GitHub" target="_blank"></a></li>
                             <li><a class="tm-icon-help" href="https://github.com/mirkobrombin/pagekit/issues" :title="'Get Help' | trans" target="_blank"></a></li>
                             <li><a class="tm-icon-visit" :href="$url.route('')" :title="'Visit Site' | trans" target="_blank"></a></li>
