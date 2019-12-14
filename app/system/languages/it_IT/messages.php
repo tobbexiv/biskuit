@@ -252,7 +252,7 @@
   'New' => 'Nuovo',
   'Filter by' => 'Filtra per',
   'User Type' => 'Tipo Utente',
-  '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' => '{0} Nessun utente registrato|{1} Ultimo %users% utente registrato|]1,Inf[ Ultimi %users% utenti registrati',
+  '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' => '{0} Nessun utente registrato|{1} Ultimo utente registrato|]1,Inf[ Ultimi %users% utenti registrati',
   'User Login' => 'Login Utente',
   'User Logout' => 'Logout utente',
   'User Registration' => 'Registrazione Utente',
