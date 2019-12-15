@@ -55,6 +55,9 @@ Pagekit offers a set of commands to run usual tasks on the command line. You can
 ./pagekit --help
 ```
 
+## Documentation
+You can read the documentation (here)[https://github.com/biskuitorg/docs].
+
 ## Contributing
 
 Finding bugs, sending pull requests, translating Pagekit or improving our docs -
