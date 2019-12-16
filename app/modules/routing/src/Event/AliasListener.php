@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Routing\Event;
+namespace Biskuit\Routing\Event;
 
-use Pagekit\Event\Event;
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Routing\Route;
-use Pagekit\Routing\Routes;
+use Biskuit\Event\Event;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\Routing\Route;
+use Biskuit\Routing\Routes;
 use Symfony\Component\Routing\RouteCollection;
 
 class AliasListener implements EventSubscriberInterface

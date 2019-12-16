@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing\Generator;
+namespace Biskuit\Routing\Generator;
 
 use Symfony\Component\Routing\Generator\Dumper\GeneratorDumper;
 

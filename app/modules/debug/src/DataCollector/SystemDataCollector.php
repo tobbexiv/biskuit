@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Debug\DataCollector;
+namespace Biskuit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
-use Pagekit\Info\InfoHelper;
+use Biskuit\Info\InfoHelper;
 
 class SystemDataCollector implements DataCollectorInterface
 {

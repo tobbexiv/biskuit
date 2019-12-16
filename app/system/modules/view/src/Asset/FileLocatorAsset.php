@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\View\Asset;
+namespace Biskuit\View\Asset;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 class FileLocatorAsset extends FileAsset
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\User\Model;
+namespace Biskuit\User\Model;
 
-use Pagekit\Application\Exception;
-use Pagekit\Auth\UserInterface;
-use Pagekit\System\Model\DataModelTrait;
+use Biskuit\Application\Exception;
+use Biskuit\Auth\UserInterface;
+use Biskuit\System\Model\DataModelTrait;
 
 /**
  * @Entity(tableClass="@system_user")

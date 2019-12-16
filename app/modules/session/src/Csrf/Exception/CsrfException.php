@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Session\Csrf\Exception;
+namespace Biskuit\Session\Csrf\Exception;
 
-use Pagekit\Kernel\Exception\UnauthorizedException;
+use Biskuit\Kernel\Exception\UnauthorizedException;
 
 class CsrfException extends UnauthorizedException
 {

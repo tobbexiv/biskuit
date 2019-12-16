@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Log\Handler;
+namespace Biskuit\Log\Handler;
 
 use DebugBar\DataCollector\DataCollectorInterface;
 use Monolog\Handler\AbstractHandler;

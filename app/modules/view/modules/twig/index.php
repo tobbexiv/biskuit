@@ -1,8 +1,8 @@
 <?php
 
-use Pagekit\Twig\TwigCache;
-use Pagekit\Twig\TwigLoader;
-use Pagekit\View\Loader\FilesystemLoader;
+use Biskuit\Twig\TwigCache;
+use Biskuit\Twig\TwigLoader;
+use Biskuit\View\Loader\FilesystemLoader;
 use Symfony\Component\Templating\Loader\FilesystemLoader as SymfonyFilesystemLoader;
 
 return [
@@ -31,7 +31,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Twig\\' => 'src'
+        'Biskuit\\Twig\\' => 'src'
 
     ]
 

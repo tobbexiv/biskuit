@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Debug;
+namespace Biskuit\Debug;
 
 use DebugBar\DebugBar as BaseDebugBar;
 

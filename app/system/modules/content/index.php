@@ -1,9 +1,9 @@
 <?php
 
-use Pagekit\Content\ContentHelper;
-use Pagekit\Content\Plugin\MarkdownPlugin;
-use Pagekit\Content\Plugin\SimplePlugin;
-use Pagekit\Content\Plugin\VideoPlugin;
+use Biskuit\Content\ContentHelper;
+use Biskuit\Content\Plugin\MarkdownPlugin;
+use Biskuit\Content\Plugin\SimplePlugin;
+use Biskuit\Content\Plugin\VideoPlugin;
 
 return [
 
@@ -25,7 +25,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Content\\' => 'src'
+        'Biskuit\\Content\\' => 'src'
 
     ]
 

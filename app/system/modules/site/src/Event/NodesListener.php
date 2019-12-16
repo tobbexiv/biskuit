@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Site\Event;
+namespace Biskuit\Site\Event;
 
-use Pagekit\Application as App;
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Site\Model\Node;
+use Biskuit\Application as App;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\Site\Model\Node;
 
 class NodesListener implements EventSubscriberInterface
 {

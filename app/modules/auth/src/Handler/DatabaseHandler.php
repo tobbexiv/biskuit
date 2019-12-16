@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Auth\Handler;
+namespace Biskuit\Auth\Handler;
 
-use Pagekit\Cookie\CookieJar;
-use Pagekit\Database\Connection;
+use Biskuit\Cookie\CookieJar;
+use Biskuit\Database\Connection;
 use RandomLib\Generator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -143,7 +143,7 @@ class DatabaseHandler implements HandlerInterface
     }
 
     /**
-     * @deprecated to be removed in Pagekit 1.0
+     * @deprecated to be removed in Biskuit 1.0
      */
     protected function createTable()
     {

@@ -13,7 +13,7 @@
 	bootstrap					= "./app/modules/application/src/Tests/bootstrap.php">
 
     <testsuites>
-        <testsuite name="Pagekit Tests">
+        <testsuite name="Biskuit Tests">
     		<directory>./app/modules/*/src/</directory>
             <directory>./app/system/modules/*/src/</directory>
         </testsuite>

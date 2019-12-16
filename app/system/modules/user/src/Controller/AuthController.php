@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\User\Controller;
+namespace Biskuit\User\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Auth\Auth;
-use Pagekit\Auth\Exception\AuthException;
-use Pagekit\Auth\Exception\BadCredentialsException;
-use Pagekit\Session\Csrf\Exception\CsrfException;
+use Biskuit\Application as App;
+use Biskuit\Auth\Auth;
+use Biskuit\Auth\Exception\AuthException;
+use Biskuit\Auth\Exception\BadCredentialsException;
+use Biskuit\Session\Csrf\Exception\CsrfException;
 
 class AuthController
 {

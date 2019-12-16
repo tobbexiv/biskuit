@@ -1,14 +1,14 @@
 <?php
 
-namespace Pagekit\Auth;
+namespace Biskuit\Auth;
 
-use Pagekit\Auth\Event\AuthenticateEvent;
-use Pagekit\Auth\Event\AuthorizeEvent;
-use Pagekit\Auth\Event\LoginEvent;
-use Pagekit\Auth\Event\LogoutEvent;
-use Pagekit\Auth\Exception\BadCredentialsException;
-use Pagekit\Auth\Handler\HandlerInterface;
-use Pagekit\Event\EventDispatcherInterface;
+use Biskuit\Auth\Event\AuthenticateEvent;
+use Biskuit\Auth\Event\AuthorizeEvent;
+use Biskuit\Auth\Event\LoginEvent;
+use Biskuit\Auth\Event\LogoutEvent;
+use Biskuit\Auth\Exception\BadCredentialsException;
+use Biskuit\Auth\Handler\HandlerInterface;
+use Biskuit\Event\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class Auth

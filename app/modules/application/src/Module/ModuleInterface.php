@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Module;
+namespace Biskuit\Module;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 interface ModuleInterface
 {

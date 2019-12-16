@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Routing\Request;
+namespace Biskuit\Routing\Request;
 
-use Pagekit\Filter\FilterManager;
+use Biskuit\Filter\FilterManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class ParamFetcher implements ParamFetcherInterface

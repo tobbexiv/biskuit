@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Auth\Event;
+namespace Biskuit\Auth\Event;
 
 class AuthorizeEvent extends Event
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Markdown;
+namespace Biskuit\Markdown;
 
 class Renderer
 {

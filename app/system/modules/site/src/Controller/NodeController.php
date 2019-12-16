@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Site\Controller;
+namespace Biskuit\Site\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Site\Model\Node;
-use Pagekit\User\Model\Role;
+use Biskuit\Application as App;
+use Biskuit\Site\Model\Node;
+use Biskuit\User\Model\Role;
 
 class NodeController
 {

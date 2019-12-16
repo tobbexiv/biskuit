@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Mail;
+namespace Biskuit\Mail;
 
 interface MessageInterface
 {

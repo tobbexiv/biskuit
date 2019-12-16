@@ -3,12 +3,12 @@
 ## 1.0.18 (December 7, 2019)
 
 ### Changed
-- Upgrade uikit to version 2.27.5 (https://github.com/mirkobrombin/pagekit/issues/11)
+- Upgrade uikit to version 2.27.5 (https://github.com/biskuitorg/biskuit/issues/11)
 - Upgrade composer to version 1.9
 - Upgrade symfony to version 4.3
 - Upgrade twig to version 2.11
 - Updated other dependencies
-- Added the possibility to nicely integrate an amphtml link (https://github.com/mirkobrombin/pagekit/issues/3)
+- Added the possibility to nicely integrate an amphtml link (https://github.com/biskuitorg/biskuit/issues/3)
 - Added support for webp in findery
 - Changed primary color in backend
 - Added GitHub reference in backend
@@ -16,16 +16,16 @@
 - Now at least version 7.2.0 of PHP is required
 
 ### Security
-- Upgrade symfony/http-foundation to version 3.4.35 https://github.com/mirkobrombin/pagekit/issues/14
-- Password recovery allows user account enumeration https://github.com/mirkobrombin/pagekit/issues/10
+- Upgrade symfony/http-foundation to version 3.4.35 https://github.com/biskuitorg/biskuit/issues/14
+- Password recovery allows user account enumeration https://github.com/biskuitorg/biskuit/issues/10
 
 ### Fixed
-- Disabled swipe on text selection https://github.com/mirkobrombin/pagekit/issues/1
-- Avoid setting cookie_path if session was already started https://github.com/mirkobrombin/pagekit/issues/2
-- Exception: Warning: filemtime().. https://github.com/mirkobrombin/pagekit/issues/4
-- Unknown database type enum requested https://github.com/mirkobrombin/pagekit/issues/5
-- Fix heading anchor parsing in the Render.php https://github.com/mirkobrombin/pagekit/issues/6
-- Warning: "continue" targeting switch is equivalent to "break".. https://github.com/mirkobrombin/pagekit/issues/12
+- Disabled swipe on text selection https://github.com/biskuitorg/biskuit/issues/1
+- Avoid setting cookie_path if session was already started https://github.com/biskuitorg/biskuit/issues/2
+- Exception: Warning: filemtime().. https://github.com/biskuitorg/biskuit/issues/4
+- Unknown database type enum requested https://github.com/biskuitorg/biskuit/issues/5
+- Fix heading anchor parsing in the Render.php https://github.com/biskuitorg/biskuit/issues/6
+- Warning: "continue" targeting switch is equivalent to "break".. https://github.com/biskuitorg/biskuit/issues/12
 
 ## 1.0.17 (July 11, 2019)
 
@@ -228,7 +228,7 @@
 
 ### Added
 - Added OpenGraph and Twitter Cards
-- Added CLI command to setup Pagekit installation
+- Added CLI command to setup Biskuit installation
 - Added redirect after login to user settings
 - Added view.init event
 - Added global params object to view
@@ -265,7 +265,7 @@
 - Added filter and ordering highlighting
 
 ### Changed
-- Bundled Pagekit installer
+- Bundled Biskuit installer
 - Updated to Symfony 3.0
 - Hide Trash menu from Site node picker
 - Deny cross site redirects after login and logout
@@ -282,7 +282,7 @@
 - Fixed Gravatar retina resolution
 - Fixed Gravatar mutual exclusion
 - Fixed Finder thumbnails for file names containing HTML special chars
-- Fixed distinguish Pagekit instances at same domain
+- Fixed distinguish Biskuit instances at same domain
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
@@ -295,8 +295,8 @@
 ## 0.10.3 (February 19, 2016)
 
 ### Changed
-- Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)
-- Prepared self updater for bundled versions of Pagekit
+- Increased package installation speed by disabling usage of Packagist repository (Biskuit API now provides a subset of required Packagist dependencies)
+- Prepared self updater for bundled versions of Biskuit
 
 ## 0.10.2 (January 11, 2016)
 
@@ -383,7 +383,7 @@
 ## 0.9.2 (October 8, 2015)
 
 ### Added
-- Added Https for Pagekit API (#415)
+- Added Https for Biskuit API (#415)
 - Added site title to browser title
 - Added Mysql character set compatibility (#434, #465)
 - Added sections tabs in user edit view (#390)
@@ -396,7 +396,7 @@
 ### Removed
 - Removed usage of environment variables (#428)
 - Removed site description
-- Removed Pagekit version from generator tag
+- Removed Biskuit version from generator tag
 
 ### Fixed
 - Fixed user widget ordering

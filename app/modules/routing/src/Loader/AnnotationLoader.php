@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Routing\Loader;
+namespace Biskuit\Routing\Loader;
 
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
-use Pagekit\Routing\Annotation\Route as RouteAnnotation;
-use Pagekit\Routing\Route;
+use Biskuit\Routing\Annotation\Route as RouteAnnotation;
+use Biskuit\Routing\Route;
 
 class AnnotationLoader implements LoaderInterface
 {
@@ -23,7 +23,7 @@ class AnnotationLoader implements LoaderInterface
     /**
      * @var string
      */
-    protected $routeAnnotation = 'Pagekit\Routing\Annotation\Route';
+    protected $routeAnnotation = 'Biskuit\Routing\Annotation\Route';
 
     /**
      * Constructor.
@@ -140,7 +140,7 @@ class AnnotationLoader implements LoaderInterface
     {
         if (!$this->reader) {
             $this->reader = new SimpleAnnotationReader();
-            $this->reader->addNamespace('Pagekit\Routing\Annotation');
+            $this->reader->addNamespace('Biskuit\Routing\Annotation');
         }
 
         return $this->reader;

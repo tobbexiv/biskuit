@@ -1,13 +1,13 @@
 <?php
 
-use Pagekit\Installer\Package\PackageScripts;
-use Pagekit\Kernel\Event\ExceptionListener;
+use Biskuit\Installer\Package\PackageScripts;
+use Biskuit\Kernel\Event\ExceptionListener;
 
 return [
 
     'name' => 'system',
 
-    'main' => 'Pagekit\\System\\SystemModule',
+    'main' => 'Biskuit\\System\\SystemModule',
 
     'include' => 'modules/*/index.php',
 
@@ -40,11 +40,11 @@ return [
 
         '/' => [
             'name' => '@system',
-            'controller' => 'Pagekit\\System\\Controller\\AdminController'
+            'controller' => 'Biskuit\\System\\Controller\\AdminController'
         ],
         '/system/migration' => [
             'name' => '@system/migration',
-            'controller' => 'Pagekit\\System\\Controller\\MigrationController'
+            'controller' => 'Biskuit\\System\\Controller\\MigrationController'
         ]
 
     ],
@@ -81,7 +81,7 @@ return [
         'boot' => function ($event, $app) {
 
             if (!$app['debug']) {
-                $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
+                $app->subscribe(new ExceptionListener('Biskuit\System\Controller\ExceptionController::showAction'));
             }
 
             $app['db.em']; // -TODO- fix me

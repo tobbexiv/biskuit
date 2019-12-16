@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Kernel\Event;
+namespace Biskuit\Kernel\Event;
 
-use Pagekit\Kernel\HttpKernelInterface;
+use Biskuit\Kernel\HttpKernelInterface;
 
 class ExceptionEvent extends KernelEvent
 {

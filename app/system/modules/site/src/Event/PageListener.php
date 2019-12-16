@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Site\Event;
+namespace Biskuit\Site\Event;
 
-use Pagekit\Application as App;
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Site\Model\Page;
+use Biskuit\Application as App;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\Site\Model\Page;
 
 class PageListener implements EventSubscriberInterface
 {

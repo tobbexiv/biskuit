@@ -1,8 +1,8 @@
 <?php
 
-use Pagekit\Application\Response;
-use Pagekit\Application\UrlProvider;
-use Pagekit\Kernel\ExceptionHandler;
+use Biskuit\Application\Response;
+use Biskuit\Application\UrlProvider;
+use Biskuit\Kernel\ExceptionHandler;
 use Symfony\Component\Debug\ErrorHandler;
 
 return [

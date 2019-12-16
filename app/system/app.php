@@ -1,8 +1,8 @@
 <?php
 
-use Pagekit\Application as App;
-use Pagekit\Module\Loader\AutoLoader;
-use Pagekit\Module\Loader\ConfigLoader;
+use Biskuit\Application as App;
+use Biskuit\Module\Loader\AutoLoader;
+use Biskuit\Module\Loader\ConfigLoader;
 
 $loader = require $path.'/autoload.php';
 

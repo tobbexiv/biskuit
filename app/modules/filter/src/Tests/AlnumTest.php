@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\AlnumFilter;
+use Biskuit\Filter\AlnumFilter;
 
 class AlnumTest extends \PHPUnit_Framework_TestCase
 {

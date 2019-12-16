@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Auth\Exception;
+namespace Biskuit\Auth\Exception;
 
-use Pagekit\Auth\UserInterface;
+use Biskuit\Auth\UserInterface;
 
 class AuthException extends \Exception
 {

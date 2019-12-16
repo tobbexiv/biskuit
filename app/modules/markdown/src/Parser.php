@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Markdown;
+namespace Biskuit\Markdown;
 
-use Pagekit\Markdown\Lexer\InlineLexer;
+use Biskuit\Markdown\Lexer\InlineLexer;
 
 class Parser
 {

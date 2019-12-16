@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Biskuit\View\Helper;
 
-use Pagekit\Application\UrlProvider;
-use Pagekit\Routing\Generator\UrlGenerator;
+use Biskuit\Application\UrlProvider;
+use Biskuit\Routing\Generator\UrlGenerator;
 
 class UrlHelper extends Helper
 {

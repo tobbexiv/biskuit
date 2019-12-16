@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Markdown\Markdown;
+use Biskuit\Markdown\Markdown;
 
 return [
 
@@ -16,7 +16,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Markdown\\' => 'src'
+        'Biskuit\\Markdown\\' => 'src'
 
     ]
 

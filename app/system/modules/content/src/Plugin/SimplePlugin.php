@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Content\Plugin;
+namespace Biskuit\Content\Plugin;
 
-use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Content\Event\ContentEvent;
+use Biskuit\Event\EventSubscriberInterface;
 
 class SimplePlugin implements EventSubscriberInterface
 {

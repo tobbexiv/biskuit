@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\DigitsFilter;
+use Biskuit\Filter\DigitsFilter;
 
 class DigitsTest extends \PHPUnit_Framework_TestCase
 {

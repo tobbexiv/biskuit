@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Comment;
+namespace Biskuit\Comment;
 
-use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Content\Event\ContentEvent;
+use Biskuit\Event\EventSubscriberInterface;
 
 class CommentPlugin implements EventSubscriberInterface
 {

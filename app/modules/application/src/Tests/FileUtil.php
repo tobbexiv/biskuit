@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Tests;
+namespace Biskuit\Tests;
 
 trait FileUtil
 {

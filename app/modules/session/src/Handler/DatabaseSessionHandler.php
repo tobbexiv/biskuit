@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Session\Handler;
+namespace Biskuit\Session\Handler;
 
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Pagekit\Database\Connection;
+use Biskuit\Database\Connection;
 
 class DatabaseSessionHandler implements \SessionHandlerInterface
 {

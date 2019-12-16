@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Twig;
+namespace Biskuit\Twig;
 
-use Pagekit\View\Loader\FilesystemLoader;
+use Biskuit\View\Loader\FilesystemLoader;
 use Symfony\Component\Templating\TemplateNameParser;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Util;
+namespace Biskuit\Util;
 
 class Arr
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\View\Event;
+namespace Biskuit\View\Event;
 
-use Pagekit\Event\Event;
+use Biskuit\Event\Event;
 
 class ViewEvent extends Event
 {

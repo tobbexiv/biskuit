@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Site;
+namespace Biskuit\Site;
 
-use Pagekit\Application as App;
-use Pagekit\Config\Config;
+use Biskuit\Application as App;
+use Biskuit\Config\Config;
 
 class MenuManager implements \JsonSerializable
 {

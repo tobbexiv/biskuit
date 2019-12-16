@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Widget\Model;
+namespace Biskuit\Widget\Model;
 
 interface TypeInterface extends \JsonSerializable
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\View\Asset;
+namespace Biskuit\View\Asset;
 
 class AssetFactory
 {
@@ -8,9 +8,9 @@ class AssetFactory
      * @var array
      */
     protected $types = [
-        'file'   => 'Pagekit\View\Asset\FileAsset',
-        'string' => 'Pagekit\View\Asset\StringAsset',
-        'url'    => 'Pagekit\View\Asset\UrlAsset'
+        'file'   => 'Biskuit\View\Asset\FileAsset',
+        'string' => 'Biskuit\View\Asset\StringAsset',
+        'url'    => 'Biskuit\View\Asset\UrlAsset'
     ];
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\User\Auth;
+namespace Biskuit\User\Auth;
 
-use Pagekit\Auth\Encoder\PasswordEncoderInterface;
-use Pagekit\Auth\UserInterface;
-use Pagekit\Auth\UserProviderInterface;
-use Pagekit\User\Model\User;
+use Biskuit\Auth\Encoder\PasswordEncoderInterface;
+use Biskuit\Auth\UserInterface;
+use Biskuit\Auth\UserProviderInterface;
+use Biskuit\User\Model\User;
 
 class UserProvider implements UserProviderInterface
 {

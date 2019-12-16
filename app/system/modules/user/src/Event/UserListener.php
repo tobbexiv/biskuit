@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\User\Event;
+namespace Biskuit\User\Event;
 
-use Pagekit\Application as App;
-use Pagekit\Auth\Event\LoginEvent;
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\User\Model\User;
+use Biskuit\Application as App;
+use Biskuit\Auth\Event\LoginEvent;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\User\Model\User;
 
 class UserListener implements EventSubscriberInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Twig;
+namespace Biskuit\Twig;
 
 class TwigCache extends \Twig_Cache_Filesystem
 {

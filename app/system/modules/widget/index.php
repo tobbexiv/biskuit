@@ -1,9 +1,9 @@
 <?php
 
-use Pagekit\Widget\Model\Widget;
-use Pagekit\Widget\PositionHelper;
-use Pagekit\Widget\PositionManager;
-use Pagekit\Widget\WidgetManager;
+use Biskuit\Widget\Model\Widget;
+use Biskuit\Widget\PositionHelper;
+use Biskuit\Widget\PositionManager;
+use Biskuit\Widget\WidgetManager;
 
 return [
 
@@ -39,7 +39,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Widget\\' => 'src'
+        'Biskuit\\Widget\\' => 'src'
 
     ],
 
@@ -47,11 +47,11 @@ return [
 
         '/site/widget' => [
             'name' => '@site/widget',
-            'controller' => 'Pagekit\\Widget\\Controller\\WidgetController'
+            'controller' => 'Biskuit\\Widget\\Controller\\WidgetController'
         ],
         '/api/site/widget' => [
             'name' => '@site/api/widget',
-            'controller' => 'Pagekit\\Widget\\Controller\\WidgetApiController'
+            'controller' => 'Biskuit\\Widget\\Controller\\WidgetApiController'
         ]
 
     ],

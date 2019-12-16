@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Intl\Loader;
+namespace Biskuit\Intl\Loader;
 
 use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\MessageCatalogue;

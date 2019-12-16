@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Model;
+namespace Biskuit\System\Model;
 
 trait NodeTrait
 {

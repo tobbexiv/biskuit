@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Widget;
+namespace Biskuit\Widget;
 
-use Pagekit\Application as App;
-use Pagekit\View\Helper\Helper;
-use Pagekit\Widget\Model\Widget;
+use Biskuit\Application as App;
+use Biskuit\View\Helper\Helper;
+use Biskuit\Widget\Model\Widget;
 
 class PositionHelper extends Helper
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Database\Types;
+namespace Biskuit\Database\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\SimpleArrayType as BaseSimpleArrayType;

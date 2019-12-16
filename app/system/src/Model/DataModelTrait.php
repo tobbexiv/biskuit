@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\System\Model;
+namespace Biskuit\System\Model;
 
-use Pagekit\Util\Arr;
+use Biskuit\Util\Arr;
 
 trait DataModelTrait
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Site\Controller;
+namespace Biskuit\Site\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Config\Config;
-use Pagekit\Kernel\Exception\ConflictException;
-use Pagekit\Site\Model\Node;
+use Biskuit\Application as App;
+use Biskuit\Config\Config;
+use Biskuit\Kernel\Exception\ConflictException;
+use Biskuit\Site\Model\Node;
 
 /**
  * @Access("site: manage site")

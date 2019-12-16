@@ -1,13 +1,13 @@
 <?php
 
-namespace Pagekit\Intl;
+namespace Biskuit\Intl;
 
-use Pagekit\Application as App;
-use Pagekit\Intl\Loader\ArrayLoader;
-use Pagekit\Intl\Loader\MoFileLoader;
-use Pagekit\Intl\Loader\PhpFileLoader;
-use Pagekit\Intl\Loader\PoFileLoader;
-use Pagekit\Module\Module;
+use Biskuit\Application as App;
+use Biskuit\Intl\Loader\ArrayLoader;
+use Biskuit\Intl\Loader\MoFileLoader;
+use Biskuit\Intl\Loader\PhpFileLoader;
+use Biskuit\Intl\Loader\PoFileLoader;
+use Biskuit\Module\Module;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;

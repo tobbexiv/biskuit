@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Database\ORM;
+namespace Biskuit\Database\ORM;
 
-use Pagekit\Database\Connection;
+use Biskuit\Database\Connection;
 
 trait ModelTrait
 {

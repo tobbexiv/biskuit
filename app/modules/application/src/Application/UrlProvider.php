@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Application;
+namespace Biskuit\Application;
 
-use Pagekit\Filesystem\Filesystem;
-use Pagekit\Filesystem\Locator;
-use Pagekit\Routing\Generator\UrlGenerator;
-use Pagekit\Routing\Router;
+use Biskuit\Filesystem\Filesystem;
+use Biskuit\Filesystem\Locator;
+use Biskuit\Routing\Generator\UrlGenerator;
+use Biskuit\Routing\Router;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;

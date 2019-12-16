@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Filter;
+namespace Biskuit\Filter;
 
 class FilterManager
 {
@@ -8,20 +8,20 @@ class FilterManager
      * @var array
      */
     protected $defaults = [
-        'addrelnofollow' => 'Pagekit\Filter\AddRelNofollowFilter',
-        'alnum'          => 'Pagekit\Filter\AlnumFilter',
-        'alpha'          => 'Pagekit\Filter\AlphaFilter',
-        'bool'           => 'Pagekit\Filter\BooleanFilter',
-        'boolean'        => 'Pagekit\Filter\BooleanFilter',
-        'digits'         => 'Pagekit\Filter\DigitsFilter',
-        'int'            => 'Pagekit\Filter\IntFilter',
-        'integer'        => 'Pagekit\Filter\IntFilter',
-        'float'          => 'Pagekit\Filter\FloatFilter',
-        'json'           => 'Pagekit\Filter\JsonFilter',
-        'pregreplace'    => 'Pagekit\Filter\PregReplaceFilter',
-        'slugify'        => 'Pagekit\Filter\SlugifyFilter',
-        'string'         => 'Pagekit\Filter\StringFilter',
-        'stripnewlines'  => 'Pagekit\Filter\StripNewlinesFilter'
+        'addrelnofollow' => 'Biskuit\Filter\AddRelNofollowFilter',
+        'alnum'          => 'Biskuit\Filter\AlnumFilter',
+        'alpha'          => 'Biskuit\Filter\AlphaFilter',
+        'bool'           => 'Biskuit\Filter\BooleanFilter',
+        'boolean'        => 'Biskuit\Filter\BooleanFilter',
+        'digits'         => 'Biskuit\Filter\DigitsFilter',
+        'int'            => 'Biskuit\Filter\IntFilter',
+        'integer'        => 'Biskuit\Filter\IntFilter',
+        'float'          => 'Biskuit\Filter\FloatFilter',
+        'json'           => 'Biskuit\Filter\JsonFilter',
+        'pregreplace'    => 'Biskuit\Filter\PregReplaceFilter',
+        'slugify'        => 'Biskuit\Filter\SlugifyFilter',
+        'string'         => 'Biskuit\Filter\StringFilter',
+        'stripnewlines'  => 'Biskuit\Filter\StripNewlinesFilter'
     ];
 
     /**

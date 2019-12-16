@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Site;
+namespace Biskuit\Site;
 
-use Pagekit\Application as App;
-use Pagekit\Module\Module;
-use Pagekit\Site\Model\Node;
+use Biskuit\Application as App;
+use Biskuit\Module\Module;
+use Biskuit\Site\Model\Node;
 
 class SiteModule extends Module
 {

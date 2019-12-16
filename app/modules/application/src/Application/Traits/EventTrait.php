@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Application\Traits;
+namespace Biskuit\Application\Traits;
 
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Event\EventSubscriberInterface;
 
 trait EventTrait
 {

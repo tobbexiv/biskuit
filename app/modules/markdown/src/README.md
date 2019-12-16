@@ -9,7 +9,7 @@ PHP Markdown parser and compiler.
 
 ```php
 
-use Pagekit\Markdown\Markdown;
+use Biskuit\Markdown\Markdown;
 
 $options = array(
     'gfm'         => true,

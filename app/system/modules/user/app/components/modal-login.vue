@@ -5,7 +5,7 @@
 
             <div class="uk-text-center">
 
-                <img class="uk-margin" :src="$url('app/system/assets/images/pagekit-logo-text-black.svg')" alt="Pagekit">
+                <img class="uk-margin" :src="$url('app/system/assets/images/biskuit-logo-text-black.svg')" alt="Biskuit">
 
                 <p class="uk-text-danger">{{ 'Session expired. Please log in again.' | trans }}</p>
 
@@ -85,7 +85,7 @@
                     if (res.data.csrf) {
 
                         this.$cache.set('_csrf', res.data.csrf);
-                        this.$cache.set('_session', window.$pagekit.csrf);
+                        this.$cache.set('_session', window.$biskuit.csrf);
                         this.$session.flush();
 
                         return login();

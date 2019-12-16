@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit;
+namespace Biskuit;
 
-use Pagekit\Application\Traits\EventTrait;
-use Pagekit\Application\Traits\RouterTrait;
-use Pagekit\Application\Traits\StaticTrait;
-use Pagekit\Event\EventDispatcher;
-use Pagekit\Module\ModuleManager;
+use Biskuit\Application\Traits\EventTrait;
+use Biskuit\Application\Traits\RouterTrait;
+use Biskuit\Application\Traits\StaticTrait;
+use Biskuit\Event\EventDispatcher;
+use Biskuit\Module\ModuleManager;
 use Symfony\Component\HttpFoundation\Request;
 
 class Application extends Container

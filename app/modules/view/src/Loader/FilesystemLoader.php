@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\View\Loader;
+namespace Biskuit\View\Loader;
 
-use Pagekit\Filesystem\Locator;
+use Biskuit\Filesystem\Locator;
 use Symfony\Component\Templating\Loader\LoaderInterface;
 use Symfony\Component\Templating\Storage\FileStorage;
 use Symfony\Component\Templating\TemplateReferenceInterface;

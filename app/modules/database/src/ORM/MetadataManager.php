@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Database\ORM;
+namespace Biskuit\Database\ORM;
 
 use Doctrine\Common\Cache\Cache;
-use Pagekit\Database\Connection;
-use Pagekit\Database\ORM\Loader\LoaderInterface;
-use Pagekit\Event\EventDispatcherInterface;
+use Biskuit\Database\Connection;
+use Biskuit\Database\ORM\Loader\LoaderInterface;
+use Biskuit\Event\EventDispatcherInterface;
 
 class MetadataManager
 {

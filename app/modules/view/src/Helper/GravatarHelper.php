@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Biskuit\View\Helper;
 
 class GravatarHelper extends Helper
 {

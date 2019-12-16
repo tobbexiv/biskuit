@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Database\ORM\Relation;
+namespace Biskuit\Database\ORM\Relation;
 
-use Pagekit\Database\ORM\QueryBuilder;
+use Biskuit\Database\ORM\QueryBuilder;
 
 class BelongsTo extends Relation
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Installer\Package;
+namespace Biskuit\Installer\Package;
 
 interface PackageInterface extends \JsonSerializable
 {

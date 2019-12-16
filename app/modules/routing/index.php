@@ -1,16 +1,16 @@
 <?php
 
-use Pagekit\Filter\FilterManager;
-use Pagekit\Kernel\Exception\HttpException;
-use Pagekit\Routing\Event\AliasListener;
-use Pagekit\Routing\Event\ConfigureRouteListener;
-use Pagekit\Routing\Event\RouterListener;
-use Pagekit\Routing\Loader\RoutesLoader;
-use Pagekit\Routing\Middleware;
-use Pagekit\Routing\Request\ParamFetcher;
-use Pagekit\Routing\Request\ParamFetcherListener;
-use Pagekit\Routing\Router;
-use Pagekit\Routing\Routes;
+use Biskuit\Filter\FilterManager;
+use Biskuit\Kernel\Exception\HttpException;
+use Biskuit\Routing\Event\AliasListener;
+use Biskuit\Routing\Event\ConfigureRouteListener;
+use Biskuit\Routing\Event\RouterListener;
+use Biskuit\Routing\Loader\RoutesLoader;
+use Biskuit\Routing\Middleware;
+use Biskuit\Routing\Request\ParamFetcher;
+use Biskuit\Routing\Request\ParamFetcherListener;
+use Biskuit\Routing\Router;
+use Biskuit\Routing\Routes;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 return [
@@ -97,7 +97,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Routing\\' => 'src'
+        'Biskuit\\Routing\\' => 'src'
 
     ]
 

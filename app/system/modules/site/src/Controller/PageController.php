@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Site\Controller;
+namespace Biskuit\Site\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Site\Model\Page;
+use Biskuit\Application as App;
+use Biskuit\Site\Model\Page;
 
 class PageController
 {

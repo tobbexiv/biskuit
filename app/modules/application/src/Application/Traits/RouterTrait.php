@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Application\Traits;
+namespace Biskuit\Application\Traits;
 
-use Pagekit\Kernel\Event\ExceptionListenerWrapper;
+use Biskuit\Kernel\Event\ExceptionListenerWrapper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

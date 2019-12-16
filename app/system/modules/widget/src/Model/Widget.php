@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Widget\Model;
+namespace Biskuit\Widget\Model;
 
-use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\System\Model\DataModelTrait;
-use Pagekit\User\Model\AccessModelTrait;
+use Biskuit\Database\ORM\ModelTrait;
+use Biskuit\System\Model\DataModelTrait;
+use Biskuit\User\Model\AccessModelTrait;
 
 /**
  * @Entity(tableClass="@system_widget")

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Database\ORM;
+namespace Biskuit\Database\ORM;
 
-use Pagekit\Database\Connection;
-use Pagekit\Database\Events;
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Event\PrefixEventDispatcher;
+use Biskuit\Database\Connection;
+use Biskuit\Database\Events;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Event\PrefixEventDispatcher;
 
 class EntityManager
 {
@@ -126,7 +126,7 @@ class EntityManager
         $metadata = $this->getMetadata(current($entities));
         $mapping  = $metadata->getRelationMapping($name);
 
-        if (!class_exists($class = 'Pagekit\Database\ORM\\Relation\\'.$mapping['type'])) {
+        if (!class_exists($class = 'Biskuit\Database\ORM\\Relation\\'.$mapping['type'])) {
             throw new \LogicException(sprintf("Unable to find relation class '%s'", $class));
         }
 

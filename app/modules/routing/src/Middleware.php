@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Routing;
+namespace Biskuit\Routing;
 
-use Pagekit\Event\EventDispatcherInterface;
+use Biskuit\Event\EventDispatcherInterface;
 
 class Middleware
 {

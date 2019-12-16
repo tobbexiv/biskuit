@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Cookie;
+namespace Biskuit\Cookie;
 
 use Symfony\Component\HttpFoundation\Cookie;
 

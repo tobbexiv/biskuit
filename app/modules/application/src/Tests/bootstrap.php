@@ -1,18 +1,18 @@
 <?php
 
 $autoload = [
-    'Pagekit\\Auth\\' => '/app/modules/auth/src',
-    'Pagekit\\Config\\' => '/app/modules/config/src',
-    'Pagekit\\Cookie\\' => '/app/modules/cookie/src',
-    'Pagekit\\Database\\' => '/app/modules/database/src',
-    'Pagekit\\Filesystem\\' => '/app/modules/filesystem/src',
-    'Pagekit\\Filter\\' => '/app/modules/filter/src',
-    'Pagekit\\Migration\\' => '/app/modules/migration/src',
-    'Pagekit\\Package\\' => '/app/modules/package/src',
-    'Pagekit\\Routing\\' => '/app/modules/routing/src',
-    'Pagekit\\Session\\' => '/app/modules/session/src',
-    'Pagekit\\Tree\\' => '/app/modules/tree/src',
-    'Pagekit\\View\\' => '/app/modules/view/src'
+    'Biskuit\\Auth\\' => '/app/modules/auth/src',
+    'Biskuit\\Config\\' => '/app/modules/config/src',
+    'Biskuit\\Cookie\\' => '/app/modules/cookie/src',
+    'Biskuit\\Database\\' => '/app/modules/database/src',
+    'Biskuit\\Filesystem\\' => '/app/modules/filesystem/src',
+    'Biskuit\\Filter\\' => '/app/modules/filter/src',
+    'Biskuit\\Migration\\' => '/app/modules/migration/src',
+    'Biskuit\\Package\\' => '/app/modules/package/src',
+    'Biskuit\\Routing\\' => '/app/modules/routing/src',
+    'Biskuit\\Session\\' => '/app/modules/session/src',
+    'Biskuit\\Tree\\' => '/app/modules/tree/src',
+    'Biskuit\\View\\' => '/app/modules/view/src'
 ];
 
 $path = realpath(__DIR__.'/../../../../../');

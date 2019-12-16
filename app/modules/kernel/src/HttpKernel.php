@@ -1,20 +1,20 @@
 <?php
 
-namespace Pagekit\Kernel;
+namespace Biskuit\Kernel;
 
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Kernel\Event\ControllerEvent;
-use Pagekit\Kernel\Event\ExceptionEvent;
-use Pagekit\Kernel\Event\KernelEvent;
-use Pagekit\Kernel\Event\RequestEvent;
-use Pagekit\Kernel\Exception\BadRequestException;
-use Pagekit\Kernel\Exception\ConflictException;
-use Pagekit\Kernel\Exception\ForbiddenException;
-use Pagekit\Kernel\Exception\HttpException;
-use Pagekit\Kernel\Exception\InternalErrorException;
-use Pagekit\Kernel\Exception\MethodNotAllowedException;
-use Pagekit\Kernel\Exception\NotFoundException;
-use Pagekit\Kernel\Exception\UnauthorizedException;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Kernel\Event\ControllerEvent;
+use Biskuit\Kernel\Event\ExceptionEvent;
+use Biskuit\Kernel\Event\KernelEvent;
+use Biskuit\Kernel\Event\RequestEvent;
+use Biskuit\Kernel\Exception\BadRequestException;
+use Biskuit\Kernel\Exception\ConflictException;
+use Biskuit\Kernel\Exception\ForbiddenException;
+use Biskuit\Kernel\Exception\HttpException;
+use Biskuit\Kernel\Exception\InternalErrorException;
+use Biskuit\Kernel\Exception\MethodNotAllowedException;
+use Biskuit\Kernel\Exception\NotFoundException;
+use Biskuit\Kernel\Exception\UnauthorizedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;

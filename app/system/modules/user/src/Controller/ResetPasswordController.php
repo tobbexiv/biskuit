@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\User\Controller;
+namespace Biskuit\User\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Application\Exception;
-use Pagekit\User\Model\User;
+use Biskuit\Application as App;
+use Biskuit\Application\Exception;
+use Biskuit\User\Model\User;
 
 class ResetPasswordController
 {

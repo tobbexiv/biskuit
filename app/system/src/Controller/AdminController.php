@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Biskuit\System\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Auth\Auth;
-use Pagekit\User\Model\User;
+use Biskuit\Application as App;
+use Biskuit\Auth\Auth;
+use Biskuit\User\Model\User;
 
 class AdminController
 {

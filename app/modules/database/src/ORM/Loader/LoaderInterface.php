@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Database\ORM\Loader;
+namespace Biskuit\Database\ORM\Loader;
 
 interface LoaderInterface
 {

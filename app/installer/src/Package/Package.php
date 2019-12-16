@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Installer\Package;
+namespace Biskuit\Installer\Package;
 
-use Pagekit\Util\Arr;
+use Biskuit\Util\Arr;
 
 class Package implements PackageInterface
 {

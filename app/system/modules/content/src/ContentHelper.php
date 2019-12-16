@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Content;
+namespace Biskuit\Content;
 
-use Pagekit\Application as App;
-use Pagekit\Content\Event\ContentEvent;
+use Biskuit\Application as App;
+use Biskuit\Content\Event\ContentEvent;
 
 class ContentHelper
 {

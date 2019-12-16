@@ -23,7 +23,7 @@ var pkgs = [
 ];
 
 // banner for the css files
-var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
+var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Biskuit | MIT License */\n";
 
 var cldr = {
     cldr: path.join(__dirname, 'node_modules/cldr-core/supplemental/'),

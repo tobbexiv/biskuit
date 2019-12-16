@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Filter;
+namespace Biskuit\Filter;
 
 /**
  * This filter keeps only alphabetic characters and digits of the value.

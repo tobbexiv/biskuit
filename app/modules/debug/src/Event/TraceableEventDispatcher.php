@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Debug\Event;
+namespace Biskuit\Debug\Event;
 
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Event\EventSubscriberInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Psr\Log\LoggerInterface;
 

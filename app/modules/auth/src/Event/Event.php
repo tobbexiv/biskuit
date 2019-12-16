@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Auth\Event;
+namespace Biskuit\Auth\Event;
 
-use Pagekit\Auth\UserInterface;
-use Pagekit\Event\Event as BaseEvent;
+use Biskuit\Auth\UserInterface;
+use Biskuit\Event\Event as BaseEvent;
 
 class Event extends BaseEvent
 {

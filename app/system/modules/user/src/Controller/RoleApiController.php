@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\User\Controller;
+namespace Biskuit\User\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\User\Model\Role;
+use Biskuit\Application as App;
+use Biskuit\User\Model\Role;
 
 /**
  * @Access("user: manage user permissions")

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Routing\Loader;
+namespace Biskuit\Routing\Loader;
 
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Routing\Route;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 class RoutesLoader implements LoaderInterface

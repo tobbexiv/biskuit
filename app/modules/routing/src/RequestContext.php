@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing;
+namespace Biskuit\Routing;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext as BaseContext;

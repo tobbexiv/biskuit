@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Site\Model;
+namespace Biskuit\Site\Model;
 
-use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\System\Model\DataModelTrait;
+use Biskuit\Database\ORM\ModelTrait;
+use Biskuit\System\Model\DataModelTrait;
 
 /**
  * @Entity(tableClass="@system_page")

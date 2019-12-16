@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Content\Plugin;
+namespace Biskuit\Content\Plugin;
 
-use Pagekit\Application as App;
-use Pagekit\Content\Event\ContentEvent;
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Application as App;
+use Biskuit\Content\Event\ContentEvent;
+use Biskuit\Event\EventSubscriberInterface;
 
 class MarkdownPlugin implements EventSubscriberInterface
 {

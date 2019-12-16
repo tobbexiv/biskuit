@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Filesystem\Tests;
+namespace Biskuit\Filesystem\Tests;
 
-use Pagekit\Filesystem\Filesystem;
-use Pagekit\Filesystem\Locator;
+use Biskuit\Filesystem\Filesystem;
+use Biskuit\Filesystem\Locator;
 
 class LocatorTest extends \PHPUnit_Framework_TestCase
 {

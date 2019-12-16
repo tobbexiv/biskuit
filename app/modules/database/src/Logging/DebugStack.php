@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Database\Logging;
+namespace Biskuit\Database\Logging;
 
 use Doctrine\DBAL\Logging\DebugStack as BaseDebugStack;
 use Symfony\Component\Stopwatch\Stopwatch;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\User;
+namespace Biskuit\User;
 
-use Pagekit\Application as App;
-use Pagekit\Module\Module;
-use Pagekit\User\Model\Role;
-use Pagekit\User\Model\User;
+use Biskuit\Application as App;
+use Biskuit\Module\Module;
+use Biskuit\User\Model\Role;
+use Biskuit\User\Model\User;
 
 class UserModule extends Module
 {

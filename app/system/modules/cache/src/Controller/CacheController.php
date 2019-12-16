@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Cache\Controller;
+namespace Biskuit\Cache\Controller;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 /**
  * @Access(admin=true)

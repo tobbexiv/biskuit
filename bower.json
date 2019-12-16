@@ -1,5 +1,5 @@
 {
-  "name": "pagekit",
+  "name": "biskuit",
   "dependencies": {
     "JSONStorage": "~1.0.3",
     "lodash": "~3.10.1",

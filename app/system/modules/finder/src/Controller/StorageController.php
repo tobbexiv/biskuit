@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Finder\Controller;
+namespace Biskuit\Finder\Controller;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 /**
  * @Access("system: manage storage", admin=true)

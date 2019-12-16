@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Biskuit\View\Helper;
 
-use Pagekit\Markdown\Markdown;
+use Biskuit\Markdown\Markdown;
 
 class MarkdownHelper extends Helper
 {

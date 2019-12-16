@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Installer\Controller;
+namespace Biskuit\Installer\Controller;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 /**
  * @Access("system: manage packages", admin=true)

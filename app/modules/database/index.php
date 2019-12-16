@@ -3,10 +3,10 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Logging\DebugStack;
 use Doctrine\DBAL\Types\Type;
-use Pagekit\Database\ORM\EntityManager;
-use Pagekit\Database\ORM\Loader\AnnotationLoader;
-use Pagekit\Database\ORM\MetadataManager;
-use Pagekit\Event\PrefixEventDispatcher;
+use Biskuit\Database\ORM\EntityManager;
+use Biskuit\Database\ORM\Loader\AnnotationLoader;
+use Biskuit\Database\ORM\MetadataManager;
+use Biskuit\Event\PrefixEventDispatcher;
 
 $config = [
 
@@ -15,7 +15,7 @@ $config = [
     'main' => function ($app) {
 
         $default = [
-            'wrapperClass' => 'Pagekit\Database\Connection'
+            'wrapperClass' => 'Biskuit\Database\Connection'
         ];
 
         $app['dbs'] = function () use ($default) {
@@ -54,13 +54,13 @@ $config = [
             return new DebugStack();
         };
 
-        Type::overrideType(Type::SIMPLE_ARRAY, '\Pagekit\Database\Types\SimpleArrayType');
-        Type::overrideType(Type::JSON_ARRAY, '\Pagekit\Database\Types\JsonArrayType');
+        Type::overrideType(Type::SIMPLE_ARRAY, '\Biskuit\Database\Types\SimpleArrayType');
+        Type::overrideType(Type::JSON_ARRAY, '\Biskuit\Database\Types\JsonArrayType');
     },
 
     'autoload' => [
 
-        'Pagekit\\Database\\' => 'src'
+        'Biskuit\\Database\\' => 'src'
 
     ],
 
@@ -87,7 +87,7 @@ $config = [
             'sqlite' => [
 
                 'driver' => 'pdo_sqlite',
-                'path' => "pagekit.db",
+                'path' => "biskuit.db",
                 'charset' => 'utf8',
                 'prefix' => 'pk_',
                 'driverOptions' => [

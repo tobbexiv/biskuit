@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Session\Csrf\Event;
+namespace Biskuit\Session\Csrf\Event;
 
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Session\Csrf\Exception\CsrfException;
-use Pagekit\Session\Csrf\Provider\CsrfProviderInterface;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\Session\Csrf\Exception\CsrfException;
+use Biskuit\Session\Csrf\Provider\CsrfProviderInterface;
 
 class CsrfListener implements EventSubscriberInterface
 {

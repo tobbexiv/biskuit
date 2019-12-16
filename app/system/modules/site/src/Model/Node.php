@@ -1,13 +1,13 @@
 <?php
 
-namespace Pagekit\Site\Model;
+namespace Biskuit\Site\Model;
 
-use Pagekit\Application as App;
-use Pagekit\System\Model\DataModelTrait;
-use Pagekit\System\Model\NodeInterface;
-use Pagekit\System\Model\NodeTrait;
-use Pagekit\User\Model\AccessModelTrait;
-use Pagekit\User\Model\User;
+use Biskuit\Application as App;
+use Biskuit\System\Model\DataModelTrait;
+use Biskuit\System\Model\NodeInterface;
+use Biskuit\System\Model\NodeTrait;
+use Biskuit\User\Model\AccessModelTrait;
+use Biskuit\User\Model\User;
 
 /**
  * @Entity(tableClass="@system_node")

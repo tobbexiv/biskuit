@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\SlugifyFilter;
+use Biskuit\Filter\SlugifyFilter;
 
 class SlugifyTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class SlugifyTest extends \PHPUnit_Framework_TestCase
         $filter = new SlugifyFilter;
 
         $values = [
-            'PAGEKIT'                  => 'pagekit',
+            'BISKUIT'                  => 'biskuit',
             ":#*\"@+=;!><&.%()/'\\|[]" => "",
             "  a b ! c   "             => "a-b-c",
         ];

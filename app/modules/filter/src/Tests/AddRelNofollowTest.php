@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\AddRelNofollowFilter;
+use Biskuit\Filter\AddRelNofollowFilter;
 
 class AddRelNofollowTest extends \PHPUnit_Framework_TestCase
 {

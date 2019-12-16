@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Installer;
+namespace Biskuit\Installer;
 
 use Composer\Console\HtmlOutputFormatter;
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 
@@ -48,7 +48,7 @@ class SelfUpdater
     }
 
     /**
-     * Runs Pagekit self update.
+     * Runs Biskuit self update.
      *
      * @param $file
      * @throws \Exception
@@ -245,7 +245,7 @@ class SelfUpdater
     }
 
     /**
-     * Toggles update mode without booting Pagekit application.
+     * Toggles update mode without booting Biskuit application.
      *
      * @param $active
      */

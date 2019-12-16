@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Captcha\Annotation;
+namespace Biskuit\Captcha\Annotation;
 
 /**
  * @Annotation

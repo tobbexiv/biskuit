@@ -36,7 +36,7 @@
         data: function () {
             return _.merge({
                 file: ''
-            }, $pagekit);
+            }, $biskuit);
         },
 
         created: function () {

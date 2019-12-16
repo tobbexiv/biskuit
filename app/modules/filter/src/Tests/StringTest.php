@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\StringFilter;
+use Biskuit\Filter\StringFilter;
 
 class StringTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Installer\Helper;
+namespace Biskuit\Installer\Helper;
 
 use Composer\Installer;
 use Composer\IO\ConsoleIO;

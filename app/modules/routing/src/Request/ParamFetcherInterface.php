@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing\Request;
+namespace Biskuit\Routing\Request;
 
 interface ParamFetcherInterface
 {
