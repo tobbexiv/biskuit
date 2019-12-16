@@ -64,6 +64,8 @@ Finding bugs, sending pull requests, translating Pagekit or improving our docs -
 any contribution is welcome and highly appreciated. To get started, head over
 to our [contribution guidelines](.github/CONTRIBUTING.md). Thanks!
 
+## Dev version
+You can try the new features from the dev branch.
 
 ## Credits
 
