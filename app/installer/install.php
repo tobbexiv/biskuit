@@ -12,9 +12,9 @@ App::db()->insert('@system_node', ['priority' => 1, 'status' => 1, 'title' => 'H
 
 App::db()->insert('@system_node', ['priority' => 2, 'status' => 1, 'title' => 'Blog', 'slug' => 'blog', 'path' => '/blog', 'link' => '@blog', 'type' => 'blog', 'menu' => 'main']);
 
-App::db()->insert('@system_widget', ['title' => 'Hello, I\'m Bis[ku]it', 'type' => 'system/text', 'status' => 1, 'nodes' => 1, 'data' => '{"content":"<h1 class=\"uk-heading-large uk-margin-large-bottom\">Hello, I\'m Bis[ku]it,<br class=\"uk-hidden-small\"> your new favorite CMS.<\/h1>\n\n<a class=\"uk-button uk-button-large\" href=\"https:\/\/github.com\/mirkobrombin\/biskuit\">Get started<\/a>"}']);
+App::db()->insert('@system_widget', ['title' => 'Hello, I\'m Bis[ku]it', 'type' => 'system/text', 'status' => 1, 'nodes' => 1, 'data' => '{"content":"<h1 class=\"uk-heading-large uk-margin-large-bottom\">Hello, I\'m Bis[ku]it,<br class=\"uk-hidden-small\"> your new favorite CMS.<\/h1>\n\n<a class=\"uk-button uk-button-large\" href=\"https:\/\/github.com\/biskuitorg\/biskuit\">Get started<\/a>"}']);
 
-App::db()->insert('@system_widget', ['title' => 'Powered by Bis[ku]it', 'type' => 'system/text', 'status' => 1, 'data' => '{"content":"<ul class=\"uk-grid uk-grid-medium uk-flex uk-flex-center\">\n    <li><a href=\"https:\/\/github.com\/mirkobrombin\/biskuit\" class=\"uk-icon-hover uk-icon-small uk-icon-github\"><\/a><\/li>\n<\/ul>\n\n<p>Powered by <a href=\"https:\/\/biskuit.org\">bis[ku]it<\/a><\/p>"}']);
+App::db()->insert('@system_widget', ['title' => 'Powered by Bis[ku]it', 'type' => 'system/text', 'status' => 1, 'data' => '{"content":"<ul class=\"uk-grid uk-grid-medium uk-flex uk-flex-center\">\n    <li><a href=\"https:\/\/github.com\/biskuitorg\/biskuit\" class=\"uk-icon-hover uk-icon-small uk-icon-github\"><\/a><\/li>\n<\/ul>\n\n<p>Powered by <a href=\"https:\/\/biskuit.org\">bis[ku]it<\/a><\/p>"}']);
 
 App::db()->insert('@system_page', [
     'title' => 'Home',

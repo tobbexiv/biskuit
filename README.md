@@ -1,4 +1,4 @@
-[![biskuit Banner](https://raw.githubusercontent.com/mirkobrombin/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/biskuitorg/biskuit)
+[![biskuit Banner](https://raw.githubusercontent.com/biskuitorg/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/biskuitorg/biskuit)
 
 # bis[ku]it (dev branch/unstable)
 **This is a development version do not use in production.**
