@@ -1,4 +1,4 @@
-[![biskuit Banner](https://raw.githubusercontent.com/mirkobrombin/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/mirkobrombin/pagekit)
+[![biskuit Banner](https://raw.githubusercontent.com/biskuitorg/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/biskuitorg/biskuit)
 
 # bis[ku]it (Pagekit unofficial)
 bis[ku]it is a modular and lightweight CMS built with Symfony components and Vue.js.
@@ -15,7 +15,7 @@ Feel free to use it.
 
 ## Install from source
 ```
-git clone https://github.com/mirkobrombin/pagekit.git
+git clone https://github.com/biskuitorg/biskuit.git
 cd pagekit
 ```
 Install dependencies using composer:
