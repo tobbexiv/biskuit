@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Database\Query;
+namespace Biskuit\Database\Query;
 
 use Closure;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Types\Type;
-use Pagekit\Database\Connection;
+use Biskuit\Database\Connection;
 use PDO;
 
 class QueryBuilder

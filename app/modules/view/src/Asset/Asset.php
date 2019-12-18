@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\View\Asset;
+namespace Biskuit\View\Asset;
 
 abstract class Asset implements AssetInterface, \ArrayAccess
 {

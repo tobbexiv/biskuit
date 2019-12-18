@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Info;
+namespace Biskuit\Info;
 
 use Doctrine\DBAL\Driver\PDOConnection;
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 use Symfony\Component\HttpFoundation\ServerBag;
 
 class InfoHelper

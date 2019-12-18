@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Debug\DataCollector;
+namespace Biskuit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
 use DebugBar\Storage\StorageInterface;

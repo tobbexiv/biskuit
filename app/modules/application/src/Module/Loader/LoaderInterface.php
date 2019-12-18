@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Module\Loader;
+namespace Biskuit\Module\Loader;
 
 interface LoaderInterface
 {

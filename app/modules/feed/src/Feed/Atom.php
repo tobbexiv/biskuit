@@ -1,13 +1,13 @@
 <?php
 
-namespace Pagekit\Feed\Feed;
+namespace Biskuit\Feed\Feed;
 
-use Pagekit\Feed\Feed;
+use Biskuit\Feed\Feed;
 
 class Atom extends Feed
 {
     protected $mime = 'application/atom+xml';
-    protected $item = 'Pagekit\Feed\Item\Atom';
+    protected $item = 'Biskuit\Feed\Item\Atom';
 
     /**
      * {@inheritdoc}

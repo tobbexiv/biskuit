@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Site;
+namespace Biskuit\Site;
 
-use Pagekit\Application as App;
-use Pagekit\Site\Model\Node;
-use Pagekit\View\Helper\Helper;
+use Biskuit\Application as App;
+use Biskuit\Site\Model\Node;
+use Biskuit\View\Helper\Helper;
 
 class MenuHelper extends Helper
 {

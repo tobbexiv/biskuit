@@ -51,7 +51,7 @@
                     type: 'json',
                     param: 'file',
                     before: function (options) {
-                        _.merge(options.params, {_csrf: $pagekit.csrf, type: type});
+                        _.merge(options.params, {_csrf: $biskuit.csrf, type: type});
                     },
                     loadstart: this.onStart,
                     progress: this.onProgress,

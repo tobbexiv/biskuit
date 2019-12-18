@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Config;
+namespace Biskuit\Config;
 
 use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Pagekit\Database\Connection;
+use Biskuit\Database\Connection;
 
 class ConfigManager implements \IteratorAggregate
 {

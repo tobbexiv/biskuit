@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Database\ORM\Annotation;
+namespace Biskuit\Database\ORM\Annotation;
 
 /**
  * @Annotation

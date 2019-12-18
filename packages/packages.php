@@ -1,4 +1,4 @@
 <?php return array (
-  'pagekit/blog' => '*',
+  'biskuit/blog' => '*',
   'pagekit/theme-one' => '*',
 );

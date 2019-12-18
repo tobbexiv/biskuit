@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Event;
+namespace Biskuit\Event;
 
-use Pagekit\Util\Arr;
+use Biskuit\Util\Arr;
 
 class Event implements EventInterface, \ArrayAccess
 {

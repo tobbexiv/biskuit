@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Auth;
+namespace Biskuit\Auth;
 
 final class AuthEvents
 {

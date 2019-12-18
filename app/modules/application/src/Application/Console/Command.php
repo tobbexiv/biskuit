@@ -1,7 +1,7 @@
 <?php
-namespace Pagekit\Application\Console;
+namespace Biskuit\Application\Console;
 
-use Pagekit\Container;
+use Biskuit\Container;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -46,7 +46,7 @@ class Command extends BaseCommand
     protected $container;
 
     /**
-     * The Pagekit config.
+     * The Biskuit config.
      *
      * @var array
      */
@@ -62,7 +62,7 @@ class Command extends BaseCommand
     }
 
     /**
-     * Set the Pagekit application instance.
+     * Set the Biskuit application instance.
      *
      * @param Container $container
      */
@@ -72,7 +72,7 @@ class Command extends BaseCommand
     }
 
     /**
-     * Set the Pagekit config.
+     * Set the Biskuit config.
      *
      * @param array $config
      */

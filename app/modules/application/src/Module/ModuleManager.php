@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Module;
+namespace Biskuit\Module;
 
-use Pagekit\Application;
-use Pagekit\Module\Loader\CallableLoader;
-use Pagekit\Module\Loader\LoaderInterface;
-use Pagekit\Module\Loader\ModuleLoader;
+use Biskuit\Application;
+use Biskuit\Module\Loader\CallableLoader;
+use Biskuit\Module\Loader\LoaderInterface;
+use Biskuit\Module\Loader\ModuleLoader;
 
 class ModuleManager implements \IteratorAggregate
 {
@@ -40,7 +40,7 @@ class ModuleManager implements \IteratorAggregate
     protected $defaults = [
         'main' => null,
         'type' => 'module',
-        'class' => 'Pagekit\Module\Module',
+        'class' => 'Biskuit\Module\Module',
         'config' => []
     ];
 

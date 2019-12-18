@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filesystem\Tests;
+namespace Biskuit\Filesystem\Tests;
 
-use Pagekit\Filesystem\Path;
+use Biskuit\Filesystem\Path;
 
 class PathTest extends \PHPUnit_Framework_TestCase
 {

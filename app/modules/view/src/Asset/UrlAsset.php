@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\View\Asset;
+namespace Biskuit\View\Asset;
 
 class UrlAsset extends Asset
 {

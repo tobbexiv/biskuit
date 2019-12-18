@@ -3,12 +3,12 @@
     "type": "pagekit-theme",
     "version": "1.0.1",
     "title": "One",
-    "description": "Pagekit's default theme.",
+    "description": "Biskuit's default theme.",
     "license": "MIT",
-    "copyright": "(c) 2016 Pagekit",
+    "copyright": "(c) 2016 Biskuit",
     "authors": [
         {
-            "name": "Pagekit",
+            "name": "Biskuit",
             "email": "info@pagekit.com",
             "homepage": "http://pagekit.com"
         }

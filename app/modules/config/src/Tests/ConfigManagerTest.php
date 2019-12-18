@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Config\Tests;
+namespace Biskuit\Config\Tests;
 
 use Doctrine\Common\Cache\ArrayCache;
-use Pagekit\Config\ConfigManager;
+use Biskuit\Config\ConfigManager;
 
 class ConfigManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -162,7 +162,7 @@ class ConfigManagerTest extends \PHPUnit_Framework_TestCase
     protected function getConnection()
     {
         $mock = $this
-            ->getMockBuilder('Pagekit\Database\Connection')
+            ->getMockBuilder('Biskuit\Database\Connection')
             ->disableOriginalConstructor()
             ->setMethods(
                 [

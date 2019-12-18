@@ -1,7 +1,7 @@
 <template>
 
     <a title="System Information">
-        <div class="pf-icon-large pf-icon-pagekit"></div>
+        <div class="pf-icon-large pf-icon-biskuit"></div>
     </a>
 
     <script id="panel-system" type="text/template">
@@ -12,7 +12,7 @@
         <table class="pf-table pf-table-dropdown">
             <tbody>
             <tr>
-                <td>Pagekit</td>
+                <td>Biskuit</td>
                 <td>{{ version }}</td>
             </tr>
             <tr>

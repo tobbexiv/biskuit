@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Cache;
+namespace Biskuit\Cache;
 
 use Doctrine\Common\Cache\ApcCache;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\XcacheCache;
-use Pagekit\Application as App;
-use Pagekit\Module\Module;
+use Biskuit\Application as App;
+use Biskuit\Module\Module;
 
 class CacheModule extends Module
 {

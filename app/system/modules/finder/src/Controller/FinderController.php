@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Finder\Controller;
+namespace Biskuit\Finder\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Finder\Event\FileAccessEvent;
-use Pagekit\Kernel\Exception\ForbiddenException;
+use Biskuit\Application as App;
+use Biskuit\Finder\Event\FileAccessEvent;
+use Biskuit\Kernel\Exception\ForbiddenException;
 
 class FinderController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Auth\Encoder;
+namespace Biskuit\Auth\Encoder;
 
 class NativePasswordEncoder implements PasswordEncoderInterface
 {

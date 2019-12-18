@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Debug\DataCollector;
+namespace Biskuit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
-use Pagekit\Auth\Auth;
-use Pagekit\User\Model\User;
+use Biskuit\Auth\Auth;
+use Biskuit\User\Model\User;
 
 class AuthDataCollector implements DataCollectorInterface
 {

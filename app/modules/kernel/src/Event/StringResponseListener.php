@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Kernel\Event;
+namespace Biskuit\Kernel\Event;
 
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Event\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class StringResponseListener implements EventSubscriberInterface

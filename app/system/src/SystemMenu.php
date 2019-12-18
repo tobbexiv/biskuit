@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System;
+namespace Biskuit\System;
 
-use Pagekit\Application as App;
-use Pagekit\Util\ArrObject;
+use Biskuit\Application as App;
+use Biskuit\Util\ArrObject;
 
 class SystemMenu implements \IteratorAggregate, \JsonSerializable
 {

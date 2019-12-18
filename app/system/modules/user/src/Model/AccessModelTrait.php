@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\User\Model;
+namespace Biskuit\User\Model;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 trait AccessModelTrait
 {

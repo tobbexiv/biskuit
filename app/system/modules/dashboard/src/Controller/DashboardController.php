@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Dashboard\Controller;
+namespace Biskuit\Dashboard\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Module\Module;
+use Biskuit\Application as App;
+use Biskuit\Module\Module;
 
 /**
  * @Access(admin=true)

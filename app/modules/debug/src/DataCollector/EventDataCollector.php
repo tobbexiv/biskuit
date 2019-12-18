@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Debug\DataCollector;
+namespace Biskuit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
-use Pagekit\Debug\Event\TraceableEventDispatcher;
-use Pagekit\Event\EventDispatcherInterface;
+use Biskuit\Debug\Event\TraceableEventDispatcher;
+use Biskuit\Event\EventDispatcherInterface;
 
 class EventDataCollector implements DataCollectorInterface
 {

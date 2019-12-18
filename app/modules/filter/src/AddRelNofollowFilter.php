@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Filter;
+namespace Biskuit\Filter;
 
 /**
  * This filter adds a rel="nofollow" to all HTML anchor elements.

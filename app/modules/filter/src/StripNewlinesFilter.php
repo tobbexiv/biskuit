@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Filter;
+namespace Biskuit\Filter;
 
 /**
  * This filter strips the newline control characters of the value.

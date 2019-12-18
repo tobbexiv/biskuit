@@ -1,7 +1,7 @@
 <?php
 
-use Pagekit\Mail\Mailer;
-use Pagekit\Mail\Plugin\ImpersonatePlugin;
+use Biskuit\Mail\Mailer;
+use Biskuit\Mail\Plugin\ImpersonatePlugin;
 
 return [
 
@@ -76,7 +76,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Mail\\' => 'src'
+        'Biskuit\\Mail\\' => 'src'
 
     ],
 
@@ -84,7 +84,7 @@ return [
 
         '/system' => [
             'name' => '@system',
-            'controller' => 'Pagekit\\Mail\\Controller\\MailController'
+            'controller' => 'Biskuit\\Mail\\Controller\\MailController'
         ]
 
     ],

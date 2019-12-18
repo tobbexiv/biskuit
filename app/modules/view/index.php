@@ -1,23 +1,23 @@
 <?php
 
-use Pagekit\Event\PrefixEventDispatcher;
-use Pagekit\Twig\TwigEngine;
-use Pagekit\View\Asset\AssetFactory;
-use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\Helper\DataHelper;
-use Pagekit\View\Helper\DeferredHelper;
-use Pagekit\View\Helper\GravatarHelper;
-use Pagekit\View\Helper\MapHelper;
-use Pagekit\View\Helper\MarkdownHelper;
-use Pagekit\View\Helper\MetaHelper;
-use Pagekit\View\Helper\ScriptHelper;
-use Pagekit\View\Helper\SectionHelper;
-use Pagekit\View\Helper\StyleHelper;
-use Pagekit\View\Helper\TokenHelper;
-use Pagekit\View\Helper\UrlHelper;
-use Pagekit\View\Loader\FilesystemLoader;
-use Pagekit\View\PhpEngine;
-use Pagekit\View\View;
+use Biskuit\Event\PrefixEventDispatcher;
+use Biskuit\Twig\TwigEngine;
+use Biskuit\View\Asset\AssetFactory;
+use Biskuit\View\Asset\AssetManager;
+use Biskuit\View\Helper\DataHelper;
+use Biskuit\View\Helper\DeferredHelper;
+use Biskuit\View\Helper\GravatarHelper;
+use Biskuit\View\Helper\MapHelper;
+use Biskuit\View\Helper\MarkdownHelper;
+use Biskuit\View\Helper\MetaHelper;
+use Biskuit\View\Helper\ScriptHelper;
+use Biskuit\View\Helper\SectionHelper;
+use Biskuit\View\Helper\StyleHelper;
+use Biskuit\View\Helper\TokenHelper;
+use Biskuit\View\Helper\UrlHelper;
+use Biskuit\View\Loader\FilesystemLoader;
+use Biskuit\View\PhpEngine;
+use Biskuit\View\View;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Templating\TemplateNameParser;
 
@@ -166,7 +166,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\View\\' => 'src'
+        'Biskuit\\View\\' => 'src'
 
     ]
 

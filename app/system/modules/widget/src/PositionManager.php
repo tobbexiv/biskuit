@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Widget;
+namespace Biskuit\Widget;
 
-use Pagekit\Application as App;
-use Pagekit\Config\Config;
+use Biskuit\Application as App;
+use Biskuit\Config\Config;
 
 class PositionManager implements \JsonSerializable
 {

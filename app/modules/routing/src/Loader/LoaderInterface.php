@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Routing\Loader;
+namespace Biskuit\Routing\Loader;
 
-use Pagekit\Routing\Route;
+use Biskuit\Routing\Route;
 
 interface LoaderInterface
 {

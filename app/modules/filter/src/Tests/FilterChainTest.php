@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\FilterChain;
+use Biskuit\Filter\FilterChain;
 
 class FilterChainTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,7 +59,7 @@ class FilterChainTest extends \PHPUnit_Framework_TestCase
 
     protected function getFilterMock()
     {
-        $filter = $this->getMock('Pagekit\Filter\FilterInterface');
+        $filter = $this->getMock('Biskuit\Filter\FilterInterface');
         $filter->expects($this->any())
                ->method('filter');
 

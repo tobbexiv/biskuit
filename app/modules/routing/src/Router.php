@@ -1,12 +1,12 @@
 <?php
 
-namespace Pagekit\Routing;
+namespace Biskuit\Routing;
 
-use Pagekit\Routing\Generator\UrlGenerator;
-use Pagekit\Routing\Generator\UrlGeneratorDumper;
-use Pagekit\Routing\Generator\UrlGeneratorInterface;
-use Pagekit\Routing\Loader\LoaderInterface;
-use Pagekit\Routing\RequestContext as Context;
+use Biskuit\Routing\Generator\UrlGenerator;
+use Biskuit\Routing\Generator\UrlGeneratorDumper;
+use Biskuit\Routing\Generator\UrlGeneratorInterface;
+use Biskuit\Routing\Loader\LoaderInterface;
+use Biskuit\Routing\RequestContext as Context;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -86,7 +86,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
         $this->options  = array_replace([
             'cache'     => null,
             'matcher'   => 'Symfony\Component\Routing\Matcher\UrlMatcher',
-            'generator' => 'Pagekit\Routing\Generator\UrlGenerator'
+            'generator' => 'Biskuit\Routing\Generator\UrlGenerator'
         ], $options);
     }
 
@@ -354,7 +354,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
 
         if (!isset($this->resolver[$resolver])) {
 
-            if (!is_subclass_of($resolver, 'Pagekit\Routing\ParamsResolverInterface')) {
+            if (!is_subclass_of($resolver, 'Biskuit\Routing\ParamsResolverInterface')) {
                 return null;
             }
 

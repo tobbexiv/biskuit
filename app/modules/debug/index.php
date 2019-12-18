@@ -2,15 +2,15 @@
 
 use DebugBar\DataCollector\MemoryCollector;
 use DebugBar\DataCollector\TimeDataCollector;
-use Pagekit\Debug\DataCollector\AuthDataCollector;
-use Pagekit\Debug\DataCollector\DatabaseDataCollector;
-use Pagekit\Debug\DataCollector\EventDataCollector;
-use Pagekit\Debug\DataCollector\ProfileDataCollector;
-use Pagekit\Debug\DataCollector\RoutesDataCollector;
-use Pagekit\Debug\DataCollector\SystemDataCollector;
-use Pagekit\Debug\DebugBar;
-use Pagekit\Debug\Event\TraceableEventDispatcher;
-use Pagekit\Debug\Storage\SqliteStorage;
+use Biskuit\Debug\DataCollector\AuthDataCollector;
+use Biskuit\Debug\DataCollector\DatabaseDataCollector;
+use Biskuit\Debug\DataCollector\EventDataCollector;
+use Biskuit\Debug\DataCollector\ProfileDataCollector;
+use Biskuit\Debug\DataCollector\RoutesDataCollector;
+use Biskuit\Debug\DataCollector\SystemDataCollector;
+use Biskuit\Debug\DebugBar;
+use Biskuit\Debug\Event\TraceableEventDispatcher;
+use Biskuit\Debug\Storage\SqliteStorage;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 return [
@@ -118,7 +118,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Debug\\' => 'src'
+        'Biskuit\\Debug\\' => 'src'
 
     ],
 

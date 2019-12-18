@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Feed\FeedFactory;
+use Biskuit\Feed\FeedFactory;
 
 return [
 
@@ -16,7 +16,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Feed\\' => 'src'
+        'Biskuit\\Feed\\' => 'src'
 
     ]
 

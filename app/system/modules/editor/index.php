@@ -6,7 +6,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Editor\\' => 'src'
+        'Biskuit\\Editor\\' => 'src'
 
     ],
 

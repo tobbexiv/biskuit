@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Kernel\Event;
+namespace Biskuit\Kernel\Event;
 
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Event\EventSubscriberInterface;
 
 /**
  * @author Fabien Potencier <fabien@symfony.com>

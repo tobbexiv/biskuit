@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Application;
+namespace Biskuit\Application;
 
 class Exception extends \RuntimeException
 {

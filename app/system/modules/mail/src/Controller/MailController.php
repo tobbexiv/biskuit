@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Mail\Controller;
+namespace Biskuit\Mail\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Util\Arr;
+use Biskuit\Application as App;
+use Biskuit\Util\Arr;
 
 /**
  * @Access("system: access settings", admin=true)

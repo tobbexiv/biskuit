@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Captcha\CaptchaListener;
+use Biskuit\Captcha\CaptchaListener;
 
 return [
 
@@ -8,7 +8,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Captcha\\' => 'src'
+        'Biskuit\\Captcha\\' => 'src'
 
     ],
 

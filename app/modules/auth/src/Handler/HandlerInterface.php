@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Auth\Handler;
+namespace Biskuit\Auth\Handler;
 
 interface HandlerInterface
 {

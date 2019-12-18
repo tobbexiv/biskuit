@@ -1,19 +1,19 @@
 <?php
 
-use Pagekit\User\Event\AccessListener;
-use Pagekit\User\Event\AuthorizationListener;
-use Pagekit\User\Event\LoginAttemptListener;
-use Pagekit\User\Event\UserListener;
+use Biskuit\User\Event\AccessListener;
+use Biskuit\User\Event\AuthorizationListener;
+use Biskuit\User\Event\LoginAttemptListener;
+use Biskuit\User\Event\UserListener;
 
 return [
 
     'name' => 'system/user',
 
-    'main' => 'Pagekit\\User\\UserModule',
+    'main' => 'Biskuit\\User\\UserModule',
 
     'autoload' => [
 
-        'Pagekit\\User\\' => 'src'
+        'Biskuit\\User\\' => 'src'
 
     ],
 
@@ -22,38 +22,38 @@ return [
         '/user' => [
             'name' => '@user',
             'controller' => [
-                'Pagekit\\User\\Controller\\AuthController',
-                'Pagekit\\User\\Controller\\UserController'
+                'Biskuit\\User\\Controller\\AuthController',
+                'Biskuit\\User\\Controller\\UserController'
             ]
         ],
         '/user/profile' => [
             'name' => '@user/profile',
             'controller' => [
-                'Pagekit\\User\\Controller\\ProfileController',
+                'Biskuit\\User\\Controller\\ProfileController',
             ]
         ],
         '/user/registration' => [
             'name' => '@user/registration',
             'controller' => [
-                'Pagekit\\User\\Controller\\RegistrationController',
+                'Biskuit\\User\\Controller\\RegistrationController',
             ]
         ],
         '/user/resetpassword' => [
             'name' => '@user/resetpassword',
             'controller' => [
-                'Pagekit\\User\\Controller\\ResetPasswordController',
+                'Biskuit\\User\\Controller\\ResetPasswordController',
             ]
         ],
         '/api/user' => [
             'name' => '@user/api',
             'controller' => [
-                'Pagekit\\User\\Controller\\UserApiController'
+                'Biskuit\\User\\Controller\\UserApiController'
             ]
         ],
         '/api/user/role' => [
             'name' => '@user/api/role',
             'controller' => [
-                'Pagekit\\User\\Controller\\RoleApiController'
+                'Biskuit\\User\\Controller\\RoleApiController'
             ]
         ]
 

@@ -37,8 +37,8 @@
                     <div class="tm-contrast">
 
 			<ul class="uk-grid uk-grid-small uk-flex-middle">
-                            <li><a class="tm-icon-github uk-icon-github" href="https://github.com/mirkobrombin/pagekit" :title="GitHub" target="_blank"></a></li>
-                            <li><a class="tm-icon-help" href="https://github.com/mirkobrombin/pagekit/issues" :title="'Get Help' | trans" target="_blank"></a></li>
+                            <li><a class="tm-icon-github uk-icon-github" href="https://github.com/biskuitorg/biskuit" :title="GitHub" target="_blank"></a></li>
+                            <li><a class="tm-icon-help" href="https://github.com/biskuitorg/biskuit/issues" :title="'Get Help' | trans" target="_blank"></a></li>
                             <li><a class="tm-icon-visit" :href="$url.route('')" :title="'Visit Site' | trans" target="_blank"></a></li>
                             <li><a class="tm-icon-logout" href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>" :title="'Logout' | trans"></a></li>
                             <li class="uk-margin-small-left"><a :href="$url.route('admin/user/edit', {id: user.id})" :title="'Profile' | trans"><img class="uk-border-circle uk-margin-small-right" height="24" width="24" :title="user.name" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>

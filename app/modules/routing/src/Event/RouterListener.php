@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Routing\Event;
+namespace Biskuit\Routing\Event;
 
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Kernel\Exception\MethodNotAllowedException as MethodNotAllowedHttpException;
-use Pagekit\Kernel\Exception\NotFoundException as NotFoundHttpException;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\Kernel\Exception\MethodNotAllowedException as MethodNotAllowedHttpException;
+use Biskuit\Kernel\Exception\NotFoundException as NotFoundHttpException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;

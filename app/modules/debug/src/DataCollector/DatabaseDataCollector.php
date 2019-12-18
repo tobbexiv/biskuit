@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Debug\DataCollector;
+namespace Biskuit\Debug\DataCollector;
 
 use DebugBar\Bridge\DoctrineCollector;
 use Doctrine\DBAL\Logging\DebugStack;
-use Pagekit\Database\Connection;
+use Biskuit\Database\Connection;
 
 class DatabaseDataCollector extends DoctrineCollector
 {

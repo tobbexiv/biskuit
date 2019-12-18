@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Widget\Controller;
+namespace Biskuit\Widget\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Widget\Model\Widget;
+use Biskuit\Application as App;
+use Biskuit\Widget\Model\Widget;
 
 /**
  * @Access("system: manage widgets")

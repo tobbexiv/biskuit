@@ -1,14 +1,14 @@
 <?php
 
-namespace Pagekit\Filesystem\Tests\Adapter;
+namespace Biskuit\Filesystem\Tests\Adapter;
 
-use Pagekit\Filesystem\Adapter\StreamAdapter;
-use Pagekit\Filesystem\Filesystem;
-use Pagekit\Filesystem\StreamWrapper;
+use Biskuit\Filesystem\Adapter\StreamAdapter;
+use Biskuit\Filesystem\Filesystem;
+use Biskuit\Filesystem\StreamWrapper;
 
 class StreamAdapterTest extends \PHPUnit_Framework_TestCase
 {
-    use \Pagekit\Tests\FileUtil;
+    use \Biskuit\Tests\FileUtil;
 
     protected $file;
     protected $fixtures;

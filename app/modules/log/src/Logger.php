@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Log;
+namespace Biskuit\Log;
 
 use Monolog\Logger as BaseLogger;
 

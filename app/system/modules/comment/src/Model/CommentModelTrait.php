@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Comment\Model;
+namespace Biskuit\Comment\Model;
 
-use Pagekit\Database\ORM\ModelTrait;
+use Biskuit\Database\ORM\ModelTrait;
 
 trait CommentModelTrait
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Intl\Controller;
+namespace Biskuit\Intl\Controller;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 class IntlController
 {

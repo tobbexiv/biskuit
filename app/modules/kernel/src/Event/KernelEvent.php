@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Kernel\Event;
+namespace Biskuit\Kernel\Event;
 
-use Pagekit\Event\Event;
-use Pagekit\Kernel\HttpKernelInterface;
+use Biskuit\Event\Event;
+use Biskuit\Kernel\HttpKernelInterface;
 
 class KernelEvent extends Event
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Mail\Plugin;
+namespace Biskuit\Mail\Plugin;
 
 class ImpersonatePlugin implements \Swift_Events_SendListener
 {

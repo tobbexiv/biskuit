@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Installer\Controller;
+namespace Biskuit\Installer\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Installer\SelfUpdater;
+use Biskuit\Application as App;
+use Biskuit\Installer\SelfUpdater;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**

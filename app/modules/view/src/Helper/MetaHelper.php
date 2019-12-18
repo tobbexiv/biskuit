@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Biskuit\View\Helper;
 
-use Pagekit\View\View;
+use Biskuit\View\View;
 
 class MetaHelper implements HelperInterface, \IteratorAggregate
 {

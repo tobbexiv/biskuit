@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Installer\Controller;
+namespace Biskuit\Installer\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Installer\Package\PackageManager;
+use Biskuit\Application as App;
+use Biskuit\Installer\Package\PackageManager;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -141,7 +141,7 @@ class PackageController
         }
 
         if ($package->get('type') !== 'pagekit-' . $type) {
-            App::abort(400, __('No Pagekit %type%', ['%type%' => $type]));
+            App::abort(400, __('No Biskuit %type%', ['%type%' => $type]));
         }
 
         $filename = str_replace('/', '-', $package->getName()) . '-' . $package->get('version') . '.zip';

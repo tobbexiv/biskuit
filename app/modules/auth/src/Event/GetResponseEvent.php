@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Auth\Event;
+namespace Biskuit\Auth\Event;
 
 use Symfony\Component\HttpFoundation\Response;
 

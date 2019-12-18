@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\PregReplaceFilter;
+use Biskuit\Filter\PregReplaceFilter;
 
 class PregReplaceTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,7 +1,7 @@
 <?php
 
 if (version_compare($ver = PHP_VERSION, $req = '7.2.0', '<')) {
-    exit(sprintf('You are running PHP %s, but Pagekit needs at least <strong>PHP %s</strong> to run.', $ver, $req));
+    exit(sprintf('You are running PHP %s, but Biskuit needs at least <strong>PHP %s</strong> to run.', $ver, $req));
 }
 
 if (PHP_SAPI == 'cli-server' && is_file(__DIR__.parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {

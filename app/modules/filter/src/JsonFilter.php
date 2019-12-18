@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Filter;
+namespace Biskuit\Filter;
 
 /**
  * This filter decodes a JSON string to a array.

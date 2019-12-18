@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\IntFilter;
+use Biskuit\Filter\IntFilter;
 
 class IntTest extends \PHPUnit_Framework_TestCase
 {

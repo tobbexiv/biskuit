@@ -1,14 +1,14 @@
 {
-    "name": "pagekit/pagekit",
+    "name": "biskuit/biskuit",
     "type": "project",
-    "description": "The Pagekit CMS",
-    "keywords": ["cms", "pagekit"],
-    "homepage": "http://pagekit.com",
+    "description": "The Biskuit CMS",
+    "keywords": ["cms", "biskuit"],
+    "homepage": "https://biskuit.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "Pagekit Team",
-            "email": "info@pagekit.com"
+            "name": "Bis[ku]it Team",
+            "email": "info@biskuit.org"
         }
     ],
     "require": {
@@ -42,12 +42,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Pagekit\\": "app/modules/application/src",
-            "Pagekit\\Installer\\": "app/installer/src",
-            "Pagekit\\System\\": "app/system/src",
-            "Pagekit\\Config\\": "app/modules/config/src",
-            "Pagekit\\Console\\": "app/console/src",
-            "Pagekit\\Migration\\": "app/modules/migration/src"
+            "Biskuit\\": "app/modules/application/src",
+            "Biskuit\\Installer\\": "app/installer/src",
+            "Biskuit\\System\\": "app/system/src",
+            "Biskuit\\Config\\": "app/modules/config/src",
+            "Biskuit\\Console\\": "app/console/src",
+            "Biskuit\\Migration\\": "app/modules/migration/src"
         }
     },
     "config": {

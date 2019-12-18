@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Widget\Model;
+namespace Biskuit\Widget\Model;
 
-use Pagekit\Module\Module;
+use Biskuit\Module\Module;
 
 class Type extends Module implements TypeInterface
 {

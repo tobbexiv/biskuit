@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Filesystem;
+namespace Biskuit\Filesystem;
 
-use Pagekit\Filesystem\Adapter\AdapterInterface;
-use Pagekit\Routing\Generator\UrlGenerator;
+use Biskuit\Filesystem\Adapter\AdapterInterface;
+use Biskuit\Routing\Generator\UrlGenerator;
 
 class Filesystem
 {

@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <p>{{{ 'Is your language not available? Please help out by translating Pagekit into your own language on %link%.' | trans {link:link} }}}</p>
+    <p>{{{ 'Is your language not available? Please help out by translating Biskuit into your own language on %link%.' | trans {link:link} }}}</p>
 
 </template>
 
@@ -50,7 +50,7 @@
         computed: {
 
             link: function () {
-                return '<a href="https://www.transifex.com/pagekit/pagekit-cms/">Transifex</a>';
+                return '<a href="https:/github.com/biskuitorg/languages/">Translate</a>';
             },
 
             option: function () {

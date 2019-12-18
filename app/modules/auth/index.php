@@ -1,8 +1,8 @@
 <?php
 
-use Pagekit\Auth\Auth;
-use Pagekit\Auth\Encoder\NativePasswordEncoder;
-use Pagekit\Auth\Handler\DatabaseHandler;
+use Biskuit\Auth\Auth;
+use Biskuit\Auth\Encoder\NativePasswordEncoder;
+use Biskuit\Auth\Handler\DatabaseHandler;
 use RandomLib\Factory;
 
 return [
@@ -31,7 +31,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Auth\\' => 'src'
+        'Biskuit\\Auth\\' => 'src'
 
     ],
 

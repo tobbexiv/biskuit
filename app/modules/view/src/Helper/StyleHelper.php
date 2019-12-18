@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Biskuit\View\Helper;
 
-use Pagekit\View\Asset\AssetManager;
-use Pagekit\View\View;
+use Biskuit\View\Asset\AssetManager;
+use Biskuit\View\View;
 
 class StyleHelper implements HelperInterface, \IteratorAggregate
 {

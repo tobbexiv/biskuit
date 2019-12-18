@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Kernel\Event;
+namespace Biskuit\Kernel\Event;
 
-use Pagekit\Kernel\Exception\HttpException;
+use Biskuit\Kernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExceptionListenerWrapper

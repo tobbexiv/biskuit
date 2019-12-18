@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Installer\Controller;
+namespace Biskuit\Installer\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Installer\Installer;
+use Biskuit\Application as App;
+use Biskuit\Installer\Installer;
 
 class InstallerController
 {
@@ -27,7 +27,7 @@ class InstallerController
 
         return [
             '$view' => [
-                'title' => __('Pagekit Installer'),
+                'title' => __('Biskuit Installer'),
                 'name' => 'app/installer/views/installer.php',
             ],
             '$installer' => [

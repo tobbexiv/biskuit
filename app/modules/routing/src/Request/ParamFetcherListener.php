@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Routing\Request;
+namespace Biskuit\Routing\Request;
 
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Event\EventSubscriberInterface;
 
 class ParamFetcherListener implements EventSubscriberInterface
 {

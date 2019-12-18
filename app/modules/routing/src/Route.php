@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing;
+namespace Biskuit\Routing;
 
 use Symfony\Component\Routing\Route as BaseRoute;
 

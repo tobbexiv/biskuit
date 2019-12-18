@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Installer\Package;
+namespace Biskuit\Installer\Package;
 
-use Pagekit\Application as App;
-use Pagekit\Installer\Helper\Composer;
+use Biskuit\Application as App;
+use Biskuit\Installer\Helper\Composer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 

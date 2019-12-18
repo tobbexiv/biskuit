@@ -1,15 +1,15 @@
 <?php
 
-namespace Pagekit\Installer;
+namespace Biskuit\Installer;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception\ConnectionException;
-use Pagekit\Application;
-use Pagekit\Config\Config;
-use Pagekit\Installer\Package\PackageManager;
-use Pagekit\Installer\Package\PackageScripts;
-use Pagekit\Util\Arr;
+use Biskuit\Application;
+use Biskuit\Config\Config;
+use Biskuit\Installer\Package\PackageManager;
+use Biskuit\Installer\Package\PackageScripts;
+use Biskuit\Util\Arr;
 use Symfony\Component\Console\Output\NullOutput;
 
 
@@ -23,7 +23,7 @@ class Installer
 
 
     /**
-     * @var Application Pagekit Application instance
+     * @var Application Biskuit Application instance
      */
     protected $app;
 
@@ -64,7 +64,7 @@ class Installer
 
                 if ($this->app->db()->getUtility()->tableExists('@system_config')) {
                     $status = 'tables-exist';
-                    $message = __('Existing Pagekit installation detected. Choose different table prefix?');
+                    $message = __('Existing Biskuit installation detected. Choose different table prefix?');
                 } else {
                     $status = 'no-tables';
                 }

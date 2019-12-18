@@ -1,3 +1,3 @@
 # One Theme
 
-Pagekit's default theme.
+Biskuit's default theme.

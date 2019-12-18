@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Debug\Event;
+namespace Biskuit\Debug\Event;
 
-use Pagekit\Event\Event;
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Event\EventInterface;
+use Biskuit\Event\Event;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Event\EventInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 /**

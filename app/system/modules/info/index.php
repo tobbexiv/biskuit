@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Info\InfoHelper;
+use Biskuit\Info\InfoHelper;
 
 return [
 
@@ -16,7 +16,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Info\\' => 'src'
+        'Biskuit\\Info\\' => 'src'
 
     ],
 
@@ -24,7 +24,7 @@ return [
 
         '/system/info' => [
             'name' => '@system/info',
-            'controller' => 'Pagekit\\Info\\Controller\\InfoController'
+            'controller' => 'Biskuit\\Info\\Controller\\InfoController'
         ]
 
     ],

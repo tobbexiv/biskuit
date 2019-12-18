@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Auth\Exception;
+namespace Biskuit\Auth\Exception;
 
 class BadCredentialsException extends AuthException
 {

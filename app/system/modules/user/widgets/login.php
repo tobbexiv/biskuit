@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Auth\Auth;
+use Biskuit\Auth\Auth;
 
 return [
 

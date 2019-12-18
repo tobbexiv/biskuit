@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\User\Event;
+namespace Biskuit\User\Event;
 
-use Pagekit\Application as App;
-use Pagekit\Auth\Event\AuthenticateEvent;
-use Pagekit\Auth\Exception\AuthException;
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Application as App;
+use Biskuit\Auth\Event\AuthenticateEvent;
+use Biskuit\Auth\Exception\AuthException;
+use Biskuit\Event\EventSubscriberInterface;
 
 class LoginAttemptListener implements EventSubscriberInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Module;
+namespace Biskuit\Module;
 
-use Pagekit\Application as App;
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Util\Arr;
+use Biskuit\Application as App;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\Util\Arr;
 
 class Module implements ModuleInterface, EventSubscriberInterface
 {

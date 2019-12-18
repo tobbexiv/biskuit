@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Config\Tests;
+namespace Biskuit\Config\Tests;
 
-use Pagekit\Config\Config;
-use Pagekit\Config\Loader\PhpLoader;
+use Biskuit\Config\Config;
+use Biskuit\Config\Loader\PhpLoader;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {

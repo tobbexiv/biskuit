@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Filesystem;
+namespace Biskuit\Filesystem;
 
 class Path
 {

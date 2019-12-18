@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Content\Event;
+namespace Biskuit\Content\Event;
 
-use Pagekit\Event\Event;
+use Biskuit\Event\Event;
 
 class ContentEvent extends Event
 {

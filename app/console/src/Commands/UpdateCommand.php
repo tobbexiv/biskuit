@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Console\Commands;
+namespace Biskuit\Console\Commands;
 
-use Pagekit\Application\Console\Command;
-use Pagekit\Installer\Helper\Composer;
+use Biskuit\Application\Console\Command;
+use Biskuit\Installer\Helper\Composer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -19,7 +19,7 @@ class UpdateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Updates dependencies of Pagekit packages';
+    protected $description = 'Updates dependencies of Biskuit packages';
 
     /**
      * {@inheritdoc}

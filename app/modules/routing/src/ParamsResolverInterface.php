@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Routing;
+namespace Biskuit\Routing;
 
 interface ParamsResolverInterface
 {

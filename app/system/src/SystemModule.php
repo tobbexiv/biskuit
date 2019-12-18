@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System;
+namespace Biskuit\System;
 
-use Pagekit\Application as App;
-use Pagekit\Module\Module;
+use Biskuit\Application as App;
+use Biskuit\Module\Module;
 use Symfony\Component\Finder\Finder;
 
 class SystemModule extends Module

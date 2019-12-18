@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\JsonFilter;
+use Biskuit\Filter\JsonFilter;
 
 class JsonTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,5 +1,5 @@
 <?php
 
-namespace Pagekit\Filesystem\Exception;
+namespace Biskuit\Filesystem\Exception;
 
 interface ExceptionInterface {}

@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 if (!function_exists('__')) {
 

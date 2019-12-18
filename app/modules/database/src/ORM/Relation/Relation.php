@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Database\ORM\Relation;
+namespace Biskuit\Database\ORM\Relation;
 
-use Pagekit\Database\ORM\EntityManager;
-use Pagekit\Database\ORM\Metadata;
-use Pagekit\Database\ORM\QueryBuilder;
+use Biskuit\Database\ORM\EntityManager;
+use Biskuit\Database\ORM\Metadata;
+use Biskuit\Database\ORM\QueryBuilder;
 
 /**
  * The Relation class handles relations between entities.

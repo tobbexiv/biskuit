@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Feed;
+namespace Biskuit\Feed;
 
 interface ItemInterface
 {

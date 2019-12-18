@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Installer\Package;
+namespace Biskuit\Installer\Package;
 
-use Pagekit\Application as App;
+use Biskuit\Application as App;
 
 class PackageFactory implements \ArrayAccess, \IteratorAggregate
 {

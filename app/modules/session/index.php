@@ -1,9 +1,9 @@
 <?php
 
-use Pagekit\Session\Csrf\Event\CsrfListener;
-use Pagekit\Session\Csrf\Provider\SessionCsrfProvider;
-use Pagekit\Session\Handler\DatabaseSessionHandler;
-use Pagekit\Session\MessageBag;
+use Biskuit\Session\Csrf\Event\CsrfListener;
+use Biskuit\Session\Csrf\Provider\SessionCsrfProvider;
+use Biskuit\Session\Handler\DatabaseSessionHandler;
+use Biskuit\Session\MessageBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
@@ -96,7 +96,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Session\\' => 'src'
+        'Biskuit\\Session\\' => 'src'
 
     ],
 

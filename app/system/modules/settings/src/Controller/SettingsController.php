@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Biskuit\System\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Config\Config;
+use Biskuit\Application as App;
+use Biskuit\Config\Config;
 
 /**
  * @Access("system: access settings", admin=true)

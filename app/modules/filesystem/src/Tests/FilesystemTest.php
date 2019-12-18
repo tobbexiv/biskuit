@@ -1,13 +1,13 @@
 <?php
 
-namespace Pagekit\Filesystem\Tests;
+namespace Biskuit\Filesystem\Tests;
 
-use Pagekit\Filesystem\Adapter\FileAdapter;
-use Pagekit\Filesystem\Filesystem;
+use Biskuit\Filesystem\Adapter\FileAdapter;
+use Biskuit\Filesystem\Filesystem;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
-    use \Pagekit\Tests\FileUtil;
+    use \Biskuit\Tests\FileUtil;
 
     protected $file;
     protected $fixtures;

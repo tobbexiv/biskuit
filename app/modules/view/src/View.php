@@ -1,13 +1,13 @@
 <?php
 
-namespace Pagekit\View;
+namespace Biskuit\View;
 
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Event\EventInterface;
-use Pagekit\Event\PrefixEventDispatcher;
-use Pagekit\Util\ArrObject;
-use Pagekit\View\Event\ViewEvent;
-use Pagekit\View\Helper\HelperInterface;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Event\EventInterface;
+use Biskuit\Event\PrefixEventDispatcher;
+use Biskuit\Util\ArrObject;
+use Biskuit\View\Event\ViewEvent;
+use Biskuit\View\Helper\HelperInterface;
 use Symfony\Component\Templating\DelegatingEngine;
 use Symfony\Component\Templating\EngineInterface;
 

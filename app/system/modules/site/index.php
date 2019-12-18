@@ -1,20 +1,20 @@
 <?php
 
-use Pagekit\Site\Event\MaintenanceListener;
-use Pagekit\Site\Event\NodesListener;
-use Pagekit\Site\Event\PageListener;
-use Pagekit\Site\MenuHelper;
-use Pagekit\Site\Model\Node;
+use Biskuit\Site\Event\MaintenanceListener;
+use Biskuit\Site\Event\NodesListener;
+use Biskuit\Site\Event\PageListener;
+use Biskuit\Site\MenuHelper;
+use Biskuit\Site\Model\Node;
 
 return [
 
     'name' => 'system/site',
 
-    'main' => 'Pagekit\\Site\\SiteModule',
+    'main' => 'Biskuit\\Site\\SiteModule',
 
     'autoload' => [
 
-        'Pagekit\\Site\\' => 'src'
+        'Biskuit\\Site\\' => 'src'
 
     ],
 
@@ -23,7 +23,7 @@ return [
         'page' => [
             'name' => '@page',
             'label' => 'Page',
-            'controller' => 'Pagekit\\Site\\Controller\\PageController::indexAction'
+            'controller' => 'Biskuit\\Site\\Controller\\PageController::indexAction'
         ]
 
     ],
@@ -32,19 +32,19 @@ return [
 
         '/' => [
             'name' => '@site',
-            'controller' => 'Pagekit\\Site\\Controller\\NodeController'
+            'controller' => 'Biskuit\\Site\\Controller\\NodeController'
         ],
         '/api/site/menu' => [
             'name' => '@site/api/menu',
-            'controller' => 'Pagekit\\Site\\Controller\\MenuApiController'
+            'controller' => 'Biskuit\\Site\\Controller\\MenuApiController'
         ],
         '/api/site/node' => [
             'name' => '@site/api/node',
-            'controller' => 'Pagekit\\Site\\Controller\\NodeApiController'
+            'controller' => 'Biskuit\\Site\\Controller\\NodeApiController'
         ],
         '/api/site/page' => [
             'name' => '@site/api/page',
-            'controller' => 'Pagekit\\Site\\Controller\\PageApiController'
+            'controller' => 'Biskuit\\Site\\Controller\\PageApiController'
         ]
 
     ],

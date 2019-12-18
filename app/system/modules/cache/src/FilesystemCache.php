@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Cache;
+namespace Biskuit\Cache;
 
 use Doctrine\Common\Cache\FilesystemCache as BaseFilesystemCache;
 

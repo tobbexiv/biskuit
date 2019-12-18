@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Kernel\Exception;
+namespace Biskuit\Kernel\Exception;
 
 class NotFoundException extends HttpException
 {

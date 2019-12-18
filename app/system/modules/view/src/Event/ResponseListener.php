@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\View\Event;
+namespace Biskuit\View\Event;
 
-use Pagekit\Application as App;
-use Pagekit\Event\EventSubscriberInterface;
+use Biskuit\Application as App;
+use Biskuit\Event\EventSubscriberInterface;
 
 class ResponseListener implements EventSubscriberInterface
 {

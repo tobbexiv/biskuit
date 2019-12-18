@@ -1,9 +1,9 @@
 <?php
 
-use Pagekit\Filesystem\Adapter\FileAdapter;
-use Pagekit\Filesystem\Filesystem;
-use Pagekit\Filesystem\Locator;
-use Pagekit\Filesystem\StreamWrapper;
+use Biskuit\Filesystem\Adapter\FileAdapter;
+use Biskuit\Filesystem\Filesystem;
+use Biskuit\Filesystem\Locator;
+use Biskuit\Filesystem\StreamWrapper;
 
 return [
 
@@ -51,7 +51,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Filesystem\\' => 'src'
+        'Biskuit\\Filesystem\\' => 'src'
 
     ],
 

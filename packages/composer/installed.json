@@ -1,6 +1,6 @@
 [
     {
-        "name": "pagekit/blog",
+        "name": "biskuit/blog",
         "version": "1.0.7",
         "version_normalized": "1.0.7.0",
         "dist": {
@@ -26,9 +26,9 @@
         ],
         "authors": [
             {
-                "name": "Pagekit",
-                "email": "info@pagekit.com",
-                "homepage": "http://pagekit.com"
+                "name": "Bis[ku]it",
+                "email": "info@biskuit.org",
+                "homepage": "http://biskuit.org"
             }
         ],
         "description": "A blog extensions with a built-in comment system."
@@ -60,11 +60,11 @@
         ],
         "authors": [
             {
-                "name": "Pagekit",
+                "name": "Biskuit",
                 "email": "info@pagekit.com",
                 "homepage": "http://pagekit.com"
             }
         ],
-        "description": "Pagekit's default theme."
+        "description": "Biskuit's default theme."
     }
 ]

@@ -1,9 +1,9 @@
 <?php
 
-use Pagekit\Application as App;
-use Pagekit\Application\Console\Application as Console;
-use Pagekit\Module\Loader\AutoLoader;
-use Pagekit\Module\Loader\ConfigLoader;
+use Biskuit\Application as App;
+use Biskuit\Application\Console\Application as Console;
+use Biskuit\Module\Loader\AutoLoader;
+use Biskuit\Module\Loader\ConfigLoader;
 
 $loader = require $path.'/autoload.php';
 
@@ -27,5 +27,5 @@ if ($app['config.file']) {
 }
 $app['module']->load('console');
 
-$console = new Console($app, 'Pagekit', $app->version());
+$console = new Console($app, 'Biskuit', $app->version());
 $console->run();

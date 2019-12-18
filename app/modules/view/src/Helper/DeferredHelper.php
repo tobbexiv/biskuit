@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Biskuit\View\Helper;
 
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\View\View;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\View\View;
 
 class DeferredHelper implements HelperInterface
 {

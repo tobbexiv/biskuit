@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Console\Commands;
+namespace Biskuit\Console\Commands;
 
-use Pagekit\Application\Console\Command;
+use Biskuit\Application\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -31,8 +31,8 @@ class TranslationFetchCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $tmp  = '/tmp/pagekit-languages';
-        $repo = 'git@github.com:pagekit/languages.git';
+        $tmp  = '/tmp/biskuit-languages';
+        $repo = 'git@github.com:biskuit/languages.git';
 
         // if cloned repo exists? rm
         if(file_exists($tmp)) {
@@ -74,7 +74,7 @@ class TranslationFetchCommand extends Command
      */
     protected function getPath($resource)
     {
-        $vendor = 'pagekit';
+        $vendor = 'biskuit';
 
         if ($resource == "system") {
             $path = sprintf('%s/app/system', $this->container['path']);

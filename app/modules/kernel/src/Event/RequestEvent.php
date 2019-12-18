@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Kernel\Event;
+namespace Biskuit\Kernel\Event;
 
 class RequestEvent extends KernelEvent
 {

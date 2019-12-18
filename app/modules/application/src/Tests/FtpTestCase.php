@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Tests;
+namespace Biskuit\Tests;
 
 abstract class FtpTestCase extends \PHPUnit_Framework_TestCase
 {

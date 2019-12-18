@@ -1,14 +1,14 @@
 <?php
 
-namespace Pagekit\User\Event;
+namespace Biskuit\User\Event;
 
-use Pagekit\Application as App;
-use Pagekit\Auth\Auth;
-use Pagekit\Auth\Event\AuthenticateEvent;
-use Pagekit\Auth\Event\AuthorizeEvent;
-use Pagekit\Auth\Exception\AuthException;
-use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\User\Auth\UserProvider;
+use Biskuit\Application as App;
+use Biskuit\Auth\Auth;
+use Biskuit\Auth\Event\AuthenticateEvent;
+use Biskuit\Auth\Event\AuthorizeEvent;
+use Biskuit\Auth\Exception\AuthException;
+use Biskuit\Event\EventSubscriberInterface;
+use Biskuit\User\Auth\UserProvider;
 
 class AuthorizationListener implements EventSubscriberInterface
 {

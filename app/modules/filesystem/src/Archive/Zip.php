@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filesystem\Archive;
+namespace Biskuit\Filesystem\Archive;
 
-use Pagekit\Filesystem\Exception\RuntimeException;
+use Biskuit\Filesystem\Exception\RuntimeException;
 
 class Zip implements ArchiveInterface
 {

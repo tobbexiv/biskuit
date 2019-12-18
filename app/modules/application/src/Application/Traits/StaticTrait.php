@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Application\Traits;
+namespace Biskuit\Application\Traits;
 
 trait StaticTrait
 {

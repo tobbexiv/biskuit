@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Kernel;
+namespace Biskuit\Kernel;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

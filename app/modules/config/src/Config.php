@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Config;
+namespace Biskuit\Config;
 
-use Pagekit\Util\Arr;
+use Biskuit\Util\Arr;
 
 class Config implements \ArrayAccess, \Countable, \JsonSerializable
 {

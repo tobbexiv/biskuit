@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Filter\Tests;
+namespace Biskuit\Filter\Tests;
 
-use Pagekit\Filter\StripNewlinesFilter;
+use Biskuit\Filter\StripNewlinesFilter;
 
 class StripNewlinesTest extends \PHPUnit_Framework_TestCase
 {

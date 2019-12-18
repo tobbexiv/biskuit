@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Dashboard;
+namespace Biskuit\Dashboard;
 
-use Pagekit\Application as App;
-use Pagekit\Module\Module;
+use Biskuit\Application as App;
+use Biskuit\Module\Module;
 
 class DashboardModule extends Module
 {

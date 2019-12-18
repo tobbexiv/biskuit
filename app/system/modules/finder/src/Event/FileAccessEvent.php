@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Finder\Event;
+namespace Biskuit\Finder\Event;
 
-use Pagekit\Event\Event;
+use Biskuit\Event\Event;
 
 class FileAccessEvent extends Event
 {

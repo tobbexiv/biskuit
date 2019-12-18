@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Widget\Controller;
+namespace Biskuit\Widget\Controller;
 
-use Pagekit\Application as App;
-use Pagekit\Site\Model\Node;
-use Pagekit\User\Model\Role;
-use Pagekit\Widget\Model\Widget;
+use Biskuit\Application as App;
+use Biskuit\Site\Model\Node;
+use Biskuit\User\Model\Role;
+use Biskuit\Widget\Model\Widget;
 
 /**
  * @Access("system: manage widgets", admin=true)

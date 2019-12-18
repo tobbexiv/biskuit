@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Debug\DataCollector;
+namespace Biskuit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
-use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Routing\Router;
+use Biskuit\Event\EventDispatcherInterface;
+use Biskuit\Routing\Router;
 
 class RoutesDataCollector implements DataCollectorInterface
 {

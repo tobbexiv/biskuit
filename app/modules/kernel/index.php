@@ -1,11 +1,11 @@
 <?php
 
-use Pagekit\Kernel\Controller\ControllerListener;
-use Pagekit\Kernel\Controller\ControllerResolver;
-use Pagekit\Kernel\Event\JsonResponseListener;
-use Pagekit\Kernel\Event\ResponseListener;
-use Pagekit\Kernel\Event\StringResponseListener;
-use Pagekit\Kernel\HttpKernel;
+use Biskuit\Kernel\Controller\ControllerListener;
+use Biskuit\Kernel\Controller\ControllerResolver;
+use Biskuit\Kernel\Event\JsonResponseListener;
+use Biskuit\Kernel\Event\ResponseListener;
+use Biskuit\Kernel\Event\StringResponseListener;
+use Biskuit\Kernel\HttpKernel;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 return [
@@ -61,7 +61,7 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\Kernel\\' => 'src'
+        'Biskuit\\Kernel\\' => 'src'
 
     ]
 
