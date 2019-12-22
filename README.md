@@ -29,7 +29,7 @@ then follow instructions from browser.
 ## Install from source
 ```
 git clone https://github.com/biskuitorg/biskuit.git
-cd pagekit
+cd biskuit-master
 ```
 Install dependencies using composer:
 ```
@@ -65,7 +65,7 @@ location ~ \.php$ {
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
 ```
-./pagekit --help
+./biskuit --help
 ```
 
 ## Documentation
