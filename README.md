@@ -13,6 +13,19 @@ Feel free to use it.
 
 ---
 
+## Install from package
+Go to the [Releases](https://github.com/biskuitorg/biskuit/releases) section and download latest package.
+
+### WebHosting ready
+Decompress data from archive to you web storage then follow instructions from browser.
+
+### Classic (access to composer)
+Decompress data from archive to your web path and run composer installation:
+```
+composer install
+```
+then follow instructions from browser.
+
 ## Install from source
 ```
 git clone https://github.com/biskuitorg/biskuit.git
