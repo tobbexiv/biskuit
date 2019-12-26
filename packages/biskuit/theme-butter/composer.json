@@ -1,16 +1,16 @@
 {
-    "name": "pagekit/theme-one",
+    "name": "biskuit/theme-butter",
     "type": "pagekit-theme",
     "version": "1.0.1",
-    "title": "One",
+    "title": "Butter",
     "description": "Biskuit's default theme.",
     "license": "MIT",
-    "copyright": "(c) 2016 Biskuit",
+    "copyright": "(c) 2019 Biskuit",
     "authors": [
         {
             "name": "Biskuit",
-            "email": "info@pagekit.com",
-            "homepage": "http://pagekit.com"
+            "email": "info@biskuit.org",
+            "homepage": "https://biskuit.org"
         }
     ],
     "extra": {

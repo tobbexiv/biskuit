@@ -43,7 +43,7 @@ class TranslationFetchCommand extends Command
         exec(sprintf("git clone %s %s", $repo, $tmp));
 
         // foreach resource:
-        $resources = ['system', 'blog', 'theme-one'];
+        $resources = ['system', 'blog', 'theme-butter'];
 
         // mv translation files to correct folder
         foreach ($resources as $resource) {

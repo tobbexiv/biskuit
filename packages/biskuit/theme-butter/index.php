@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'theme-one',
+    'name' => 'theme-butter',
 
     /**
      * Menu positions
@@ -44,9 +44,9 @@ return [
         'hero_contrast' => '',
         'hero_parallax' => '',
         'navbar_transparent' => '',
-        'top_style' => 'uk-block-muted',
-        'main_style' => 'uk-block-default',
-        'bottom_style' => 'uk-block-muted'
+        'top_style' => 'uk-section-muted',
+        'main_style' => 'uk-section-default',
+        'bottom_style' => 'uk-section-muted'
 
     ],
 
@@ -56,7 +56,7 @@ return [
     'widget' => [
 
         'title_hide' => false,
-        'title_size' => 'uk-panel-title',
+        'title_size' => 'uk-heading-medium',
         'alignment' => '',
         'html_class' => '',
         'panel' => ''
@@ -108,7 +108,7 @@ return [
             $params = $view->params;
 
             $classes = [
-                'navbar' => 'tm-navbar',
+                'navbar' => 'bk-navbar',
                 'hero' => '',
                 'parallax' => ''
             ];
@@ -127,7 +127,7 @@ return [
             if ($params['navbar_transparent'] && $view->position()->exists('hero') && $params['hero_image']) {
 
                 $sticky['top'] = '.uk-sticky-placeholder + *';
-                $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
+                $classes['navbar'] .= ' bk-navbar-overlay bk-navbar-transparent uk-light';
 
                 if ($params['hero_viewport']) {
                     $classes['hero'] = 'uk-height-viewport';
@@ -137,24 +137,24 @@ return [
 
                 if ($params['hero_contrast']) {
 
-                    $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
-                    $classes['navbar'] .= ' tm-navbar-contrast';
+                    $sticky['clsinactive'] = 'bk-navbar-transparent bk-navbar-contrast uk-light';
+                    $classes['navbar'] .= ' bk-navbar-contrast';
 
                 } else {
-                    $sticky['clsinactive'] = 'tm-navbar-transparent';
+                    $sticky['clsinactive'] = 'bk-navbar-transparent uk-light';
                 }
 
             }
 
             if ($params['hero_parallax'] && $view->position()->exists('hero') && $params['hero_image']) {
-                $classes['parallax'] = 'data-uk-parallax="{bg: \'-400\'}"';
+                $classes['parallax'] = 'uk-parallax="bgy: -200"';
             }
 
             if ($params['hero_contrast'] && $params['hero_image']) {
                 $classes['hero'] .= ' uk-contrast';
             }
 
-            $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
+            $classes['sticky'] = 'uk-sticky=\''.json_encode($sticky).'\'';
 
             $params['classes'] = $classes;
         },

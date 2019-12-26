@@ -47,7 +47,7 @@ class BuildCommand extends Command
         $filter = '/' . implode('|', $this->excludes) . '/i';
         $packages = [
             'biskuit/blog' => '*',
-            'biskuit/theme-one' => '*'
+            'biskuit/theme-butter' => '*'
         ];
 
         $config = [];

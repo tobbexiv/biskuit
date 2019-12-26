@@ -6,7 +6,7 @@
     <img src="<?= $image ?>" alt="<?= $post->get('image.alt') ?>">
     <?php endif ?>
 
-    <h1 class="uk-article-title"><?= $post->title ?></h1>
+    <h1 class="uk-heading-small"><?= $post->title ?></h1>
 
     <p class="uk-article-meta">
         <?= __('Written by %name% on %date%', ['%name%' => $post->user->name, '%date%' => '<time datetime="'.$post->date->format(\DateTime::W3C).'" v-cloak>{{ "'.$post->date->format(\DateTime::W3C).'" | date "longDate" }}</time>' ]) ?>
