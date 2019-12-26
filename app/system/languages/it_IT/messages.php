@@ -448,7 +448,7 @@
   'No theme found.' => 'Nessun tema trovato.',
   'There is an update available.' => 'È disponibile un aggiornamento.',
   'You have the latest version of Biskuit.' => 'La tua versione di Biskuit è aggiornata.',
-  'You have the latest version of Biskuit. You do not need to update. However, if you want to re-install version %version%, you can download the package and re-install manually.' => 'Possiedi l\'ultima versione di Biskuit. Non è necessario aggiornare. Tuttavia, se desideri re-installare la versione versione%%, puoi scaricare il pacchetto e re-installarlo manualmente.',
+  'You have the latest version of Biskuit. You do not need to update. However, if you want to re-install version %version%, you can download the package and re-install manually.' => 'Possiedi l\'ultima versione di Biskuit. Non è necessario aggiornare. Tuttavia, se desideri re-installare la versione %versione%, puoi scaricare il pacchetto e re-installarlo manualmente.',
   'Download %version%' => 'Scarica %version%',
   'Changelog' => 'Changelog',
 );
