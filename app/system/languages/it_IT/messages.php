@@ -243,7 +243,7 @@
   'Forgot Password?' => 'Password dimenticata?',
   'Request Password' => 'Richiedi password',
   'Email' => 'Email',
-  'Reset Password' => 'Riassegna assword',
+  'Reset Password' => 'Riassegna password',
   'Update Biskuit' => 'Aggiorna Biskuit',
   'Biskuit has been updated! Before we send you on your way, we have to update your database to the newest version.' => 'Biskuit è stato aggiornato! Prima di lasciarti libero di andare, dobbiamo aggiornare il tuo database all\'ultima versione.',
   'Visit Site' => 'Visita Sito',
