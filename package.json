@@ -1,7 +1,12 @@
 {
   "name": "biskuit",
+  "license" : "MIT License",
   "scripts": {
     "install": "bower install && webpack && gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/biskuitorg/biskuit.git"
   },
   "devDependencies": {
     "babel-core": "^6.1.2",
