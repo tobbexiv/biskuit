@@ -31,9 +31,10 @@ then follow instructions from browser.
 git clone https://github.com/biskuitorg/biskuit.git
 cd biskuit-master
 ```
-Install dependencies using composer:
+Install dependencies using composer and npm:
 ```
 composer install
+npm install
 ```
 Continue installing from browser.
 
