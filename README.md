@@ -70,7 +70,7 @@ Pagekit offers a set of commands to run usual tasks on the command line. You can
 ```
 
 ## Documentation
-You can read the documentation (here)[https://github.com/biskuitorg/docs].
+You can read the documentation [here](https://github.com/biskuitorg/docs).
 
 ## Contributing
 
