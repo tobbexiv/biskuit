@@ -1,6 +1,6 @@
 {
   "name": "biskuit",
-  "license" : "MIT",
+  "license": "MIT",
   "version": "1.0.19",
   "scripts": {
     "install": "bower install && webpack && gulp"
