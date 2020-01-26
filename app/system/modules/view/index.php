@@ -66,7 +66,7 @@ return [
         'view.scripts' => function ($event, $scripts) use ($app) {
             $scripts->register('codemirror', 'app/assets/codemirror/codemirror.js');
             $scripts->register('jquery', 'app/assets/jquery/dist/jquery.min.js');
-            $scripts->register('lodash', 'app/assets/lodash/lodash.min.js');
+            $scripts->register('lodash', 'app/assets/lodash/dist/lodash.min.js');
             $scripts->register('marked', 'app/assets/marked/marked.js');
             $scripts->register('uikit', 'app/assets/uikit/js/uikit.min.js', 'jquery');
             $scripts->register('uikit-accordion', 'app/assets/uikit/js/components/accordion.min.js', 'uikit');
