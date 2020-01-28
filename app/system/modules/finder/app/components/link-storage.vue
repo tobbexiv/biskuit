@@ -42,7 +42,7 @@
         created: function () {
             this.assets = this.$asset({
                 js: [
-                    'app/assets/uikit/js/components/upload.min.js',
+                    'app/assets/uikit-2-js/components/upload.min.js',
                     'app/system/modules/finder/app/bundle/panel-finder.js'
                 ]
             });
