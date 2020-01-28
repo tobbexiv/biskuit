@@ -88,9 +88,9 @@
     Vue.component('input-date', function (resolve, reject) {
         Vue.asset({
             js: [
-                'app/assets/uikit/js/components/autocomplete.min.js',
-                'app/assets/uikit/js/components/datepicker.min.js',
-                'app/assets/uikit/js/components/timepicker.min.js'
+                'app/assets/uikit-2-js/components/autocomplete.min.js',
+                'app/assets/uikit-2-js/components/datepicker.min.js',
+                'app/assets/uikit-2-js/components/timepicker.min.js'
             ]
         }).then(function () {
             resolve(module.exports);

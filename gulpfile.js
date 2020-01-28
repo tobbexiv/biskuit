@@ -39,12 +39,11 @@ var errhandler = function (error) {
     return console.error(error.toString());
 };
 
-gulp.task('default', ['compile']);
 
 /**
  * Compile all less files
  */
-gulp.task('compile', function () {
+function compile () {
 
     pkgs = pkgs.filter(function (pkg) {
         return fs.existsSync(pkg.path);
@@ -61,20 +60,20 @@ gulp.task('compile', function () {
             }))
             .pipe(gulp.dest(pkg.path));
     }));
-
-});
+}
 
 /**
  * Watch for changes in files
  */
-gulp.task('watch', function (cb) {
-    gulp.watch('**/*.less', ['compile']);
-});
+function watch (cb) {
+    gulp.watch('**/*.less', gulp.parallel('compile'));
+    cb();
+}
 
 /**
  * Lint all script files
  */
-gulp.task('lint', function () {
+function lint () {
     return gulp.src([
         'app/modules/**/*.js',
         'app/system/**/*.js',
@@ -86,9 +85,9 @@ gulp.task('lint', function () {
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
-});
+}
 
-gulp.task('cldr', function () {
+function cldr (cb) {
 
     // territoryContainment
     var data = {}, json = JSON.parse(fs.readFileSync(cldr.cldr + 'territoryContainment.json', 'utf8')).supplemental.territoryContainment;
@@ -129,4 +128,11 @@ gulp.task('cldr', function () {
             });
 
         });
-});
+    cb();
+}
+
+exports.default = compile;
+exports.compile = compile;
+exports.lint = lint;
+exports.cldr = cldr;
+exports.watch = watch;
