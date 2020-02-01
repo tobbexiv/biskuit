@@ -71,7 +71,7 @@ class UrlResolver implements ParamsResolverInterface
     public function generate(array $parameters = [])
     {
         $id = $parameters['id'];
-	unset($parameters['id']);
+     	unset($parameters['id']);
 
         if (!isset($this->cacheEntries[$id])) {
 
