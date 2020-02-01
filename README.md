@@ -1,7 +1,9 @@
 [![biskuit Banner](https://raw.githubusercontent.com/biskuitorg/biskuit-assets/ac2e599b0a83a4ed31d1fc74f47b340a96f61322/brand/biskuit-cover.png)](https://github.com/biskuitorg/biskuit)
 
 # bis[ku]it (Pagekit unofficial)
-bis[ku]it is a modular and lightweight CMS built with Symfony components and Vue.js.
+[![Gitter](https://badges.gitter.im/biskuitorg/community.svg)](https://gitter.im/biskuitorg/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+Bis[ku]it is a modular and lightweight CMS built with Symfony components and Vue.js.
 
 This unofficial version of Pagekit was created to solve various problems. Mainly born for linuxhub.it, a portal that uses PageKit.
 
