@@ -1,4 +1,4 @@
-var md5 = require('md5');
+var md5 = require('blueimp-md5');
 var mutex = {};
 
 module.exports = {
