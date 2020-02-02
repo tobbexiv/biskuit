@@ -1,9 +1,6 @@
 **/app/bundle/**/*.js
 /app/vendor/*
 /app/assets/*
-!/app/assets/codemirror
-!/app/assets/marked
-!/app/assets/uikit-2-js
 /app/installer/assets/css/*
 /app/system/modules/theme/css/*
 /packages/*
