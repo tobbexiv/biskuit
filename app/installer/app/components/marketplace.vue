@@ -172,7 +172,7 @@
             },
 
             isInstalled: function (pkg) {
-                return _.isObject(pkg) ? _.find(this.installed, 'name', pkg.name) : undefined;
+                return _.isObject(pkg) ? _.find(this.installed, ['name', pkg.name]) : undefined;
             }
         },
 

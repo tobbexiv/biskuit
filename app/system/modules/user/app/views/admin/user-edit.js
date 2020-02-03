@@ -20,7 +20,7 @@ window.User = {
 
         });
 
-        this.$set('sections', _.sortBy(sections, 'priority'));
+        this.$set('sections', _.sortBy(sections, ['priority']));
 
     },
 

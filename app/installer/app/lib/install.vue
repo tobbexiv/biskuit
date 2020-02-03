@@ -39,7 +39,7 @@
 
                 return this.$http.post('admin/system/package/install', {package: pkg, packagist: Boolean(packagist)},null , {xhr: this.init()}).then(function () {
                             if (this.status === 'success' && packages) {
-                                var index = _.findIndex(packages, 'name', pkg.name);
+                                var index = _.findIndex(packages, ['name', pkg.name]);
 
                                 if (-1 !== index) {
                                     packages.splice(index, 1, pkg);

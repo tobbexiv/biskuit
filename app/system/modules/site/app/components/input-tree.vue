@@ -61,7 +61,7 @@
                 ])
                 .then(function(responses) {
                     vm.$set('nodes', responses[0].data);
-                    vm.$set('menus', vm.trash ? responses[1].data : _.reject(responses[1].data, 'id', 'trash'));
+                    vm.$set('menus', vm.trash ? responses[1].data : _.reject(responses[1].data, ['id', 'trash']));
                 }, function () {
                     vm.$notify('Could not load config.', 'danger');
                 });

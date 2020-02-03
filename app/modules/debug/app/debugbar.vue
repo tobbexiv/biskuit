@@ -36,13 +36,13 @@
 
         created: function () {
 
-            _.forIn(this.$options.components, function (component, name) {
+            _.forIn(this.$options.components, _.bind(function (component, name) {
 
                 if (component.options && component.options.section) {
                     Vue.set(this.sections, name, _.merge({name: name}, component.options.section));
                 }
 
-            }, this);
+            }, this));
 
             this.load(config.current).then(function (res) {
                 this.$set('request', res.data.__meta);
@@ -68,7 +68,7 @@
 
             open: function (name) {
 
-                var section = this.sections[name], panel, vm = _.find(this.$children, '$options.name', name);
+                var section = this.sections[name], panel, vm = _.find(this.$children, ['$options.name', name]);
 
                 if (!section.panel) {
                     return;

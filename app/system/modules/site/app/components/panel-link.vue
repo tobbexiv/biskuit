@@ -53,7 +53,7 @@
 
                 });
 
-                return _.sortBy(types, 'text');
+                return _.sortBy(types, ['text']);
             }
 
         },
