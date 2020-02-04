@@ -27,7 +27,7 @@ module.exports = {
         },
 
         unassigned: function () {
-            return {name: '_unassigned', label: this.$trans('Unassigned'), assigned: _.pluck(this.unassignedWidgets, 'id'), widgets: this.unassignedWidgets};
+            return {name: '_unassigned', label: this.$trans('Unassigned'), assigned: _.map(this.unassignedWidgets, 'id'), widgets: this.unassignedWidgets};
         },
 
         empty: function () {
@@ -53,7 +53,7 @@ module.exports = {
                     })
                 });
 
-            }, this);
+            });
 
             return options;
         }
@@ -123,7 +123,7 @@ module.exports = {
 
         move: function (position, ids) {
 
-            position = _.find(this.positions, 'name', position);
+            position = _.find(this.positions, ['name', position]);
 
             this.assign(position.name, position.assigned.concat(ids)).then(function () {
                 this.$notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
@@ -204,7 +204,7 @@ module.exports = {
             } else if (widget.nodes.length > 1) {
                 return this.$trans('Selected');
             } else {
-                return (_.find(this.config.nodes, 'id', widget.nodes[0]) || {}).title;
+                return (_.find(this.config.nodes, ['id', widget.nodes[0]]) || {}).title;
             }
 
         },
@@ -247,7 +247,7 @@ module.exports = {
 
         assigned: function (ids) {
             return ids.map(function (id) {
-                return _.find(this.widgets, 'id', id);
+                return _.find(this.widgets, ['id', id]);
             }, this).filter(function (widget) {
                 return widget !== undefined;
             });
@@ -276,7 +276,7 @@ module.exports = {
                         .element.off('change.uk.sortable')
                         .on('change.uk.sortable', function (e, sortable, element, action) {
                             if (action == 'added' || action == 'moved') {
-                                vm.vm.assign(vm._frag.scope.$get('pos.name'), _.pluck(sortable.serialize(), 'id'));
+                                vm.vm.assign(vm._frag.scope.$get('pos.name'), _.map(sortable.serialize(), 'id'));
                             }
                         });
 

@@ -20,7 +20,7 @@ module.exports = {
     computed: {
 
         current: function () {
-            return _.find(this.roles, 'id', this.config.role) || this.roles[0];
+            return _.find(this.roles, ['id', this.config.role]) || this.roles[0];
         }
 
     },
@@ -43,7 +43,7 @@ module.exports = {
 
                 if (this.role.id) {
 
-                    var role = _.findIndex(this.roles, 'id', this.role.id);
+                    var role = _.findIndex(this.roles, ['id', this.role.id]);
                     this.roles.splice(role, 1, data.role);
 
                     this.$notify('Role saved');

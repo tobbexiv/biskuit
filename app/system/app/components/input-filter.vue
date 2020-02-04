@@ -45,8 +45,8 @@
             },
 
             label: function () {
-                var list = this.list.concat(_.flatten(_.pluck(this.list, 'options')));
-                var value = _.find(list, 'value', this.value);
+                var list = this.list.concat(_.flatten(_.map(this.list, 'options')));
+                var value = _.find(list, ['value', this.value]);
                 return value ? value.text : this.title;
             }
 

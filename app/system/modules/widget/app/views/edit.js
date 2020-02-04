@@ -31,7 +31,7 @@ module.exports = {
             }
 
             return active[1] == type;
-        }, this), 'priority');
+        }, this), ['priority']);
 
         this.$set('sections', sections);
 

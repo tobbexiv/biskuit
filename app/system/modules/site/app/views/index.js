@@ -19,7 +19,7 @@ module.exports = {
 
         var vm = this;
         this.load().then(function () {
-            vm.$set('menu', _.find(vm.menus, 'id', vm.$get('menu.id')) || vm.menus[0]);
+            vm.$set('menu', _.find(vm.menus, ['id', vm.$get('menu.id')]) || vm.menus[0]);
         });
     },
 
@@ -59,7 +59,7 @@ module.exports = {
                 vm.$set('nodes', responses[1].data);
                 vm.$set('selected', []);
 
-                if (!_.find(vm.menus, 'id', vm.$get('menu.id'))) {
+                if (!_.find(vm.menus, ['id', vm.$get('menu.id')])) {
                     vm.$set('menu', vm.menus[0]);
                 }
 
@@ -109,7 +109,7 @@ module.exports = {
 
         getMenu: function (position) {
             return _.find(this.menus, function (menu) {
-                return _.contains(menu.positions, position);
+                return _.includes(menu.positions, position);
             });
         },
 
@@ -145,7 +145,7 @@ module.exports = {
                     menu: _.find(this.menus.concat({
                         id: 'trash',
                         label: this.$trans('Trash')
-                    }), 'id', menu).label
+                    }), ['id', menu]).label
                 }));
             });
         },
@@ -171,7 +171,7 @@ module.exports = {
         },
 
         getType: function (node) {
-            return _.find(this.types, 'id', node.type);
+            return _.find(this.types, ['id', node.type]);
         },
 
         getSelected: function () {
@@ -183,9 +183,9 @@ module.exports = {
         isSelected: function (node, children) {
 
             if (_.isArray(node)) {
-                return _.every(node, function (node) {
+                return _.every(node, _.bind(function (node) {
                     return this.isSelected(node, children);
-                }, this);
+                }, this));
             }
 
             return this.selected.indexOf(node.id) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
@@ -207,9 +207,9 @@ module.exports = {
     computed: {
 
         showDelete: function () {
-            return this.showMove && _.every(this.getSelected(), function (node) {
+            return this.showMove && _.every(this.getSelected(), _.bind(function (node) {
                     return !(this.getType(node) || {})['protected'];
-                }, this);
+                }, this));
         },
 
         showMove: function () {
@@ -232,19 +232,19 @@ module.exports = {
     filters: {
 
         label: function (id) {
-            return _.result(_.find(this.menus, 'id', id), 'label');
+            return _.result(_.find(this.menus, ['id', id]), 'label');
         },
 
         protected: function (types) {
-            return _.reject(types, 'protected', true);
+            return _.reject(types, ['protected', true]);
         },
 
         trash: function (menus) {
-            return _.reject(menus, 'id', 'trash');
+            return _.reject(menus, ['id', 'trash']);
         },
 
         divided: function (menus) {
-            return _.reject(menus, 'fixed', true).concat({divider: true}, _.filter(menus, 'fixed', true))
+            return _.reject(menus, ['fixed', true]).concat({divider: true}, _.filter(menus, ['fixed', true]))
         }
 
     },

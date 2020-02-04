@@ -125,9 +125,9 @@
             },
 
             search: function () {
-                this.$set('selected', _.filter(this.selected, function (name) {
-                    return _.find(this.searched, 'name', name);
-                }, this));
+                this.$set('selected', _.filter(this.selected, _.bind(function (name) {
+                    return _.find(this.searched, ['name', name]);
+                }, this)));
             }
 
         },
@@ -153,9 +153,9 @@
             },
 
             searched: function () {
-                return _.filter(this.items, function (file) {
+                return _.filter(this.items, _.bind(function (file) {
                     return !this.search || file.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
-                }, this);
+                }, this));
             },
 
             count: function () {
@@ -188,7 +188,7 @@
 
             getSelected: function () {
                 return this.selected.map(function (name) {
-                    return _.find(this.items, 'name', name).url;
+                    return _.find(this.items, ['name', name]).url;
                 }, this);
             },
 

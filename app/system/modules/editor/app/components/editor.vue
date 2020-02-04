@@ -45,7 +45,7 @@
                     if (Component.options && Component.options.plugin) {
                         new Component({parent: self});
                     }
-                }, this);
+                });
 
             });
         },

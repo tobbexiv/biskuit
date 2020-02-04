@@ -113,13 +113,13 @@ module.exports = {
         },
 
         showRoles: function (user) {
-            return _.reduce(user.roles, function (roles, id) {
-                var role = _.find(this.config.roles, 'id', id);
+            return _.reduce(user.roles, _.bind(function (roles, id) {
+                var role = _.find(this.config.roles, ['id', id]);
                 if (id !== 2 && role) {
                     roles.push(role.name);
                 }
                 return roles;
-            }, [], this).join(', ');
+            }, this), []).join(', ');
         },
 
         load: function () {

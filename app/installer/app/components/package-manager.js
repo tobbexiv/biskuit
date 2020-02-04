@@ -33,7 +33,7 @@ module.exports = {
             if (this.packages) {
                 this.queryUpdates(this.packages).then(function (res) {
                     var data = res.data;
-                    this.$set('updates', data.packages.length ? _.indexBy(data.packages, 'name') : null);
+                    this.$set('updates', data.packages.length ? _.keyBy(data.packages, 'name') : null);
                     this.$set('status', '');
                 }, function () {
                     this.$set('status', 'error');
