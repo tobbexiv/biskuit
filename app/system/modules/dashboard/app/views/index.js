@@ -58,7 +58,7 @@ window.Dashboard = {
 
                     sortable.element.children('[data-idx]').each(function (idx) {
 
-                        widget = _.find(widgets, 'id', this.getAttribute('data-id'));
+                        widget = _.find(widgets, ['id', this.getAttribute('data-id')]);
                         widget.column = column;
                         widget.idx = idx;
                     });
@@ -138,7 +138,7 @@ window.Dashboard = {
         },
 
         getType: function (id) {
-            return _.find(this.getTypes(), 'id', id);
+            return _.find(this.getTypes(), ['id', id]);
         },
 
         getTypes: function () {
