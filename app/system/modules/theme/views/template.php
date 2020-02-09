@@ -37,7 +37,7 @@
                     <div class="tm-contrast">
 
 			<ul class="uk-grid uk-grid-small uk-flex-middle">
-                            <li><a class="tm-icon-github uk-icon-github" href="https://github.com/biskuitorg/biskuit" :title="GitHub" target="_blank"></a></li>
+                            <li><a class="tm-icon-github uk-icon-github" href="https://github.com/biskuitorg" :title="GitHub" target="_blank"></a></li>
                             <li><a class="tm-icon-help" href="https://github.com/biskuitorg/biskuit/issues" :title="'Get Help' | trans" target="_blank"></a></li>
                             <li><a class="tm-icon-visit" :href="$url.route('')" :title="'Visit Site' | trans" target="_blank"></a></li>
                             <li><a class="tm-icon-logout" href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>" :title="'Logout' | trans"></a></li>
