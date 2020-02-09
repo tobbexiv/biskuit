@@ -12,8 +12,8 @@ module.exports = {
             ],
             js: [
                 'app/assets/codemirror/codemirror.js',
-                'app/assets/marked/marked.js',
-                'app/assets/uikit-2-js/components/htmleditor.min.js'
+                'app/assets/marked/marked.min.js',
+                'app/assets/uikit/js/components/htmleditor.min.js'
             ]
 
         }).then(function () {
