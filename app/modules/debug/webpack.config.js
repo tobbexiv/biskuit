@@ -5,8 +5,5 @@ module.exports = [{
     output: {
         filename: "./app/bundle/[name].js",
         library: "Debugbar"
-    },
-    module: {
-        loaders: [{ test: /\.vue$/, loader: "vue" }]
     }
 }];

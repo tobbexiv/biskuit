@@ -7,11 +7,6 @@ module.exports = [
         output: {
             filename: "./app/bundle/[name].js",
             library: "Links"
-        },
-        module: {
-            loaders: [
-                { test: /\.vue$/, loader: "vue" }
-            ]
         }
     },
 
@@ -30,12 +25,6 @@ module.exports = [
         },
         output: {
             filename: "./app/bundle/[name].js"
-        },
-        module: {
-            loaders: [
-                { test: /\.html$/, loader: "vue-html" },
-                { test: /\.vue$/, loader: "vue" }
-            ]
         }
     }
 

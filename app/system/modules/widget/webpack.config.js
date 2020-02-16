@@ -8,12 +8,6 @@ module.exports = [
         },
         output: {
             filename: "./app/bundle/[name].js"
-        },
-        module: {
-            loaders: [
-                { test: /\.html$/, loader: "vue-html" },
-                { test: /\.vue$/, loader: "vue" }
-            ]
         }
     }
 
