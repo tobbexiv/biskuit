@@ -10,10 +10,9 @@
     </head>
     <body>
 
-        <div id="installer" class="tm-background uk-height-viewport uk-flex uk-flex-center uk-flex-middle" >
+        <div id="installer" class="tm-background uk-height-viewport uk-flex uk-flex-center uk-flex-middle" :key="key">
             <div class="tm-container">
-
-                <div class="uk-text-center" v-el:start v-show="step == 'start'">
+                <div class="uk-text-center" ref="start" v-show="step == 'start'">
 
                     <a class="uk-panel" @click="gotoStep('language')">
                         <img src="app/system/assets/images/biskuit-logo-large.svg" alt="Biskuit">
@@ -27,8 +26,8 @@
 
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el:language v-show="step == 'language'" >
-                    <div v-pre>
+                <div class="uk-panel uk-panel-box" ref="language" v-show="step == 'language'" >
+                    <div>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Choose language' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ "Select your site language." | trans }}</div>
@@ -36,7 +35,7 @@
                         <form class="uk-form" @submit.prevent="stepLanguage">
 
                             <select class="uk-width-1-1" size="10" v-model="locale">
-                                <option v-for="lang in locales" :value="$key">{{ lang }}</option>
+                                <option v-for="(lang, key) in locales" :value="key">{{ lang }}</option>
                             </select>
 
                             <p class="uk-text-right">
@@ -57,15 +56,15 @@
 
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el:database v-show="step == 'database'">
-                    <div v-pre>
+                <div class="uk-panel uk-panel-box" ref="database" v-show="step == 'database'">
+                    <validation-observer tag="div" v-slot="{ handleSubmit }">
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Connect database' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Enter your database connection details.' | trans }}</div>
 
                         <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formDatabase" @submit.prevent="stepDatabase | valid">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" @submit.prevent="handleSubmit(stepDatabase)">
                             <div class="uk-form-row">
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -76,52 +75,55 @@
                                 </div>
                             </div>
                             <div class="uk-form-row" v-if="config.database.default == 'mysql'">
-                                <div class="uk-form-row">
-                                    <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
-                                    <div class="uk-form-controls">
-                                        <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="host" value="localhost" v-model="config.database.connections.mysql.host" v-validate:required>
-                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.host.invalid">{{ 'Host cannot be blank.' | trans }}</p>
-                                    </div>
-                                </div>
-                                <div class="uk-form-row">
-                                    <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
-                                    <div class="uk-form-controls">
-                                        <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.mysql.user" v-validate:required>
-                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.user.invalid">{{ 'User cannot be blank.' | trans }}</p>
-                                    </div>
-                                </div>
-                                <div class="uk-form-row">
-                                    <label for="form-mysql-dbpassword" class="uk-form-label">{{ 'Password' | trans }}</label>
-                                    <div class="uk-form-controls">
-                                        <div class="uk-form-password uk-width-1-1">
-                                            <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" name="password" value="" autocomplete="off" v-model="config.database.connections.mysql.password">
-                                            <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="uk-form-row">
-                                    <label for="form-mysql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
-                                    <div class="uk-form-controls">
-                                        <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="dbname" value="biskuit" v-model="config.database.connections.mysql.dbname" v-validate:required>
-                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.dbname.invalid">{{ 'Database name cannot be blank.' | trans }}</p>
-                                    </div>
-                                </div>
-                                <div class="uk-form-row">
-                                    <label for="form-mysql-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
-                                    <div class="uk-form-controls">
-                                        <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="mysqlprefix" value="pk_" v-model="config.database.connections.mysql.prefix" v-validate:pattern.literal="/^[a-zA-Z][a-zA-Z0-9._\-]*$/">
-                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.mysqlprefix.invalid">{{ 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' | trans }}</p>
-                                    </div>
-                                </div>
+                                <v-validated-input
+                                    id="form-mysql-dbhost"
+                                    name="host"
+                                    rules="required"
+                                    label="Hostname"
+                                    :error-messages="{ required: 'Host cannot be blank.' }"
+                                    v-model="config.database.connections.mysql.host">
+                                </v-validated-input>
+                                <v-validated-input
+                                    id="form-mysql-dbuser"
+                                    name="user"
+                                    rules="required"
+                                    label="User"
+                                    :error-messages="{ required: 'User cannot be blank.' }"
+                                    v-model="config.database.connections.mysql.user">
+                                </v-validated-input>
+                                <v-validated-input
+                                    id="form-mysql-dbpassword"
+                                    name="password"
+                                    type="password"
+                                    label="Password"
+                                    v-model="config.database.connections.mysql.password">
+                                </v-validated-input>
+                                <v-validated-input
+                                    id="form-mysql-dbname"
+                                    name="dbname"
+                                    rules="required"
+                                    label="Database Name"
+                                    :error-messages="{ required: 'Database name cannot be blank.' }"
+                                    v-model="config.database.connections.mysql.dbname">
+                                </v-validated-input>
+                                <v-validated-input
+                                    id="form-mysql-dbprefix"
+                                    name="mysqlprefix"
+                                    :rules="{ regex: /^[a-zA-Z][a-zA-Z0-9._\-]*$/ }"
+                                    label="Table Prefix"
+                                    :error-messages="{ regex: 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' }"
+                                    v-model="config.database.connections.mysql.prefix">
+                                </v-validated-input>
                             </div>
-                            <div class="uk-form-row" v-show="config.database.default == 'sqlite'">
-                                <div class="uk-form-row">
-                                    <label for="form-sqlite-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
-                                    <div class="uk-form-controls">
-                                        <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="sqliteprefix" value="pk_" v-model="config.database.connections.sqlite.prefix" v-validate:pattern.literal="/^[a-zA-Z][a-zA-Z0-9._\-]*$/">
-                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.sqliteprefix.invalid">{{ 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' | trans }}</p>
-                                    </div>
-                                </div>
+                            <div class="uk-form-row" v-else-if="config.database.default == 'sqlite'">
+                                <v-validated-input
+                                    id="form-sqlite-dbprefix"
+                                    name="sqliteprefix"
+                                    :rules="{ regex: /^[a-zA-Z][a-zA-Z0-9._\-]*$/ }"
+                                    label="Table Prefix"
+                                    :error-messages="{ regex: 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' }"
+                                    v-model="config.database.connections.sqlite.prefix">
+                                </v-validated-input>
                             </div>
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
@@ -137,48 +139,50 @@
                             </p>
                         </form>
 
-                    </div>
+                    </validation-observer>
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el:site v-show="step == 'site'">
-                    <div v-pre>
+                <div class="uk-panel uk-panel-box" ref="site" v-show="step == 'site'">
+                    <validation-observer tag="div" v-slot="{ handleSubmit }">
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Choose a title and create the administrator account.' | trans }}</div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formSite" @submit.prevent="stepSite | valid">
-                            <div class="uk-form-row">
-                                <label for="form-sitename" class="uk-form-label">{{ 'Site Title' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-validate:required>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
-                                </div>
-                            </div>
-
-                            <div class="uk-form-row">
-                                <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.user.invalid">{{ 'Username cannot be blank and may only contain alphanumeric characters (A-Z, 0-9) and some special characters ("._-")' | trans }}</p>
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <div class="uk-form-password uk-width-1-1">
-                                        <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" v-validate:required>
-                                        <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
-                                    </div>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.password.invalid">{{ 'Password cannot be blank.' | trans }}</p>
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-validate:email v-validate:required>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
-                                </div>
-                            </div>
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" validator="formSite" @submit.prevent="handleSubmit(stepSite)">
+                            <v-validated-input
+                                id="form-sitename"
+                                name="name"
+                                rules="required"
+                                label="Site Title"
+                                :error-messages="{ required: 'Site title cannot be blank.' }"
+                                v-model="option['system/site'].title">
+                            </v-validated-input>
+                            <v-validated-input
+                                id="form-username"
+                                name="user"
+                                :rules="{ required: true, min: 3, regex: /^[a-zA-Z0-9._\-]{3,}$/ }"
+                                label="Username"
+                                :error-messages="{ required: 'Username cannot be blank.', min: 'Username must be at least 3 charaters long.', regex: 'Username can only contain alphanumeric characters (A-Z, 0-9) and some special characters (._-)' }"
+                                v-model="user.username">
+                            </v-validated-input>
+                            <v-validated-input
+                                id="form-password"
+                                name="password"
+                                type="password"
+                                rules="required"
+                                label="Password"
+                                :error-messages="{ required: 'Password cannot be blank.' }"
+                                v-model="user.password">
+                            </v-validated-input>
+                            <v-validated-input
+                                id="form-email"
+                                name="email"
+                                type="email"
+                                rules="required|email"
+                                label="Email"
+                                :error-messages="{ required: 'Email cannot be blank.', email: 'Field must be a valid email address.' }"
+                                v-model="user.email">
+                            </v-validated-input>
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
                                     <span class="uk-flex-inline uk-flex-middle">{{ 'Install' | trans }}
@@ -193,11 +197,11 @@
                             </p>
                         </form>
 
-                    </div>
+                    </validation-observer>
                 </div>
 
-                <div v-el:finish v-show="step == 'finish'">
-                    <div v-pre>
+                <div ref="finish" v-show="step == 'finish'">
+                    <div>
                         <div class="uk-text-center" v-show="status == 'install'">
                             <svg class="tm-loader" width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                                 <g><circle cx="0" cy="0" r="70" fill="none" stroke-width="2"/></g>
