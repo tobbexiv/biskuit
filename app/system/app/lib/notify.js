@@ -1,21 +1,14 @@
-module.exports = function (Vue) {
-
-    Vue.prototype.$notify = function () {
-
-        var args = arguments,
-            msgs = window.jQuery('.pk-system-messages'),
-            UIkit = window.UIkit || {};
-
-        if (args[0]) {
-            args[0] = this.$trans(args[0]);
-        }
+export default (Vue) => {
+    Vue.prototype.$notify = () => {
+        const messages = document.getElementsByClassName('pk-system-messages');
+        const UIkit = window.UIkit || {};
+        const message = arguments[0] ? this.$trans(arguments[0]) : this.$trans('Unknown error');
+        const status = arguments[1] || 'info';
 
         if (UIkit.notify) {
-            UIkit.notify.apply(this, args);
-        } else if (msgs) {
-            msgs.empty().append('<div class="uk-alert uk-alert-' + (args[1] || 'info') + '"><p>' + args[0] + '</p></div>');
+            Uikit.notify(message, status);
+        } else if (messages) {
+            messages.empty().append(`<div class="uk-alert uk-alert-${status}"><p>${message}</p></div>`);
         }
-
     };
-
 };

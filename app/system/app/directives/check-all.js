@@ -1,9 +1,52 @@
-module.exports = {
+const toNumber = (value, binding) => {
+    return binding.number ? Number(value) : value;
+};
 
-    params: ['group'],
+const state(el, checked) {
+    if (checked === undefined) {
+        el.indeterminate = true;
+    } else {
+        el.checked = checked;
+        el.indeterminate = false;
+    }
+};
 
-    update: function (subSelector) {
+const selected = (update, el, binding, vnode) => {
+    let keypath = binding.arg
+    let selected = [];
+    let values = []
+    let value;
 
+    $(binding.selector, this.$el).each(function () {
+
+        value = toNumber($(this).val(), binding);
+        values.push(value);
+
+        if ($(this).prop('checked')) {
+            selected.push(value);
+        }
+    });
+
+    if (update) {
+        update = this.vm.$get(keypath).filter(function (value) {
+            return values.indexOf(value) === -1;
+        });
+
+        Vue.set(this.vm, keypath, update.concat(selected));
+    }
+
+    if (selected.length === 0) {
+        return false;
+    } else if (selected.length == values.length) {
+        return true;
+    } else {
+        return undefined;
+    }
+};
+
+export default {
+    update(subSelector) {
+        const { group } = el.dataset;
         var self = this, keypath = this.arg, group = this.params.group ? this.params.group + ' ' : '', selector = group + subSelector;
 
         this.selector = selector;
@@ -34,7 +77,7 @@ module.exports = {
         this.unbindWatcher = this.vm.$watch(keypath, function (selected) {
 
             $(subSelector, this.$el).prop('checked', function () {
-                return selected.indexOf(self.toNumber($(this).val())) !== -1;
+                return selected.indexOf(self.toNumber($(this).val(), binding)) !== -1;
             });
 
             self.selected();
@@ -42,13 +85,12 @@ module.exports = {
         });
     },
 
-    unbind: function () {
-
+    unbind(el) {
         var self = this;
 
-        $(this.el).off('.check-all');
+        $(el).off('.check-all');
 
-        if (this.handler) {
+        if (binding.handler) {
             this.handler.forEach(function (handler) {
                 $(self.$el).off('.check-all', handler);
             });
@@ -57,55 +99,5 @@ module.exports = {
         if (this.unbindWatcher) {
             this.unbindWatcher();
         }
-    },
-
-    state: function () {
-
-        var el = $(this.el);
-
-        if (this.checked === undefined) {
-            el.prop('indeterminate', true);
-        } else {
-            el.prop('checked', this.checked).prop('indeterminate', false);
-        }
-
-    },
-
-    selected: function (update) {
-
-        var self = this, keypath = this.arg, selected = [], values = [], value;
-
-        $(this.selector, this.$el).each(function () {
-
-            value = self.toNumber($(this).val());
-            values.push(value);
-
-            if ($(this).prop('checked')) {
-                selected.push(value);
-            }
-        });
-
-        if (update) {
-
-            update = this.vm.$get(keypath).filter(function (value) {
-                return values.indexOf(value) === -1;
-            });
-
-            this.vm.$set(keypath, update.concat(selected));
-        }
-
-        if (selected.length === 0) {
-            this.checked = false;
-        } else if (selected.length == values.length) {
-            this.checked = true;
-        } else {
-            this.checked = undefined;
-        }
-
-    },
-
-    toNumber: function (value) {
-        return this.number ? Number(value) : value;
     }
-
 };
