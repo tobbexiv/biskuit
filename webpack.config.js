@@ -16,7 +16,8 @@ const build = (mode, dir, config) => {
         },
         module: {
             rules: [
-                { test: /\.vue$/, use: 'vue-loader' }
+                { test: /\.vue$/, use: 'vue-loader' },
+                { test: /\.js$/,  exclude: [/node_modules/, /assets/, /vendor/],  use: ['babel-loader']}
             ]
         },
         plugins: [
@@ -29,7 +30,8 @@ const buildExports = (env, argv) => {
     let mode = argv.mode || 'development';
     console.log('Mode:', mode);
     let exports = [];
-    sync('{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
+    // Original string for sync: '{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js'
+    sync('app/system/webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
         let dir = path.join(__dirname, path.dirname(file));
         exports = exports.concat(require('./' + file).map(config => build(mode, dir, config)));
     });
