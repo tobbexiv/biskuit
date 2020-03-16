@@ -17,11 +17,11 @@ Vue.ready(function () {
             var menu = _(this.menu).sortBy('priority').groupBy('parent').value(),
                 item = _.find(menu.root, 'active');
 
-            this.$set('nav', menu.root);
+            this.nav = menu.root;
 
             if (item) {
-                this.$set('item', item);
-                this.$set('subnav', menu[item.id]);
+                this.item = item;
+                this.subnav = menu[item.id];
             }
         }
 
