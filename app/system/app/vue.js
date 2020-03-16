@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VueEventManager from 'vue-event-manager';
 
 import VueIntl from 'vue-intl';
 import VueResource from 'vue-resource';
@@ -110,9 +111,11 @@ const install = (Vue) => {
     Vue.url.current = Vue.url.parse(window.location.href);
 
     Vue.ready = function(fn) {
-        if (_.isObject(fn)) {
+        if (_.isObjectLike(fn)) {
             let options = fn;
-            fn = () => new Vue(options);
+            fn = function () {
+                new Vue(options);
+            };
         }
 
         let handle = function() {

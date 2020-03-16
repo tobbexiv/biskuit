@@ -17,7 +17,7 @@ const handleUpdate = (el, binding, vnode) => {
 
     // vue-confirm="'Text...?'"
     if (typeof binding.value === 'string') {
-        options.text = value;
+        options.text = binding.value;
     }
 
     // vue-confirm="{title:'Title', text:'Text...?'}"
@@ -27,7 +27,7 @@ const handleUpdate = (el, binding, vnode) => {
 
     let handler = vnode.data.on.click.fns;
     vnode.data.on.click.fns = (e) => {
-        UIkit.modal.confirm($trans(self.options.text), () => {
+        UIkit.modal.confirm($trans(options.text), () => {
             handler(e);
         }, options);
     }
