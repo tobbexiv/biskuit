@@ -96,7 +96,9 @@ const Updater = {
         },
 
         error(error) {
-            this.errors.push(error.data || this.$trans('Whoops, something went wrong.'));
+            error = error && error.data ? error.data : error;
+            error = error && error.responseText ? error.responseText : error;
+            this.errors.push(error || this.$trans('Whoops, something went wrong.'));
             this.status = 'error';
             this.finished = true;
         },
