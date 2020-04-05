@@ -10,7 +10,7 @@
 
             <template v-if="!update.msg">
                 <h2>{{ 'There is an update available.' | trans }}</h2>
-                <p>{{ 'Update to Biskuit %version% automatically or download the package and install it manually! Read the changelog below to see what\'s new.' | trans update }}</p>
+                <p>{{ 'Update to Biskuit %version% automatically or download the package and install it manually! Read the changelog below to see what\'s new.' | trans(update) }}</p>
             </template>
 
             <p v-html="update.msg" v-else></p>
@@ -18,24 +18,24 @@
 
         <div v-show="!hasUpdate">
             <h2>{{ 'You have the latest version of Biskuit.' | trans }}</h2>
-            <p>{{ 'You have the latest version of Biskuit. You do not need to update. However, if you want to re-install version %version%, you can download the package and re-install manually.' | trans update }}</p>
+            <p>{{ 'You have the latest version of Biskuit. You do not need to update. However, if you want to re-install version %version%, you can download the package and re-install manually.' | trans(update) }}</p>
         </div>
 
         <p>
             <a class="uk-button uk-button-primary" @click.prevent="install" v-show="hasUpdate">
                 <span>{{ 'Update' | trans }}</span>
             </a>
-            <a class="uk-button" :href="update.url">{{ 'Download %version%' | trans update }}</a>
-            <a class="uk-button" href="https://github.com/biskuitorg/biskuit">{{ 'Source code' | trans update }}</a>
+            <a class="uk-button" :href="update.url">{{ 'Download %version%' | trans(update) }}</a>
+            <a class="uk-button" href="https://github.com/biskuitorg/biskuit">{{ 'Source code' | trans(update) }}</a>
         </p>
 
         <hr class="uk-margin-large">
 
         <h2 v-show="hasUpdate">{{ 'Changelog' | trans }}</h2>
-        <div class="uk-margin-large" v-for="release in releases" v-if="release.version | showChangelog">
+        <div class="uk-margin-large" v-for="release in releases" v-if="showChangelog(release.version)">
 
-            <h2>{{ release.version }} <small class="uk-text-muted">/ <time :datetime="release.published_at" :title="release.published_at | date">{{ release.published_at | relativeDate {max:2592000} }}</time></small></h2>
-            <ul class="uk-list uk-list-space" v-html="release.changelog | changelog"></ul>
+            <h2>{{ release.version }} <small class="uk-text-muted">/ <time :datetime="release.published_at" :title="$date(release.published_at)">{{ release.published_at | relativeDate({max:2592000}) }}</time></small></h2>
+            <ul class="uk-list uk-list-space" v-html="changelog(release.changelog)"></ul>
 
         </div>
 
@@ -55,7 +55,7 @@
 
         <pre v-html="output" v-show="output"></pre>
 
-        <a class="uk-button uk-button-{{ status }}" :href="$url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
+        <a :class="'uk-button uk-button-' + status" :href="$url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
 
     </div>
 
