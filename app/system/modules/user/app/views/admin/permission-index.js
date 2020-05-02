@@ -1,1 +1,2 @@
-Vue.ready(_.merge(require('../../lib/permissions'), {el: '#permissions'}));
+import PermissionsLibrary from '../../lib/permissions';
+Vue.ready(_.merge(PermissionsLibrary, {el: '#permissions'}));

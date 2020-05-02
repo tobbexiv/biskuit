@@ -5,7 +5,7 @@ module.exports = [
             "interceptor": "./app/interceptor",
             //"registration": "./app/views/registration",
             //"profile": "./app/views/profile",
-            //"permission-index": "./app/views/admin/permission-index",
+            "permission-index": "./app/views/admin/permission-index",
             //"role-index": "./app/views/admin/role-index",
             "settings": "./app/views/admin/settings",
             //"user-edit": "./app/views/admin/user-edit",
