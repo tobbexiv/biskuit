@@ -27,6 +27,7 @@
     "gulp-less": "^4.0.1",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
+    "html-loader": "^1.1.0",
     "jquery": "^2.1.4",
     "less": "^3.10.3",
     "lodash": "^4.7.12",
