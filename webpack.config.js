@@ -17,6 +17,7 @@ const build = (mode, dir, config) => {
         module: {
             rules: [
                 { test: /\.vue$/, use: 'vue-loader' },
+                { test: /\.html$/, use: 'html-loader' },
                 { test: /\.js$/,  exclude: [/node_modules/, /assets/, /vendor/],  use: ['babel-loader']}
             ]
         },
@@ -31,7 +32,7 @@ const buildExports = (env, argv) => {
     console.log('Mode:', mode);
     let exports = [];
     // Original string for sync: '{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js'
-    sync('{app/installer/**,app/system/,app/system/modules/dashboard/**,app/system/modules/user/**,app/system/modules/settings/**,app/system/modules/mail/**,app/system/modules/cache/**,app/system/modules/info/**}webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
+    sync('{app/installer/**,app/system/,app/system/modules/dashboard/**,app/system/modules/user/**,app/system/modules/settings/**,app/system/modules/site/**,app/system/modules/mail/**,app/system/modules/cache/**,app/system/modules/info/**,app/system/modules/finder/**,packages/biskuit/blog/**}webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
         let dir = path.join(__dirname, path.dirname(file));
         exports = exports.concat(require('./' + file).map(config => build(mode, dir, config)));
     });
