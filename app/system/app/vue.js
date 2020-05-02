@@ -22,7 +22,7 @@ import InputImageMeta from './components/input-image-meta.vue';
 import InputVideo from './components/input-video.vue';
 import Validation from './components/validation.vue';
 
-//import CheckAll from './directives/check-all';
+import CheckAll from './directives/check-all';
 import Confirm from './directives/confirm';
 import Gravatar from './directives/gravatar';
 import Order from './directives/order';
@@ -79,7 +79,7 @@ const install = (Vue) => {
      * Directives
      */
 
-    //Vue.directive('check-all', CheckAll);
+    Vue.directive('check-all', CheckAll);
     Vue.directive('confirm', Confirm);
     Vue.directive('gravatar', Gravatar);
     Vue.directive('order', Order);

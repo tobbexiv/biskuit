@@ -4,6 +4,7 @@
             <label v-if="label" :for="id" :class="getOption('labelClass')">{{ label | trans }} <span>{{ required ? ' *' : '' }}</span></label>
             <div :class="getOption('innerWrapperClass')">
                 <input v-if="tag === 'input'" :id="id" :class="getOption('elementClass')" :type="type" :name="name" :placeholder="placeholder" v-model="innerValue" v-bind="ariaInput">
+                <a v-if="getOption('icon.type') == 'link'" class="pk-form-link-toggle pk-link-icon uk-flex-middle" @click.prevent="getOption('icon.callback')">{{ getOption('icon.label') | trans }} <i :class="`uk-margin-small-left pk-icon-hover pk-icon-${getOption('icon.symbol')}`"></i></a>
                 <p class="uk-form-help-block uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
             </div>
         </div>
@@ -59,21 +60,26 @@
             errorMessages: { type: Object, default: () => { return {} } },
             options: {
                 type: Object,
-                default() {
-                    return {
-                        wrapperClass: 'uk-form-row',
-                        labelClass: 'uk-form-label',
-                        innerWrapperClass: 'uk-form-controls',
-                        elementClass: 'uk-width-1-1'
-                    };
-                }
+                default: () => ({})
             },
             value: { type: null, default: '' }
         },
 
         data() {
             return {
-                innerValue: ''
+                innerValue: '',
+                innerOptions: _.merge({
+                    wrapperClass: 'uk-form-row',
+                    labelClass: 'uk-form-label',
+                    innerWrapperClass: 'uk-form-controls',
+                    elementClass: 'uk-width-1-1',
+                    icon: {
+                        type: '',
+                        symbol: '',
+                        label: '',
+                        callback: () => {}
+                    }
+                }, this.options)
             };
         },
 
@@ -96,8 +102,13 @@
 
         methods: {
             getOption(key) {
-                return this.options.hasOwnProperty(key) ? this.options[key] : '';
-            }
+                let keyParts = key ? key.split('.') : [];
+                let result = keyParts.length > 0 ? this.innerOptions : '';
+                for(let keyPart of keyParts) {
+                    result = result.hasOwnProperty(keyPart) ? result[keyPart] : '';
+                }
+                return _.isFunction(result) == true ? result.call() : result;
+            },
         }
     };
 
