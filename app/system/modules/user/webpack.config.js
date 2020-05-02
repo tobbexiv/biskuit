@@ -6,7 +6,7 @@ module.exports = [
             //"registration": "./app/views/registration",
             //"profile": "./app/views/profile",
             "permission-index": "./app/views/admin/permission-index",
-            //"role-index": "./app/views/admin/role-index",
+            "role-index": "./app/views/admin/role-index",
             "settings": "./app/views/admin/settings",
             //"user-edit": "./app/views/admin/user-edit",
             //"user-index": "./app/views/admin/user-index",
