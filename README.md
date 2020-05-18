@@ -7,8 +7,6 @@ Bis[ku]it is a modular and lightweight CMS built with Symfony components and Vue
 
 This unofficial version of Pagekit was created to solve various problems. Mainly born for linuxhub.it, a portal that uses PageKit.
 
-~~The purpose is to solve various problems without introducing new features that could alter the structure of PageKit, allowing the update to the official branch in the future. However it is not said that in the future it is compatible with official updates and could take a completely different path.~~
-
 This project is taking a different path from that of official pagekit. The project is called Bis[ku]it and will not be compatible with future pagekit updates.
 
 Feel free to use it.
