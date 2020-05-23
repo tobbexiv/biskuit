@@ -82,6 +82,4 @@ const Roles = {
     }
 };
 
-export default Roles;
-
 Vue.ready(Roles);

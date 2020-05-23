@@ -1,14 +1,14 @@
-module.exports = {
-
+const UserIndex = {
     name: 'user-index',
 
     el: '#users',
 
-    data: function () {
+    data() {
         return _.merge({
             users: false,
+            searchString: '',
             config: {
-              filter: this.$session.get('user.filter', {order: 'username asc'})
+                filter: this.$session.get('user.filter', { order: 'username asc' })
             },
             pages: 0,
             count: '',
@@ -16,15 +16,18 @@ module.exports = {
         }, window.$data);
     },
 
-    ready: function () {
+    created() {
         this.resource = this.$resource('api/user{/id}');
-        this.$watch('config.page', this.load, {immediate: true});
+        this.load();
     },
 
     watch: {
-
+        searchString: _.throttle(function() {
+            this.$set(this.config.filter, 'search', this.searchString);
+        }, 1000),
+        'config.page': 'load',
         'config.filter': {
-            handler: function (filter) {
+            handler(filter) {
                 if (this.config.page) {
                     this.config.page = 0;
                 } else {
@@ -35,38 +38,29 @@ module.exports = {
             },
             deep: true
         }
-
     },
 
     computed: {
-
-        statuses: function () {
-
-            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.config.statuses, function (status, id) {
-                return {text: status, value: id};
+        statuses() {
+            const options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.config.statuses, (status, id) => {
+                return { text: status, value: id };
             }));
-
-            return [{label: this.$trans('Filter by'), options: options}];
+            return [{ label: this.$trans('Filter by'), options }];
         },
-
-        roles: function () {
-
-            var options = this.config.roles.map(function (role) {
-                return {text: role.name, value: role.id};
+        roles() {
+            const options = this.config.roles.map((role) => {
+                return { text: role.name, value: role.id };
             });
-
-            return [{label: this.$trans('Filter by'), options: options}];
+            return [{ label: this.$trans('Filter by'), options }];
         }
-
     },
 
     methods: {
-
-        active: function (user) {
+        active(user) {
             return this.selected.indexOf(user.id) != -1;
         },
 
-        save: function (user) {
+        save(user) {
             this.resource.save({id: user.id}, {user: user}).then(function () {
                 this.load();
                 this.$notify('User saved.');
@@ -76,15 +70,14 @@ module.exports = {
             });
         },
 
-        status: function (status) {
+        status(status) {
+            const users = this.getSelected();
 
-            var users = this.getSelected();
-
-            users.forEach(function (user) {
+            users.forEach((user) => {
                 user.status = status;
             });
 
-            this.resource.save({id: 'bulk'}, {users: users}).then(function () {
+            this.resource.save({id: 'bulk'}, { users }).then(function () {
                 this.load();
                 this.$notify('Users saved.');
             }, function (res) {
@@ -93,8 +86,8 @@ module.exports = {
             });
         },
 
-        remove: function () {
-            this.resource.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
+        remove() {
+            this.resource.delete({id: 'bulk'}, { ids: this.selected }).then(function () {
                 this.load();
                 this.$notify('Users deleted.');
             }, function (res) {
@@ -103,18 +96,18 @@ module.exports = {
             });
         },
 
-        toggleStatus: function (user) {
+        toggleStatus(user) {
             user.status = !!user.status ? 0 : 1;
             this.save(user);
         },
 
-        showVerified: function (user) {
+        showVerified(user) {
             return this.config.emailVerification && user.data.verified;
         },
 
-        showRoles: function (user) {
+        showRoles(user) {
             return _.reduce(user.roles, _.bind(function (roles, id) {
-                var role = _.find(this.config.roles, ['id', id]);
+                const role = _.find(this.config.roles, ['id', id]);
                 if (id !== 2 && role) {
                     roles.push(role.name);
                 }
@@ -122,27 +115,25 @@ module.exports = {
             }, this), []).join(', ');
         },
 
-        load: function () {
+        load() {
             this.resource.query({filter: this.config.filter, page: this.config.page}).then( function (res) {
-                var data = res.data;
+                const { data } = res;
 
-                this.$set('users', data.users);
-                this.$set('pages', data.pages);
-                this.$set('count', data.count);
-                this.$set('selected', []);
+                this.users = data.users;
+                this.pages = data.pages;
+                this.count = data.count;
+                this.selected = [];
             }, function () {
                 this.$notify('Loading failed.', 'danger');
             });
         },
 
-        getSelected: function () {
+        getSelected() {
             return this.users.filter(function (user) {
                 return this.selected.indexOf(user.id) !== -1;
             }, this);
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(UserIndex);

@@ -15,6 +15,4 @@ const UserSettings = {
     }
 };
 
-export default UserSettings;
-
 Vue.ready(UserSettings);
