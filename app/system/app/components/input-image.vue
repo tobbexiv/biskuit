@@ -1,7 +1,7 @@
 <template>
     <div>
         <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" @click.prevent="pick">
-            <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-image.svg')">
+            <img width="60" height="60" :alt="$trans('Placeholder Image')" :src="$url('app/system/assets/images/placeholder-image.svg')">
             <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
         </a>
 
@@ -12,25 +12,25 @@
 
             <div class="uk-panel-badge pk-panel-badge uk-hidden">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
                 </ul>
             </div>
 
         </div>
 
-        <v-modal ref:modal large>
-            <panel-finder :root="storage" ref:finder :modal="true"></panel-finder>
+        <v-modal ref="modal" large>
+            <panel-finder :root="storage" :modal="true"></panel-finder>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-primary" type="button" :disabled="!hasSelection()" @click.prevent="select">{{ 'Select' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" :disabled="lastSelection == ''" @click.prevent="select">{{ 'Select' | trans }}</button>
             </div>
         </v-modal>
     </div>
 </template>
 
 <script>
-    export default {
+    const InputImage = {
         props: {
             cls: {default: ''},
             value: {default: ''}
@@ -38,8 +38,18 @@
 
         data() {
             return _.merge({
-                source: this.value
+                source: this.value,
+                lastSelection: '',
             }, $biskuit);
+        },
+
+        watch: {
+            value(src) {
+                this.source = src;
+            },
+            source(src) {
+                this.$emit('input', src);
+            }
         },
 
         methods: {
@@ -48,9 +58,9 @@
             },
 
             select() {
-                this.source = this.$refs.finder.getSelected()[0];
-                this.$dispatch('image-selected', this.source);
-                this.$refs.finder.removeSelection();
+                this.source = this.lastSelection;
+                this.lastSelection = '';
+                this.$trigger('input-image:selected', { source: this.source });
                 this.$refs.modal.close();
             },
 
@@ -58,17 +68,17 @@
                 this.source = '';
             },
 
-            hasSelection() {
-                const selected = this.$refs.finder.getSelected();
-                return selected.length === 1 && this.$refs.finder.isImage(selected[0])
+            updateSelected(event, params) {
+                this.lastSelection = params.selected ? params.selected[0] : '';
             }
         },
-        watch: {
-            source(src) {
-                this.$emit('input', src);
-            }
+
+        events: {
+            'finder:selected': 'updateSelected',
         }
     };
+
+    export default InputImage;
 
     Vue.component('input-image', (resolve, reject) => {
         Vue.asset({
@@ -77,7 +87,7 @@
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }).then(function () {
-            resolve(require('./input-image.vue'));
+            resolve(InputImage);
         })
     });
 </script>

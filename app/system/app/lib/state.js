@@ -10,7 +10,7 @@ const modifyQuery = (query, key, value) => {
 }
 
 export default (Vue) => {
-    const State = (key, value) => {
+    const State = function(key, value) {
         const vm = this;
         const current = (new RegExp(key + '=([^&]*)&?')).exec(location.search);
 
@@ -31,7 +31,6 @@ export default (Vue) => {
                 vm.$set(vm, key, event.state.value);
             }
         };
-
     };
 
     Object.defineProperty(Vue.prototype, '$state', {

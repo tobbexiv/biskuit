@@ -2,7 +2,7 @@ export default {
     template: '<ul class="uk-pagination"></ul>',
 
     props: {
-        page: {
+        value: {
             default: 0
         },
 
@@ -16,13 +16,17 @@ export default {
         }
     },
 
+    data() {
+        return {
+            page: this.value
+        };
+    },
+
     created() {
         this.key = this.$parent.$options.name + '.pagination';
-
         if (this.page === null && this.$session.get(this.key)) {
-            this.$set('page', this.$session.get(this.key));
+            this.page = this.$session.get(this.key);
         }
-
         if (this.replaceState) {
             this.$state('page', this.page);
         }
@@ -30,21 +34,23 @@ export default {
 
     mounted() {
         const vm = this;
-
         this.pagination = UIkit.pagination(this.$el, { pages: this.pages, currentPage: this.page || 0 });
         this.pagination.on('select.uk.pagination', (e, page) => {
-            vm.$set('page', page);
+            vm.page = page;
         });
     },
 
     watch: {
-        page: function (page) {
-            this.pagination.selectPage(page || 0);
-            this.$session.set(this.key, page || 0);
+        value(newPage) {
+            this.page = newPage;
         },
-        pages: function (pages) {
-            this.pagination.render(pages);
+        page(newPage) {
+            this.pagination.selectPage(newPage || 0);
+            this.$session.set(this.key, newPage || 0);
+            this.$emit('input', newPage);
+        },
+        pages(newPages) {
+            this.pagination.render(newPages);
         }
     }
-
 };

@@ -1,7 +1,7 @@
 <template>
     <div>
         <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" @click.prevent="pick">
-            <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-video.svg')">
+            <img width="60" height="60" :alt="$trans('Placeholder Image')" :src="$url('app/system/assets/images/placeholder-video.svg')">
             <p class="uk-text-muted uk-margin-small-top">{{ 'Select Video' | trans }}</p>
         </a>
 
@@ -13,40 +13,41 @@
 
             <div class="uk-panel-badge pk-panel-badge uk-hidden">
                 <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                    <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
                 </ul>
             </div>
         </div>
 
-        <v-modal ref:modal large>
-            <panel-finder :root="storage" :modal="true" ref:finder></panel-finder>
+        <v-modal ref="modal" large>
+            <panel-finder :root="storage" :modal="true"></panel-finder>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-primary" type="button" :disabled="!selectButton" @click.prevent="select">{{ 'Select' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" :disabled="lastSelection == ''" @click.prevent="select">{{ 'Select' | trans }}</button>
             </div>
         </v-modal>
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['source'],
+    const InputVideo = {
+        props: ['value'],
 
         data() {
-            return _.merge({image: undefined, video: undefined}, $biskuit);
-        },
-
-        computed: {
-            selectButton() {
-                const selected = this.$refs.finder.getSelected();
-                return selected.length === 1 && this.$refs.finder.isVideo(selected[0])
-            }
+            return _.merge({
+                image: undefined,
+                video: undefined,
+                source: this.value,
+                lastSelection: ''
+            }, $biskuit);
         },
 
         watch: {
+            value(src) {
+                this.source = src;
+            },
             source: {
-                handler: 'update',
+                handler: 'updatePreview',
                 immediate: true
             }
         },
@@ -57,15 +58,22 @@
             },
 
             select() {
-                this.source = this.$refs.finder.getSelected()[0];
+                this.source = this.lastSelection;
+                this.lastSelection = '';
+                this.$emit('input', this.source);
+                this.$trigger('input-video:selected', { source: this.source });
                 this.$refs.modal.close();
             },
 
             remove() {
-                this.source = ''
+                this.source = '';
             },
 
-            update(src) {
+            updateSelected(event, params) {
+                this.lastSelection = params.selected ? params.selected[0] : '';
+            },
+
+            updatePreview(src) {
                 let matches;
 
                 this.image = undefined;
@@ -82,8 +90,14 @@
                     this.video = this.$url(src);
                 }
             }
+        },
+
+        events: {
+            'finder:selected': 'updateSelected',
         }
     };
+
+    export default InputVideo;
 
     Vue.component('input-video', (resolve, reject) => {
         Vue.asset({
@@ -92,7 +106,7 @@
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }).then(function () {
-            resolve(require('./input-video.vue'));
+            resolve(InputVideo);
         })
     });
 </script>

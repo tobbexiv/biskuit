@@ -3,7 +3,7 @@
         <div v-if="type !== 'password'" :class="getOption('wrapperClass')">
             <label v-if="label" :for="id" :class="getOption('labelClass')">{{ label | trans }} <span>{{ required ? ' *' : '' }}</span></label>
             <div :class="getOption('innerWrapperClass')">
-                <input v-if="tag === 'input'" :id="id" :class="getOption('elementClass')" :type="type" :name="name" :placeholder="placeholder" v-model="innerValue" v-bind="ariaInput">
+                <input v-if="tag === 'input'" :id="id" :class="getOption('elementClass')" :type="type" :name="name" :placeholder="placeholder" :autocomplete="autocomplete" v-model="innerValue" v-bind="ariaInput">
                 <a v-if="getOption('icon.type') == 'link'" class="pk-form-link-toggle pk-link-icon uk-flex-middle" @click.prevent="getOption('icon.callback')">{{ getOption('icon.label') | trans }} <i :class="`uk-margin-small-left pk-icon-hover pk-icon-${getOption('icon.symbol')}`"></i></a>
                 <p class="uk-form-help-block uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
             </div>
@@ -12,7 +12,7 @@
             <label v-if="label" :for="id" :class="getOption('labelClass')">{{ label | trans }} <span>{{ required ? ' *' : '' }}</span></label>
             <div :class="getOption('innerWrapperClass')">
                 <div class="uk-form-password uk-width-1-1">
-                    <input :id="id" :class="getOption('elementClass')" :type="type" autocomplete="off" :name="name" :placeholder="placeholder" v-model="innerValue" v-bind="ariaInput">
+                    <input :id="id" :class="getOption('elementClass')" :type="type" :name="name" :placeholder="placeholder" autocomplete="off" v-model="innerValue" v-bind="ariaInput">
                     <a class="uk-form-password-toggle" href="" tabindex="-1" :data-uk-form-password="`{lblShow:'${$trans('Show')}',lblHide:'${$trans('Hide')}'}`">{{ 'Show' | trans }}</a>
                 </div>
                 <p class="uk-form-help-block uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
@@ -31,7 +31,8 @@
             id: { type: String, default: '' },
             name: { type: String, default: '' },
             label: { type: String, default: '' },
-            placeholder: { type: String, default: "" },
+            autocomplete: { type: String, default: '' },
+            placeholder: { type: String, default: '' },
             tag: {
                 type: String,
                 default: 'input',
