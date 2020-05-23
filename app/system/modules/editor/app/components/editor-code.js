@@ -1,10 +1,10 @@
-module.exports = {
+export default {
+    created() {
+        const self = this;
+        const $el = $(this.$parent.$refs.editor);
+        const $parentEl = $el.parent();
 
-    created: function () {
-
-        var self = this, $el = $(this.$parent.$els.editor), $parent = $el.parent();
-
-        $parent.addClass('pk-editor');
+        $parentEl.addClass('pk-editor');
 
         this.$asset({
             css: [
@@ -14,10 +14,8 @@ module.exports = {
             js: [
                 'app/assets/codemirror/codemirror.js'
             ]
-
         }).then(function () {
-
-            this.editor = CodeMirror.fromTextArea(this.$parent.$els.editor, _.extend({
+            this.editor = CodeMirror.fromTextArea(this.$parent.$refs.editor, _.extend({
                 mode: 'htmlmixed',
                 dragDrop: false,
                 autoCloseTags: true,
@@ -29,24 +27,22 @@ module.exports = {
                 tabSize: 4
             }, this.$parent.options));
 
-            $parent.attr('data-uk-check-display', 'true').on('display.uk.check', function (e) {
+            $parentEl.attr('data-uk-check-display', 'true').on('display.uk.check', (e) => {
                 self.editor.refresh();
             });
 
-            this.editor.on('change', function () {
+            this.editor.on('change', () => {
                 self.editor.save();
-                $el.trigger('input');
+                self.$parent.innerValue = self.editor.getValue();
             });
 
-            this.$watch('$parent.value', function (value) {
+            this.$watch('$parent.innerValue', function (value) {
                 if (value != this.editor.getValue()) {
                     this.editor.setValue(value);
                 }
             });
 
             this.$emit('ready');
-
         });
     }
-
 };
