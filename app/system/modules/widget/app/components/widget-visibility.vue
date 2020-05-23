@@ -1,37 +1,37 @@
 <template>
-
     <div class="uk-form-horizontal">
-
         <div class="uk-form-row">
             <span class="uk-form-label">Pages</span>
             <div class="uk-form-controls uk-form-controls-text" v-if="config.menus">
-
-                <input-tree :active.sync="widget.nodes"></input-tree>
-
+                <input-tree v-model="widget.nodes"></input-tree>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    export default {
         section: {
             label: 'Visibility',
             priority: 100
         },
 
-        data: function () {
-          return {
-              menus: false
-          }
+        props: ['config', 'value'],
+
+        data() {
+            return {
+                menus: false,
+                widget: this.value
+            };
         },
 
-        props: ['widget', 'config', 'form']
-
+        watch: {
+            value(val) {
+                this.widget = val;
+            },
+            widget(val) {
+                this.$emit('input', val);
+            }
+        }
     }
-
 </script>
