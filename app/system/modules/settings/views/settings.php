@@ -1,7 +1,6 @@
 <?php $view->script('settings', 'app/system/modules/settings/app/bundle/settings.js', ['vue', 'uikit']) ?>
 
 <form id="settings" class="uk-form uk-form-horizontal" @submit.prevent="save" v-cloak>
-
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
         <div class="pk-width-sidebar">
 
@@ -15,14 +14,11 @@
 
         </div>
         <div class="pk-width-content">
-
             <ul class="uk-switcher uk-margin" ref="content">
                 <li v-for="section in sections" :key="section.name">
                     <component :is="section.name" :config="config[getBackendName(section.name)]" :options="options[getBackendName(section.name)]"></component>
                 </li>
             </ul>
-
         </div>
     </div>
-
 </form>

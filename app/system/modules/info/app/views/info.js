@@ -7,6 +7,4 @@ const Info = {
     }
 };
 
-export default Info;
-
 Vue.ready(Info);
