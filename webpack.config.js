@@ -31,8 +31,7 @@ const buildExports = (env, argv) => {
     let mode = argv.mode || 'development';
     console.log('Mode:', mode, '\n\nConfiguration files found:');
     let exports = [];
-    // Original string for sync: '{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js'
-    sync('{app/installer/**,app/system/,app/system/modules/dashboard/**,app/system/modules/user/**,app/system/modules/settings/**,app/system/modules/site/**,app/system/modules/mail/**,app/system/modules/cache/**,app/system/modules/info/**,app/system/modules/finder/**,app/system/modules/editor/**,app/system/modules/widget/**,packages/**/}webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
+    sync('{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
         let dir = path.join(__dirname, path.dirname(file));
         console.log(file);
         exports = exports.concat(require('./' + file).map(config => build(mode, dir, config)));
