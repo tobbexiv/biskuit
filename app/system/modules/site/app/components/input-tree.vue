@@ -91,7 +91,7 @@
                 template: '<li>' +
                     '<label><input type="checkbox" :value="node.id" v-model.number="active"> {{ node.title }}</label>' +
                     '<ul class="uk-list" v-if="grouped[menu.id][node.id]">' +
-                        '<node-template v-for="innerNode in grouped[menu.id][node.id]" :menu="menu" :grouped="grouped" :node="innerNode" v-model="active" :key="menu.id + node.id + innerNode.id></node-template>' +
+                        '<node-template v-for="innerNode in grouped[menu.id][node.id]" :menu="menu" :grouped="grouped" :node="innerNode" v-model="active" :key="menu.id + node.id + innerNode.id"></node-template>' +
                     '</ul>' +
                 '</li>'
             }

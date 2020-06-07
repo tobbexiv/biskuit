@@ -1,25 +1,35 @@
 <template>
-
     <div class="uk-form-horizontal">
-        <partial name="settings"></partial>
+        <template-settings />
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
-        props: ['node', 'roles'],
-
+    export default {
         section: {
             label: 'Settings'
         },
 
-        created: function () {
-            this.$options.partials.settings = this.$root.$options.partials.settings;
-        }
+        props: ['roles', 'value'],
 
+        data() {
+            return {
+                menuTitleRequired: true,
+                node: this.value
+            };
+        },
+
+        watch: {
+            value(val) {
+                this.node = val;
+            },
+            node(val) {
+                this.$emit('input', val);
+            }
+        },
+
+        beforeCreate() {
+            this.$options.components = _.merge(this.$options.components, this.$root.$options.components);
+        },
     };
-
 </script>

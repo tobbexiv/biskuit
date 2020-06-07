@@ -1,7 +1,5 @@
 <template>
-
     <div class="uk-form-horizontal">
-
         <div class="uk-form-row">
             <label for="form-meta-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
@@ -19,35 +17,45 @@
         <div class="uk-form-row">
             <label for="form-meta-image" class="uk-form-label">{{ 'Image' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input-image :source.sync="node.data.meta['og:image']"></input-image>
+                <input-image v-model="node.data.meta['og:image']"></input-image>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    const NodeMeta = {
         section: {
             label: 'Meta',
             priority: 100
         },
 
-        props: ['node'],
+        props: ['value'],
 
-        created: function () {
+        data() {
+            return {
+                node: this.value
+            };
+        },
 
-            if (!this.node.data.meta) {
-                this.$set('node.data.meta', {'og:title': ''});
+        watch: {
+            value(val) {
+                this.node = val;
+            },
+            node(val) {
+                this.$emit('input', val);
             }
+        },
 
+        created() {
+            if (!this.node.data.meta) {
+                this.node.data.meta = { 'og:title': '' };
+            }
         }
 
     };
 
-    window.Site.components['node-meta'] = module.exports;
+    export default NodeMeta;
 
+    window.Site.components['node-meta'] = NodeMeta;
 </script>
