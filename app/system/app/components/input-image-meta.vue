@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <v-modal ref:modal>
+        <v-modal ref="modal">
             <form class="uk-form uk-form-stacked" @submit="update">
                 <div class="uk-modal-header">
                     <h2>{{ 'Image' | trans }}</h2>
@@ -52,30 +52,25 @@
 </template>
 
 <script>
-    export default {
+    const InputImageMeta = {
         props: {
             cls: {
                 type: String,
                 default: ''
             },
-            image: Object
+            value: Object
         },
 
         data() {
-            return _.merge({img: {}}, $biskuit);
+            return _.merge({
+                image: this.value,
+                img: {}
+            }, $biskuit);
         },
 
-        mounted() {
-            this.$set(this, 'image', this.image || {src: '', alt: ''});
-            this.$set(this, 'img', _.extend({}, this.image));
-
-            this.$on('image-selected', (path) => {
-                if (path && !this.img.alt) {
-                    const alt = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '').replace(/(_|-)/g, ' ').trim();
-                    const first = alt.charAt(0).toUpperCase();
-                    this.img.alt = first + alt.substr(1);
-                }
-            });
+        created() {
+            this.image = this.image || {src: '', alt: ''};
+            this.img = _.extend({}, this.image);
         },
 
         methods: {
@@ -94,10 +89,34 @@
             remove() {
                 this.img.src = '';
                 this.image.src = '';
-            }
-        }
+            },
 
+            updateAlt(event, params) {
+                const path = params.source;
+                if(path && !this.img.alt) {
+                    const alt = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '').replace(/(_|-)/g, ' ').trim();
+                    const first = alt.charAt(0).toUpperCase();
+                    this.img.alt = first + alt.substr(1);
+                }
+            }
+        },
+
+        watch: {
+            value(newImage) {
+                this.image = newImage;
+            },
+
+            image(newImage) {
+                this.$emit('input', newImage);
+            }
+        },
+
+        events: {
+            'input-image:selected': 'updateAlt',
+        }
     };
+
+    export default InputImageMeta;
 
     Vue.component('input-image-meta', (resolve, reject) => {
         Vue.asset({
@@ -106,7 +125,7 @@
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }).then(function () {
-            resolve(require('./input-image-meta.vue'));
+            resolve(InputImageMeta);
         })
     });
 </script>

@@ -1,18 +1,23 @@
 <template>
-    <div class="uk-grid uk-grid-small" data-uk-grid-margin>
-        <div class="uk-width-large-1-2">
-            <div class="uk-form-icon uk-display-block">
-                <i class="pk-icon-calendar pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" ref:datepicker v-model.lazy="date" v-validate:required="isRequired">
+
+        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+            <div class="uk-width-large-1-2">
+                <div class="uk-form-icon uk-display-block">
+                    <i class="pk-icon-calendar pk-icon-muted"></i>
+                    <validation-provider :rules="{ required: isRequired }" slim>
+                        <input class="uk-width-1-1" type="text" ref="datepicker" v-model.lazy="date">
+                    </validation-provider>
+                </div>
+            </div>
+            <div class="uk-width-large-1-2">
+                <div class="uk-form-icon uk-display-block" ref="timepicker">
+                    <i class="pk-icon-time pk-icon-muted"></i>
+                    <validation-provider :rules="{ required: isRequired }" slim>
+                        <input class="uk-width-1-1" type="text" v-model.lazy="time">
+                    </validation-provider>
+                </div>
             </div>
         </div>
-        <div class="uk-width-large-1-2">
-            <div class="uk-form-icon uk-display-block" ref:timepicker>
-                <i class="pk-icon-time pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-model.lazy="time" v-validate:required="isRequired">
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -30,6 +35,16 @@
                 UIkit.datepicker(this.$refs.datepicker, {format: this.dateFormat, pos: 'bottom'});
                 UIkit.timepicker(this.$refs.timepicker, {format: this.clockFormat});
             });
+        },
+
+        watch: {
+            value(newDatetime) {
+                this.datetime = newDatetime;
+            },
+
+            datetime(newDatetime) {
+                this.$emit('input', newDatetime);
+            }
         },
 
         computed: {
