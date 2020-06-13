@@ -6,7 +6,7 @@ const UserIndex = {
     data() {
         return _.merge({
             users: false,
-            searchString: '',
+            searchString: this.$session.get('user.filter', {}).search || '',
             config: {
                 filter: this.$session.get('user.filter', { order: 'username asc' })
             },
