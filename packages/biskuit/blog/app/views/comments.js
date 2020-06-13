@@ -18,7 +18,7 @@ const BlogComments = {
 
     methods: {
         load() {
-            return this.$http.get('api/blog/comment{/id}', { post: this.config.post }).then(function (res) {
+            return this.$http.get('api/blog/comment{/id}', { params: { post: this.config.post } }).then(function (res) {
                 var { data } = res;
 
                 this.comments = data.comments;
@@ -175,9 +175,8 @@ const BlogComments = {
                             });
                         }
                         this.cancel()
-                    }, function () {
-                        // TODO better error messages
-                        this.error = this.$trans('Unable to comment. Please try again later.');
+                    }, function (res) {
+                        this.error = res.data;
                     });
                 },
 
