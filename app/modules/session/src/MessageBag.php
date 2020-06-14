@@ -37,7 +37,7 @@ class MessageBag extends AutoExpireFlashBag
      * @param string $name
      * @param string $storageKey
      */
-    public function __construct($name = 'messages', $storageKey = '_pk_messages')
+    public function __construct($name = 'messages', $storageKey = '_bk_messages')
     {
         parent::__construct($storageKey);
 
