@@ -1,10 +1,8 @@
 <template>
-
     <div>
-        <v-modal v-ref:output :options="options">
-
+        <v-modal ref="output" :options="options">
             <div class="uk-modal-header uk-flex uk-flex-middle">
-                <h2>{{ 'Updating %title% to %version%' | trans {title:pkg.title,version:updatePkg.version} }}</h2>
+                <h2>{{ 'Updating %title% to %version%' | trans({ title:pkg.title, version:updatePkg.version }) }}</h2>
             </div>
 
             <pre class="pk-pre uk-text-break" v-html="output"></pre>
@@ -17,27 +15,24 @@
             <div class="uk-modal-footer uk-text-right" v-show="status != 'loading'">
                 <a class="uk-button uk-button-link" @click.prevent="close">{{ 'Close' | trans }}</a>
             </div>
-
         </v-modal>
     </div>
-
 </template>
 
 <script>
+    import Output from './output';
 
-    module.exports = {
-
-        mixins: [require('./output')],
+    export default {
+        mixins: [ Output ],
 
         methods: {
-
-            update: function (pkg, updates, onClose, packagist) {
-                this.$set('pkg', pkg);
-                this.$set('updatePkg', updates[pkg.name]);
-
+            update(pkg, updates, onClose, packagist) {
+                const vm = this;
+                this.pkg = pkg;
+                this.updatePkg = updates[pkg.name];
                 this.cb = onClose;
 
-                return this.$http.post('admin/system/package/install', {package: updates[pkg.name], packagist: Boolean(packagist)},null , {xhr: this.init()}).then(function () {
+                return this.$http.post('admin/system/package/install', { params: { package: updates[pkg.name], packagist: Boolean(packagist) }, progress() { vm.init() } }).then(function () {
                     if (this.status === 'loading') {
                         this.status = 'error';
                     }
@@ -58,7 +53,5 @@
                 });
             }
         }
-
     };
-
 </script>

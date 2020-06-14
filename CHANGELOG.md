@@ -18,6 +18,7 @@
 ### Security
 - Upgrade symfony/http-foundation to version 3.4.35 https://github.com/biskuitorg/biskuit/issues/14
 - Password recovery allows user account enumeration https://github.com/biskuitorg/biskuit/issues/10
+- CSRF vulnerability in Finder, discovered by Christian Bortone https://github.com/biskuitorg/biskuit/issues/39
 
 ### Fixed
 - Disabled swipe on text selection https://github.com/biskuitorg/biskuit/issues/1

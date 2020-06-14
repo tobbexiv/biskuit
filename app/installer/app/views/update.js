@@ -1,10 +1,10 @@
-var Version = require('../lib/version');
+const Version = require('../lib/version');
 
-module.exports = {
+const Updater = {
 
     el: '#update',
 
-    data: function () {
+    data() {
         return _.extend({
             view: 'index',
             status: 'success',
@@ -13,30 +13,27 @@ module.exports = {
             output: '',
             progress: 0,
             releases: [],
-            errors: []
+            errors: [],
+            message: ''
         }, window.$data);
     },
 
-    created: function () {
+    created() {
         this.getVersions();
     },
 
     computed: {
-
-        hasUpdate: function () {
+        hasUpdate() {
             return this.update && Version.compare(this.update.version, this.version, '>');
         }
-
     },
 
     methods: {
-
-        getVersions: function () {
-
-            this.$http.get(this.api + '/api/update', {version: this.version}).then(
+        getVersions() {
+            this.$http.get(this.api + '/api/update', { version: this.version }).then(
                 function (res) {
-                    var data = res.data;
-                    var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+                    const { data } = res;
+                    const channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
 
                     if (channel) {
                         this.update = channel;
@@ -51,34 +48,31 @@ module.exports = {
 
         },
 
-        install: function () {
-            this.$set('view', 'installation');
+        install() {
+            this.view = 'installation';
             this.doDownload(this.update);
         },
 
-        doDownload: function (update) {
-            this.$set('progress', 33);
-            this.$http.post('admin/system/update/download', {url: update.url}).then(this.doInstall, this.error);
+        doDownload(update) {
+            this.progress = 33;
+            this.$http.post('admin/system/update/download', { url: update.url }).then(this.doInstall, this.error);
         },
 
-        doInstall: function () {
-            var vm = this;
-
-            this.$set('progress', 66);
-            this.$http.get('admin/system/update/update', null, {
-                xhr: {
-                    onprogress: function () {
-                        vm.setOutput(this.responseText);
-                    }
+        doInstall() {
+            const vm = this;
+            this.progress = 66;
+            this.$http.get('admin/system/update/update', {
+                progress: function() {
+                    vm.setOutput(this.responseText);
                 }
             }).then(this.doMigration, this.error);
         },
 
-        doMigration: function () {
-            this.$set('progress', 100);
+        doMigration() {
+            this.progress = 100;
             if (this.status === 'success') {
                 this.$http.get('admin/system/migration/migrate').then(function (res) {
-                    var data = res.data;
+                    const { data } = res;
                     this.output += "\n\n" + data.message;
                     this.finished = true;
                 }, this.error);
@@ -87,9 +81,9 @@ module.exports = {
             }
         },
 
-        setOutput: function (output) {
-            var lines = output.split("\n");
-            var match = lines[lines.length - 1].match(/^status=(success|error)$/);
+        setOutput(output) {
+            let lines = output.split("\n");
+            const match = lines[lines.length - 1].match(/^status=(success|error)$/);
 
             if (match) {
                 this.status = match[1];
@@ -101,21 +95,21 @@ module.exports = {
 
         },
 
-        error: function (error) {
-            this.errors.push(error.data || this.$trans('Whoops, something went wrong.'));
-
+        error(error) {
+            error = error && error.data ? error.data : error;
+            error = error && error.responseText ? error.responseText : error;
+            this.errors.push(error || this.$trans('Whoops, something went wrong.'));
             this.status = 'error';
             this.finished = true;
-        }
+        },
 
-    },
+        showChangelog(version) {
+            return Version.compare(version, this.version, '>');
+        },
 
-    filters: {
-
-        changelog: function (md) {
-
-            var renderer = new marked.Renderer(),
-                section;
+        changelog(md) {
+            const renderer = new marked.Renderer();
+            let section;
 
             renderer.heading = function (text) {
                 section = text;
@@ -144,14 +138,8 @@ module.exports = {
             };
 
             return marked(md, {renderer: renderer});
-        },
-
-        showChangelog: function (version) {
-            return Version.compare(version, this.version, '>');
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(Updater);

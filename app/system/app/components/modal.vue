@@ -1,5 +1,4 @@
 <template>
-
     <div class="uk-modal">
         <div class="uk-modal-dialog" :class="classes">
             <div v-if="opened">
@@ -7,14 +6,11 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
-        data: function () {
+    export default {
+        data() {
             return {
                 opened: false
             };
@@ -24,36 +20,29 @@
             large: Boolean,
             lightbox: Boolean,
             closed: Function,
-            modifier: {type: String, default: ''},
+            modifier: { type: String, default: '' },
             options: {
-                type: Object, default: function () {
-                    return {};
-                }
+                type: Object, default: () => {}
             }
         },
 
-        ready: function () {
+        mounted() {
+            const vm = this;
 
-            var vm = this;
-
-            this.$appendTo('body');
+            document.querySelector('body').appendChild(this.$el);
 
             this.modal = UIkit.modal(this.$el, _.extend({modal: false}, this.options));
-            this.modal.on('hide.uk.modal', function () {
-
+            this.modal.on('hide.uk.modal', () => {
                 vm.opened = false;
-
                 if (vm.closed) {
                     vm.closed();
                 }
             });
-
         },
 
         computed: {
-
-            classes: function () {
-                var classes = this.modifier.split(' ');
+            classes() {
+                let classes = this.modifier.split(' ');
 
                 if (this.large) {
                     classes.push('uk-modal-dialog-large');
@@ -65,22 +54,16 @@
 
                 return classes;
             }
-
         },
 
         methods: {
-
-            open: function () {
+            open() {
                 this.opened = true;
                 this.modal.show();
             },
-
-            close: function () {
+            close() {
                 this.modal.hide();
             }
-
         }
-
-    };
-
+    }
 </script>

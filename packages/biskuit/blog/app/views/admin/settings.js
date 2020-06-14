@@ -1,14 +1,12 @@
-module.exports = {
-
+const BlogSettings = {
     el: '#settings',
 
-    data: function () {
+    data() {
         return window.$data;
     },
 
     methods: {
-
-        save: function () {
+        save() {
             this.$http.post('admin/system/settings/config', { name: 'blog', config: this.config }).then(function () {
                         this.$notify('Settings saved.');
                     }, function (res) {
@@ -16,9 +14,7 @@ module.exports = {
                     }
                 );
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(BlogSettings);

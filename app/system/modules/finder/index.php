@@ -41,7 +41,7 @@ return [
             $scripts->register('panel-finder', 'system/finder:app/bundle/panel-finder.js', ['vue', 'uikit-upload']);
             $scripts->register('input-image', 'system/finder:app/bundle/input-image.js', ['vue', 'panel-finder']);
             $scripts->register('input-video', 'system/finder:app/bundle/input-video.js', ['vue', 'panel-finder']);
-            $scripts->register('link-storage', 'system/finder:app/bundle/link-storage.js', ['~panel-link']);
+            $scripts->register('link-storage', 'system/finder:app/bundle/link-storage.js', ['~panel-link', 'panel-finder']);
         },
 
         'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {

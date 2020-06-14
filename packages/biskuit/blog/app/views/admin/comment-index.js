@@ -1,12 +1,12 @@
-module.exports = {
-
+const CommentIndex = {
     name: 'comment',
 
     el: '#comments',
 
-    data: function () {
+    data() {
         return _.merge({
             posts: [],
+            searchString: this.$session.get('comments.filter', {}).search || '',
             config: {
                 filter: this.$session.get('comments.filter', {})
             },
@@ -15,60 +15,58 @@ module.exports = {
             count: '',
             selected: [],
             user: window.$biskuit.user,
-            replyComment: {},
+            replyComment: { },
             editComment: {}
         }, window.$data);
     },
 
-    ready: function () {
-
+    mounted() {
         this.Comments = this.$resource('api/blog/comment{/id}');
-        this.$watch('config.page', this.load, {immediate: true});
-
+        this.load();
         UIkit.init(this.$el);
     },
 
     watch: {
-
+        searchString: _.throttle(function() {
+            this.$set(this.config.filter, 'search', this.searchString);
+        }, 300),
+        'config.page': 'load',
         'config.filter': {
-            handler: function (filter) {
+            handler(filter) {
                 if (this.config.page) {
                     this.config.page = 0;
                 } else {
                     this.load();
                 }
-
                 this.$session.set('comments.filter', filter);
             },
             deep: true
         }
-
     },
 
     computed: {
-
-        statusOptions: function () {
-
-            var options = _.map(this.$data.statuses, function (status, id) {
-                return {text: status, value: id};
+        statusOptions() {
+            const options = _.map(this.$data.statuses, (status, id) => {
+                return { text: status, value: id };
             });
-
-            return [{label: this.$trans('Filter by'), options: options}];
+            return [{ label: this.$trans('Filter by'), options: options }];
         }
-
     },
 
     methods: {
+        getPost(postId) {
+            return _.filter(this.posts, ['id', postId])
+        },
 
-        active: function (comment) {
+        active(comment) {
             return this.selected.indexOf(comment.id) != -1;
         },
 
-        submit: function () {
+        submit() {
             this.save(this.editComment.id ? this.editComment : this.replyComment);
         },
 
-        save: function (comment) {
+        save(comment) {
             return this.Comments.save({id: comment.id}, {comment: comment}).then(function () {
                 this.load();
                 this.$notify('Comment saved.');
@@ -77,81 +75,69 @@ module.exports = {
             });
         },
 
-        status: function (status) {
-
-            var comments = this.getSelected();
-
+        status(status) {
+            let comments = this.getSelected();
             comments.forEach(function (comment) {
                 comment.status = status;
             });
-
             this.Comments.save({id: 'bulk'}, {comments: comments}).then(function () {
                 this.load();
                 this.$notify('Comments saved.');
             });
         },
 
-        remove: function () {
+        remove() {
             this.Comments.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
                 this.load();
                 this.$notify('Comments deleted.');
             });
         },
 
-        load: function () {
-
+        load() {
             this.cancel();
 
             this.Comments.query({filter: this.config.filter, post: this.config.post && this.config.post.id || 0, page: this.config.page, limit: this.config.limit}).then(function (res) {
+                const { data } = res;
 
-                var data = res.data;
-
-                this.$set('posts', data.posts);
-                this.$set('comments', data.comments);
-                this.$set('pages', data.pages);
-                this.$set('count', data.count);
-                this.$set('selected', []);
+                this.posts = data.posts;
+                this.comments = _.orderBy(data.comments, 'created', 'desc');
+                this.pages = data.pages;
+                this.count = data.count;
+                this.selected = [];
             });
         },
 
-        getSelected: function () {
-            var vm = this;
-            return this.comments.filter(function (comment) {
+        getSelected() {
+            const vm = this;
+            return this.comments.filter((comment) => {
                 return vm.selected.indexOf(comment.id) !== -1;
             });
         },
 
-        getStatusText: function (comment) {
+        getStatusText(comment) {
             return this.statuses[comment.status];
         },
 
-        cancel: function () {
-            this.$set('replyComment', {});
-            this.$set('editComment', {});
+        cancel() {
+            this.replyComment = {};
+            this.editComment = {};
         },
 
-        reply: function (comment) {
+        reply(comment) {
             this.cancel();
-            this.$set('replyComment', {parent_id: comment.id, post_id: comment.post_id, author: this.user.name, email: this.user.email});
+            this.replyComment = { parent_id: comment.id, post_id: comment.post_id, author: this.user.name, email: this.user.email };
         },
 
-        edit: function (comment) {
+        edit(comment) {
             this.cancel();
-            this.$set('editComment', _.merge({}, comment));
+            this.editComment = _.merge({}, comment);
         },
 
-        toggleStatus: function (comment) {
+        toggleStatus(comment) {
             comment.status = comment.status === 1 ? 0 : 1;
             this.save(comment);
         }
-
-    },
-
-    partials: {
-        'default-row': '#default-row',
-        'edit-row': '#edit-row'
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(CommentIndex);

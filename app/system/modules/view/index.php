@@ -65,9 +65,9 @@ return [
 
         'view.scripts' => function ($event, $scripts) use ($app) {
             $scripts->register('codemirror', 'app/assets/codemirror/codemirror.js');
-            $scripts->register('jquery', 'app/assets/jquery/dist/jquery.min.js');
+            $scripts->register('jquery', 'app/assets/jquery/jquery.min.js');
             $scripts->register('lodash', 'app/assets/lodash/lodash.min.js');
-            $scripts->register('marked', 'app/assets/marked/marked.js');
+            $scripts->register('marked', 'app/assets/marked/marked.min.js');
             $scripts->register('uikit', 'app/assets/uikit/js/uikit.min.js', 'jquery');
             $scripts->register('uikit-accordion', 'app/assets/uikit/js/components/accordion.min.js', 'uikit');
             $scripts->register('uikit-autocomplete', 'app/assets/uikit/js/components/autocomplete.min.js', 'uikit');
@@ -89,7 +89,7 @@ return [
             $scripts->register('uikit-parallax', 'app/assets/uikit/js/components/parallax.min.js', 'uikit');
             $scripts->register('uikit-timepicker', 'app/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
-            $scripts->register('vue-dist', 'app/assets/vue/dist/' . ($app->debug() ? 'vue.js' : 'vue.min.js'));
+            $scripts->register('vue-dist', 'app/assets/vue/' . ($app->debug() ? 'vue.js' : 'vue.min.js'));
             $scripts->register('locale', $app->url('@system/intl', ['locale' => $app->module('system/intl')->getLocale(), 'v' => $scripts->getFactory()->getVersion()]), [], ['type' => 'url']);
         }
 

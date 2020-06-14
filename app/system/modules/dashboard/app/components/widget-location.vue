@@ -1,88 +1,81 @@
 <template>
+    <div>
+        <div class="uk-panel-badge">
+            <ul class="uk-subnav pk-subnav-icon">
+                <li v-show="!editing">
+                    <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" :title="$trans('Edit')" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
+                </li>
+                <li v-show="!editing">
+                    <a class="pk-icon-contrast pk-icon-handle pk-icon-hover uk-hidden uk-sortable-handle" :title="$trans('Drag')" data-uk-tooltip="{delay: 500}"></a>
+                </li>
+                <li v-show="editing">
+                    <a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
+                </li>
+                <li v-show="editing">
+                    <a class="pk-icon-check pk-icon-hover" :title="$trans('Close')" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.save"></a>
+                </li>
+            </ul>
+        </div>
 
-    <div class="uk-panel-badge">
-        <ul class="uk-subnav pk-subnav-icon">
-            <li v-show="!editing">
-                <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
-            </li>
-            <li v-show="!editing">
-                <a class="pk-icon-contrast pk-icon-handle pk-icon-hover uk-hidden uk-sortable-handle" :title="'Drag' | trans" data-uk-tooltip="{delay: 500}"></a>
-            </li>
-            <li v-show="editing">
-                <a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
-            </li>
-            <li v-show="editing">
-                <a class="pk-icon-check pk-icon-hover" :title="'Close' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.save"></a>
-            </li>
-        </ul>
-    </div>
+        <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" @submit.prevent>
 
-    <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" @submit.prevent>
+            <div class="uk-form-row">
+                <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
 
-        <div class="uk-form-row">
-            <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
-
-            <div class="uk-form-controls">
-                <div v-el:autocomplete class="uk-autocomplete uk-width-1-1">
-                    <input id="form-city" class="uk-width-1-1" type="text" :placeholder="location" v-el:location @blur="clear" autocomplete="off">
+                <div class="uk-form-controls">
+                    <div ref="autocomplete" class="uk-autocomplete uk-width-1-1">
+                        <input id="form-city" class="uk-width-1-1" type="text" :placeholder="location" ref="location" @blur="clear" autocomplete="off">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="uk-form-row">
-            <span class="uk-form-label">{{ 'Unit' | trans }}</span>
+            <div class="uk-form-row">
+                <span class="uk-form-label">{{ 'Unit' | trans }}</span>
 
-            <div class="uk-form-controls uk-form-controls-text">
-                <p class="uk-form-controls-condensed">
-                    <label><input type="radio" value="metric" v-model="widget.units"> {{ 'Metric' | trans }}</label>
-                </p>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <p class="uk-form-controls-condensed">
+                        <label><input type="radio" value="metric" v-model="widget.units"> {{ 'Metric' | trans }}</label>
+                    </p>
 
-                <p class="uk-form-controls-condensed">
-                    <label><input type="radio" value="imperial" v-model="widget.units"> {{ 'Imperial' | trans }}</label>
-                </p>
+                    <p class="uk-form-controls-condensed">
+                        <label><input type="radio" value="imperial" v-model="widget.units"> {{ 'Imperial' | trans }}</label>
+                    </p>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="pk-panel-background uk-contrast" v-if="status != 'loading'">
+            <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-xlarge" v-if="time">{{ time | date(format) }}</h1>
+
+            <h2 class="uk-text-center uk-h4 uk-margin-remove" v-if="time">{{ time | date('longDate') }}</h2>
+            <div class="uk-margin-large-top uk-flex uk-flex-middle uk-flex-space-between uk-flex-wrap" data-uk-margin>
+                <h3 class="uk-margin-remove" v-if="widget.city">{{ widget.city }}</h3>
+                <h3 class="uk-flex uk-flex-middle uk-margin-remove" v-if="status=='done'">{{ temperature }} <img class="uk-margin-small-left" :src="icon" width="25" height="25" alt="Weather"></h3>
             </div>
         </div>
 
-    </form>
-
-    <div class="pk-panel-background uk-contrast" v-if="status != 'loading'">
-        <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-xlarge" v-if="time">{{ time | date format }}</h1>
-
-        <h2 class="uk-text-center uk-h4 uk-margin-remove" v-if="time">{{ time | date 'longDate' }}</h2>
-        <div class="uk-margin-large-top uk-flex uk-flex-middle uk-flex-space-between uk-flex-wrap" data-uk-margin>
-            <h3 class="uk-margin-remove" v-if="widget.city">{{ widget.city }}</h3>
-            <h3 class="uk-flex uk-flex-middle uk-margin-remove" v-if="status=='done'">{{ temperature }} <img class="uk-margin-small-left" :src="icon" width="25" height="25" alt="Weather"></h3>
+        <div class="uk-text-center" v-else>
+            <v-loader></v-loader>
         </div>
     </div>
-
-    <div class="uk-text-center" v-else>
-        <v-loader></v-loader>
-    </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    export default {
         type: {
-
             id: 'location',
             label: 'Location',
             disableToolbar: true,
-            description: function () {
-            },
+            description: () => {},
             defaults: {
                 units: 'metric'
             }
-
         },
-
-        replace: false,
 
         props: ['widget', 'editing'],
 
-        data: function () {
+        data() {
             return {
                 status: '',
                 timezone: {},
@@ -93,27 +86,22 @@
             };
         },
 
-        ready: function () {
-
-            var vm = this, list;
+        mounted() {
+            const vm = this;
+            let list;
 
             UIkit
-                .autocomplete(this.$els.autocomplete, {
-
-                    source: function (release) {
-
-                        vm.$http.get('admin/dashboard/weather', {action: 'find', data: {q: this.input.val(), type: 'like'}}).then(
-                            function (res) {
-
-                                var data = res.data;
+                .autocomplete(this.$refs.autocomplete, {
+                    source(release) {
+                        vm.$http.get('admin/dashboard/weather', { params: { action: 'find', data: { q: this.input.val(), type: 'like' } } }).then(
+                            (res) => {
+                                const { data } = res;
                                 list = data.list || [];
                                 release(list);
-
                             },
-                            function () {
+                            () => {
                                 release([]);
                             });
-
                     },
 
                     template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">\
@@ -121,127 +109,103 @@
                                   {{^items.length}}<li class="uk-skip"><a class="uk-text-muted">{{msgNoResults}}</a></li>{{/end}} \
                                </ul>',
 
-                    renderer: function (data) {
-
-                        this.dropdown.append(this.template({items: data || [], msgNoResults: vm.$trans('No location found.')}));
+                    renderer(data) {
+                        this.dropdown.append(this.template({ items: data || [], msgNoResults: vm.$trans('No location found.') }));
                         this.show();
                     }
-
                 })
                 .on('selectitem.uk.autocomplete', function (e, data) {
-
-                    var location = _.find(list, 'id', data.id);
+                    const location = _.find(list, ['id', data.id]);
 
                     Vue.nextTick(function () {
-                        vm.$els.location.blur();
+                        vm.$refs.location.blur();
                     });
 
                     if (!location) {
                         return;
                     }
 
-                    vm.$set('widget.uid', location.id);
-                    vm.$set('widget.city', location.name);
-                    vm.$set('widget.country', location.sys.country);
-                    vm.$set('widget.coords', location.coord);
+                    vm.$set(vm.widget, 'uid', location.id);
+                    vm.$set(vm.widget, 'city', location.name);
+                    vm.$set(vm.widget, 'country', location.sys.country);
+                    vm.$set(vm.widget, 'coords', location.coord);
                 });
 
             this.timer = setInterval(this.updateClock(), 60 * 1000);
         },
 
         watch: {
-
             'widget.uid': {
-
-                handler: function (uid) {
-
+                handler(uid) {
                     if (uid === undefined) {
-                        this.$set('widget.uid', '');
+                        this.$set(this.widget, 'uid', '');
                         this.$parent.save();
                         this.$parent.edit(true);
                     }
 
                     if (!uid) return;
-
                     this.load();
-
                 },
                 immediate: true
 
             },
 
             'timezone': 'updateClock'
-
         },
 
         computed: {
-
-            location: function () {
+            location() {
                 return this.widget.city ? this.widget.city + ', ' + this.widget.country : '';
             },
 
-            temperature: function () {
-
+            temperature() {
                 if (this.widget.units !== 'imperial') {
                     return Math.round(this.temp) + ' °C';
                 }
-
                 return Math.round(this.temp * (9 / 5) + 32) + ' °F';
             }
-
         },
 
         methods: {
-
-            load: function () {
-
+            load() {
                 if (!this.widget.uid) {
                     return;
                 }
 
-                this.$http.get('admin/dashboard/weather', {action: 'weather', data: {id: this.widget.uid, units: 'metric'}}, {cache: 60}).then(
+                this.$http.get('admin/dashboard/weather', { params: { action: 'weather', data: { id: this.widget.uid, units: 'metric' } }, cache: 60 }).then(
                     function (res) {
-                        var data = res.data;
+                        const { data } = res;
                         if (data.cod == 200) {
                             this.init(data)
                         } else {
-                            this.$set('status', 'error');
+                            this.status = 'error';
                         }
 
                     },
                     function () {
-                        this.$set('status', 'error');
+                        this.status = 'error';
                     }
                 );
 
-                this.$http.get('https://maps.googleapis.com/maps/api/timezone/json',
-                    {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)},
-                    {cache: {key: 'timezone-' + this.widget.coords.lat + this.widget.coords.lon, lifetime: 1440}}).then(function (res) {
-
-                    var data = res.data;
-                    data.offset = data.rawOffset + data.dstOffset;
-
-                    this.$set('timezone', data);
-
-                }, function () {
-                    this.$set('status', 'error');
-                });
-
-
+                /* TODO: google api requires account and billing information ==> could cause costs
+                this.$http.get('https://maps.googleapis.com/maps/api/timezone/json', { params: { location: `${this.widget.coords.lat},${this.widget.coords.lon}`, timestamp: Math.floor(Date.now() / 1000) }, cache: { key: `timezone-${this.widget.coords.lat},${this.widget.coords.lon}`, lifetime: 1440 } })
+                    .then(function (res) {
+                        let { data } = res;
+                        data.offset = data.rawOffset + data.dstOffset;
+                        this.timezone = data;
+                    }, function () {
+                        this.status = 'error';
+                    });*/
             },
 
-            init: function (data) {
-
-                this.$set('temp', data.main.temp);
-                this.$set('icon', this.getIconUrl(data.weather[0].icon));
-                this.$set('status', 'done');
-
+            init(data) {
+                this.temp = data.main.temp;
+                this.icon = this.getIconUrl(data.weather[0].icon);
+                this.status = 'done';
             },
 
-            getIconUrl: function (icon) {
-
-                var icons = {
-
+            getIconUrl(icon) {
+                const icons = {
                     '01d': 'sun.svg',
                     '01n': 'moon.svg',
                     '02d': 'cloud-sun.svg',
@@ -260,35 +224,25 @@
                     '13n': 'snow.svg',
                     '50d': 'fog.svg',
                     '50n': 'fog.svg'
-
                 };
-
-                return this.$url('app/system/modules/dashboard/assets/images/weather-{icon}', {icon: icons[icon]});
+                return this.$url('app/system/modules/dashboard/assets/images/weather-{icon}', { icon: icons[icon] });
             },
 
-            updateClock: function () {
-
-                var offset = this.$get('timezone.offset') || 0,
-                    date = new Date(),
-                    time = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : new Date();
-
-                this.$set('time', time);
-
+            updateClock() {
+                const offset = this.timezone.offset || 0;
+                const date = new Date();
+                const time = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : new Date();
+                this.time = time;
                 return this.updateClock;
             },
 
-            clear: function () {
-                this.$els.location.value = '';
+            clear() {
+                this.$refs.location.value = '';
             }
-
         },
 
-        destroyed: function () {
-
+        destroyed() {
             clearInterval(this.timer);
-
         }
-
     }
-
 </script>

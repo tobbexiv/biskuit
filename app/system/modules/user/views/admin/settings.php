@@ -4,14 +4,10 @@
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
-
             <h2 class="uk-margin-remove">{{ 'Settings' | trans }}</h2>
-
         </div>
         <div data-uk-margin>
-
             <button class="uk-button uk-button-primary" @click.prevent="save">{{ 'Save' | trans }}</button>
-
         </div>
     </div>
 
@@ -40,7 +36,7 @@
     <div class="uk-form-row">
         <label for="form-redirect" class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
         <div class="uk-form-controls">
-           <input-link id="form-redirect" class="uk-form-width-large" :link.sync="config.login_redirect"></input-link>
+           <input-link id="form-redirect" input-class="uk-form-width-large" v-model="config.login_redirect"></input-link>
         </div>
     </div>
 

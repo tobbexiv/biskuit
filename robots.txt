@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /storage/
+Allow: /packages/
+Disallow: /app/
+Disallow: /error/
+Disallow: /tmp/

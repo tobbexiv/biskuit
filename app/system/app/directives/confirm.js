@@ -1,62 +1,43 @@
-var _ = Vue.util;
+const handleUpdate = (el, binding, vnode) => {
+    const $trans = vnode.context.$trans;
+    const buttons = (el.getAttribute('buttons') || '').split(',');
 
-module.exports = {
-
-    priority: 500,
-
-    bind: function () {
-
-        var self = this, el = this.el, buttons = (_.getAttr(el, 'buttons') || '').split(',');
-
-        this.options = {
-            title: false,
-            labels: {
-                Ok: buttons[0] || this.vm.$trans('Ok'),
-                Cancel: buttons[1] || this.vm.$trans('Cancel')
-            }
-        };
-
-        this.dirs = this.vm._directives.filter(function (dir) {
-            return dir.name == 'on' && dir.el === el;
-        });
-
-        this.dirs.forEach(function (dir) {
-
-            _.off(dir.el, dir.arg, dir.handler);
-            _.on(dir.el, dir.arg, function (e) {
-                UIkit.modal.confirm(self.vm.$trans(self.options.text), function () {
-                    dir.handler(e);
-                }, self.options);
-            });
-
-        });
-    },
-
-    update: function (value) {
-
-        // vue-confirm="'Title':'Text...?'"
-        if (this.arg) {
-            this.options.title = this.arg;
+    let options = {
+        title: false,
+        labels: {
+            Ok: buttons[0] || $trans('Ok'),
+            Cancel: buttons[1] || $trans('Cancel')
         }
+    };
 
-        // vue-confirm="'Text...?'"
-        if (typeof value === 'string') {
-            this.options.text = value;
-        }
-
-        // vue-confirm="{title:'Title', text:'Text...?'}"
-        if (typeof value === 'object') {
-            this.options = _.extend(this.options, value);
-        }
-    },
-
-    unbind: function () {
-        this.dirs.forEach(function (dir) {
-            try {
-                _.off(dir.el, dir.arg, dir.handler);
-            } catch (e) {
-            }
-        });
+    // vue-confirm="'Title':'Text...?'"
+    if (binding.arg) {
+        options.title = this.arg;
     }
 
+    // vue-confirm="'Text...?'"
+    if (typeof binding.value === 'string') {
+        options.text = binding.value;
+    }
+
+    // vue-confirm="{title:'Title', text:'Text...?'}"
+    if (typeof binding.value === 'object') {
+        options = _.extend(binding.options, binding.value);
+    }
+
+    let handler = vnode.data.on.click.fns;
+    vnode.data.on.click.fns = (e) => {
+        UIkit.modal.confirm($trans(options.text), () => {
+            handler(e);
+        }, options);
+    }
+};
+
+export default {
+    bind(el, binding, vnode) {
+        handleUpdate(el, binding, vnode);
+    },
+    componentUpdated(el, binding, vnode) {
+        handleUpdate(el, binding, vnode);
+    }
 };

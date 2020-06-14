@@ -1,36 +1,54 @@
 <template>
 
-    <div class="uk-grid uk-grid-small" data-uk-grid-margin>
-        <div class="uk-width-large-1-2">
-            <div class="uk-form-icon uk-display-block">
-                <i class="pk-icon-calendar pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-el:datepicker v-model="date" v-validate:required="isRequired" lazy>
+        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
+            <div class="uk-width-large-1-2">
+                <div class="uk-form-icon uk-display-block">
+                    <i class="pk-icon-calendar pk-icon-muted"></i>
+                    <validation-provider :rules="{ required: isRequired }" slim>
+                        <input class="uk-width-1-1" type="text" ref="datepicker" v-model.lazy="date">
+                    </validation-provider>
+                </div>
+            </div>
+            <div class="uk-width-large-1-2">
+                <div class="uk-form-icon uk-display-block" ref="timepicker">
+                    <i class="pk-icon-time pk-icon-muted"></i>
+                    <validation-provider :rules="{ required: isRequired }" slim>
+                        <input class="uk-width-1-1" type="text" v-model.lazy="time">
+                    </validation-provider>
+                </div>
             </div>
         </div>
-        <div class="uk-width-large-1-2">
-            <div class="uk-form-icon uk-display-block" v-el:timepicker>
-                <i class="pk-icon-time pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-model="time" v-validate:required="isRequired" lazy>
-            </div>
-        </div>
-    </div>
-
 </template>
 
 <script>
+    export default {
+        props: ['value', 'required'],
 
-    module.exports = {
+        data() {
+            return {
+                datetime: this.value
+            }
+        },
 
-        props: ['datetime', 'required'],
+        mounted() {
+            this.$nextTick(function () {
+                UIkit.datepicker(this.$refs.datepicker, {format: this.dateFormat, pos: 'bottom'});
+                UIkit.timepicker(this.$refs.timepicker, {format: this.clockFormat});
+            });
+        },
 
-        ready: function () {
-            UIkit.datepicker(this.$els.datepicker, {format: this.dateFormat, pos: 'bottom'});
-            UIkit.timepicker(this.$els.timepicker, {format: this.clockFormat});
+        watch: {
+            value(newDatetime) {
+                this.datetime = newDatetime;
+            },
+
+            datetime(newDatetime) {
+                this.$emit('input', newDatetime);
+            }
         },
 
         computed: {
-
-            dateFormat: function () {
+            dateFormat() {
                 return window.$locale.DATETIME_FORMATS.shortDate
                     .replace(/\bd\b/i, 'DD')
                     .replace(/\bm\b/i, 'MM')
@@ -38,62 +56,56 @@
                     .toUpperCase();
             },
 
-            timeFormat: function () {
+            timeFormat() {
                 return window.$locale.DATETIME_FORMATS.shortTime.replace(/\bh\b/i, 'hh');
             },
 
-            clockFormat: function () {
+            clockFormat() {
                 return this.timeFormat.match(/a/) ? '12h' : '24h';
             },
 
             date: {
-
-                get: function () {
+                get() {
                     return UIkit.Utils.moment(this.datetime).format(this.dateFormat);
                 },
 
-                set: function (date) {
-                    var prev = new Date(this.datetime);
+                set(date) {
+                    const prev = new Date(this.datetime);
                     date = UIkit.Utils.moment(date, this.dateFormat);
                     date.hours(prev.getHours());
                     date.minutes(prev.getMinutes());
-                    this.$set('datetime', date.utc().format());
+                    this.datetime = date.utc().format();
                 }
-
             },
 
             time: {
-
-                get: function () {
+                get() {
                     return UIkit.Utils.moment(this.datetime).format(this.timeFormat);
                 },
 
-                set: function (time) {
-                    var date = new Date(this.datetime);
+                set(time) {
+                    let date = new Date(this.datetime);
                     time = UIkit.Utils.moment(time, this.timeFormat);
                     date.setHours(time.hours(), time.minutes());
-                    this.$set('datetime', date.toISOString());
+                    this.datetime = date.toISOString();
                 }
-
             },
 
-            isRequired: function () {
+            isRequired() {
                 return this.required !== undefined;
             }
-
         }
-
     };
 
-    Vue.component('input-date', function (resolve, reject) {
+    Vue.component('input-date', (resolve, reject) => {
         Vue.asset({
             js: [
                 'app/assets/uikit/js/components/autocomplete.min.js',
                 'app/assets/uikit/js/components/datepicker.min.js',
                 'app/assets/uikit/js/components/timepicker.min.js'
             ]
-        }).then(function () {
-            resolve(module.exports);
+        }).then(() => {
+            resolve(require('./input-date.vue'));
         })
     });
 

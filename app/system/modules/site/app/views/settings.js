@@ -1,63 +1,53 @@
-window.Site = {
+import SiteCode from '../components/site-code.vue';
+import SiteMeta from '../components/site-meta.vue';
+import SiteGeneral from '../components/site-general.vue';
+import SiteMaintenance from '../components/site-maintenance.vue';
 
+window.Site = {
     el: '#settings',
 
-    data: function () {
-        return _.merge({form: {}}, window.$data);
+    data() {
+        return window.$data;
     },
 
-    ready: function () {
-
-        UIkit.tab(this.$els.tab, {connect: this.$els.content});
-
+    mounted() {
+        UIkit.tab(this.$refs.tab, { connect: this.$refs.content });
     },
 
     computed: {
+        sections() {
+            let hash = window.location.hash.replace('#', '');
 
-        sections: function () {
-
-            var sections = [], hash = window.location.hash.replace('#', '');
-
+            let sections = [];
             _.forIn(this.$options.components, function (component, name) {
-
-                var options = component.options || {}, section = options.section;
-
+                let section = component.section;
                 if (section) {
                     section.name = name;
                     section.active = name == hash;
                     sections.push(section);
                 }
-
             });
-
-            return sections;
+            return _.sortBy(sections, ['priority']);
         }
-
     },
 
     methods: {
-
-        save: function () {
-            this.$broadcast('save', this.config);
-
-            this.$http.post('admin/system/settings/config', {name: 'system/site', config: this.config}).then(function () {
-                        this.$notify('Settings saved.');
-                    }, function (res) {
-                        this.$notify(res.data, 'danger');
-                    });
+        save() {
+            this.$trigger('site:save-settings', this.config);
+            this.$http.post('admin/system/settings/config', { name: 'system/site', config: this.config }).then(function () {
+                this.$notify('Settings saved.');
+            }, function (res) {
+                this.$notify(res.data, 'danger');
+            });
         }
-
     },
 
     components: {
-
-        'site-code': require('../components/site-code.vue'),
-        'site-meta': require('../components/site-meta.vue'),
-        'site-general': require('../components/site-general.vue'),
-        'site-maintenance': require('../components/site-maintenance.vue')
-
+        'site-code': SiteCode,
+        'site-meta': SiteMeta,
+        'site-general': SiteGeneral,
+        'site-maintenance': SiteMaintenance
     }
-
 };
 
 Vue.ready(window.Site);

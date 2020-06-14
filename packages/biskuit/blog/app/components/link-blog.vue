@@ -1,56 +1,55 @@
 <template>
-
     <div class="uk-form-row">
         <label for="form-link-blog" class="uk-form-label">{{ 'View' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-link-blog" class="uk-width-1-1" v-model="link">
+            <select id="form-link-blog" class="uk-width-1-1" v-model="innerLink">
                 <option value="@blog">{{ 'Posts View' | trans }}</option>
-                <optgroup :label="'Posts' | trans">
-                    <option v-for="p in posts" :value="p | link">{{ p.title }}</option>
+                <optgroup :label="$trans('Posts')">
+                    <option v-for="p in posts" :value="link(p)" :key="p.id">{{ p.title }}</option>
                 </optgroup>
             </select>
         </div>
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    const LinkBlog = {
         link: {
             label: 'Blog'
         },
 
-        props: ['link'],
-
-        data: function () {
+        data() {
             return {
+                innerLink: '',
                 posts: []
             }
         },
 
-        created: function () {
+        created() {
             // TODO: Implement pagination or search
-            this.$http.get('api/blog/post', {filter: {limit: 1000}}).then(function (res) {
-                this.$set('posts', res.data.posts);
+            this.$http.get('api/blog/post', { params: { filter: { limit: 1000 } } }).then(function (res) {
+                this.posts = res.data.posts;
             });
         },
 
-        ready: function() {
-            this.link = '@blog';
+        mounted() {
+            this.innerLink = '@blog';
         },
 
-        filters: {
-
-            link: function (post) {
+        methods: {
+            link(post) {
                 return '@blog/id?id='+post.id;
             }
+        },
 
+        watch: {
+            innerLink(link) {
+                this.$emit('input', link);
+            }
         }
-
     };
 
-    window.Links.components['link-blog'] = module.exports;
+    export default LinkBlog;
 
+    window.Links.default.components['link-blog'] = LinkBlog;
 </script>

@@ -1,111 +1,120 @@
-module.exports = {
+const STATE = {
+    CHECKED: 'C',
+    INDETERMINATE: 'I',
+    UNCHECKED: 'U'
+};
 
-    params: ['group'],
+const storage = {};
 
-    update: function (subSelector) {
+const convertElementValue = (value, asNumber) => {
+    return asNumber ? Number(value) : value;
+};
 
-        var self = this, keypath = this.arg, group = this.params.group ? this.params.group + ' ' : '', selector = group + subSelector;
+const getElements = (selector) => {
+    return document.querySelectorAll(selector);
+};
 
-        this.selector = selector;
-        this.$el = this.vm.$el;
-        this.checked = false;
-        this.number = this.el.getAttribute('number') !== null;
-
-        $(this.el).on('change.check-all', function () {
-            $(selector, self.$el).prop('checked', $(this).prop('checked'));
-            self.selected(true);
-        });
-
-        this.handler = [
-            function () {
-                self.selected(true);
-                self.state();
-            },
-            function (e) {
-                if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
-                    $(this).find(subSelector).trigger('click');
-                }
-            }
-        ];
-
-        $(this.$el).on('change.check-all', selector, this.handler[0]);
-        $(this.$el).on('click.check-all', group + '.check-item', this.handler[1]);
-
-        this.unbindWatcher = this.vm.$watch(keypath, function (selected) {
-
-            $(subSelector, this.$el).prop('checked', function () {
-                return selected.indexOf(self.toNumber($(this).val())) !== -1;
-            });
-
-            self.selected();
-            self.state();
-        });
-    },
-
-    unbind: function () {
-
-        var self = this;
-
-        $(this.el).off('.check-all');
-
-        if (this.handler) {
-            this.handler.forEach(function (handler) {
-                $(self.$el).off('.check-all', handler);
-            });
-        }
-
-        if (this.unbindWatcher) {
-            this.unbindWatcher();
-        }
-    },
-
-    state: function () {
-
-        var el = $(this.el);
-
-        if (this.checked === undefined) {
-            el.prop('indeterminate', true);
+const setElementState = (element, targetState) => {
+    if(targetState == STATE.INDETERMINATE) {
+        element.indeterminate = true;
+    } else {
+        if(targetState == STATE.CHECKED) {
+            element.checked = true;
         } else {
-            el.prop('checked', this.checked).prop('indeterminate', false);
+            element.checked = false;
         }
-
-    },
-
-    selected: function (update) {
-
-        var self = this, keypath = this.arg, selected = [], values = [], value;
-
-        $(this.selector, this.$el).each(function () {
-
-            value = self.toNumber($(this).val());
-            values.push(value);
-
-            if ($(this).prop('checked')) {
-                selected.push(value);
-            }
-        });
-
-        if (update) {
-
-            update = this.vm.$get(keypath).filter(function (value) {
-                return values.indexOf(value) === -1;
-            });
-
-            this.vm.$set(keypath, update.concat(selected));
-        }
-
-        if (selected.length === 0) {
-            this.checked = false;
-        } else if (selected.length == values.length) {
-            this.checked = true;
-        } else {
-            this.checked = undefined;
-        }
-
-    },
-
-    toNumber: function (value) {
-        return this.number ? Number(value) : value;
+        element.indeterminate = false;
     }
+};
 
+const checkAllSelected = (mainElement, elementsToCheck) => {
+    let allChecked = elementsToCheck.length > 0;
+    let nothingChecked = true;
+    elementsToCheck.forEach((element) => {
+        allChecked = allChecked && element.checked; // will switch to false as soon as the first element is unchecked
+        nothingChecked = nothingChecked && !element.checked; // will switch to false as soon as the first element is checked
+    });
+    let targetState = allChecked ? STATE.CHECKED : (nothingChecked ? STATE.UNCHECKED : STATE.INDETERMINATE);
+    setElementState(mainElement, targetState);
+};
+
+const setWatcherForStatusStorage = (storageId) => {
+    if(storage[storageId].unbindWatcherForStatusStorage) storage[storageId].unbindWatcherForStatusStorage();
+    storage[storageId].unbindWatcherForStatusStorage = storage[storageId].context.$watch(storage[storageId].settings.statusStorageSelector, (selected) => {
+        checkAllSelected(storage[storageId].mainElement, getElements(storage[storageId].settings.watchedElementsSelector));
+    });
+};
+
+const updateStatusStorage = (storageId, watchedElements) => {
+    let newStatus = [];
+    let values = [];
+    watchedElements.forEach((element) => {
+        let value = convertElementValue(element.value, storage[storageId].settings.idAsNumber);
+        values.push(value);
+        if(element.checked) {
+            newStatus.push(value);
+        }
+    });
+    let untouchedStatus = _.get(storage[storageId].context, storage[storageId].settings.statusStorageSelector).filter(value => values.indexOf(value) === -1);
+    _.set(storage[storageId].context, storage[storageId].settings.statusStorageSelector, untouchedStatus.concat(newStatus));
+};
+
+const mainElementSelectionChanged = (storageId) => {
+    const watchedElements = getElements(storage[storageId].settings.watchedElementsSelector);
+    let newState = storage[storageId].mainElement.checked;
+    watchedElements.forEach((element) => {
+        element.checked = newState;
+    });
+    updateStatusStorage(storageId, watchedElements);
+};
+
+export default {
+    bind(el, binding, vnode) {
+        // use like v-check-all:<id>="..."
+        const storageId = binding.arg;
+        if(!storage[storageId]) {
+            storage[storageId] = {
+                counter: 0,
+                unbindWatcherForStatusStorage: null,
+                mainElementCallback: () => {
+                    mainElementSelectionChanged(storageId);
+                }
+            };
+        }
+        storage[storageId].counter++;
+        storage[storageId].context = vnode.context;
+        storage[storageId].mainElement = el,
+        storage[storageId].settings = {
+            // use like v-check-all:<id>.number="..." if the element value is a number
+            idAsNumber: !!binding.modifiers.number,
+            // selector for all checkboxes that will be switched/watched by this checkbox
+            // Example: v-check-all:<id>="{ watchedElementsSelector: 'input[name=id]' }"
+            watchedElementsSelector: binding.value.watchedElementsSelector,
+            // selector for all checkboxes that will be switched/watched by this checkbox
+            // Example: v-check-all:<id>="{ statusStorageSelector: 'selected' }"
+            statusStorageSelector: binding.value.statusStorageSelector,
+        };
+        setWatcherForStatusStorage(storageId);
+        el.addEventListener('change', storage[storageId].mainElementCallback);
+        checkAllSelected(el, getElements(storage[storageId].settings.watchedElementsSelector));
+    },
+
+    inserted(el, binding, vnode) {
+        checkAllSelected(el, getElements(binding.value.watchedElementsSelector));
+    },
+
+    componentUpdated(el, binding, vnode) {
+        checkAllSelected(el, getElements(binding.value.watchedElementsSelector));
+    },
+
+    unbind(el, binding, vnode) {
+        const storageId = binding.arg;
+        if(storage[storageId].counter == 1) {
+            storage[storageId].unbindWatcherForStatusStorage();
+            el.removeEventListener('change', storage[storageId].mainElementCallback);
+            delete storage[storageId];
+        } else {
+            storage[storageId].counter--;
+        }
+    }
 };

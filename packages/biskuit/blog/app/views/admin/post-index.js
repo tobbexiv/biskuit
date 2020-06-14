@@ -1,12 +1,12 @@
-module.exports = {
-
+const BlogPostIndex = {
     name: 'post',
 
     el: '#post',
 
-    data: function() {
+    data() {
         return _.merge({
             posts: false,
+            searchString: '',
             config: {
                 filter: this.$session.get('posts.filter', {order: 'date desc', limit:25})
             },
@@ -17,42 +17,40 @@ module.exports = {
         }, window.$data);
     },
 
-    ready: function () {
+    created() {
         this.resource = this.$resource('api/blog/post{/id}');
-        this.$watch('config.page', this.load, {immediate: true});    
+        this.load();
     },
 
     watch: {
-
+        searchString: _.throttle(function() {
+            this.$set(this.config.filter, 'search', this.searchString);
+        }, 1000),
+        'config.page': 'load',
         'config.filter': {
-            handler: function (filter) {
+            handler(filter) {
                 if (this.config.page) {
                     this.config.page = 0;
                 } else {
                     this.load();
                 }
-
                 this.$session.set('posts.filter', filter);
             },
             deep: true
         }
-
     },
 
     computed: {
-
-        statusOptions: function () {
-
-            var options = _.map(this.$data.statuses, function (status, id) {
+        statusOptions() {
+            const options = _.map(this.statuses, function (status, id) {
                 return { text: status, value: id };
             });
 
             return [{ label: this.$trans('Filter by'), options: options }];
         },
 
-        authors: function() {
-
-            var options = _.map(this.$data.authors, function (author) {
+        authorOptions() {
+            const options = _.map(this.authors, function (author) {
                 return { text: author.username, value: author.user_id };
             });
 
@@ -61,47 +59,41 @@ module.exports = {
     },
 
     methods: {
-
-        active: function (post) {
+        active(post) {
             return this.selected.indexOf(post.id) != -1;
         },
 
-        save: function (post) {
+        save(post) {
             this.resource.save({ id: post.id }, { post: post }).then(function () {
                 this.load();
                 this.$notify('Post saved.');
             });
         },
 
-        status: function(status) {
-
-            var posts = this.getSelected();
-
-            posts.forEach(function(post) {
+        status(status) {
+            const posts = this.getSelected();
+            posts.forEach((post) => {
                 post.status = status;
             });
-
             this.resource.save({ id: 'bulk' }, { posts: posts }).then(function () {
                 this.load();
-                this.$notify('Posts saved.');
+                this.$notify('Post(s) saved.');
             });
         },
 
-        remove: function() {
-
+        remove() {
             this.resource.delete({ id: 'bulk' }, { ids: this.selected }).then(function () {
                 this.load();
-                this.$notify('Posts deleted.');
+                this.$notify('Post(s) deleted.');
             });
         },
 
-        toggleStatus: function (post) {
+        toggleStatus(post) {
             post.status = post.status === 2 ? 3 : 2;
             this.save(post);
         },
 
-        copy: function() {
-
+        copy() {
             if (!this.selected.length) {
                 return;
             }
@@ -112,28 +104,26 @@ module.exports = {
             });
         },
 
-        load: function () {
+        load() {
             this.resource.query({ filter: this.config.filter, page: this.config.page }).then(function (res) {
-
-                var data = res.data;
-
-                this.$set('posts', data.posts);
-                this.$set('pages', data.pages);
-                this.$set('count', data.count);
-                this.$set('selected', []);
+                const { data } = res;
+                this.posts = data.posts;
+                this.pages = data.pages;
+                this.count = data.count;
+                this.selected = [];
             });
         },
 
-        getSelected: function() {
-            return this.posts.filter(function(post) { return this.selected.indexOf(post.id) !== -1; }, this);
+        getSelected() {
+            return this.posts.filter(function(post) {
+                return this.selected.indexOf(post.id) !== -1;
+            }, this);
         },
 
-        getStatusText: function(post) {
+        getStatusText(post) {
             return this.statuses[post.status];
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(BlogPostIndex);

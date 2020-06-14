@@ -1,26 +1,24 @@
-window.Widgets = module.exports = {
+import WidgetSettings from './components/widget-settings.vue';
+import WidgetVisibility from './components/widget-visibility.vue';
 
-    data: function () {
+window.Widgets = {
+    data() {
         return {
             widgets: []
         };
     },
 
-    created: function () {
+    created() {
         this.resource = this.$resource('api/site/widget{/id}');
     },
 
-    partials: {
-
-        settings: require('./templates/widget-settings.html')
-
-    },
-
     components: {
-
-        settings: require('./components/widget-settings.vue'),
-        visibility: require('./components/widget-visibility.vue')
-
+        'template-settings': {
+            template: require('./templates/widget-settings.html')
+        },
+        settings: WidgetSettings,
+        visibility: WidgetVisibility
     }
-
 };
+
+export default window.Widgets;

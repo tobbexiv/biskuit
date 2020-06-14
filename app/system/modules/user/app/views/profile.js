@@ -1,12 +1,10 @@
-module.exports = {
-
+const UserProfile = {
     el: '#user-profile',
 
     data: window.$data,
 
     methods: {
-
-        save: function () {
+        save() {
             this.$http.post('user/profile/save', {user: this.user}).then(function () {
                         this.$notify('Profile Updated', 'success');
                     }, function (res) {
@@ -14,9 +12,7 @@ module.exports = {
                     }
                 );
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(UserProfile);

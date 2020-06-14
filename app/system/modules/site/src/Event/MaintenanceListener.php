@@ -22,7 +22,7 @@ class MaintenanceListener implements EventSubscriberInterface
 
             $message = $site->config('maintenance.msg') ?: __("We'll be back soon.");
             $logo = $site->config('maintenance.logo') ?: 'app/system/assets/images/biskuit-logo-large-black.svg';
-            $response = App::view('system/theme:views/maintenance.php', compact('message', 'logo'));
+            $response = App::view('system/maintenance.php', compact('message', 'logo'));
 
             $request->attributes->set('_disable_debugbar', true);
 

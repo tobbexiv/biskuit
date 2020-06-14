@@ -1,11 +1,10 @@
-module.exports = {
+const Info = {
 
     el: '#info',
 
-    data: {
-        info: window.$info
+    data() {
+        return { info: window.$info };
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(Info);

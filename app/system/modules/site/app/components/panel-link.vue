@@ -1,23 +1,22 @@
 <template>
-
-    <div class="uk-form-row">
-        <label for="form-style" class="uk-form-label">{{ 'Extension' | trans }}</label>
-        <div class="uk-form-controls">
-            <select id="form-style" class="uk-width-1-1" v-model="type">
-                <option v-for="type in types" :value="type.value">{{ type.text }}</option>
-            </select>
+    <div>
+        <div class="uk-form-row">
+            <label for="form-style" class="uk-form-label">{{ 'Extension' | trans }}</label>
+            <div class="uk-form-controls">
+                <select id="form-style" class="uk-width-1-1" v-model="type">
+                    <option v-for="type in types" :value="type.value">{{ type.text }}</option>
+                </select>
+            </div>
         </div>
+
+        <component :is="type" v-if="type" v-model="link"></component>
     </div>
-
-    <div :is="type" :link.sync="link" v-if="type"></div>
-
 </template>
 
 <script>
 
-    window.Links = module.exports = {
-
-        data: function () {
+    export default {
+        data() {
             return {
                 type: false,
                 link: ''
@@ -25,45 +24,41 @@
         },
 
         watch: {
-
             type: {
-                handler: function (type) {
+                handler(type) {
                     if (!type && this.types.length) {
                         this.type = this.types[0].value;
                     }
                 },
                 immediate: true
-            }
+            },
 
+            link() {
+                this.$emit('selection-changed', this.link);
+            }
         },
 
         computed: {
+            types() {
+                const types = [];
+                let options;
 
-            types: function () {
-
-                var types = [], options;
-
-                _.forIn(this.$options.components, function (component, name) {
-
-                    options = component.options || {};
-
-                    if (options.link) {
-                        types.push({ text: options.link.label, value: name });
+                _.forIn(this.$options.components, (component, name) => {
+                    if (component.link) {
+                        types.push({ text: component.link.label, value: name });
                     }
 
                 });
 
-                return _.sortBy(types, 'text');
+                return _.sortBy(types, ['text']);
             }
-
         },
 
         components: {}
-
     };
 
-    Vue.component('panel-link', function (resolve) {
-        resolve(module.exports);
+    Vue.component('panel-link', (resolve) => {
+        resolve(require('./panel-link.vue'));
     });
 
 </script>

@@ -112,7 +112,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(dir, writable) in info.directories">
+                            <tr v-for="(writable, dir) in info.directories">
                                 <td>{{ dir }}</td>
                                 <td class="uk-text-success" v-if="writable">{{ 'Writable' | trans }}</span></td>
                                 <td class="uk-text-danger" v-else>{{ 'Unwritable' | trans }}</span></td>

@@ -1,9 +1,7 @@
 <template>
-
     <div>
-        <v-modal v-ref:modal :closed="close">
+        <v-modal ref="modal" :closed="close">
             <form class="uk-form uk-form-stacked" @submit.prevent="update">
-
                 <div class="uk-modal-header">
                     <h2>{{ 'Add Link' | trans }}</h2>
                 </div>
@@ -18,7 +16,7 @@
                 <div class="uk-form-row">
                     <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input-link id="form-link-url" class="uk-width-1-1" :link.sync="link.link"></input-link>
+                        <input-link id="form-link-url" input-class="uk-width-1-1" v-model="link.link"></input-link>
                     </div>
                 </div>
 
@@ -26,40 +24,36 @@
                     <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
                     <button class="uk-button uk-button-link" type="submit">{{ 'Update' | trans }}</button>
                 </div>
-
             </form>
         </v-modal>
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
-        data: function () {
+    export default {
+        data() {
             return {
-                link: {link: '', txt: '', class: ''}
-            }
+                link: {
+                    link: '',
+                    txt: '',
+                    class: ''
+                }
+            };
         },
 
-        ready: function () {
+        mounted() {
             this.$refs.modal.open();
         },
 
         methods: {
-
-            close: function() {
+            close() {
                 this.$destroy(true);
             },
 
-            update: function () {
+            update() {
                 this.$refs.modal.close();
                 this.$emit('select', this.link);
             }
-
         }
-
     };
-
 </script>

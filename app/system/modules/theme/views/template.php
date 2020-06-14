@@ -19,14 +19,14 @@
 
                         <div class="tm-cursor-pointer uk-flex uk-flex-middle">
                             <i class="tm-icon-menu"></i>
-                            <h1 class="tm-heading" v-text="item.label | trans"></h1>
+                            <h1 class="tm-heading" v-text="$trans(item.label)"></h1>
                         </div>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
                             <ul id="js-appnav" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 <li v-for="item in nav" :data-id="item.id">
                                     <a class="uk-panel tm-panel-icon" :href="item.url">
-                                        <img width="50" height="50" :alt="item.label | trans" :src="item.icon">
+                                        <img width="50" height="50" :alt="$trans(item.label)" :src="item.icon">
                                         <p>{{ item.label | trans }}</p>
                                     </a>
                                 </li>
@@ -37,11 +37,11 @@
                     <div class="tm-contrast">
 
 			<ul class="uk-grid uk-grid-small uk-flex-middle">
-                            <li><a class="tm-icon-github uk-icon-github" href="https://github.com/biskuitorg/biskuit" :title="GitHub" target="_blank"></a></li>
-                            <li><a class="tm-icon-help" href="https://github.com/biskuitorg/biskuit/issues" :title="'Get Help' | trans" target="_blank"></a></li>
-                            <li><a class="tm-icon-visit" :href="$url.route('')" :title="'Visit Site' | trans" target="_blank"></a></li>
-                            <li><a class="tm-icon-logout" href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>" :title="'Logout' | trans"></a></li>
-                            <li class="uk-margin-small-left"><a :href="$url.route('admin/user/edit', {id: user.id})" :title="'Profile' | trans"><img class="uk-border-circle uk-margin-small-right" height="24" width="24" :title="user.name" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>
+                            <li><a class="tm-icon-github uk-icon-github" href="https://github.com/biskuitorg" title="GitHub" target="_blank"></a></li>
+                            <li><a class="tm-icon-help" href="https://github.com/biskuitorg/biskuit/issues" :title="$trans('Get Help')" target="_blank"></a></li>
+                            <li><a class="tm-icon-visit" :href="$url.route('')" :title="$trans('Visit Site')" target="_blank"></a></li>
+                            <li><a class="tm-icon-logout" href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>" :title="$trans('Logout')"></a></li>
+                            <li class="uk-margin-small-left"><a :href="$url.route('admin/user/edit', {id: user.id})" :title="$trans('Profile')"><img class="uk-border-circle uk-margin-small-right" height="24" width="24" :title="user.name" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>
                         </ul>
 
                     </div>
@@ -50,7 +50,7 @@
                 <nav class="uk-navbar tm-navbar uk-hidden-small" v-show="subnav">
                     <ul class="uk-navbar-nav">
                         <li :class="{ 'uk-active': item.active }" v-for="item in subnav">
-                            <a :href="item.url" v-text="item.label | trans"></a>
+                            <a :href="item.url" v-text="$trans(item.label)"></a>
                         </li>
                     </ul>
                 </nav>
@@ -86,7 +86,7 @@
                     <li class="uk-nav-header">{{ 'Extensions' | trans }}</li>
                     <li :class="{ 'uk-active': item.active }" v-for="item in nav">
                         <a :href="item.url">
-                            <img class="uk-margin-small-right" width="34" height="34" :alt="item.label | trans" :src="item.icon"> {{ item.label | trans }}
+                            <img class="uk-margin-small-right" width="34" height="34" :alt="$trans(item.label)" :src="item.icon"> {{ item.label | trans }}
                         </a>
                     </li>
                 </ul>

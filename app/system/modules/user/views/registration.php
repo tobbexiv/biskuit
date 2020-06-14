@@ -1,40 +1,58 @@
 <?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-registration" class="pk-user pk-user-registration uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" v-cloak @submit.prevent="submit | valid">
+<validation-observer id="user-registration" v-slot="{ handleSubmit }" slim>
+    <form class="pk-user pk-user-registration uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" @submit.prevent="handleSubmit(save)">
+        <h4 class="uk-text-center"><?= __('Create an account') ?></h4>
+        <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
 
-    <h4 class="uk-text-center"><?= __('Create an account') ?></h4>
+        <div class="uk-text-center uk-grid-small" uk-grid>
+            <v-validated-input
+                id="form-username"
+                name="username"
+                :rules="{ required: true, min: 3, regex: /^[a-zA-Z0-9._\-]{3,}$/ }"
+                placeholder="<?= __('Username') ?>"
+                :error-messages="{ required: 'Username cannot be blank.', min: 'Username must be at least 3 charaters long.', regex: 'Username can only contain alphanumeric characters (A-Z, 0-9) and some special characters (._-)' }"
+                :options="{ wrapperClass: 'uk-width-1-2@s', innerWrapperClass: '' }"
+                v-model="user.username">
+            </v-validated-input>
 
-    <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
+            <v-validated-input
+                id="form-name"
+                name="name"
+                rules="required"
+                placeholder="<?= __('Name') ?>"
+                :error-messages="{ required: 'Name cannot be blank.' }"
+                :options="{ wrapperClass: 'uk-width-1-2@s', innerWrapperClass: '' }"
+                v-model="user.name">
+            </v-validated-input>
 
-    <div class="uk-text-center uk-grid-small" uk-grid>
-        <div class="uk-width-1-2@s">
-            <input class="uk-input" type="text" name="username" placeholder="<?= __('Username') ?>" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
-            <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid"><?= __('Username is invalid.') ?></p>
-        </div>
+            <v-validated-input
+                id="form-email"
+                name="email"
+                type="email"
+                rules="required|email"
+                placeholder="<?= __('Email') ?>"
+                :error-messages="{ required: 'Email cannot be blank.', email: 'Field must be a valid email address.' }"
+                :options="{ wrapperClass: 'uk-width-1-2@s', innerWrapperClass: '' }"
+                v-model.lazy="user.email">
+            </v-validated-input>
 
-        <div class="uk-width-1-2@s">
-            <input class="uk-input" type="text" name="name" placeholder="<?= __('Name') ?>" v-model="user.name" v-validate:required>
-            <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid"><?= __('Name cannot be blank.') ?></p>
-        </div>
+            <v-validated-input
+                id="form-password"
+                name="password"
+                type="password"
+                :rules="{ required: true, min: 6 }"
+                placeholder="<?= __('Current Password') ?>"
+                :error-messages="{ required: 'Password cannot be blank.', min: 'Password must be at least 6 characters long.' }"
+                :options="{ wrapperClass: 'uk-width-1-2@s', innerWrapperClass: '' }"
+                v-model="user.password">
+            </v-validated-input>
 
-        <div class="uk-width-1-2@s">
-            <input class="uk-input" type="email" name="email" placeholder="<?= __('Email') ?>" v-model="user.email" v-validate:email v-validate:required>
-            <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid"><?= __('Email address is invalid.') ?></p>
-        </div>
-
-        <div class="uk-width-1-2@s">
-            <div class="uk-form-password uk-width-1-1">
-                <input class="uk-input" type="password" name="password" placeholder="<?= __('Password') ?>" v-model="user.password" v-validate:required v-validate:pattern.literal="/^.{6,}$/">
-                <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
+            <div class="uk-margin">
+                <button class="uk-button uk-button-primary" type="submit"><?= __('Sign up') ?></button>
             </div>
-            <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password must be 6 characters or longer.') ?></p>
         </div>
 
-        <div class="uk-margin">
-            <button class="uk-button uk-button-primary" type="submit"><?= __('Sign up') ?></button>
-        </div>
-    </div>
-
-    <p class="uk-text-center"><?= __('Already have an account?') ?> <a href="<?= $view->url('@user/login') ?>"><?= __('Login!') ?></a></p>
-
-</form>
+        <p class="uk-text-center"><?= __('Already have an account?') ?> <a href="<?= $view->url('@user/login') ?>"><?= __('Login!') ?></a></p>
+    </form>
+</validation-observer>

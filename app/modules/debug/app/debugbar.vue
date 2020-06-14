@@ -1,31 +1,23 @@
 <template>
-
     <div id="pk-profiler" class="pf-profiler">
-
         <div class="pf-navbar">
-
             <ul v-if="data" class="pf-navbar-nav">
-                <li v-for="section in sections | orderBy 'priority'" :is="section.name" :data="data[section.name]" @click="open(section.name)"></li>
+                <li v-for="section in sections" :key="section.name" :is="section.name" :data="data[section.name]" @click.native="open(section.name)" />
             </ul>
 
             <a class="pf-close" @click.prevent="close"></a>
-
         </div>
 
-        <div class="pf-profiler-panel" v-el:panel :style="{display: panel ? 'block' : 'none', height: height}"></div>
-
+        <div class="pf-profiler-panel" ref="panel" :style="{ display: panel ? 'block' : 'none', height: height }"></div>
     </div>
-
 </template>
 
 <script>
+    const _ = require('lodash');
+    const config = window.$debugbar;
 
-    var _ = require('lodash');
-    var config = window.$debugbar;
-
-    module.exports = {
-
-        data: function () {
+    export default {
+        data() {
             return {
                 request: null,
                 data: null,
@@ -34,41 +26,37 @@
             }
         },
 
-        created: function () {
-
-            _.forIn(this.$options.components, function (component, name) {
-
+        created() {
+            let sections = {};
+            _.forIn(this.$options.components, (component, name) => {
                 if (component.options && component.options.section) {
-                    Vue.set(this.sections, name, _.merge({name: name}, component.options.section));
+                    sections[name] = _.merge({ name: name }, component.options.section);
                 }
-
-            }, this);
+            });
+            this.sections = _.orderBy(sections, 'priority');
 
             this.load(config.current).then(function (res) {
-                this.$set('request', res.data.__meta);
+                this.request = res.data.__meta;
             });
         },
 
         computed: {
-
-            height: function () {
+            height() {
                 return Math.ceil(window.innerHeight / 2) + 'px';
             }
-
         },
 
         methods: {
-
-            load: function (id) {
-                return this.$http.get('_debugbar/{id}', {id: id}).then(function (res) {
-                    this.$set('data', res.data);
+            load(id) {
+                return this.$http.get('_debugbar/{id}', { params: { id } }).then(function (res) {
+                    this.data = res.data;
                     return res;
                 });
             },
 
-            open: function (name) {
-
-                var section = this.sections[name], panel, vm = _.find(this.$children, '$options.name', name);
+            open(name) {
+                const section = _.find(this.sections, ['name', name]);
+                const vm = _.find(this.$children, ['$options.name', name]);
 
                 if (!section.panel) {
                     return;
@@ -78,28 +66,23 @@
                     this.close();
                 }
 
-                panel = new Vue({
+                this.panel = new Vue({
                     parent: vm,
                     template: section.panel,
                     data: this.data[section.name],
-                    filters: vm.$options.filters.__proto__
+                    filters: vm.$options.filters
                 });
-                panel.$mount().$appendTo(this.$els.panel);
-
-                this.$set('panel', panel);
+                this.panel.$mount();
+                this.$refs.panel.appendChild(this.panel.$el);
             },
 
-            close: function () {
-
+            close() {
                 if (this.panel) {
+                    this.$refs.panel.removeChild(this.panel.$el);
                     this.panel.$destroy(true);
                 }
-
-                this.$set('panel', null);
+                this.panel = null;
             }
-
         }
-
     };
-
 </script>

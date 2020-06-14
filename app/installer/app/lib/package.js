@@ -1,16 +1,14 @@
-var Install = Vue.extend(require('./install.vue'));
-var Uninstall = Vue.extend(require('./uninstall.vue'));
-var Update = Vue.extend(require('./update.vue'));
+var Install = Vue.extend(require('./install.vue').default);
+var Uninstall = Vue.extend(require('./uninstall.vue').default);
+var Update = Vue.extend(require('./update.vue').default);
 
-module.exports = {
-
+export default {
     methods: {
+        queryUpdates(packages, success) {
+            const options = { emulateJSON: true };
+            let pkgs = {};
 
-        queryUpdates: function (packages, success) {
-
-            var pkgs = {}, options = {emulateJSON: true};
-
-            _.each(packages, function (pkg) {
+            _.each(packages, (pkg) => {
                 pkgs[pkg.name] = pkg.version;
             });
 
@@ -19,7 +17,7 @@ module.exports = {
             }, options).then(success, this.error);
         },
 
-        enable: function (pkg) {
+        enable(pkg) {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}).then(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
                     Vue.set(pkg, 'enabled', true);
@@ -27,7 +25,7 @@ module.exports = {
                 }, this.error);
         },
 
-        disable: function (pkg) {
+        disable(pkg) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name})
                 .then(function () {
                     this.$notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
@@ -36,28 +34,23 @@ module.exports = {
                 }, this.error);
         },
 
-        install: function (pkg, packages, onClose, packagist) {
-            var install = new Install({parent: this});
-
+        install(pkg, packages, onClose, packagist) {
+            const install = new Install({parent: this});
             return install.install(pkg, packages, onClose, packagist);
         },
 
-        update: function (pkg, updates, onClose, packagist) {
-            var update = new Update({parent: this});
-
+        update(pkg, updates, onClose, packagist) {
+            const update = new Update({parent: this});
             return update.update(pkg, updates, onClose, packagist);
         },
 
-        uninstall: function (pkg, packages) {
-            var uninstall = new Uninstall({parent: this});
-
+        uninstall(pkg, packages) {
+            const uninstall = new Uninstall({parent: this});
             return uninstall.uninstall(pkg, packages);
         },
 
-        error: function (message) {
+        error(message) {
             this.$notify(message.data, 'danger');
         }
-
     }
-
 };

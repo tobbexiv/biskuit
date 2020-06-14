@@ -22,6 +22,23 @@ var pkgs = [
     {path: 'app/system/modules/theme/', data: '../../../../composer.json'}
 ];
 
+var assetConfig = {
+    npm_source: 'node_modules',
+    mappings: [
+        {
+            target: 'app',
+            configs: [
+                {module: 'codemirror', files: {src: ['**']}},
+                {module: 'jquery', files: {src: ['dist/**', 'LICENSE.txt', 'package.json']}},
+                {module: 'lodash', files: {src: ['lodash*.js', 'LICENSE', 'package.json']}},
+                {module: 'marked', files: {src: ['marked*.js', 'LICENSE.md', 'package.json']}},
+                {module: 'uikit', files: {src: ['**']}},
+                {module: 'vue', files: {src: ['dist/**', 'LICENSE', 'package.json']}}
+            ]
+        }
+    ]
+};
+
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Biskuit | MIT License */\n";
 
@@ -39,12 +56,25 @@ var errhandler = function (error) {
     return console.error(error.toString());
 };
 
-gulp.task('default', ['compile']);
+function assets () {
+    return merge.apply(null, assetConfig.mappings.map(function (mapping) {
+        let assetsFolder = mapping.target + '/assets';
+        return mapping.configs.map(function (config) {
+            let sourceFolder = assetConfig.npm_source + '/' + config.module;
+            let src = [];
+            for (let path of config.files.src)
+                src.push(sourceFolder + '/' + path);
+            let dest = assetsFolder + '/' + config.module + (config.files.hasOwnProperty('dest') ? '/' + config.files.dest : '');
+            return gulp.src(src)
+                .pipe(gulp.dest(dest));
+        });
+    }));
+};
 
 /**
  * Compile all less files
  */
-gulp.task('compile', function () {
+function compile () {
 
     pkgs = pkgs.filter(function (pkg) {
         return fs.existsSync(pkg.path);
@@ -61,34 +91,37 @@ gulp.task('compile', function () {
             }))
             .pipe(gulp.dest(pkg.path));
     }));
-
-});
+}
 
 /**
  * Watch for changes in files
  */
-gulp.task('watch', function (cb) {
-    gulp.watch('**/*.less', ['compile']);
-});
+function watch (cb) {
+    gulp.watch('**/*.less', gulp.parallel('compile'));
+    cb();
+}
 
 /**
  * Lint all script files
  */
-gulp.task('lint', function () {
+function lint () {
     return gulp.src([
         'app/modules/**/*.js',
         'app/system/**/*.js',
         'extensions/**/*.js',
         'themes/**/*.js',
         '!**/bundle/*',
-        '!**/vendor/**/*'
+        '!**/vendor/**/*',
+        '!**/assets/**/*',
+        '!node_modules/**',
+        '!.git/**'
     ])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failOnError());
-});
+}
 
-gulp.task('cldr', function () {
+function cldr (cb) {
 
     // territoryContainment
     var data = {}, json = JSON.parse(fs.readFileSync(cldr.cldr + 'territoryContainment.json', 'utf8')).supplemental.territoryContainment;
@@ -129,4 +162,12 @@ gulp.task('cldr', function () {
             });
 
         });
-});
+    cb();
+}
+
+exports.default = gulp.series(assets, compile);
+exports.assets = assets;
+exports.compile = compile;
+exports.lint = lint;
+exports.cldr = cldr;
+exports.watch = watch;

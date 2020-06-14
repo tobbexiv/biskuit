@@ -1,9 +1,10 @@
-module.exports = {
+import PermissionsLibrary from '../../lib/permissions';
 
+const Roles = {
     el: '#roles',
 
     mixins: [
-        require('../../lib/permissions')
+        PermissionsLibrary
     ],
 
     data: {
@@ -11,39 +12,36 @@ module.exports = {
         config: window.$config
     },
 
-    ready: function () {
-
+    mounted() {
         $(this.$el).on('change.uk.sortable', this.reorder);
-
     },
 
     computed: {
+        current() {
+            return _.find(this.roles, ['id', this.config.role]) || this.roles[0];
+        },
 
-        current: function () {
-            return _.find(this.roles, 'id', this.config.role) || this.roles[0];
+        orderedRoles() {
+            return _.orderBy(this.roles, 'priority');
         }
-
     },
 
     methods: {
-
-        edit: function (role) {
-            this.$set('role', $.extend({}, role || {}));
+        edit(role) {
+            this.role = $.extend({}, role || {});
             this.$refs.modal.open();
         },
 
-        save: function () {
+        save() {
             if (!this.role) {
                 return;
             }
 
             this.Roles.save({ id: this.role.id }, { role: this.role }).then(function (res) {
-
-                var data = res.data;
+                const { data } = res;
 
                 if (this.role.id) {
-
-                    var role = _.findIndex(this.roles, 'id', this.role.id);
+                    const role = _.findIndex(this.roles, ['id', this.role.id]);
                     this.roles.splice(role, 1, data.role);
 
                     this.$notify('Role saved');
@@ -59,32 +57,29 @@ module.exports = {
             this.$refs.modal.close();
         },
 
-        remove: function (role) {
-
-            this.Roles.remove({ id: role.id }, function () {
+        remove(role) {
+            this.Roles.remove({ id: role.id }).then(function () {
                 this.roles.splice(_.findIndex(this.roles, { id: role.id }), 1);
             });
         },
 
-        reorder: function (e, sortable) {
-
+        reorder(e, sortable) {
+            const vm = this;
             if (!sortable) {
                 return;
             }
 
-            sortable.element.children().each(function(i) {
-                this.__v_frag.raw.priority = i;
+            sortable.element.children().each((index, element) => {
+                vm.roles[_.findIndex(vm.roles, { id: parseInt(element.id) })].priority = index;
             });
 
-            this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function () {
+            this.Roles.save({ id: 'bulk' }, { roles: this.roles }).then(function () {
                 this.$notify('Roles reordered.');
             }, function (data) {
                 this.$notify(data, 'danger');
             });
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(Roles);
