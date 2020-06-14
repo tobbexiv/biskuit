@@ -1,5 +1,4 @@
-module.exports = {
-
+const UserRegistration = {
     el: '#user-registration',
 
     data: {
@@ -8,9 +7,7 @@ module.exports = {
     },
 
     methods: {
-
-        submit: function () {
-
+        save() {
             this.error = null;
 
             this.$http.post('user/registration/register', {user: this.user}).then(function (res) {
@@ -20,9 +17,7 @@ module.exports = {
                 }
             );
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(UserRegistration);

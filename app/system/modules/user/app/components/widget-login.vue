@@ -1,58 +1,68 @@
 <template>
-
     <div class="uk-grid pk-grid-large pk-width-sidebar-large" data-uk-grid-margin>
         <div class="pk-width-content uk-form-horizontal">
-
-            <div class="uk-form-row">
-                <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input id="form-title" class="uk-form-width-large" type="text" name="title" v-model="widget.title" v-validate:required>
-                    <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
-                </div>
-            </div>
+            <v-validated-input
+                id="form-title"
+                name="title"
+                rules="required"
+                label="Title"
+                placeholder="Enter Title"
+                :error-messages="{ required: 'Title cannot be blank.' }"
+                :options="{ elementClass: 'uk-form-width-large' }"
+                v-model="widget.title">
+            </v-validated-input>
 
             <div class="uk-form-row">
                 <label class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input-link class="uk-form-width-large" :link.sync="widget.data.redirect_login"></input-link>
+                    <input-link id="form-redirect-login" input-class="uk-form-width-large" v-model="widget.data.redirect_login"></input-link>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <label class="uk-form-label">{{ 'Logout Redirect' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input-link class="uk-form-width-large" :link.sync="widget.data.redirect_logout"></input-link>
+                    <input-link id="form-redirect-logout" input-class="uk-form-width-large" v-model="widget.data.redirect_logout"></input-link>
                 </div>
             </div>
-
         </div>
         <div class="pk-width-sidebar">
-
-            <partial name="settings"></partial>
-
+            <template-settings />
         </div>
     </div>
 
 </template>
 
 <script>
-
-    module.exports = {
-
+    const WidgetSystemLoginSettings = {
         section: {
             label: 'Settings'
         },
 
-        replace: false,
+        props: ['config', 'value'],
 
-        props: ['widget', 'config', 'form'],
+        data() {
+            return {
+                widget: this.value
+            };
+        },
 
-        created: function () {
-            this.$options.partials = this.$parent.$options.partials;
+        watch: {
+            value(val) {
+                this.widget = val;
+            },
+            widget(val) {
+                this.$emit('input', val);
+            }
+        },
+
+        beforeCreate() {
+            this.$options.components = _.merge(this.$options.components, this.$root.getComponents());
         }
-
     };
 
-    window.Widgets.components['system-login:settings'] = module.exports;
+    export default WidgetSystemLoginSettings;
+
+    window.Widgets.components['system-login.settings'] = WidgetSystemLoginSettings;
 
 </script>

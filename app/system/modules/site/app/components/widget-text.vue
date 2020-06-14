@@ -1,48 +1,58 @@
 <template>
-
     <div class="uk-grid pk-grid-large pk-width-sidebar-large" data-uk-grid-margin>
         <div class="pk-width-content uk-form-stacked">
+            <v-validated-input
+                id="form-title"
+                name="title"
+                rules="required"
+                placeholder="Enter Title"
+                :error-messages="{ required: 'Title cannot be blank.' }"
+                :options="{ elementClass: 'uk-width-1-1 uk-form-large' }"
+                v-model="widget.title">
+            </v-validated-input>
 
             <div class="uk-form-row">
-
-                <input class="uk-width-1-1 uk-form-large" type="text" name="title" :placeholder="'Enter Title' | trans" v-model="widget.title" v-validate:required>
-                <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
-
-            </div>
-
-            <div class="uk-form-row">
-                <v-editor :value.sync="widget.data.content" :options="{markdown : widget.data.markdown}"></v-editor>
+                <v-editor :options="{ markdown : widget.data.markdown }" v-model="widget.data.content"></v-editor>
                 <p>
                     <label><input type="checkbox" v-model="widget.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
                 </p>
             </div>
-
         </div>
         <div class="pk-width-sidebar">
-
-            <partial name="settings"></partial>
-
+            <template-settings />
         </div>
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    const WidgetSystemTextSettings = {
         section: {
             label: 'Settings'
         },
 
-        props: ['widget', 'config', 'form'],
+        props: ['config', 'value'],
 
-        created: function () {
-            this.$options.partials = this.$parent.$options.partials;
+        data() {
+            return {
+                widget: this.value
+            };
+        },
+
+        watch: {
+            value(val) {
+                this.widget = val;
+            },
+            widget(val) {
+                this.$emit('input', val);
+            }
+        },
+
+        beforeCreate() {
+            this.$options.components = _.merge(this.$options.components, this.$root.getComponents());
         }
-
     };
 
-    window.Widgets.components['system-text:settings'] = module.exports;
+    export default WidgetSystemTextSettings;
 
+    window.Widgets.components['system-text.settings'] = WidgetSystemTextSettings;
 </script>

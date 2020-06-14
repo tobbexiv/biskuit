@@ -1,13 +1,42 @@
-var _ = require('lodash');
-var glob = require('glob');
-var path = require('path');
-var exports = [];
+const { merge }           = require('lodash');
+const { sync }            = require('glob');
+const path                = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
 
-glob.sync('{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(function (file) {
-    var dir = path.join(__dirname, path.dirname(file));
-    exports = exports.concat(require('./' + file).map(function (config) {
-        return _.merge({context: dir, output: {path: dir}}, config);
-    }));
-});
+const build = (mode, dir, config) => {
+    return merge({
+        mode: mode,
+        context: dir,
+        output: {
+            path: dir
+        },
+        externals: {
+            'vue': 'Vue',
+            'uikit': 'Uikit'
+        },
+        module: {
+            rules: [
+                { test: /\.vue$/, use: 'vue-loader' },
+                { test: /\.html$/, use: 'html-loader' },
+                { test: /\.js$/,  exclude: [/node_modules/, /assets/, /vendor/],  use: ['babel-loader']}
+            ]
+        },
+        plugins: [
+            new VueLoaderPlugin()
+        ]
+    }, config);
+};
 
-module.exports = exports;
+const buildExports = (env, argv) => {
+    let mode = argv.mode || 'development';
+    console.log('Mode:', mode, '\n\nConfiguration files found:');
+    let exports = [];
+    sync('{app/modules/**,app/installer/**,app/system/**,packages/**}/webpack.config.js', {ignore: 'packages/**/node_modules/**'}).forEach(file => {
+        let dir = path.join(__dirname, path.dirname(file));
+        console.log(file);
+        exports = exports.concat(require('./' + file).map(config => build(mode, dir, config)));
+    });
+    return exports;
+}
+
+module.exports = buildExports;

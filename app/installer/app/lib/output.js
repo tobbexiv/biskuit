@@ -1,6 +1,5 @@
-module.exports = {
-
-    data: function () {
+export default {
+    data() {
         return {
             pkg: {},
             updatePkg: {},
@@ -13,27 +12,19 @@ module.exports = {
         }
     },
 
-    created: function () {
-        this.$mount().$appendTo('body');
+    created() {
+        this.$mount();
     },
 
     methods: {
-
-        init: function () {
-            var vm = this;
-
+        init() {
             this.open();
-            return {
-                onprogress: function () {
-                    vm.setOutput(this.responseText);
-                }
-            }
-
+            return this.setOutput(this.responseText);
         },
 
-        setOutput: function (output) {
-            var lines = output.split("\n");
-            var match = lines[lines.length - 1].match(/^status=(success|error)$/);
+        setOutput(output) {
+            let lines = output.split("\n");
+            const match = lines[lines.length - 1].match(/^status=(success|error)$/);
 
             if (match) {
                 this.status = match[1];
@@ -44,27 +35,26 @@ module.exports = {
             }
         },
 
-        open: function () {
+        open() {
             this.$refs.output.open();
             this.$refs.output.modal.on('hide.uk.modal', this.onClose);
         },
 
-        close: function () {
+        close() {
             this.$refs.output.close();
         },
 
-        onClose: function () {
+        onClose() {
             if (this.cb) {
                 this.cb(this);
             }
-
             this.$destroy();
         }
 
     },
 
     watch: {
-        status: function () {
+        status() {
             if (this.status !== 'loading') {
                 this.$refs.output.modal.options.bgclose = true;
                 this.$refs.output.modal.options.keyboard = true;

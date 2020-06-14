@@ -1,64 +1,51 @@
-window.User = {
+import UserSettings from '../../components/user-settings.vue';
 
+window.User = {
     el: '#user-edit',
 
-    data: function () {
-        return _.extend({sections: [], form: {}}, window.$data);
+    data() {
+        return _.extend({
+            sections: []
+        }, window.$data);
     },
 
-    created: function () {
-
-        var sections = [];
-
-        _.forIn(this.$options.components, function (component, name) {
-
-            var options = component.options || {};
-
-            if (options.section) {
-                sections.push(_.extend({name: name, priority: 0}, options.section));
+    created() {
+        let sections = [];
+        _.forIn(this.$options.components, (component, name) => {
+            if (component.section) {
+                sections.push(_.extend({
+                    name: name,
+                    priority: 0
+                }, component.section));
             }
-
         });
-
-        this.$set('sections', _.sortBy(sections, ['priority']));
-
+        this.sections = _.sortBy(sections, ['priority']);
     },
 
-    ready: function () {
-        this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
+    mounted() {
+        this.tab = UIkit.tab(this.$refs.tab, { connect: this.$refs.content });
     },
 
     methods: {
-
-        save: function () {
-
-            var data = {user: this.user};
-
-            this.$broadcast('save', data);
-
-            this.$resource('api/user{/id}').save({id: this.user.id}, data).then(function (res) {
-                        if (!this.user.id) {
-                            window.history.replaceState({}, '', this.$url.route('admin/user/edit', {id: res.data.user.id}))
-                        }
-
-                        this.$set('user', res.data.user);
-
-                        this.$notify('User saved.');
-                    }, function (res) {
-                        this.$notify(res.data, 'danger');
+        save() {
+            const data = { user: this.user };
+            this.$trigger('user:save', data);
+            this.$resource('api/user{/id}').save({ id: this.user.id }, data).then(function (res) {
+                    if (!this.user.id) {
+                        window.history.replaceState({}, '', this.$url.route('admin/user/edit', { id: res.data.user.id }))
                     }
-                );
-
+                    this.user = res.data.user;
+                    this.$notify('User saved.');
+                }, function (res) {
+                    this.$notify(res.data, 'danger');
+                }
+            );
         }
-
     },
 
     components: {
-
-        settings: require('../../components/user-settings.vue')
-
+        settings: UserSettings
     }
-
 };
 
 Vue.ready(window.User);

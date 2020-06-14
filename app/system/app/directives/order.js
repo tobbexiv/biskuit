@@ -1,46 +1,46 @@
-module.exports = {
+const storage = {};
 
-    bind: function () {
+export default {
+    bind(el, binding, vnode) {
+        const field = binding.arg;
+        storage[field] = {
+            indicator: $('<i class="uk-icon-justify uk-margin-small-left"></i>'),
+            direction: '',
+            active: false
+        };
 
-        var self = this;
-
-        this.dir       = '';
-        this.active    = false;
-        this.indicator = $('<i class="uk-icon-justify uk-margin-small-left"></i>');
-
-        $(this.el).addClass('pk-table-order uk-visible-hover-inline').on('click.order', function (){
-
-            self.dir = (self.dir == 'asc') ? 'desc':'asc';
-            self.vm.$set(self.expression, [self.arg, self.dir].join(' '));
-
-        }).append(this.indicator);
+        $(el).addClass('pk-table-order uk-visible-hover-inline').on('click.order', () => {
+            storage[field].direction = (storage[field].direction == 'asc') ? 'desc':'asc';
+            _.set(vnode.context, binding.expression, [field, storage[field].direction].join(' '));
+        }).append(storage[field].indicator);
     },
 
-    update: function (data) {
+    update(el, binding, vnode) {
+        const field = binding.arg;
+        const parts = binding.value.split(' ');
+        const selectedField = parts[0];
+        const selectedDirection = parts[1] || 'asc';
 
-        var parts = data.split(' '),
-            field = parts[0],
-            dir   = parts[1] || 'asc';
+        storage[field].indicator.removeClass('pk-icon-arrow-up pk-icon-arrow-down');
+        $(el).removeClass('uk-active');
 
-        this.indicator.removeClass('pk-icon-arrow-up pk-icon-arrow-down');
-        $(this.el).removeClass('uk-active');
+        if (selectedField == field) {
+            storage[field].direction = selectedDirection;
+            storage[field].active = true;
 
-        if (field == this.arg) {
-            this.active = true;
-            this.dir    = dir;
-
-            $(this.el).addClass('uk-active');
-            this.indicator.removeClass('uk-invisible').addClass(dir == 'asc' ? 'pk-icon-arrow-down':'pk-icon-arrow-up');
+            $(el).addClass('uk-active');
+            storage[field].indicator.removeClass('uk-invisible').addClass(selectedDirection == 'asc' ? 'pk-icon-arrow-down':'pk-icon-arrow-up');
         } else {
-            this.indicator.addClass('pk-icon-arrow-down uk-invisible');
-            this.active = false;
-            this.dir    = '';
+            storage[field].indicator.addClass('pk-icon-arrow-down uk-invisible');
+            storage[field].direction = '';
+            storage[field].active = false;
         }
     },
 
-    unbind: function () {
-        $(this.el).removeClass('pk-table-order').off('.order');
-        this.indicator.remove();
+    unbind(el, binding, vnode) {
+        const field = binding.arg;
+        $(el).removeClass('pk-table-order').off('.order');
+        storage[field].indicator.remove();
+        delete storage[field];
     }
-
 };

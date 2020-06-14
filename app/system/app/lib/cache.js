@@ -1,12 +1,10 @@
-var storage = require('JSONStorage');
+import storage from 'JSONStorage';
 
-module.exports = function (bucket, adapter) {
-
-    var db = storage.select(bucket, adapter || 'local');
+export default (bucket, adapter) => {
+    const db = storage.select(bucket, adapter || 'local');
 
     return {
-
-        set: function (key, value, minutes) {
+        set(key, value, minutes) {
             if (minutes){
                 return db.setex(key, minutes * 60, value);
             } else  {
@@ -14,18 +12,16 @@ module.exports = function (bucket, adapter) {
             }
         },
 
-        get: function () {
+        get() {
             return db.get.apply(db, arguments);
         },
 
-        remove: function (key) {
+        remove(key) {
             return db.del.apply(db, arguments);
         },
 
-        flush: function () {
+        flush() {
             return db.flushdb.apply(db, arguments);
         }
-
     };
-
 };

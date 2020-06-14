@@ -1,7 +1,5 @@
 <template>
-
     <div class="uk-form-horizontal">
-
         <div class="uk-form-row">
             <label for="form-meta-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
@@ -15,24 +13,42 @@
                 <textarea id="form-meta-description" class="uk-form-width-large" rows="5" type="text" v-model="post.data.meta['og:description']"></textarea>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    const PostMeta = {
         section: {
             label: 'Meta',
             priority: 100
         },
 
-        props: ['post']
+        props: ['value'],
 
+        data() {
+            return {
+                post: _.merge({
+                    data: {
+                        meta: {}
+                    }
+                }, this.value)
+            };
+        },
+
+        watch: {
+            value(newPost) {
+                this.post = newPost;
+            },
+            post: {
+                handler(newPost) {
+                    this.$emit('input', newPost);
+                },
+                deep: true
+            }
+        }
     };
 
-    window.Post.components['post-meta'] = module.exports;
+    export default PostMeta;
 
+    window.Post.components['post-meta'] = PostMeta;
 </script>

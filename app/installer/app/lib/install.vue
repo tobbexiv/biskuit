@@ -1,10 +1,8 @@
 <template>
-
     <div>
-        <v-modal v-ref:output :options="options">
-
+        <v-modal ref="output" :options="options">
             <div class="uk-modal-header uk-flex uk-flex-middle">
-                <h2>{{ 'Installing %title% %version%' | trans {title:pkg.title,version:pkg.version} }}</h2>
+                <h2>{{ 'Installing %title% %version%' | trans({title:pkg.title,version:pkg.version}) }}</h2>
             </div>
 
             <pre class="pk-pre uk-text-break" v-html="output"></pre>
@@ -18,29 +16,25 @@
                 <a class="uk-button uk-button-link" @click.prevent="close">{{ 'Close' | trans }}</a>
                 <a class="uk-button uk-button-primary" @click.prevent="enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
             </div>
-
         </v-modal>
     </div>
-
 </template>
 
 <script>
+    import Output from './output';
 
-    module.exports = {
-
-        mixins: [require('./output')],
+    export default {
+        mixins: [ Output ],
 
         methods: {
-
-            install: function (pkg, packages, onClose, packagist) {
-                this.$set('pkg', pkg);
+            install(pkg, packages, onClose, packagist) {
+                const vm = this;
+                this.pkg = pkg;
                 this.cb = onClose;
 
-
-                return this.$http.post('admin/system/package/install', {package: pkg, packagist: Boolean(packagist)},null , {xhr: this.init()}).then(function () {
+                return this.$http.post('admin/system/package/install', { package: pkg, packagist: Boolean(packagist), progress() { vm.init() } }).then(function () {
                             if (this.status === 'success' && packages) {
-                                var index = _.findIndex(packages, ['name', pkg.name]);
-
+                                const index = _.findIndex(packages, ['name', pkg.name]);
                                 if (-1 !== index) {
                                     packages.splice(index, 1, pkg);
                                 } else {
@@ -58,7 +52,5 @@
                 this.close();
             }
         }
-
     };
-
 </script>

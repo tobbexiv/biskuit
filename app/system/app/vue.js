@@ -1,67 +1,90 @@
-function install (Vue) {
+import Vue from 'vue';
+import VueEventManager from 'vue-event-manager';
 
-    var config = window.$biskuit;
+import VueIntl from 'vue-intl';
+import VueResource from 'vue-resource';
+import Cache from './lib/cache';
+import Asset from './lib/asset';
+import State from './lib/state';
+import ResourceCache from './lib/resourceCache';
+import Csrf from './lib/csrf';
+import Notify from './lib/notify';
+import Trans from './lib/trans';
+import Filters from './lib/filters';
 
-    Vue.config.debug = false;
-    Vue.cache = Vue.prototype.$cache = require('./lib/cache')(config.url);
-    Vue.session = Vue.prototype.$session = require('./lib/cache')('session',
-        {
+import VLoader from './components/loader.vue';
+import VModal from './components/modal.vue';
+import VPagination from './components/pagination';
+import InputFilter from './components/input-filter.vue';
+import InputDate from './components/input-date.vue';
+import InputImage from './components/input-image.vue';
+import InputImageMeta from './components/input-image-meta.vue';
+import InputVideo from './components/input-video.vue';
+import Validation from './components/validation.vue';
 
-            load: function (name) {
+import CheckAll from './directives/check-all';
+import Confirm from './directives/confirm';
+import Gravatar from './directives/gravatar';
+import Order from './directives/order';
+import LazyBackground from './directives/lazy-background';
+import StackMargin from './directives/stack-margin';
 
-                if (Vue.cache.get('_session') !== Vue.cache.get('_csrf')) {
-                    Vue.cache.remove(name);
-                }
-                Vue.cache.set('_session', Vue.cache.get('_csrf'));
+const install = (Vue) => {
+    const config = window.$biskuit;
 
-                return Vue.cache.get(name, {});
-            },
-
-            store: function (name, data) {
-                return Vue.cache.set(name, data);
+    Vue.cache = Vue.prototype.$cache = Cache(config.url);
+    Vue.session = Vue.prototype.$session = Cache('session', {
+        load(name) {
+            if (Vue.cache.get('_session') !== Vue.cache.get('_csrf')) {
+                Vue.cache.remove(name);
             }
-
-        });
+            Vue.cache.set('_session', Vue.cache.get('_csrf'));
+            return Vue.cache.get(name, {});
+        },
+        store(name, data) {
+            return Vue.cache.set(name, data);
+        }
+    });
 
     /**
      * Libraries
      */
 
-    require('vue-form');
-    require('vue-intl');
-    require('vue-resource');
-    require('./lib/asset')(Vue);
-    require('./lib/state')(Vue);
-    require('./lib/resourceCache')(Vue);
-    require('./lib/csrf')(Vue);
-    require('./lib/notify')(Vue);
-    require('./lib/trans')(Vue);
-    require('./lib/filters')(Vue);
+    Vue.use(VueIntl);
+    Vue.use(VueResource);
+    Vue.use(Asset);
+    Vue.use(State);
+    Vue.use(ResourceCache);
+    Vue.use(Csrf);
+    Vue.use(Notify);
+    Vue.use(Trans);
+    Vue.use(Filters);
 
     /**
      * Components
      */
 
-    Vue.component('v-loader', require('./components/loader.vue'));
-    Vue.component('v-modal', require('./components/modal.vue'));
-    Vue.component('v-pagination', require('./components/pagination'));
-    Vue.component('input-filter', require('./components/input-filter.vue'));
+    Vue.component('v-loader', VLoader);
+    Vue.component('v-modal', VModal);
+    Vue.component('v-pagination', VPagination);
+    Vue.component('input-filter', InputFilter);
 
-    require('./components/input-date.vue');
-    require('./components/input-image.vue');
-    require('./components/input-image-meta.vue');
-    require('./components/input-video.vue');
+    Vue.use(InputDate);
+    Vue.use(InputImage);
+    Vue.use(InputImageMeta);
+    Vue.use(InputVideo);
+    Vue.use(Validation);
 
     /**
      * Directives
      */
 
-    Vue.directive('check-all', require('./directives/check-all'));
-    Vue.directive('confirm', require('./directives/confirm'));
-    Vue.directive('gravatar', require('./directives/gravatar'));
-    Vue.directive('order', require('./directives/order'));
-    Vue.directive('lazy-background', require('./directives/lazy-background'));
-    Vue.directive('stack-margin', require('./directives/stack-margin'));
+    Vue.directive('check-all', CheckAll);
+    Vue.directive('confirm', Confirm);
+    Vue.directive('gravatar', Gravatar);
+    Vue.directive('order', Order);
+    Vue.directive('lazy-background', LazyBackground);
+    Vue.directive('stack-margin', StackMargin);
 
     /**
      * Resource
@@ -71,12 +94,11 @@ function install (Vue) {
     Vue.http.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
 
-    Vue.url.route = function (url, params) {
-
-        var options = url;
+    Vue.url.route = function(url, params) {
+        let options = url;
 
         if (!_.isPlainObject(options)) {
-            options = {url: url, params: params};
+            options = { url, params };
         }
 
         Vue.util.extend(options, {
@@ -88,19 +110,15 @@ function install (Vue) {
 
     Vue.url.current = Vue.url.parse(window.location.href);
 
-    Vue.ready = function (fn) {
-
-        if (Vue.util.isObject(fn)) {
-
-            var options = fn;
-
+    Vue.ready = function(fn) {
+        if (_.isObjectLike(fn)) {
+            let options = fn;
             fn = function () {
                 new Vue(options);
             };
-
         }
 
-        var handle = function () {
+        let handle = function() {
             document.removeEventListener('DOMContentLoaded', handle);
             window.removeEventListener('load', handle);
             fn();
@@ -112,7 +130,6 @@ function install (Vue) {
             document.addEventListener('DOMContentLoaded', handle);
             window.addEventListener('load', handle);
         }
-
     };
 }
 

@@ -1,8 +1,8 @@
 const config = window.$captcha;
-let requestResolve, requestReject;
+let requestResolve;
+let requestReject;
 
 if (config.grecaptcha) {
-
     Vue.asset({
         js: ['https://www.google.com/recaptcha/api.js?onload=biskuit_onRecaptchaLoad&render=explicit']
     });
@@ -26,40 +26,31 @@ if (config.grecaptcha) {
         resolveLoad();
     };
 
-    Vue.http.interceptors.push(() => {
+    Vue.http.interceptors.push((request, response) =>  {
+        if (!config.routes || request.method.toLowerCase() !== 'post' || !config.routes.some(route => {
+            const exp = new RegExp(route.replace(/{.+?}/, '.+?'));
+            return exp.test(request.url);
+        })) {
+            return response;
+        } else if(!request.body.gRecaptchaResponse){
+            return new Vue.Promise(
+                (resolve, reject) => {
+                    requestResolve = (gRecaptchaResponse) => {
+                        grecaptcha.reset();
+                        request.body.gRecaptchaResponse = gRecaptchaResponse;
+                        resolve(Vue.http(request));
+                    };
+                    requestReject = (error) => {
+                        return reject({
+                            data: error
+                        });
+                    };
 
-        return {
-
-            request: request => {
-                if (!config.routes || request.method.toLowerCase() !== 'post' || !config.routes.some(route => {
-                    const exp = new RegExp(route.replace(/{.+?}/, '.+?'));
-                    return exp.test(request.url);
-                })) {
-                    return request;
+                    loadPromise.then(() => grecaptcha.execute());
                 }
-
-                return new Vue.Promise(
-                    (resolve, reject) => {
-                        requestResolve = (gRecaptchaResponse) => {
-                            grecaptcha.reset();
-                            request.data.gRecaptchaResponse = gRecaptchaResponse;
-                            resolve(request);
-                        };
-                        requestReject = (error) => {
-                            return reject({
-                                data: error
-                            });
-                        };
-
-                        loadPromise.then(() => grecaptcha.execute());
-                    }
-                )
-            }
-
-        };
-
+            )
+        }
     });
-
 }
 
 function onSubmit(gRecaptchaResponse) {

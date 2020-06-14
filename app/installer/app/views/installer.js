@@ -4,19 +4,48 @@ var Installer = {
 
     data: function () {
         return _.merge({
+            key: 0,
             step: 'start',
             status: '',
             message: '',
-            config: {},
-            option: {},
-            user: {}
+            config: {
+                database: {
+                    connections: {
+                        mysql: {
+                            user: '',
+                            host: 'localhost',
+                            password: '',
+                            dbname: 'biskuit',
+                            prefix: 'bk_'
+                        },
+                        sqlite: {
+                            prefix: 'bk_'
+                        }
+                    },
+                    default: ''
+                }
+            },
+            option: {
+                'system/site': {
+                    title: ''
+                },
+                system: {
+                    admin: { },
+                    site: { }
+                }
+            },
+            user: {
+                username: 'admin',
+                password: '',
+                email: ''
+            }
         }, window.$installer);
     },
 
-    ready: function () {
+    mounted: function () {
 
-        this.resource = this.$resource('installer/:action', {}, {post: {method: 'POST'}});
-        this.$set('config.database', {default: this.sqlite ? 'sqlite' : 'mysql'})
+        this.resource = this.$resource('installer/{action}', {}, {post: {method: 'POST'}});
+        this.$set(this.config.database, 'default', this.sqlite ? 'sqlite' : 'mysql')
 
     },
 
@@ -25,39 +54,41 @@ var Installer = {
         gotoStep: function (step) {
 
             if (UIkit.support.animation) {
-
-                var vm = this, current = this.$els[this.step], next = this.$els[step];
-
-                this.$compile(next);
+                var vm = this;
+                var current = this.$refs[this.step];
+                var next = this.$refs[step];
 
                 UIkit.Utils.animate(current, 'uk-animation-slide-left uk-animation-reverse').then(function () {
-
                     current.style.display = 'none';
 
                     UIkit.Utils.animate(next, 'uk-animation-slide-right').then(function () {
-                        vm.$set('step', step);
+                        vm.step = step;
                     });
                 });
 
             } else {
-                this.$set('step', step);
+                this.step = step;
             }
 
         },
 
         stepLanguage: function () {
 
-            this.$asset({js: [this.$url.route('system/intl/:locale', {locale: this.locale})]}).then(function () {
-                this.$set('option.system.admin.locale', this.locale);
-                this.$set('option.system.site.locale', this.locale);
+            var vm = this;
+            this.$asset({js: [this.$url.route('system/intl/{locale}', {locale: this.locale})]}).then(function () {
+                this.$set(this.option.system.admin, 'locale', this.locale);
+                this.$set(this.option.system.site, 'locale', this.locale);
                 this.$locale = window.$locale;
-                this.gotoStep('database');
+                this.key = this.key + 1;
+
+                Vue.nextTick(function() {
+                    vm.gotoStep('database');
+                });
             });
 
         },
 
         stepDatabase: function () {
-
             var config = _.cloneDeep(this.config);
 
             _.forEach(config.database.connections, function (connection, name) {
@@ -74,7 +105,7 @@ var Installer = {
             this.resource.post({action: 'check'}, {config: config, locale: this.locale}).then(function (res) {
 
                 var data = res.data;
-                if (!Vue.util.isPlainObject(data)) {
+                if (!_.isPlainObject(data)) {
                     data = {message: 'Whoops, something went wrong'};
                 }
 
@@ -82,8 +113,8 @@ var Installer = {
                     this.gotoStep('site');
                     this.config = config;
                 } else {
-                    this.$set('status', data.status);
-                    this.$set('message', data.message);
+                    this.status = data.status;
+                    this.message = data.message;
                 }
 
             });
@@ -99,7 +130,7 @@ var Installer = {
 
         stepInstall: function () {
 
-            this.$set('status', 'install');
+            this.status = 'install';
 
             this.resource.post({action: 'install'}, {config: this.config, option: this.option, user: this.user, locale: this.locale}).then(function (res) {
 
@@ -107,12 +138,12 @@ var Installer = {
 
                 setTimeout(function () {
 
-                    if (!Vue.util.isPlainObject(data)) {
+                    if (!_.isPlainObject(data)) {
                         data = {message: 'Whoops, something went wrong'};
                     }
 
                     if (data.status == 'success') {
-                        this.$set('status', 'finished');
+                        this.status = 'finished';
 
                         // redirect to login after 3s
                         setTimeout(function () {
@@ -120,8 +151,8 @@ var Installer = {
                         }.bind(this), 3000);
 
                     } else {
-                        this.$set('status', 'failed');
-                        this.$set('message', data.message);
+                        this.status = 'failed';
+                        this.message = data.message;
                     }
 
 

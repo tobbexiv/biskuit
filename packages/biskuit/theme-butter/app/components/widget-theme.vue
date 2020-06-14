@@ -1,7 +1,5 @@
 <template>
-
     <div class="uk-form-horizontal">
-
         <div class="uk-form-row">
             <span class="uk-form-label">{{ 'Title' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
@@ -55,18 +53,31 @@
 </template>
 
 <script>
-
-    module.exports = {
-
+    const WidgetTheme = {
         section: {
             label: 'Theme',
             priority: 90
         },
 
-        props: ['widget', 'config']
+        props: ['config', 'value'],
 
+        data() {
+            return {
+                widget: this.value
+            };
+        },
+
+        watch: {
+            value(val) {
+                this.widget = val;
+            },
+            widget(val) {
+                this.$emit('input', val);
+            }
+        },
     };
 
-    window.Widgets.components['theme'] = module.exports;
+    export default WidgetTheme;
 
+    window.Widgets.components['theme'] = WidgetTheme;
 </script>

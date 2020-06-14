@@ -1,18 +1,17 @@
 <template>
-
     <div class="uk-form-horizontal">
-
-        <div class="uk-form-row">
-            <label for="form-url" class="uk-form-label">{{ 'Url' | trans }}</label>
-            <div class="uk-form-controls">
-                <input-link id="form-url" class="uk-form-width-large" name="link" :link.sync="node.link" required></input-link>
-                <div class="uk-form-help-block uk-text-danger" v-show="form.link.invalid">{{ 'Invalid url.' | trans }}</div>
-            </div>
-        </div>
+        <v-validated-input
+            id="form-url"
+            name="link"
+            rules="required"
+            label="Url"
+            :error-messages="{ required: 'Url cannot be blank.' }"
+            :options="{ elementClass: 'uk-form-width-large' }"
+            v-model="node.link">
+        </v-validated-input>
 
         <div class="uk-form-row">
             <label for="form-type" class="uk-form-label">{{ 'Type' | trans }}</label>
-
             <div class="uk-form-controls">
                 <select id="form-type" class="uk-form-width-large" v-model="behavior">
                     <option value="link">{{ 'Link' | trans }}</option>
@@ -22,28 +21,41 @@
             </div>
         </div>
 
-        <partial name="settings"></partial>
-
+        <template-settings />
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    export default {
         section: {
             label: 'Settings',
             priority: 0,
             active: 'link'
         },
 
-        props: ['node', 'roles', 'form'],
+        props: ['roles', 'value'],
 
-        created: function () {
-            
-            this.$options.partials = this.$parent.$options.partials;
+        data() {
+            return {
+                menuTitleRequired: false,
+                node: this.value
+            };
+        },
 
+        watch: {
+            value(val) {
+                this.node = val;
+            },
+            node(val) {
+                this.$emit('input', val);
+            }
+        },
+
+        beforeCreate() {
+            this.$options.components = _.merge(this.$options.components, this.$root.$options.components);
+        },
+
+        created() {
             if (this.behavior === 'redirect') {
                 this.node.link = this.node.data.redirect;
             }
@@ -54,40 +66,35 @@
         },
 
         computed: {
-
             behavior: {
-
-                get: function () {
+                get() {
                     if (this.node.data.alias) {
                         return 'alias';
                     } else if (this.node.data.redirect) {
                         return 'redirect';
                     }
-
                     return 'link';
                 },
 
-                set: function (type) {
-                    this.$set('node.data', _.extend(this.node.data, {
+                set(type) {
+                    this.node.data = _.extend(this.node.data, {
                         alias: type === 'alias',
                         redirect: type === 'redirect' ? this.node.link : false
-                    }));
+                    });
                 }
-
             }
+        },
 
+        methods: {
+            nodeSave(event, params) {
+                if (this.behavior === 'redirect') {
+                    params.node.data.redirect = params.node.link;
+                }
+            }
         },
 
         events: {
-
-            save: function () {
-                if (this.behavior === 'redirect') {
-                    this.node.data.redirect = this.node.link;
-                }
-            }
-
+            'node:save': 'nodeSave'
         }
-
     }
-
 </script>

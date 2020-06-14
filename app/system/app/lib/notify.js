@@ -1,21 +1,17 @@
-module.exports = function (Vue) {
+export default (Vue) => {
+    Vue.prototype.$notify = function() {
+        const messages = document.getElementsByClassName('pk-system-messages');
+        const UIkit = window.UIkit || {};
+        const message = arguments[0] ? this.$trans(arguments[0]) : this.$trans('Unknown error');
+        const status = arguments[1] || 'info';
 
-    Vue.prototype.$notify = function () {
-
-        var args = arguments,
-            msgs = window.jQuery('.pk-system-messages'),
-            UIkit = window.UIkit || {};
-
-        if (args[0]) {
-            args[0] = this.$trans(args[0]);
+        if (UIkit.notify) { // TODO: UIkit 2 has notify, UIkit 3 has only notification
+            UIkit.notify(message, status);
+        } else if (UIkit.notification) {
+            UIkit.notification(message, status);
+        } else if (messages && messages.length) {
+            messages.innerHTML = '';
+            messages.append(`<div class="uk-alert uk-alert-${status}"><p>${message}</p></div>`);
         }
-
-        if (UIkit.notify) {
-            UIkit.notify.apply(this, args);
-        } else if (msgs) {
-            msgs.empty().append('<div class="uk-alert uk-alert-' + (args[1] || 'info') + '"><p>' + args[0] + '</p></div>');
-        }
-
     };
-
 };

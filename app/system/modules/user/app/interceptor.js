@@ -1,36 +1,22 @@
-var modal = require('./components/modal-login.vue');
-var mutex;
+import loginModal from './components/modal-login.vue';
+let mutex;
 
-Vue.http.interceptors.push(function () {
+Vue.http.interceptors.push((request) => {
+    let options = _.clone(request);
 
-    var options;
-
-    return {
-
-        request: function (request) {
-            options = _.clone(request);
-
-            return request;
-        },
-
-        response: function (response) {
-
-            if (response.request.crossOrigin || response.status !== 401 || options.headers['X-LOGIN']) {
-               return response;
-            }
-
-            if (!mutex) {
-                mutex = new Vue(modal).promise.finally(function () {
-                    mutex = undefined;
-                });
-            }
-
-            return mutex.then(function () {
-                return Vue.http(options);
-            });
-
+    return (response) => {
+        if (options.crossOrigin || response.status !== 401 || options.headers.get('X-LOGIN')) {
+           return response;
         }
 
-    };
+        if (!mutex) {
+            mutex = new Vue(loginModal).promise.finally(() => {
+                mutex = undefined;
+            });
+        }
 
+        return mutex.then(() => {
+            return Vue.http(options);
+        });
+    }
 });

@@ -2,54 +2,47 @@
  * Editor Image plugin.
  */
 
-module.exports = {
+import ImagePreview from './image-preview.vue';
 
+export default {
     plugin: true,
 
-    created: function () {
-
-        var vm = this, editor = this.$parent.editor;
+    created() {
+        const vm = this;
+        const editor = this.$parent.editor;
 
         if (!editor || !editor.htmleditor) {
             return;
         }
 
-        this.images = [];
+        this.$options.editor.previewData.images = {
+            data: [],
+            callback: vm.openModal
+        };
 
         editor
             .off('action.image')
-            .on('action.image', function (e, editor) {
-                vm.openModal(_.find(vm.images, function (img) {
+            .on('action.image', (e, editor) => {
+                vm.openModal(_.find(vm.$options.editor.previewData.images.data, function (img) {
                     return img.inRange(editor.getCursor());
                 }));
             })
-            .on('render', function () {
+            .on('render', () => {
                 var regexp = editor.getMode() != 'gfm' ? /<img(.+?)>/gi : /(?:<img(.+?)>|!(?:\[([^\n\]]*)])(?:\(([^\n\]]*?)\))?)/gi;
-                vm.images = editor.replaceInPreview(regexp, vm.replaceInPreview);
-            })
-            .on('renderLate', function () {
-
-                while (vm.$children.length) {
-                    vm.$children[0].$destroy();
-                }
-
-                Vue.nextTick(function () {
-                    editor.preview.find('image-preview').each(function () {
-                        vm.$compile(this);
-                    });
-                });
+                vm.$options.editor.previewData.images.data = editor.replaceInPreview(regexp, vm.replaceInPreview);
             });
+            this.$options.editor.previewComponents['image-preview'] = this.$options.components['image-preview'];
     },
 
     methods: {
-
-        openModal: function (image) {
-
-            var parser = new DOMParser(), editor = this.$parent.editor, cursor = editor.editor.getCursor();
+        openModal(image) {
+            const parser = new DOMParser();
+            const editor = this.$parent.editor;
+            const cursor = editor.editor.getCursor();
 
             if (!image) {
                 image = {
-                    replace: function (value) {
+                    replace: (value) => {
                         editor.editor.replaceRange(value, cursor);
                     }
                 };
@@ -61,32 +54,24 @@ module.exports = {
                     image: image
                 }
             }).$mount()
-                .$appendTo('body')
                 .$on('select', function (image) {
-
-                    var content;
-
+                    let content;
                     if ((image.tag || editor.getCursorMode()) == 'html') {
-
                         if (!image.anchor) {
                             image.anchor = parser.parseFromString('<img>', "text/html").body.childNodes[0];;
                         }
-
                         image.anchor.setAttribute('src', image.data.src);
                         image.anchor.setAttribute('alt', image.data.alt);
-
                         content = image.anchor.outerHTML;
-
                     } else {
                         content = '![' + image.data.alt + '](' + image.data.src + ')';
                     }
-
                     image.replace(content);
                 });
         },
 
-        replaceInPreview: function (data, index) {
-            var parser = new DOMParser();
+        replaceInPreview(data, index) {
+            const parser = new DOMParser();
 
             data.data = {};
             if (data.matches[0][0] == '<') {
@@ -102,13 +87,9 @@ module.exports = {
 
             return '<image-preview index="' + index + '"></image-preview>';
         }
-
     },
 
     components: {
-
-        'image-preview': require('./image-preview.vue')
-
+        'image-preview': ImagePreview
     }
-
 };

@@ -1,60 +1,51 @@
+import Locale from './components/locale.vue';
+import System from './components/system.vue';
+
 window.Settings = {
 
     el: '#settings',
 
-    data: function () {
+    data() {
         return window.$settings;
     },
 
-    ready: function () {
-
-        UIkit.tab(this.$els.tab, {connect: this.$els.content});
-
+    mounted() {
+        UIkit.tab(this.$refs.tab, { connect: this.$refs.content });
     },
 
     computed: {
-
-        sections: function () {
-
-            var sections = [];
-
-            _.forIn(this.$options.components, function (component, name) {
-
-                var options = component.options || {}, section = options.section;
-
+        sections() {
+            const sections = [];
+            _.forIn(this.$options.components, (component, name) => {
+                const { section } = component;
                 if (section) {
                     section.name = name;
                     sections.push(section);
                 }
-
             });
-
-            return sections;
+            return _.orderBy(sections, 'priority');
         }
-
     },
 
     methods: {
+        save() {
+            this.$trigger('save:settings', this.$data);
+            this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }).then(function () {
+                this.$notify('Settings saved.');
+            }, function (res) {
+                this.$notify(res.data, 'danger');
+            });
+        },
 
-        save: function () {
-            this.$broadcast('save', this.$data);
-            this.$resource('admin/system/settings/save').save({config: this.config, options: this.options}).then(function () {
-                        this.$notify('Settings saved.');
-                    }, function (res) {
-                        this.$notify(res.data, 'danger');
-                    }
-                );
+        getBackendName(frontendName) {
+            return frontendName.replace('-', '/');
         }
-
     },
 
     components: {
-
-        locale: require('./components/locale.vue'),
-        system: require('./components/system.vue')
-
+        locale: Locale,
+        system: System
     }
-
 };
 
 Vue.ready(window.Settings);

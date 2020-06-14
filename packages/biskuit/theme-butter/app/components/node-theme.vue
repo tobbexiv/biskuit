@@ -1,7 +1,5 @@
 <template>
-
     <div class="uk-form-horizontal">
-
         <template v-if="node.type === 'page'">
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Title' | trans }}</span>
@@ -54,7 +52,7 @@
                 <p class="uk-form-controls-condensed uk-margin-bottom">
                     <label><input type="checkbox" v-model="node.theme.hero_parallax"> {{ 'Enable parallax effect' | trans }}</label>
                 </p>
-                <p class="uk-form-controls-condensed uk-form-width-large"><input-image :source.sync="node.theme.hero_image"></input-image></p>
+                <p class="uk-form-controls-condensed uk-form-width-large"><input-image v-model="node.theme.hero_image"></input-image></p>
                 <p class="uk-form-help-block">{{ 'Select a background image for the hero position.' | trans }}</p>
             </div>
         </div>
@@ -89,24 +87,35 @@
                 <p class="uk-form-help-block uk-margin">{{ 'Note: Position settings only work if you publish a widget in that position.' | trans }}</p>
             </div>
         </div>
-
     </div>
-
 </template>
 
 <script>
-
-    module.exports = {
-
+    const NodeTheme = {
         section: {
             label: 'Theme',
             priority: 90
         },
 
-        props: ['node']
+        props: ['value'],
 
+        data() {
+            return {
+                node: this.value
+            };
+        },
+
+        watch: {
+            value(val) {
+                this.node = val;
+            },
+            node(val) {
+                this.$emit('input', val);
+            }
+        }
     };
 
-    window.Site.components['node-theme'] = module.exports;
+    export default NodeTheme;
 
+    window.Site.components['node-theme'] = NodeTheme;
 </script>

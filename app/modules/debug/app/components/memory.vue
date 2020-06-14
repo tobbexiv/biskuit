@@ -1,21 +1,15 @@
 <template>
-
-    <a title="Memory"><span class="pf-icon pf-icon-memory"></span> {{ data.peak_usage_str }}</a>
-
+    <li>
+        <a title="Memory"><span class="pf-icon pf-icon-memory"></span>{{ data.peak_usage_str }}</a>
+    </li>
 </template>
 
 <script>
-
-    module.exports = {
-
+    export default {
         section: {
             priority: 40
         },
 
-        replace: false,
-
         props: ['data']
-
     };
-
 </script>

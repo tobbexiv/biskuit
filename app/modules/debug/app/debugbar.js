@@ -1,20 +1,31 @@
-var Debugbar = Vue.extend(require('./debugbar.vue'));
+import DebugbarTemplate from './debugbar.vue';
+import TimeInformation from './components/time-information.vue';
+import System from './components/system.vue';
+import Events from './components/events.vue';
+import Routes from './components/routes.vue';
+import Memory from './components/memory.vue';
+import Database from './components/database.vue';
+//import Request from './components/request.vue';
+import Auth from './components/auth.vue';
+import Log from './components/log.vue';
+import Profile from './components/profile.vue';
 
-Debugbar.component('time', require('./components/time.vue'));
-Debugbar.component('system', require('./components/system.vue'));
-Debugbar.component('events', require('./components/events.vue'));
-Debugbar.component('routes', require('./components/routes.vue'));
-Debugbar.component('memory', require('./components/memory.vue'));
-Debugbar.component('database', require('./components/database.vue'));
-//Debugbar.component('request', require('./components/request.vue'));
-Debugbar.component('auth', require('./components/auth.vue'));
-Debugbar.component('log', require('./components/log.vue'));
-Debugbar.component('profile', require('./components/profile.vue'));
+const Debugbar = Vue.extend(DebugbarTemplate);
 
-Vue.ready(function () {
+Debugbar.component('time-information', TimeInformation);
+Debugbar.component('system', System);
+Debugbar.component('events', Events);
+Debugbar.component('routes', Routes);
+Debugbar.component('memory', Memory);
+Debugbar.component('database', Database);
+//Debugbar.component('request', Request);
+Debugbar.component('auth', Auth);
+Debugbar.component('log', Log);
+Debugbar.component('profile', Profile);
 
-    new Debugbar().$mount().$appendTo('body');
-
+Vue.ready(() => {
+    const debugbar = new Debugbar().$mount();
+    document.body.appendChild(debugbar.$el);
 });
 
-module.exports = Debugbar;
+export default Debugbar;

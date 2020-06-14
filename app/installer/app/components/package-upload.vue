@@ -1,33 +1,30 @@
 <template>
+    <div>
+        <a class="uk-button uk-button-primary uk-form-file">
+            <span v-show="!progress">{{ 'Upload' | trans }}</span>
+            <span v-show="progress"><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
+            <input type="file" name="file" ref="input">
+        </a>
 
-    <a class="uk-button uk-button-primary uk-form-file">
-        <span v-show="!progress">{{ 'Upload' | trans }}</span>
-        <span v-else><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
-        <input type="file" name="file" v-el:input>
-    </a>
+        <div class="uk-modal" ref="modal">
+            <div class="uk-modal-dialog">
+                <package-details :api="api" :pkg="pkg"></package-details>
 
-    <div class="uk-modal" v-el:modal>
-        <div class="uk-modal-dialog">
-
-            <package-details :api="api" :package="package"></package-details>
-
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" @click.prevent="doInstall">{{ 'Install' | trans }}</button>
+                <div class="uk-modal-footer uk-text-right">
+                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link" @click.prevent="doInstall">{{ 'Install' | trans }}</button>
+                </div>
             </div>
-
         </div>
     </div>
-
 </template>
 
 <script>
+    import PackageLibrary from '../lib/package';
+    import PackageDetails from './package-details.vue';
 
-    module.exports = {
-
-        mixins: [
-            require('../lib/package')
-        ],
+    export default {
+        mixins: [PackageLibrary],
 
         props: {
             api: {type: String, default: ''},
@@ -35,73 +32,61 @@
             type: String
         },
 
-        data: function () {
+        data() {
             return {
-                package: {},
+                pkg: {},
                 upload: null,
                 progress: ''
             };
         },
 
-        ready: function () {
-
-            var type = this.type,
-                settings = {
-                    action: this.$url.route('admin/system/package/upload'),
-                    type: 'json',
-                    param: 'file',
-                    before: function (options) {
-                        _.merge(options.params, {_csrf: $biskuit.csrf, type: type});
-                    },
-                    loadstart: this.onStart,
-                    progress: this.onProgress,
-                    allcomplete: this.onComplete
-                };
-
-            UIkit.uploadSelect(this.$els.input, settings);
-
-            this.modal = UIkit.modal(this.$els.modal);
+        mounted: function () {
+            const type = this.type;
+            const settings = {
+                action: this.$url.route('admin/system/package/upload'),
+                type: 'json',
+                param: 'file',
+                before(options) {
+                    _.merge(options.params, {_csrf: $biskuit.csrf, type: type});
+                },
+                loadstart: this.onStart,
+                progress: this.onProgress,
+                allcomplete: this.onComplete
+            };
+            UIkit.uploadSelect(this.$refs.input, settings);
+            this.modal = UIkit.modal(this.$refs.modal);
         },
 
         methods: {
-
-            onStart: function () {
+            onStart() {
                 this.progress = '1%';
             },
 
-            onProgress: function (percent) {
+            onProgress(percent) {
                 this.progress = Math.ceil(percent) + '%';
             },
 
-            onComplete: function (data) {
-
-                var vm = this;
-
+            onComplete(data) {
+                const vm = this;
                 this.progress = '100%';
-
-                setTimeout(function () {
+                setTimeout(() => {
                     vm.progress = '';
                 }, 250);
-
                 if (!data.package) {
                     this.$notify(data, 'danger');
                     return;
                 }
-
-                this.$set('upload', data);
-                this.$set('package', data.package);
-
+                this.upload = data;
+                this.pkg = data.package;
                 this.modal.show();
             },
 
-            doInstall: function () {
-
+            doInstall() {
                 this.modal.hide();
-
                 this.install(this.upload.package, this.packages,
-                    function (output) {
+                    (output) => {
                         if (output.status === 'success') {
-                            setTimeout(function () {
+                            setTimeout(() => {
                                 location.reload();
                             }, 300);
                         }
@@ -111,10 +96,7 @@
         },
 
         components: {
-
-            'package-details': require('./package-details.vue')
-
+            'package-details': PackageDetails
         }
     };
-
 </script>

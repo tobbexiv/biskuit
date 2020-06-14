@@ -1,7 +1,7 @@
 <?php
 
 use DebugBar\DataCollector\MemoryCollector;
-use DebugBar\DataCollector\TimeDataCollector;
+use Biskuit\Debug\DataCollector\TimeInformationDataCollector;
 use Biskuit\Debug\DataCollector\AuthDataCollector;
 use Biskuit\Debug\DataCollector\DatabaseDataCollector;
 use Biskuit\Debug\DataCollector\EventDataCollector;
@@ -51,7 +51,7 @@ return [
             }
 
             $app['debugbar']->addCollector(new MemoryCollector());
-            $app['debugbar']->addCollector(new TimeDataCollector());
+            $app['debugbar']->addCollector(new TimeInformationDataCollector());
             $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['events'], $app['path.cache']));
             $app['debugbar']->addCollector(new EventDataCollector($app['events'], $app['path']));
             $app['debugbar']->addCollector(new ProfileDataCollector($app['debugbar.storage']));

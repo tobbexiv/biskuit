@@ -1,46 +1,34 @@
-var md5 = require('blueimp-md5');
+import md5 from 'blueimp-md5';
 
-module.exports = function (Vue) {
+export default (Vue) => {
+    Vue.http.interceptors.unshift((request) => {
+        let hit;
+        let key;
+        let lifetime;
 
-    Vue.http.interceptors.unshift(function () {
+        if (request.cache !== undefined && /^(GET|JSONP)$/i.test(request.method)) {
+            if (_.isObject(request.cache)) {
+                lifetime = request.cache.lifetime;
+                key = '_resource.' + request.cache.key;
+            } else {
+                lifetime = request.cache;
+                key = '_resource.' + md5(JSON.stringify(request));
+            }
 
-            var hit, key, lifetime;
-
-            return {
-                request: function (request) {
-
-                    if (request.cache !== undefined && /^(GET|JSONP)$/i.test(request.method)) {
-
-                        if (_.isObject(request.cache)) {
-                            lifetime = request.cache.lifetime;
-                            key = '_resource.' + request.cache.key;
-                        } else {
-                            lifetime = request.cache;
-                            key = '_resource.' + md5(JSON.stringify(request));
-                        }
-
-                        hit = Vue.cache.get(key);
-                        if (hit) {
-                            request.client = function () {
-                                return hit;
-                            };
-                        }
-                    }
-
-                    return request;
-                },
-
-                response: function (response) {
-
-                    if (key && !hit && response.ok) {
-                        Vue.cache.set(key, response, lifetime);
-                    }
-
-                    return response;
-                }
-            };
-
+            hit = Vue.cache.get(key);
+            if (hit) {
+                return request.respondWith(hit.body, {
+                    status: 200,
+                    statusText: 'From cache'
+                });
+            }
         }
-    );
 
-};
+        return (response) => {
+            if (key && !hit && response.ok) {
+                Vue.cache.set(key, response, lifetime);
+            }
+            return response;
+        };
+    });
+}

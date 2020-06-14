@@ -1,8 +1,7 @@
-module.exports = {
-
+const SiteIndex = {
     el: '#site',
 
-    data: function () {
+    data() {
         return _.merge({
             edit: undefined,
             menu: this.$session.get('site.menu', {}),
@@ -13,132 +12,115 @@ module.exports = {
         }, window.$data);
     },
 
-    created: function () {
+    created() {
         this.Menus = this.$resource('api/site/menu{/id}');
         this.Nodes = this.$resource('api/site/node{/id}');
 
-        var vm = this;
-        this.load().then(function () {
-            vm.$set('menu', _.find(vm.menus, ['id', vm.$get('menu.id')]) || vm.menus[0]);
+        const vm = this;
+        this.load().then(() => {
+            vm.menu = _.find(vm.menus, ['id', vm.menu.id]) || vm.menus[0];
         });
     },
 
-    ready: function () {
-
-        var vm = this;
-
-        UIkit.nestable(this.$els.nestable, {
+    mounted() {
+        const vm = this;
+        // TODO: Check whether https://github.com/unite-cms/uikit3-nestable can be used to replace if switching to UIkit3
+        // Known issue: Child item is not displayed if it is the first child moved to a parent node.
+        // Workaround: select another menu. Needs to be solved if still existing after switch to Uikit3.
+        UIkit.nestable(this.$refs.nestable, {
             maxDepth: 20,
             group: 'site.nodes'
-        }).on('change.uk.nestable', function (e, nestable, el, type) {
-
+        }).on('change.uk.nestable', (e, nestable, el, type) => {
             if (type && type !== 'removed') {
-
                 vm.Nodes.save({id: 'updateOrder'}, {
                     menu: vm.menu.id,
                     nodes: nestable.list()
-                }).then(vm.load, function () {
-                    this.$notify('Reorder failed.', 'danger');
+                }).then(vm.load, () => {
+                    vm.$notify('Reorder failed.', 'danger');
                 });
             }
         });
-
     },
 
     methods: {
-
-        load: function () {
-
-            var vm = this;
+        load() {
+            const vm = this;
             return Vue.Promise.all([
                 this.Menus.query(),
                 this.Nodes.query()
-            ]).then(function (responses) {
+            ]).then((responses) => {
+                vm.menus = responses[0].data;
+                vm.nodes = responses[1].data;
+                vm.selected = [];
 
-                vm.$set('menus', responses[0].data);
-                vm.$set('nodes', responses[1].data);
-                vm.$set('selected', []);
-
-                if (!_.find(vm.menus, ['id', vm.$get('menu.id')])) {
-                    vm.$set('menu', vm.menus[0]);
+                if (!_.find(vm.menus, ['id', vm.menu.id])) {
+                    vm.menu = vm.menus[0];
                 }
-
-            }, function () {
+            }, () => {
                 vm.$notify('Loading failed.', 'danger');
             });
         },
 
-        isActive: function (menu) {
+        isActive(menu) {
             return this.menu && this.menu.id === menu.id;
         },
 
-        selectMenu: function (menu) {
-
-            this.$set('selected', []);
-            this.$set('menu', menu);
+        selectMenu(menu) {
+            this.selected = [];
+            this.menu = menu;
             this.$session.set('site.menu', menu);
-
         },
 
-        removeMenu: function (menu) {
+        removeMenu(menu) {
             this.Menus.delete({id: menu.id}).finally(this.load);
         },
 
-        editMenu: function (menu) {
-
+        editMenu(menu) {
             if (!menu) {
                 menu = {
                     id: '',
                     label: ''
                 };
             }
-
-            this.$set('edit', _.merge({positions: []}, menu));
-
+            menu.label = menu.label.trim();
+            this.edit = _.merge({positions: []}, menu);
             this.$refs.modal.open();
         },
 
-        saveMenu: function (menu) {
-
-            this.Menus.save({menu: menu}).then(this.load, function (res) {
+        saveMenu(menu) {
+            menu.label = menu.label.trim();
+            this.Menus.save({menu: menu}).then(this.load, function(res) {
                 this.$notify(res.data, 'danger');
             });
-
             this.cancel();
         },
 
-        getMenu: function (position) {
-            return _.find(this.menus, function (menu) {
+        getMenu(position) {
+            return _.find(this.menus, (menu) => {
                 return _.includes(menu.positions, position);
             });
         },
 
-        cancel: function () {
+        cancel() {
             this.$refs.modal.close();
         },
 
-        status: function (status) {
-
-            var nodes = this.getSelected();
-
-            nodes.forEach(function (node) {
+        status(status) {
+            const nodes = this.getSelected();
+            nodes.forEach((node) => {
                 node.status = status;
             });
-
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}).then(function () {
                 this.load();
                 this.$notify('Page(s) saved.');
             });
         },
 
-        moveNodes: function (menu) {
-
-            var nodes = this.getSelected();
-
-            nodes.forEach(function (node) {
+        moveNodes(menu) {
+            const nodes = this.getSelected();
+            nodes.forEach((node) => {
                 node.menu = menu;
             });
-
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}).then(function () {
                 this.load();
                 this.$notify(this.$trans('Pages moved to %menu%.', {
@@ -150,18 +132,13 @@ module.exports = {
             });
         },
 
-        removeNodes: function () {
-
+        removeNodes() {
             if (this.menu.id !== 'trash') {
-
-                var nodes = this.getSelected();
-
-                nodes.forEach(function (node) {
+                const nodes = this.getSelected();
+                nodes.forEach((node) => {
                     node.status = 0;
                 });
-
                 this.moveNodes('trash');
-
             } else {
                 this.Nodes.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
                     this.load();
@@ -170,118 +147,121 @@ module.exports = {
             }
         },
 
-        getType: function (node) {
+        getType(node) {
             return _.find(this.types, ['id', node.type]);
         },
 
-        getSelected: function () {
+        getSelected() {
             return this.nodes.filter(function (node) {
                 return this.isSelected(node);
             }, this);
         },
 
-        isSelected: function (node, children) {
-
+        isSelected(node, children) {
             if (_.isArray(node)) {
                 return _.every(node, _.bind(function (node) {
                     return this.isSelected(node, children);
                 }, this));
             }
-
             return this.selected.indexOf(node.id) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
         },
 
-        toggleSelect: function (node) {
-
-            var index = this.selected.indexOf(node.id);
-
+        toggleSelect(node) {
+            const index = this.selected.indexOf(node.id);
             if (index == -1) {
                 this.selected.push(node.id);
             } else {
                 this.selected.splice(index, 1);
             }
-        }
+        },
 
+        rebuildTree() {
+            this.tree = _(this.nodes).filter({menu: this.menu.id}).sortBy('priority').groupBy('parent_id').value();
+        }
     },
 
     computed: {
-
-        showDelete: function () {
+        showDelete() {
             return this.showMove && _.every(this.getSelected(), _.bind(function (node) {
                     return !(this.getType(node) || {})['protected'];
                 }, this));
         },
 
-        showMove: function () {
+        showMove() {
             return this.isSelected(this.getSelected(), true);
-        }
+        },
 
+        unprotectedTypes() {
+            return _.orderBy(_.reject(this.types, ['protected', true]), 'label');
+        },
+
+        menusWithoutTrash() {
+            return _.reject(this.menus, ['id', 'trash']);
+        },
+
+        menusWithDivider() {
+            return _.reject(this.menus, ['fixed', true]).concat({divider: true}, _.filter(this.menus, ['fixed', true]))
+        }
     },
 
     watch: {
-
-        'menu + nodes': {
-            handler: function () {
-                this.$set('tree', _(this.nodes).filter({menu: this.menu.id}).sortBy('priority').groupBy('parent_id').value());
-            },
+        'menu': {
+            handler: 'rebuildTree',
+            deep: true
+        },
+        'nodes': {
+            handler: 'rebuildTree',
             deep: true
         }
-
     },
 
     filters: {
-
-        label: function (id) {
+        label(id) {
             return _.result(_.find(this.menus, ['id', id]), 'label');
         },
-
-        protected: function (types) {
-            return _.reject(types, ['protected', true]);
-        },
-
-        trash: function (menus) {
-            return _.reject(menus, ['id', 'trash']);
-        },
-
-        divided: function (menus) {
-            return _.reject(menus, ['fixed', true]).concat({divider: true}, _.filter(menus, ['fixed', true]))
-        }
-
     },
 
     components: {
-
         node: {
-
             name: 'node',
-            props: ['node', 'tree'],
+            props: ['node', 'tree', 'value'],
             template: '#node',
 
-            computed: {
+            data() {
+                return {
+                    selected: this.value
+                };
+            },
 
-                isFrontpage: function () {
+            watch: {
+                value(val) {
+                    this.selected = val;
+                },
+                selected(val) {
+                    this.$emit('input', val);
+                }
+            },
+
+            computed: {
+                isFrontpage() {
                     return this.node.url === '/';
                 },
 
-                type: function () {
+                type() {
                     return this.$root.getType(this.node) || {};
                 }
-
             },
 
             methods: {
-
-                setFrontpage: function () {
-                    this.$root.Nodes.save({id: 'frontpage'}, {id: this.node.id}, function () {
+                setFrontpage() {
+                    this.$root.Nodes.save({id: 'frontpage'}, {id: this.node.id}).then(function () {
                         this.$root.load();
                         this.$notify('Frontpage updated.');
                     });
                 },
 
-                toggleStatus: function () {
-
+                toggleStatus() {
                     this.node.status = this.node.status === 1 ? 0 : 1;
-
                     this.$root.Nodes.save({id: this.node.id}, {node: this.node}).then(function () {
                         this.$root.load();
                         this.$notify('Page saved.');
@@ -289,9 +269,7 @@ module.exports = {
                 }
             }
         }
-
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(SiteIndex);

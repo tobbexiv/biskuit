@@ -1,10 +1,10 @@
-var config = window.$locale || {translations: {}};
+let config = window.$locale || {translations: {}};
 
 /**
  * Copyright (c) William DURAND <william.durand1@gmail.com> (https://github.com/willdurand/BazingaJsTranslationBundle)
  */
 
-var Translator = (function (document, undefined) {
+const Translator = (function (document, undefined) {
 
     "use strict";
 
@@ -592,24 +592,21 @@ var Translator = (function (document, undefined) {
 
 })(document, undefined);
 
-module.exports = function (Vue) {
+const tmp = {};
 
+export default (Vue) => {
     Vue.prototype.$trans = Translator.trans.bind(Translator);
     Vue.prototype.$transChoice = Translator.transChoice.bind(Translator);
 
     Object.defineProperty(Vue.prototype, '$locale', {
-
-        get: function () {
+        get () {
             return config;
         },
-
-        set: function (locale) {
+        set (locale) {
             config = locale;
             Translator.fromJSON(locale);
             Translator.locale = locale.locale;
         }
-
     });
-
     Vue.prototype.$locale = config;
 };

@@ -1,67 +1,77 @@
 <template>
+    <div>
+        <v-validated-input
+            :id="id"
+            :name="name"
+            :rules="{ required: isRequired }"
+            :error-messages="{ required: 'Link cannot be blank.' }"
+            :options="{
+                    wrapperClass: inputClass,
+                    innerWrapperClass: 'pk-form-link uk-width-1-1',
+                    icon: {
+                        type: 'link',
+                        symbol: 'link',
+                        label: 'Select',
+                        callback: open
+                    }
+                }"
+            v-model.lazy="link">
+        </v-validated-input>
 
-    <div :class="[class]">
-        <div class="pk-form-link uk-width-1-1">
-            <input class="uk-width-1-1" type="text" v-model="link" :id="id" :name="name" v-validate:required="isRequired" v-el:input lazy>
-            <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" @click.prevent="open">{{ 'Select' | trans }} <i class="pk-icon-link pk-icon-hover uk-margin-small-left"></i></a>
-        </div>
+        <p class="uk-text-muted uk-margin-small-top uk-margin-bottom-remove" v-show="url">{{ url }}</p>
+
+        <v-modal ref="modal">
+            <form class="uk-form uk-form-stacked" @submit.prevent="update">
+                <div class="uk-modal-header">
+                    <h2>{{ 'Select Link' | trans }}</h2>
+                </div>
+
+                <panel-link @selection-changed="updateSelection"></panel-link>
+
+                <div class="uk-modal-footer uk-text-right">
+                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-link" type="submit" :disabled="lastSelection == ''">{{ 'Update' | trans }}</button>
+                </div>
+            </form>
+        </v-modal>
     </div>
-
-    <p class="uk-text-muted uk-margin-small-top uk-margin-bottom-remove" v-show="url">{{ url }}</p>
-
-    <v-modal v-ref:modal>
-
-        <form class="uk-form uk-form-stacked" @submit.prevent="update">
-
-            <div class="uk-modal-header">
-                <h2>{{ 'Select Link' | trans }}</h2>
-            </div>
-
-            <panel-link v-ref:links></panel-link>
-
-            <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" type="submit" :disabled="!showUpdate()">{{ 'Update' | trans }}</button>
-            </div>
-
-        </form>
-
-    </v-modal>
-
 </template>
 
 <script>
+    export default {
+        props: ['name', 'inputClass', 'id', 'required', 'value'],
 
-    module.exports = {
-
-        props: ['link', 'name', 'class', 'id', 'required'],
-
-        data: function () {
-            return {url: false};
+        data() {
+            return {
+                link: this.value,
+                lastSelection: '',
+                url: false,
+                updateDisabled: true
+            };
         },
 
         watch: {
-
             link: {
-                handler: 'load',
+                handler: 'linkChanged',
                 immediate: true
             }
-
         },
 
         computed: {
-
-            isRequired: function() {
+            isRequired() {
                 return this.required !== undefined;
             }
-
         },
 
         methods: {
+            linkChanged() {
+                this.$emit('input', this.link);
+                this.load();
+            },
 
-            load: function () {
+            load() {
                 if (this.link) {
-                    this.$http.get('api/site/link', {link: this.link}).then(function (res) {
+                    this.$http.get('api/site/link', { params: { link: this.link }}).then(function (res) {
                                 this.url = res.data.url || false;
                             }, function () {
                                 this.url = false;
@@ -71,30 +81,23 @@
                 }
             },
 
-            open: function () {
+            open() {
                 this.$refs.modal.open();
             },
 
-            update: function () {
-                this.$set('link', this.$refs.links.link);
-
-                Vue.nextTick(function() {
-                    this.$els.input.dispatchEvent(new Event('input'));
-                }.bind(this));
-
+            update() {
+                this.link = this.lastSelection;
+                this.lastSelection = '';
                 this.$refs.modal.close();
             },
 
-            showUpdate: function () {
-                return !!this.$refs.links.link;
+            updateSelection(selection) {
+                this.lastSelection = selection;
             }
-
         }
-
     };
 
-    Vue.component('input-link', function (resolve) {
-        resolve(module.exports);
+    Vue.component('input-link', (resolve) => {
+        resolve(require('./input-link.vue'));
     });
-
 </script>

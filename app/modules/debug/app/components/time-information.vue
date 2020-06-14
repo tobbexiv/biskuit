@@ -1,13 +1,13 @@
 <template>
     <li>
-        <a title="Request"><span class="pf-icon pf-icon-request"></span><span class="pf-badge">200</span> @test</a>
+        <a title="Time"><span class="pf-icon pf-icon-time"></span>{{ data.duration_str }}</a>
     </li>
 </template>
 
 <script>
     export default {
         section: {
-            priority: 10
+            priority: 30
         },
 
         props: ['data']

@@ -1,8 +1,9 @@
-window.Post = {
+import PostSettings from '../../components/post-settings.vue';
 
+window.Post = {
     el: '#post',
 
-    data: function () {
+    data() {
         return {
             data: window.$data,
             post: window.$data.post,
@@ -10,61 +11,48 @@ window.Post = {
         }
     },
 
-    created: function () {
-
-        var sections = [];
-
-        _.forIn(this.$options.components, function (component, name) {
-
-            var options = component.options || {};
-
-            if (options.section) {
-                sections.push(_.extend({name: name, priority: 0}, options.section));
+    created() {
+        let sections = [];
+        _.forIn(this.$options.components, (component, name) => {
+            if (component.section) {
+                sections.push(_.extend({
+                    name: name,
+                    priority: 0
+                }, component.section));
             }
-
         });
-
-        this.$set('sections', _.sortBy(sections, ['priority']));
+        this.sections = _.sortBy(sections, ['priority']);
 
         this.resource = this.$resource('api/blog/post{/id}');
     },
 
-    ready: function () {
-        this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
+    mounted() {
+        this.tab = UIkit.tab(this.$refs.tab, {connect: this.$refs.content});
     },
 
     methods: {
-
-        save: function () {
-            var data = {post: this.post, id: this.post.id};
-
-            this.$broadcast('save', data);
-
-            this.resource.save({id: this.post.id}, data).then(function (res) {
-
-                var data = res.data;
-
+        save() {
+            let data = {
+                post: this.post,
+                id: this.post.id
+            };
+            this.$trigger('post:save', data);
+            this.resource.save({ id: this.post.id }, data).then(function (res) {
+                const { data } = res;
                 if (!this.post.id) {
-                    window.history.replaceState({}, '', this.$url.route('admin/blog/post/edit', {id: data.post.id}))
+                    window.history.replaceState({}, '', this.$url.route('admin/blog/post/edit', { id: data.post.id }))
                 }
-
-                this.$set('post', data.post);
-
+                this.post = data.post;
                 this.$notify('Post saved.');
-
             }, function (res) {
                 this.$notify(res.data, 'danger');
             });
         }
-
     },
 
     components: {
-
-        settings: require('../../components/post-settings.vue')
-
+        settings: PostSettings
     }
-
 };
 
 Vue.ready(window.Post);
