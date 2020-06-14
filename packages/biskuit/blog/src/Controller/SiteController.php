@@ -97,7 +97,7 @@ class SiteController
                     'link' => $url,
                     'description' => App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
                     'date' => $post->date,
-                    'author' => [$post->user->name, $post->user->email],
+                    'author' => $post->user->name,
                     'id' => $url
                 ])
             );
