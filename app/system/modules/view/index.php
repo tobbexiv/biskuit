@@ -89,7 +89,7 @@ return [
             $scripts->register('uikit-parallax', 'app/assets/uikit/js/components/parallax.min.js', 'uikit');
             $scripts->register('uikit-timepicker', 'app/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
-            $scripts->register('vue-dist', 'app/assets/vue/' . ($app->debug() ? 'vue.js' : 'vue.js'));
+            $scripts->register('vue-dist', 'app/assets/vue/' . ($app->debug() ? 'vue.js' : 'vue.min.js'));
             $scripts->register('locale', $app->url('@system/intl', ['locale' => $app->module('system/intl')->getLocale(), 'v' => $scripts->getFactory()->getVersion()]), [], ['type' => 'url']);
         }
 
