@@ -1,13 +1,13 @@
-module.exports = {
+import PackageLibrary from '../lib/package';
+import PackageDetails from './package-details.vue';
+import PackageUpload from './package-upload.vue';
 
-    mixins: [
-        require('../lib/package')
-    ],
+export default {
+    mixins: [PackageLibrary],
 
-    data: function () {
-
+    data() {
         return _.extend({
-            package: {},
+            pkg: {},
             view: false,
             updates: null,
             search: this.$session.get(this.$options.name + '.search', ''),
@@ -15,102 +15,87 @@ module.exports = {
         }, window.$data);
     },
 
-    ready: function () {
+    mounted() {
         this.load();
     },
 
     watch: {
-        search: function (search) {
+        search(search) {
             this.$session.set(this.$options.name + '.search', search);
         }
     },
 
+    computed: {
+        filteredPackages() {
+            const search = this.search;
+            return _.filter(this.packages, pkg => { return pkg.title.toLowerCase().indexOf(search) > -1 });
+        },
+
+        nothingFound() {
+            return this.filteredPackages.length === 0;
+        }
+    },
+
     methods: {
-
-        load: function () {
-            this.$set('status', 'loading');
-
+        load() {
+            this.status = 'loading';
             if (this.packages) {
                 this.queryUpdates(this.packages).then(function (res) {
-                    var data = res.data;
-                    this.$set('updates', data.packages.length ? _.keyBy(data.packages, 'name') : null);
-                    this.$set('status', '');
+                    const { data } = res;
+                    this.updates = data.packages.length ? _.keyBy(data.packages, 'name') : null;
+                    this.status = '';
                 }, function () {
-                    this.$set('status', 'error');
+                    this.status = 'error';
                 });
             }
         },
 
-        icon: function (pkg) {
-
+        icon(pkg) {
             if (pkg.extra && pkg.extra.icon) {
                 return pkg.url + '/' + pkg.extra.icon;
             } else {
                 return this.$url('app/system/assets/images/placeholder-icon.svg');
             }
-
         },
 
-        image: function (pkg) {
-
+        image(pkg) {
             if (pkg.extra && pkg.extra.image) {
                 return pkg.url + '/' + pkg.extra.image;
             } else {
                 return this.$url('app/system/assets/images/placeholder-800x600.svg');
             }
-
         },
 
-        details: function (pkg) {
-            this.$set('package', pkg);
+        details(pkg) {
+            this.pkg = pkg;
             this.$refs.details.open();
         },
 
-        settings: function (pkg) {
-
+        settings(pkg) {
             if (!pkg.settings) {
                 return;
             }
 
-            var view, options;
-
-            _.forIn(this.$options.components, function (component, name) {
-
-                options = component.options || {};
-
+            let view;
+            _.forIn(this.$options.components, (component, name) => {
+                let options = component.options || {};
                 if (options.settings && pkg.settings === name) {
                     view = name;
                 }
-
             });
 
             if (view) {
-
-                this.$set('package', pkg);
-                this.$set('view', view);
+                this.pkg = pkg;
+                this.view = view;
                 this.$refs.settings.open();
-
             } else {
                 window.location = pkg.settings;
             }
-
         }
-
-    },
-
-    filters: {
-
-        empty: function (packages) {
-            return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
-        }
-
     },
 
     components: {
-
-        'package-upload': require('./package-upload.vue'),
-        'package-details': require('./package-details.vue')
-
+        'package-upload': PackageUpload,
+        'package-details': PackageDetails
     }
-
 };

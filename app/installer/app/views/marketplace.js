@@ -1,25 +1,27 @@
-module.exports = {
+import MarketplaceComponent from '../components/marketplace.vue';
 
+const Marketplace = {
     el: '#marketplace',
 
-    data: function () {
+    data() {
         return _.extend({
+            searchString: this.$session.get('marketplace.search', ''),
             search: this.$session.get('marketplace.search', '')
         }, window.$data);
     },
 
     watch: {
-
-        search: function (search) {
+        searchString: _.throttle(function() {
+            this.search = this.searchString;
+        }, 300),
+        search(search) {
             this.$session.set('marketplace.search', search);
         }
-
     },
 
     components: {
-        'marketplace': require('../components/marketplace.vue')
+        'marketplace': MarketplaceComponent
     }
-
 };
 
-Vue.ready(module.exports);
+Vue.ready(Marketplace);
