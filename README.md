@@ -62,6 +62,15 @@ location ~ \.php$ {
 
 ```
 
+## Caddy 2 configuration (optional)
+```
+mydomain.ex {                                                             
+        root * /full_path_to_biskuit                  
+        php_fastcgi * unix//run/php-fpm/www.sock                          
+        encode gzip                                                       
+        file_server                                                       
+}
+```
 ## CLI
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
