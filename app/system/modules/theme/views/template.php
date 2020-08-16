@@ -17,7 +17,7 @@
 <body>
 
 <div id="header" class="bk-header">
-  <nav class="uk-navbar-container uk-navbar-transparent uk-light" uk-navbar>
+  <nav class="uk-navbar-container uk-container uk-container-center uk-navbar-transparent uk-light" uk-navbar>
     <div class="uk-navbar-left">
       <a class="uk-navbar-item uk-logo" href="#">{{ item.label | trans }}</a>
 
@@ -56,8 +56,8 @@
   </nav>
 
   <!---- navigation ---->
-  <div class="uk-light">
-    <ul class="uk-flex-center uk-tab">
+  <div class="uk-light uk-container uk-container-center">
+    <ul class="uk-flex uk-tab">
       <li :class="{ 'uk-active': item.active }" v-for="item in subnav">
         <a :href="item.url" v-text="$trans(item.label)"></a>
       </li>
@@ -65,7 +65,7 @@
   </div>
 </div>
 
-<main class="tm-main uk-container uk-container-center">
+<main class="bk-main uk-margin-top uk-container uk-container-center">
     <?= $view->render('content') ?>
 </main>
 
