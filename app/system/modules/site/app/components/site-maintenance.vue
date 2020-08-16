@@ -10,21 +10,21 @@
         </div>
 
         <div class="uk-form uk-form-horizontal">
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Offline' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <label><input type="checkbox" value="1" v-model="config.maintenance.enabled"> {{ 'Put the site offline and show the offline message.' | trans }}</label>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-offlinemessage" class="uk-form-label">{{ 'Message' | trans }}</label>
                 <div class="uk-form-controls">
                     <textarea id="form-offlinemessage" class="uk-form-width-large" :placeholder="$trans('We\'ll be back soon.')" rows="5" v-model="config.maintenance.msg"></textarea>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-logo" class="uk-form-label">{{ 'Logo' | trans }}</label>
                 <div class="uk-form-controls uk-form-width-large">
                     <input-image v-model="config.maintenance.logo"></input-image>

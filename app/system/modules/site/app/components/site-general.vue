@@ -20,21 +20,21 @@
                 v-model="config.title">
             </v-validated-input>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-logo" class="uk-form-label">{{ 'Logo' | trans }}</label>
                 <div class="uk-form-controls uk-form-width-large">
                     <input-image v-model="config.view.logo"></input-image>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-favicon" class="uk-form-label">{{ 'Favicon' | trans }}</label>
                 <div class="uk-form-controls uk-form-width-large">
                     <input-image v-model="config.icons.favicon"></input-image>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-appicon" class="uk-form-label">{{ 'Appicon' | trans }}</label>
                 <div class="uk-form-controls uk-form-width-large">
                     <input-image v-model="config.icons.appicon"></input-image>

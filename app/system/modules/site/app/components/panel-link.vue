@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-style" class="uk-form-label">{{ 'Extension' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-style" class="uk-width-1-1" v-model="type">

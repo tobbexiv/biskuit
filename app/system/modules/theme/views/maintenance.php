@@ -14,7 +14,7 @@
 
                 <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic($logo) ?>" alt="Biskuit">
 
-                <div class="uk-panel uk-panel-box">
+                <div class="uk-panel uk-card">
                     <h1><?= __('Maintenance') ?></h1>
                     <p><?= $message ?></p>
                 </div>

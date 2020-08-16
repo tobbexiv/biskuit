@@ -11,7 +11,7 @@
                 v-model.lazy="page.title">
             </v-validated-input>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <v-editor v-model="page.content" :options="{markdown : page.data.markdown}"></v-editor>
                 <p>
                     <label><input type="checkbox" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>

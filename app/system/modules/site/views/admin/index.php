@@ -87,7 +87,7 @@
                     v-model="edit.label">
                 </v-validated-input>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
                     <div class="uk-form-controls uk-form-controls-text">
                         <p class="uk-form-controls-condensed" v-for="m in config.menus">

@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <div>
             <label for="form-link-file" class="uk-form-label">{{ 'File' | trans }}</label>
             <v-validated-input

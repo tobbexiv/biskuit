@@ -2,7 +2,7 @@
     <div>
         <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'User Type' | trans }}</span>
 
                 <div class="uk-form-controls uk-form-controls-text">
@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Display' | trans }}</span>
 
                 <div class="uk-form-controls uk-form-controls-text">
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Total Users' | trans }}</span>
 
                 <div class="uk-form-controls uk-form-controls-text">
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label class="uk-form-label" for="form-user-number">{{ 'Number of Users' | trans }}</label>
 
                 <div class="uk-form-controls">

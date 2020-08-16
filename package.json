@@ -34,7 +34,7 @@
     "marked": "^1.1.0",
     "merge-stream": "^2.0.0",
     "rss-parser": "^3.8.0",
-    "uikit": "github:biskuitorg/uikit#biskuit",
+    "uikit": "^3.5.5",
     "vee-validate": "^3.3.3",
     "vue": "~2.6.11",
     "vue-event-manager": "^2.1.3",

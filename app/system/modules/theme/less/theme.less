@@ -1,4 +1,4 @@
-@import "uikit/uikit.less";
+@import "../../../../assets/uikit/src/less/uikit.less";
 @import "../../../assets/less/biskuit.less";
 
 @icon-font-path: "../../../../../app/assets/uikit/fonts";
@@ -38,7 +38,7 @@ body {
     position: relative;
     margin-bottom: 40px;
     background: @navbar-background;
-    color: @global-contrast-color;
+    color: @global-color;
 }
 
 @media (min-height: 700px) {
@@ -124,7 +124,7 @@ body {
 
 .tm-heading {
     margin: 0;
-    color: @global-contrast-color;
+    color: @global-color;
 }
 
 
@@ -133,7 +133,6 @@ body {
 
 .tm-navbar {
     margin-top: -28px;
-    margin-left: -(@navbar-nav-padding-horizontal);
 }
 
 
@@ -142,7 +141,7 @@ body {
 
 .tm-contrast a { color: rgba(255,255,255,0.7); }
 
-.tm-contrast a:hover { color: @global-contrast-color; }
+.tm-contrast a:hover { color: @global-color; }
 
 
 /*
@@ -151,7 +150,7 @@ body {
 
 .tm-contrast .uk-icon-hover { color: rgba(255,255,255,0.5); }
 
-.tm-contrast .uk-icon-hover:hover { color: @global-contrast-color; }
+.tm-contrast .uk-icon-hover:hover { color: @global-color; }
 
 
 /* `tm-panel-icon`
@@ -253,7 +252,7 @@ body {
 
 }
 
-.tm-form .uk-form-row + .uk-form-row { margin-top: 50px; }
+.tm-form .uk-margin + .uk-margin { margin-top: 50px; }
 
 .tm-form button {
     padding-top: 5px;

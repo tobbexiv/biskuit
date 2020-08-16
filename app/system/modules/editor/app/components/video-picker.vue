@@ -6,18 +6,18 @@
                     <h2>{{ 'Add Video' | trans }}</h2>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <input-video v-model="video.data.src"></input-video>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
                         <input id="form-src" class="uk-width-1-1" type="text" v-model="videoSource">
                     </div>
                 </div>
 
-                <div class="uk-grid uk-grid-width-1-2 uk-form-row">
+                <div class="uk-grid uk-grid-width-1-2 uk-margin">
                     <div>
                         <label for="form-src" class="uk-form-label">{{ 'Width' | trans }}</label>
                         <input class="uk-width-1-1" id="form-width" type="text" :placeholder="$trans('auto')" v-model="video.data.width">
@@ -28,14 +28,14 @@
                     </div>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label><input type="checkbox" v-model="video.data.autoplay"> {{ 'Autoplay' | trans }}</label>
                     <label class="uk-margin-small-left" v-show="!isVimeo"><input type="checkbox" v-model="video.data.controls"> {{ 'Controls' | trans }}</label>
                     <label class="uk-margin-small-left"><input type="checkbox" v-model="video.data.loop"> {{ 'Loop' | trans }}</label>
                     <label class="uk-margin-small-left" v-show="!isVimeo && !isYoutube"><input type="checkbox" v-model="video.data.muted"> {{ 'Muted' | trans }}</label>
                 </div>
 
-                <div class="uk-form-row" v-show="!isYoutube && !isVimeo">
+                <div class="uk-margin" v-show="!isYoutube && !isVimeo">
                     <span class="uk-form-label">{{ 'Poster Image' | trans }}</span>
                     <div class="uk-form-controls">
                         <input-image class="uk-width-1-1" v-model="video.data.poster"></input-image>

@@ -11,7 +11,7 @@
                 v-model="widget.title">
             </v-validated-input>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <v-editor :options="{ markdown : widget.data.markdown }" v-model="widget.data.content"></v-editor>
                 <p>
                     <label><input type="checkbox" v-model="widget.data.markdown"> {{ 'Enable Markdown' | trans }}</label>

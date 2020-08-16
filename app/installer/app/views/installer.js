@@ -53,7 +53,7 @@ var Installer = {
 
         gotoStep: function (step) {
 
-            if (UIkit.support.animation) {
+            if (UIkit.animation) {
                 var vm = this;
                 var current = this.$refs[this.step];
                 var next = this.$refs[step];

@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <span class="uk-form-label">{{ 'Registration' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
@@ -26,14 +26,14 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <label for="form-user-verification" class="uk-form-label">{{ 'Verification' | trans }}</label>
         <div class="uk-form-controls uk-form-controls-text">
             <label><input id="form-user-verification" type="checkbox" v-model="config.require_verification"> {{ 'Require e-mail verification when a guest creates an account.' | trans }}</label>
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <label for="form-redirect" class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
         <div class="uk-form-controls">
            <input-link id="form-redirect" input-class="uk-form-width-large" v-model="config.login_redirect"></input-link>

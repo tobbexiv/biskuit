@@ -9,14 +9,14 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-storage" class="uk-form-label">{{ 'Storage' | trans }}</label>
             <div class="uk-form-controls">
                 <input id="form-storage" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$root.config['system/finder'].storage">
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-fileextensions" class="uk-form-label">{{ 'File Extensions' | trans }}</label>
             <div class="uk-form-controls">
                 <input id="form-fileextensions" class="uk-form-width-large" type="text" v-model="$root.options['system/finder']['extensions']">
@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-user-recaptcha-enable" class="uk-form-label">{{ 'Google reCAPTCHA' | trans }}</label>
             <div class="uk-form-controls uk-form-controls-text">
                 <p class="uk-form-controls-condensed">
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <span class="uk-form-label">{{ 'Developer' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <p class="uk-form-controls-condensed">

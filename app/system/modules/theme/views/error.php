@@ -17,7 +17,7 @@
 
                 <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/biskuit-logo-large-black.svg') ?>" alt="Biskuit">
 
-                <div class="uk-panel uk-panel-box">
+                <div class="uk-panel uk-card">
                     <h1 class="uk-h2"><?= $title ?></h1>
                 </div>
 

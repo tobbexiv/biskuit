@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <link href="app/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="app/system/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
+        <?php $view->style('uikit', 'app/assets/uikit/dist/css/uikit.css') ?>
         <?php $view->style('installer', 'app/installer/assets/css/installer.css') ?>
-        <?php $view->script('installer', 'app/installer/app/views/installer.js', ['vue', 'uikit-form-password']) ?>
+        <?php $view->script('installer', 'app/installer/app/views/installer.js', ['vue', 'uikit', 'uikit-form-password']) ?>
         <?= $view->render('head') ?>
     </head>
     <body>
@@ -26,7 +27,7 @@
 
                 </div>
 
-                <div class="uk-panel uk-panel-box" ref="language" v-show="step == 'language'" >
+                <div class="uk-panel uk-card uk-card-default" ref="language" v-show="step == 'language'" >
                     <div>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Choose language' | trans }}</h1>
@@ -56,7 +57,7 @@
 
                 </div>
 
-                <div class="uk-panel uk-panel-box" ref="database" v-show="step == 'database'">
+                <div class="uk-panel uk-card uk-card-default" ref="database" v-show="step == 'database'">
                     <validation-observer tag="div" v-slot="{ handleSubmit }">
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Connect database' | trans }}</h1>
@@ -65,7 +66,7 @@
                         <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
                         <form class="uk-form uk-form-horizontal tm-form-horizontal" @submit.prevent="handleSubmit(stepDatabase)">
-                            <div class="uk-form-row">
+                            <div class="uk-margin">
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <select id="form-dbdriver" class="uk-width-1-1" name="dbdriver" v-model="config.database.default">
@@ -74,7 +75,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="uk-form-row" v-if="config.database.default == 'mysql'">
+                            <div class="uk-margin" v-if="config.database.default == 'mysql'">
                                 <v-validated-input
                                     id="form-mysql-dbhost"
                                     name="host"
@@ -115,7 +116,7 @@
                                     v-model="config.database.connections.mysql.prefix">
                                 </v-validated-input>
                             </div>
-                            <div class="uk-form-row" v-else-if="config.database.default == 'sqlite'">
+                            <div class="uk-margin" v-else-if="config.database.default == 'sqlite'">
                                 <v-validated-input
                                     id="form-sqlite-dbprefix"
                                     name="sqliteprefix"
@@ -142,7 +143,7 @@
                     </validation-observer>
                 </div>
 
-                <div class="uk-panel uk-panel-box" ref="site" v-show="step == 'site'">
+                <div class="uk-panel uk-card uk-card-default" ref="site" v-show="step == 'site'">
                     <validation-observer tag="div" v-slot="{ handleSubmit }">
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
@@ -216,7 +217,7 @@
                             </a>
                         </div>
 
-                        <div class="uk-panel uk-panel-box" v-show="status == 'failed'">
+                        <div class="uk-panel uk-card uk-card-default" v-show="status == 'failed'">
                             <h1>{{ 'Installation failed!' | trans }}</h1>
                             <div class="uk-text-break">{{ message }}</div>
                             <p class="uk-text-right">

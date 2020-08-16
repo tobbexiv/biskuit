@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-sitelocale" class="uk-form-label">{{ 'Site Locale' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-sitelocale" class="uk-form-width-large" v-model="option.site.locale">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-adminlocale" class="uk-form-label">{{ 'Admin Locale' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-adminlocale" class="uk-form-width-large" v-model="option.admin.locale">

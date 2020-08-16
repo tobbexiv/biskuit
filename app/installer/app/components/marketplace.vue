@@ -2,7 +2,7 @@
     <div>
         <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin="observe:true">
             <div v-for="pkg in packages">
-                <div class="uk-panel uk-panel-box uk-overlay-hover">
+                <div class="uk-panel uk-card uk-overlay-hover">
                     <div class="uk-panel-teaser">
                         <div class="uk-overlay uk-display-block">
                             <div class="uk-cover-background uk-position-cover" :style="{ 'background-image': 'url(' + pkg.extra.image + ')' }"></div>

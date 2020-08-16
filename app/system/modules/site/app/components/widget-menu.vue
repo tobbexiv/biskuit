@@ -12,7 +12,7 @@
                 v-model="widget.title">
             </v-validated-input>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-menu" class="uk-form-label">{{ 'Menu' | trans }}</label>
                 <div class="uk-form-controls">
                     <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu">
@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-level" class="uk-form-label">{{ 'Start Level' | trans }}</label>
                 <div class="uk-form-controls">
                     <select id="form-level" class="uk-form-width-large" v-model.number="widget.data.start_level">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-depth" class="uk-form-label">{{ 'Depth' | trans }}</label>
                 <div class="uk-form-controls">
                     <select id="form-depth" class="uk-form-width-large" v-model.number="widget.data.depth">
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Sub Items' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed">

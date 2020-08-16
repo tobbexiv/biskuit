@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <span class="uk-form-label">{{ 'Cache' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <p class="uk-form-controls-condensed" v-for="(cache, key) in caches">
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <span class="uk-form-label">{{ 'Developer' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <p class="uk-form-controls-condensed">
@@ -36,7 +36,7 @@
                     <h2>{{ 'Select Cache to Clear' | trans }}</h2>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <p class="uk-form-controls-condensed">
                         <label><input type="checkbox" v-model="cache.cache"> {{ 'System Cache' | trans }}</label>
                     </p>

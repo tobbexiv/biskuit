@@ -1,6 +1,6 @@
 <template>
     <div class="uk-form-horizontal">
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <span class="uk-form-label">Pages</span>
             <div class="uk-form-controls uk-form-controls-text" v-if="config.menus">
                 <input-tree v-model="widget.nodes"></input-tree>

@@ -10,7 +10,7 @@
             v-model="node.link">
         </v-validated-input>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-type" class="uk-form-label">{{ 'Type' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-type" class="uk-form-width-large" v-model="behavior">

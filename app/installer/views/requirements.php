@@ -17,7 +17,7 @@
 
                 <img class="uk-margin-large-bottom" src="app/system/assets/images/biskuit-logo-large-black.svg" alt="Bis[ku]it">
 
-                <div class="uk-panel uk-panel-box">
+                <div class="uk-panel uk-card">
                     <h1>System Requirements</h1>
                     <p>Please fix the following issues to proceed.</p>
                     <?php foreach ($failed as $req) : ?>

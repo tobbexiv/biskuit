@@ -12,14 +12,14 @@
         <p>{{ 'Insert code in the header and footer of your theme. This is useful for tracking codes and meta tags.' | trans }}</p>
 
         <div class="uk-form uk-form-stacked">
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-codeheader" class="uk-form-label">{{ 'Header' | trans }}</label>
                 <div class="uk-form-controls">
                     <v-editor type="code" v-model="config.code.header"></v-editor>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-codeheader" class="uk-form-label">{{ 'Footer' | trans }}</label>
                 <div class="uk-form-controls">
                     <v-editor type="code" v-model="config.code.footer"></v-editor>

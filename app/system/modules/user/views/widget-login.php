@@ -7,15 +7,15 @@
 
 <form class="uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $this->escape($last_username) ?>" placeholder="<?= __('username') ?>">
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <input class="uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('password') ?>">
     </div>
 
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <button class="uk-button uk-button-primary uk-width-1-1" type="submit"><?= __('Login') ?></button>
     </div>
 

@@ -17,7 +17,7 @@
 
                 <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/biskuit-logo-large-black.svg') ?>" alt="Biskuit">
 
-                <form class="uk-panel uk-panel-box" action="<?= $view->url('@system/migration/migrate') ?>">
+                <form class="uk-panel uk-card" action="<?= $view->url('@system/migration/migrate') ?>">
                     <h1><?= __('Update Biskuit') ?></h1>
                     <p><?= __('Biskuit has been updated! Before we send you on your way, we have to update your database to the newest version.') ?></p>
                     <p>

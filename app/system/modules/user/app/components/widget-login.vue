@@ -12,14 +12,14 @@
                 v-model="widget.title">
             </v-validated-input>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
                 <div class="uk-form-controls">
                     <input-link id="form-redirect-login" input-class="uk-form-width-large" v-model="widget.data.redirect_login"></input-link>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label class="uk-form-label">{{ 'Logout Redirect' | trans }}</label>
                 <div class="uk-form-controls">
                     <input-link id="form-redirect-logout" input-class="uk-form-width-large" v-model="widget.data.redirect_logout"></input-link>

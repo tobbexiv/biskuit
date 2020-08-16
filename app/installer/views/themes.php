@@ -17,7 +17,7 @@
 
     <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-medium-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
         <div v-for="pkg in themeorder(filteredPackages)">
-            <div class="uk-panel uk-panel-box uk-visible-hover uk-overlay-hover">
+            <div class="uk-panel uk-card uk-visible-hover uk-overlay-hover">
                 <div class="uk-panel-teaser">
                     <div class="uk-overlay uk-display-block">
                         <div class="uk-cover-background uk-position-cover" :style="{'background-image': 'url('+image(pkg)+')'}"></div>

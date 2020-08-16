@@ -19,7 +19,7 @@
 
         <form class="pk-panel-teaser uk-form uk-form-stacked" v-show="editing" @submit.prevent>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
 
                 <div class="uk-form-controls">
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Unit' | trans }}</span>
 
                 <div class="uk-form-controls uk-form-controls-text">

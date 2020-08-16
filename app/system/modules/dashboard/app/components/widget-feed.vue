@@ -2,7 +2,7 @@
     <div>
         <form class="pk-panel-teaser uk-form uk-form-stacked" v-if="editing">
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-feed-title" class="uk-form-label">{{ 'Title' | trans }}</label>
 
                 <div class="uk-form-controls">
@@ -10,7 +10,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-feed-url" class="uk-form-label">{{ 'URL' | trans }}</label>
 
                 <div class="uk-form-controls">
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-feed-count" class="uk-form-label">{{ 'Number of Posts' | trans }}</label>
 
                 <div class="uk-form-controls">
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Post Content' | trans }}</span>
 
                 <div class="uk-form-controls uk-form-controls-text">

@@ -26,7 +26,7 @@
         <div class="uk-width-medium-1-3" v-for="i in [0,1,2]">
             <ul class="uk-sortable pk-sortable" :data-column="i">
                 <li v-for="widget in getWidgetsForColumn(i)" :data-id="widget.id" :data-idx="widget.idx" :key="widget.id">
-                    <panel class="uk-panel uk-panel-box uk-visible-hover-inline" :widget="widget" :editing="editing[widget.id]" v-on:editing="editing[widget.id] = $event"></panel>
+                    <panel class="uk-panel uk-card uk-visible-hover-inline" :widget="widget" :editing="editing[widget.id]" v-on:editing="editing[widget.id] = $event"></panel>
                 </li>
             </ul>
         </div>

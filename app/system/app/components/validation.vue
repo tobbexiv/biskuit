@@ -74,7 +74,7 @@
             return {
                 innerValue: '',
                 innerOptions: _.merge({
-                    wrapperClass: 'uk-form-row',
+                    wrapperClass: 'uk-margin',
                     labelClass: 'uk-form-label',
                     innerWrapperClass: 'uk-form-controls',
                     elementClass: 'uk-width-1-1',

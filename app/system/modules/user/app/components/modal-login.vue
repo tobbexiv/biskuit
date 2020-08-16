@@ -6,16 +6,16 @@
                 <p class="uk-text-danger">{{ 'Session expired. Please log in again.' | trans }}</p>
 
                 <form class="uk-form tm-form" @submit.prevent="login" ref="loginForm">
-                    <div class="uk-panel uk-panel-box">
-                        <div class="uk-form-row">
+                    <div class="uk-panel uk-card">
+                        <div class="uk-margin">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" :placeholder="$trans('Username')" autofocus v-model="credentials.username">
                         </div>
 
-                        <div class="uk-form-row">
+                        <div class="uk-margin">
                             <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" :placeholder="$trans('Password')" v-model="credentials.password" ref="password">
                         </div>
 
-                        <p class="uk-form-row tm-panel-marginless-bottom">
+                        <p class="uk-margin tm-panel-marginless-bottom">
                             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">{{ 'Login' | trans }}</button>
                         </p>
                     </div>

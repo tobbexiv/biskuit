@@ -21,17 +21,17 @@
 
                 <form class="js-login js-toggle uk-form tm-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
-                    <div class="uk-panel uk-panel-box">
+                    <div class="uk-panel uk-card">
 
-                        <div class="uk-form-row">
+                        <div class="uk-margin">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $this->escape($last_username) ?>" placeholder="<?= __('Username') ?>" autofocus>
                         </div>
 
-                        <div class="uk-form-row">
+                        <div class="uk-margin">
                             <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
                         </div>
 
-                        <p class="uk-form-row tm-panel-marginless-bottom">
+                        <p class="uk-margin tm-panel-marginless-bottom">
                             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Login') ?></button>
                         </p>
 
@@ -49,13 +49,13 @@
 
                 <form class="js-toggle uk-form tm-form uk-hidden" action="<?= $view->url('@user/resetpassword/request') ?>" method="post">
 
-                    <div class="uk-panel uk-panel-box">
+                    <div class="uk-panel uk-card">
 
-                        <div class="uk-form-row">
+                        <div class="uk-margin">
                             <input class="uk-form-large uk-width-1-1" type="text" name="email" value="" placeholder="<?= __('Email') ?>" required>
                         </div>
 
-                        <p class="uk-form-row tm-panel-marginless-bottom">
+                        <p class="uk-margin tm-panel-marginless-bottom">
                             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"><?= __('Reset Password') ?></button>
                         </p>
 

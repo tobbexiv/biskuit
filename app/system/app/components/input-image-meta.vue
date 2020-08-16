@@ -24,18 +24,18 @@
                     <h2>{{ 'Image' | trans }}</h2>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <input-image v-model="img.src"></input-image>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
                         <input id="form-src" class="uk-width-1-1" type="text" v-model.lazy="img.src">
                     </div>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-alt" class="uk-form-label">{{ 'Alt' | trans }}</label>
                     <div class="uk-form-controls">
                         <input id="form-alt" class="uk-width-1-1" type="text" v-model="img.alt">

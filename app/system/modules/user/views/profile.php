@@ -25,7 +25,7 @@
             v-model.lazy="user.email">
         </v-validated-input>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <a href="#" data-uk-toggle="{ target: '.js-password' }">{{ 'Change password' | trans }}</a>
         </div>
 
@@ -34,7 +34,7 @@
             name="password-old"
             type="password"
             placeholder="<?= __('Current Password') ?>"
-            :options="{ wrapperClass: 'uk-form-row js-password uk-hidden', innerWrapperClass: '' }"
+            :options="{ wrapperClass: 'uk-margin js-password uk-hidden', innerWrapperClass: '' }"
             v-model="user.password_old">
         </v-validated-input>
 
@@ -43,11 +43,11 @@
             name="password-new"
             type="password"
             placeholder="<?= __('New Password') ?>"
-            :options="{ wrapperClass: 'uk-form-row js-password uk-hidden', innerWrapperClass: '' }"
+            :options="{ wrapperClass: 'uk-margin js-password uk-hidden', innerWrapperClass: '' }"
             v-model="user.password_new">
         </v-validated-input>
 
-        <p class="uk-form-row">
+        <p class="uk-margin">
             <button class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit">{{ 'Save' | trans }}</button>
         </p>
     </form>

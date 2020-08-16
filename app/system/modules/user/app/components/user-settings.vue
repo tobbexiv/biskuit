@@ -35,7 +35,7 @@
                 v-model.lazy="user.email">
             </v-validated-input>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
                 <div class="uk-form-controls uk-form-controls-text" v-show="user.id && !editingPassword">
                     <a href="#" @click.prevent="editingPassword = true">{{ 'Change password' | trans }}</a>
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-for="(status, key) in config.statuses">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-for="role in config.roles">
@@ -66,14 +66,14 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Last login' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p>{{ $trans('%date%', { date: user.login ? $date(user.login) : $trans('Never') }) }}</p>
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <span class="uk-form-label">{{ 'Registered since' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     {{ user.registered ? $trans('%date%', { date: $date(user.registered) }) : '' }}
@@ -82,7 +82,7 @@
         </div>
 
         <div class="uk-width-medium-1-3 uk-width-large-1-4">
-            <div class="uk-panel uk-panel-box uk-text-center" v-show="user.name">
+            <div class="uk-panel uk-card uk-text-center" v-show="user.name">
                 <div class="uk-panel-teaser">
                     <img height="280" width="280" :alt="user.name" v-gravatar="user.email">
                 </div>

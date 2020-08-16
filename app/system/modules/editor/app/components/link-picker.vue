@@ -6,14 +6,14 @@
                     <h2>{{ 'Add Link' | trans }}</h2>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-link-title" class="uk-form-label">{{ 'Title' | trans }}</label>
                     <div class="uk-form-controls">
                         <input id="form-link-title" class="uk-width-1-1" type="text" v-model="link.txt">
                     </div>
                 </div>
 
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
                     <div class="uk-form-controls">
                         <input-link id="form-link-url" input-class="uk-width-1-1" v-model="link.link"></input-link>
