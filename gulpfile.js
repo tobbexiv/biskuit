@@ -33,7 +33,8 @@ var assetConfig = {
                 {module: 'lodash', files: {src: ['lodash*.js', 'LICENSE', 'package.json']}},
                 {module: 'marked', files: {src: ['marked*.js', 'LICENSE.md', 'package.json']}},
                 {module: 'uikit', files: {src: ['**']}},
-                {module: 'vue', files: {src: ['dist/**', 'LICENSE', 'package.json']}}
+                {module: 'vue', files: {src: ['dist/**', 'LICENSE', 'package.json']}},
+                {module: 'easymde', files: {src: ['dist/**']}},
             ]
         }
     ]

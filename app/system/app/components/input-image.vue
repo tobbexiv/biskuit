@@ -83,7 +83,7 @@
     Vue.component('input-image', (resolve, reject) => {
         Vue.asset({
             js: [
-                'app/assets/uikit/js/components/upload.min.js',
+                //'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }).then(function () {

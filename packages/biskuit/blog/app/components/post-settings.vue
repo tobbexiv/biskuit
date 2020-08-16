@@ -1,6 +1,5 @@
 <template>
-
-    <div class="uk-grid pk-grid-large pk-width-sidebar-large uk-form-stacked" data-uk-grid-margin>
+    <div>
         <div class="pk-width-content">
             <v-validated-input
                 id="form-title"
@@ -12,7 +11,8 @@
                 v-model="post.title">
             </v-validated-input>
             <div class="uk-margin">
-                <v-editor id="post-content" v-model="post.content" :options="{ markdown : post.data.markdown }"></v-editor>
+                <!--<textarea id="post-content" v-model="post.content" :options="{ markdown : post.data.markdown }"></textarea>-->
+              <textarea id="post-content" v-model="post.content" ref="markdownEditor"></textarea>
             </div>
             <div class="uk-margin">
                 <label for="form-post-excerpt" class="uk-form-label">{{ 'Excerpt' | trans }}</label>
@@ -80,6 +80,8 @@
 </template>
 
 <script>
+import EasyMDE from "easymde";
+
     export default {
         props: ['data', 'value'],
 
@@ -103,6 +105,36 @@
                 },
                 deep: true
             }
+        },
+
+        mounted() {
+          var easyMDE = new EasyMDE({
+            element: document.getElementById('post-content'),
+            autosave: {
+              enabled: true,
+              uniqueId: "biskuit-editor",
+              delay: 1000 * 5,
+              submit_delay: 5000,
+              timeFormat: {
+                locale: 'en-US',
+                format: {
+                  year: 'numeric',
+                  month: 'long',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                },
+              },
+              text: "Autosaved: "
+            }
+          });
+
+          easyMDE.codemirror.on('change', (instance, changeObj) => {
+            if (changeObj.origin === 'setValue') {
+              return;
+            }
+            this.post.content = easyMDE.value();
+          });
         }
     };
 </script>

@@ -71,11 +71,11 @@ return [
             $scripts->register('uikit', 'app/assets/uikit/dist/js/uikit.min.js', 'jquery');
             $scripts->register('uikit-accordion', 'app/assets/uikit/dist/js/components/accordion.min.js', 'uikit');
             $scripts->register('uikit-autocomplete', 'app/assets/uikit/dist/js/components/autocomplete.min.js', 'uikit');
-            $scripts->register('uikit-datepicker', 'app/assets/uikit/dist/js/components/datepicker.min.js', 'uikit');
+            //$scripts->register('uikit-datepicker', 'app/assets/uikit/dist/js/components/datepicker.min.js', 'uikit');
             //$scripts->register('uikit-form-password', 'app/assets/uikit/dist/js/components/form-password.min.js', 'uikit');
             //$scripts->register('uikit-form-select', 'app/assets/uikit/dist/js/components/form-select.min.js', 'uikit');
             $scripts->register('uikit-grid', 'app/assets/uikit/dist/js/components/grid.min.js', 'uikit');
-            $scripts->register('uikit-htmleditor', 'app/assets/uikit/dist/js/components/htmleditor.min.js', ['uikit', 'marked', 'codemirror']);
+            //$scripts->register('uikit-htmleditor', 'app/assets/uikit/dist/js/components/htmleditor.min.js', ['uikit', 'marked', 'codemirror']);
             $scripts->register('uikit-nestable', 'app/assets/uikit/dist/js/components/nestable.min.js', 'uikit');
             //$scripts->register('uikit-notify', 'app/assets/uikit/dist/js/components/notify.min.js', 'uikit');
             $scripts->register('uikit-tooltip', 'app/assets/uikit/dist/js/components/tooltip.min.js', 'uikit');
@@ -84,10 +84,10 @@ return [
             $scripts->register('uikit-slideshow', 'app/assets/uikit/dist/js/components/slideshow.min.js', 'uikit');
             $scripts->register('uikit-sortable', 'app/assets/uikit/dist/js/components/sortable.min.js', 'uikit');
             //$scripts->register('uikit-sticky', 'app/assets/uikit/dist/js/components/sticky.min.js', 'uikit');
-            $scripts->register('uikit-upload', 'app/assets/uikit/dist/js/components/upload.min.js', 'uikit');
+            //$scripts->register('uikit-upload', 'app/assets/uikit/dist/js/components/upload.min.js', 'uikit');
             $scripts->register('uikit-lightbox', 'app/assets/uikit/dist/js/components/lightbox.min.js', 'uikit');
             $scripts->register('uikit-parallax', 'app/assets/uikit/dist/js/components/parallax.min.js', 'uikit');
-            $scripts->register('uikit-timepicker', 'app/assets/uikit/dist/js/components/timepicker.js', 'uikit-autocomplete');
+            //$scripts->register('uikit-timepicker', 'app/assets/uikit/dist/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
             $scripts->register('vue-dist', 'app/assets/vue/' . ($app->debug() ? 'vue.js' : 'vue.min.js'));
             $scripts->register('locale', $app->url('@system/intl', ['locale' => $app->module('system/intl')->getLocale(), 'v' => $scripts->getFactory()->getVersion()]), [], ['type' => 'url']);

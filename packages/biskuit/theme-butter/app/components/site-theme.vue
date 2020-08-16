@@ -10,7 +10,7 @@
         </div>
 
         <div class="uk-form uk-form-horizontal">
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label class="uk-form-label">{{ 'Logo Contrast' | trans }}</label>
                 <div class="uk-form-controls uk-form-width-large">
                     <input-image v-model="config.logo_contrast"></input-image>
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label class="uk-form-label">{{ 'Logo Off-canvas' | trans }}</label>
                 <div class="uk-form-controls uk-form-width-large">
                     <input-image v-model="config.logo_offcanvas"></input-image>

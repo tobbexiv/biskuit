@@ -18,7 +18,7 @@ export default {
             js: [
                 'app/assets/codemirror/codemirror.js',
                 'app/assets/marked/marked.min.js',
-                'app/assets/uikit/js/components/htmleditor.min.js'
+                //'app/assets/uikit/js/components/htmleditor.min.js'
             ]
         }).then(function () {
             const vm = this;

@@ -2,7 +2,7 @@
 <?php $view->script('comment-index', 'blog:app/bundle/comment-index.js', 'vue') ?>
 
 <div id="comments" class="uk-form" v-cloak>
-    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+    <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
             <h2 class="uk-margin-remove" v-if="!selected.length">{{ '{0} %count% Comments|{1} %count% Comment|]1,Inf[ %count% Comments' | transChoice(count, {count:count}) }}</h2>
             <template v-else>
@@ -50,7 +50,7 @@
                                 <img class="uk-img-preserve uk-border-circle" width="40" height="40" :alt="comment.author" v-gravatar="comment.email">
                             </td>
                             <td class="uk-visible-hover">
-                                <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+                                <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" data-uk-margin>
                                     <div>
                                         <a :href="$url.route('admin/user/edit', { id: comment.user_id })" v-if="comment.user_id!=0">{{ comment.author }}</a>
                                         <span v-else>{{ comment.author }}</span>

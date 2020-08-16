@@ -151,7 +151,7 @@ return [
             }
 
             if ($params['hero_contrast'] && $params['hero_image']) {
-                $classes['hero'] .= ' uk-contrast';
+                $classes['hero'] .= ' uk-light';
             }
 
             $classes['sticky'] = 'uk-sticky=\''.json_encode($sticky).'\'';

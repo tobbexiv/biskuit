@@ -121,7 +121,7 @@
     Vue.component('input-image-meta', (resolve, reject) => {
         Vue.asset({
             js: [
-                'app/assets/uikit/js/components/upload.min.js',
+                //'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }).then(function () {

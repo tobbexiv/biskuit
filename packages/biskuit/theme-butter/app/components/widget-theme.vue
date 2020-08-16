@@ -1,13 +1,13 @@
 <template>
     <div class="uk-form-horizontal">
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <span class="uk-form-label">{{ 'Title' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <label><input type="checkbox" v-model="widget.theme.title_hide"> {{ 'Hide Title' | trans }}</label>
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-theme-title-size" class="uk-form-label">{{ 'Title Size' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-theme-title-size" class="uk-form-width-large" v-model="widget.theme.title_size">
@@ -21,28 +21,28 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <span class="uk-form-label">{{ 'Alignment' | trans }}</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <label><input type="checkbox" v-model="widget.theme.alignment"> {{ 'Center the title and content.' | trans }}</label>
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-theme-badge" class="uk-form-label">{{ 'HTML Class' | trans }}</label>
             <div class="uk-form-controls">
                 <input id="form-theme-badge" class="uk-form-width-large" type="text" v-model="widget.theme.html_class">
             </div>
         </div>
 
-        <div class="uk-form-row">
+        <div class="uk-margin">
             <label for="form-theme-panel" class="uk-form-label">{{ 'Panel Style' | trans }}</label>
             <div class="uk-form-controls">
                 <select id="form-theme-panel" class="uk-form-width-large" v-model="widget.theme.panel">
                     <option value="">{{ 'None' | trans }}</option>
-                    <option value="uk-panel-box">{{ 'Box' | trans }}</option>
-                    <option value="uk-panel-box uk-panel-box-primary">{{ 'Box Primary' | trans }}</option>
-                    <option value="uk-panel-box uk-panel-box-secondary">{{ 'Box Secondary' | trans }}</option>
+                    <option value="uk-card">{{ 'Box' | trans }}</option>
+                    <option value="uk-card uk-card-primary">{{ 'Box Primary' | trans }}</option>
+                    <option value="uk-card uk-card-secondary">{{ 'Box Secondary' | trans }}</option>
                     <option value="uk-panel-header">{{ 'Header' | trans }}</option>
                 </select>
             </div>
