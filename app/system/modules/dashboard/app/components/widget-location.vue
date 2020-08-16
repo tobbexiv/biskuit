@@ -45,7 +45,7 @@
 
         </form>
 
-        <div class="pk-panel-background uk-contrast" v-if="status != 'loading'">
+        <div class="pk-panel-background uk-light" v-if="status != 'loading'">
             <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-xlarge" v-if="time">{{ time | date(format) }}</h1>
 
             <h2 class="uk-text-center uk-h4 uk-margin-remove" v-if="time">{{ time | date('longDate') }}</h2>
