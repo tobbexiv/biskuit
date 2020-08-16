@@ -29,12 +29,11 @@ class ResetPasswordController
      */
     public function requestAction($email)
     {
+        if (App::user()->isAuthenticated()) {
+            return App::redirect();
+        }
+
         try {
-
-            if (App::user()->isAuthenticated()) {
-                return App::redirect();
-            }
-
             if (!App::csrf()->validate()) {
                 throw new Exception(__('Invalid token. Please try again.'));
             }
@@ -42,34 +41,6 @@ class ResetPasswordController
             if (empty($email)) {
                 throw new Exception(__('Enter a valid email address.'));
             }
-
-            if ($user = User::findByEmail($email)) {
-                if ($user->isBlocked()) {
-                    throw new Exception(__('Your account has not been activated or is blocked.'));
-                }
-
-                $key = App::get('auth.random')->generateString(32);
-                $url = App::url('@user/resetpassword/confirm', compact('key'), 0);
-
-                try {
-
-                    $mail = App::mailer()->create();
-                    $mail->setTo($user->email)
-                        ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
-                        ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
-                        ->send();
-
-                } catch (\Exception $e) {
-                    throw new Exception(__('Unable to send confirmation link.'));
-                }
-                $user->activation = $key;
-                $user->save();
-            }
-
-            App::message()->success(__('If mail exists, you should have received a confirmation link.'));
-
-            return App::redirect('@user/login');
-
         } catch (Exception $e) {
             return [
                 '$view' => [
@@ -79,6 +50,29 @@ class ResetPasswordController
                 'error' => $e->getMessage()
             ];
         }
+
+        if ($user = User::findByEmail($email)) {
+            if(!$user->isBlocked()) {
+                $key = App::get('auth.random')->generateString(32);
+                $url = App::url('@user/resetpassword/confirm', compact('key'), 0);
+                try {
+                    $mail = App::mailer()->create();
+                    $mail->setTo($user->email)
+                        ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
+                        ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
+                        ->send();
+                } catch (\Exception $e) {
+                    App::log()->error("[Reset password exception]: {$e->getMessage()}");
+                }
+                $user->activation = $key;
+                $user->save();
+            }
+        }
+
+        // sleep for a random time (0-2 seconds) to make it harder to guess success based on the runtime.
+        usleep(rand(0, 2000000));
+        App::message()->success(__('You will receive an email with a confirmation link if an unblocked account exists for entered email.'));
+        return App::redirect('@user/login');
     }
 
     /**
