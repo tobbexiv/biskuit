@@ -45,7 +45,6 @@ Vue.ready(function () {
     });
 
     // show system messages
-    UIkit.notify.message.defaults.timeout = 2000;
     $('.pk-system-messages').children().each(function () {
 
         var message = $(this), data = message.data();
