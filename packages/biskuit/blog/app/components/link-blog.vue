@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-form-row">
+    <div class="uk-margin">
         <label for="form-link-blog" class="uk-form-label">{{ 'View' | trans }}</label>
         <div class="uk-form-controls">
             <select id="form-link-blog" class="uk-width-1-1" v-model="innerLink">

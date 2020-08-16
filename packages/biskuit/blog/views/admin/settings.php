@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="uk-form-row">
+                    <div class="uk-margin">
                         <span class="uk-form-label">{{ 'Permalink' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
 
-                    <div class="uk-form-row">
+                    <div class="uk-margin">
                         <label class="uk-form-label">{{ 'Posts per page' | trans }}</label>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
 
-                    <div class="uk-form-row">
+                    <div class="uk-margin">
                         <span class="uk-form-label">{{ 'Default post settings' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
@@ -93,7 +93,7 @@
                         </div>
                     </div>
 
-                    <div class="uk-form-row">
+                    <div class="uk-margin">
                         <span class="uk-form-label">{{ 'Comments' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">
@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="uk-form-row">
+                    <div class="uk-margin">
                         <span class="uk-form-label">{{ 'Appearance' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
                             <p class="uk-form-controls-condensed">

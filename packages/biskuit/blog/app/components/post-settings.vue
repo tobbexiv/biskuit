@@ -11,10 +11,10 @@
                 :options="{ innerWrapperClass: '', elementClass: 'uk-width-1-1 uk-form-large' }"
                 v-model="post.title">
             </v-validated-input>
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <v-editor id="post-content" v-model="post.content" :options="{ markdown : post.data.markdown }"></v-editor>
             </div>
-            <div class="uk-form-row">
+            <div class="uk-margin">
                 <label for="form-post-excerpt" class="uk-form-label">{{ 'Excerpt' | trans }}</label>
                 <div class="uk-form-controls">
                     <v-editor id="post-excerpt" v-model="post.excerpt" :options="{ markdown : post.data.markdown, height: 250 }"></v-editor>
@@ -23,19 +23,19 @@
         </div>
         <div class="pk-width-sidebar">
             <div class="uk-panel">
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
                     <div class="uk-form-controls">
                         <input-image-meta v-model="post.data.image" cls="pk-image-max-height"></input-image-meta>
                     </div>
                 </div>
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
                     <div class="uk-form-controls">
                         <input id="form-slug" class="uk-width-1-1" type="text" v-model="post.slug">
                     </div>
                 </div>
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
                     <div class="uk-form-controls">
                         <select id="form-status" class="uk-width-1-1" v-model="post.status">
@@ -43,7 +43,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="uk-form-row" v-if="data.canEditAll">
+                <div class="uk-margin" v-if="data.canEditAll">
                     <label for="form-author" class="uk-form-label">{{ 'Author' | trans }}</label>
                     <div class="uk-form-controls">
                         <select id="form-author" class="uk-width-1-1" v-model="post.user_id">
@@ -51,13 +51,13 @@
                         </select>
                     </div>
                 </div>
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <span class="uk-form-label">{{ 'Publish on' | trans }}</span>
                     <div class="uk-form-controls">
                         <input-date v-model="post.date"></input-date>
                     </div>
                 </div>
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
                     <div class="uk-form-controls uk-form-controls-text">
                         <p v-for="role in data.roles" class="uk-form-controls-condensed" :key="role.id">
@@ -65,7 +65,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="uk-form-row">
+                <div class="uk-margin">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
                     <div class="uk-form-controls">
                         <label><input type="checkbox" v-model="post.data.markdown" value="1"> {{ 'Enable Markdown' | trans }}</label>

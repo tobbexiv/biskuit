@@ -9,12 +9,12 @@
                 <h2 class="uk-margin-remove">{{ '{1} %count% Post selected|]1,Inf[ %count% Posts selected' | transChoice(selected.length, {count:selected.length}) }}</h2>
 
                 <div class="uk-margin-left" >
-                    <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-check pk-icon-hover" title="Publish" data-uk-tooltip="{delay: 500}" @click="status(2)"></a></li>
-                        <li><a class="pk-icon-block pk-icon-hover" title="Unpublish" data-uk-tooltip="{delay: 500}" @click="status(3)"></a></li>
-                        <li><a class="pk-icon-copy pk-icon-hover" title="Copy" data-uk-tooltip="{delay: 500}" @click="copy"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"></a></li>
-                    </ul>
+                  <ul class="uk-iconnav">
+                      <li><a title="Publish" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="check"></span></a></li>
+                      <li><a title="Unpublish" data-uk-tooltip="{delay: 500}" @click="status(3)"><span uk-icon="close"></span></a></li>
+                      <li><a title="Copy" data-uk-tooltip="{delay: 500}" @click="copy"><span uk-icon="copy"></span></a></li>
+                      <li><a title="Delete" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
+                  </ul>
                 </div>
             </template>
 
@@ -31,21 +31,21 @@
     </div>
 
     <div class="uk-overflow-container">
-        <table class="uk-table uk-table-hover uk-table-middle">
+      <table class="uk-table uk-table-divider uk-table-hover">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all:posts.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
-                    <th class="pk-table-min-width-200" v-order:title="config.filter.order">{{ 'Title' | trans }}</th>
-                    <th class="pk-table-width-100 uk-text-center">
+                    <th><input type="checkbox" v-check-all:posts.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
+                    <th v-order:title="config.filter.order">{{ 'Title' | trans }}</th>
+                    <th class="uk-text-center">
                         <input-filter :title="$trans('Status')" :options="statusOptions" v-model="config.filter.status"></input-filter>
                     </th>
-                    <th class="pk-table-width-100">
+                    <th>
                         <span v-if="!canEditAll">{{ 'Author' | trans }}</span>
                         <input-filter :title="$trans('Author')" :options="authorOptions" v-model="config.filter.author" v-else></input-filter>
                     </th>
-                    <th class="pk-table-width-100 uk-text-center" v-order:comment_count="config.filter.order">{{ 'Comments' | trans }}</th>
-                    <th class="pk-table-width-100" v-order:date="config.filter.order">{{ 'Date' | trans }}</th>
-                    <th class="pk-table-width-200 pk-table-min-width-200">{{ 'URL' | trans }}</th>
+                    <th class="uk-text-center" v-order:comment_count="config.filter.order">{{ 'Comments' | trans }}</th>
+                    <th v-order:date="config.filter.order">{{ 'Date' | trans }}</th>
+                    <th>{{ 'URL' | trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,19 +55,20 @@
                         <a :href="$url.route('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a :title="getStatusText(post)" :class="{
-                                'pk-icon-circle': post.status == 0,
-                                'pk-icon-circle-warning': post.status == 1,
-                                'pk-icon-circle-success': post.status == 2 && post.published,
-                                'pk-icon-circle-danger': post.status == 3,
-                                'pk-icon-schedule': post.status == 2 && !post.published
-                            }" @click="toggleStatus(post)"></a>
+                        <a :title="getStatusText(post)" @click="toggleStatus(post)">
+                          <span v-if="post.status == 0" uk-icon="check"></span>
+                          <span v-if="post.status == 1" uk-icon="warning"></span>
+                          <span v-if="post.status == 2 && post.published" uk-icon="check"></span>
+                          <span v-if="post.status == 3" uk-icon="danger"></span>
+                          <span v-if="post.status == 2 && !post.published" uk-icon="calendar"></span>
+                        </a>
                     </td>
                     <td>
                         <a :href="$url.route('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-text-nowrap" :class="{'pk-link-icon': !post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :title="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments% pending', post.comments_pending, {comments:post.comments_pending})" data-uk-tooltip><i class="pk-icon-comment uk-margin-small-right" :class="{'pk-icon-primary': post.comments_pending}"></i> {{ post.comment_count }}</a>
+                        <a class="uk-text-nowrap" :class="{'pk-link-icon': !post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :title="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments% pending', post.comments_pending, {comments:post.comments_pending})" data-uk-tooltip>
+                          <span uk-icon="comment"></span> {{ post.comment_count }}</a>
                     </td>
                     <td>
                         {{ post.date | date }}
