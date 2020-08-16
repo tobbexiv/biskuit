@@ -33,12 +33,12 @@
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
-        <th><input class="uk-checkbox" type="checkbox" v-check-all:posts.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
-        <th v-order:title="config.filter.order">{{ 'Title' | trans }}</th>
-        <th class="uk-text-center">
+        <th class="bk-table-width-minimum"><input class="uk-checkbox" type="checkbox" v-check-all:posts.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
+        <th class="bk-table-min-width-300" v-order:title="config.filter.order">{{ 'Title' | trans }}</th>
+        <th class="bk-table-width-100 uk-text-center">
           <input-filter :title="$trans('Status')" :options="statusOptions" v-model="config.filter.status"></input-filter>
         </th>
-        <th>
+        <th class="bk-table-width-200">
           <span v-if="!canEditAll">{{ 'Author' | trans }}</span>
           <input-filter :title="$trans('Author')" :options="authorOptions" v-model="config.filter.author" v-else></input-filter>
         </th>

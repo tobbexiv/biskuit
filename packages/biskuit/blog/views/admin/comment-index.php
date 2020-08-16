@@ -33,12 +33,12 @@
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
-        <th><input class="uk-checkbox" type="checkbox" v-check-all:comments.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
-        <th colspan="2">{{ 'Comment' | trans }}</th>
-        <th class="uk-text-center">
+        <th class="bk-table-width-minimum"><input class="uk-checkbox" type="checkbox" v-check-all:comments.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
+        <th class="bk-table-min-width-200" colspan="2">{{ 'Comment' | trans }}</th>
+        <th class="bk-table-width-100 uk-text-center">
           <input-filter :title="$trans('Status')" :options="statusOptions" v-model="config.filter.status"></input-filter>
         </th>
-        <th :class="{'pk-filter': config.post, 'uk-active': config.post}">
+        <th class="bk-table-width-200" :class="{'pk-filter': config.post, 'uk-active': config.post}">
           <span v-if="!config.post">{{ 'Post' | trans }}</span>
           <span v-else>{{ config.post.title }}</span>
         </th>
@@ -48,8 +48,8 @@
       <template v-for="comment in comments">
         <template v-if="editComment.id !== comment.id">
           <tr class="uk-visible-toggle" :class="{'uk-active': active(comment)}" v-for="post in getPost(comment.post_id)">
-            <td class="pk-blog-comments-padding"><input class="uk-checkbox" type="checkbox" name="id" :value="comment.id" v-model="selected"></td>
-            <td>
+            <td><input class="uk-checkbox" type="checkbox" name="id" :value="comment.id" v-model="selected"></td>
+            <td class="bk-table-width-36">
               <img class="uk-img-preserve uk-border-circle" width="40" height="40" :alt="comment.author" v-gravatar="comment.email">
             </td>
             <td>
