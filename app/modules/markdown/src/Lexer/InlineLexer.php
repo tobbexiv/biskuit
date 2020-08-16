@@ -111,6 +111,8 @@ class InlineLexer
                 continue;
             }
 
+            /*
+             * TODO: This code generate error on complex markdown text, need revision
             if ((preg_match($this->rules['reflink'], $src, $cap)) || (preg_match($this->rules['nolink'], $src, $cap))) {
 
                 $src  = substr($src, strlen($cap[0]));
@@ -119,6 +121,7 @@ class InlineLexer
 
                 if (!$link || !$link["href"]) {
                     $out .= $cap[0][0];
+                    dump($cap[0]);
                     $src = substr($cap[0], 1) + $src;
                     continue;
                 }
@@ -129,6 +132,7 @@ class InlineLexer
 
                 continue;
             }
+            */
 
             // strong
             if (preg_match($this->rules['strong'], $src, $cap)) {
