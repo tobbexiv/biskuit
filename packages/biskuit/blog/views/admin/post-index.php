@@ -33,7 +33,7 @@
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
-        <th><input type="checkbox" v-check-all:posts.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
+        <th><input class="uk-checkbox" type="checkbox" v-check-all:posts.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
         <th v-order:title="config.filter.order">{{ 'Title' | trans }}</th>
         <th class="uk-text-center">
           <input-filter :title="$trans('Status')" :options="statusOptions" v-model="config.filter.status"></input-filter>
@@ -49,7 +49,7 @@
       </thead>
       <tbody>
       <tr class="check-item" v-for="post in posts" :class="{'uk-active': active(post)}">
-        <td><input type="checkbox" name="id" :value="post.id" v-model="selected"></td>
+        <td><input class="uk-checkbox" type="checkbox" name="id" :value="post.id" v-model="selected"></td>
         <td>
           <a :href="$url.route('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
         </td>
