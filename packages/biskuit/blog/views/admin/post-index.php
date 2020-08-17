@@ -57,7 +57,7 @@
           <a :title="getStatusText(post)" @click="toggleStatus(post)">
             <span v-if="post.status == 0" uk-icon="check"></span>
             <span v-if="post.status == 1" uk-icon="warning"></span>
-            <span v-if="post.status == 2 && post.published" uk-icon="check"></span>
+            <span v-if="post.status == 2 && post.published" uk-icon="pencil"></span>
             <span v-if="post.status == 3" uk-icon="close"></span>
             <span v-if="post.status == 2 && !post.published" uk-icon="calendar"></span>
           </a>
