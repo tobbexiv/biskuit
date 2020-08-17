@@ -125,7 +125,7 @@
                         rules="required"
                         label="Name"
                         :error-messages="{ required: 'Name cannot be blank.' }"
-                        :options="{ wrapperClass:'', innerWrapperClass: '' }"
+                        :options="{ wrapperClass:'', innerWrapperClass: '', elementClass: 'uk-input' }"
                         v-model="editComment.author">
                     </v-validated-input>
 
@@ -136,12 +136,12 @@
                         rules="email"
                         label="Email"
                         :error-messages="{ email: 'Email invalid.' }"
-                        :options="{ wrapperClass:'', innerWrapperClass: '' }"
+                        :options="{ wrapperClass:'', innerWrapperClass: '', elementClass: 'uk-input' }"
                         v-model="editComment.email">
                     </v-validated-input>
                     <div>
                       <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
-                      <select id="form-status" class="uk-width-1-1" v-model="editComment.status">
+                      <select id="form-status" class="uk-width-1-1 uk-select" v-model="editComment.status">
                         <option v-for="(status, key) in statuses" :value="key">{{ status }}</option>
                       </select>
                     </div>
@@ -154,7 +154,7 @@
                       rules="required"
                       label="Comment"
                       :error-messages="{ required: 'Comment cannot be blank.' }"
-                      :options="{ wrapperClass: 'uk-grid uk-grid-medium uk-grid-width-1-1', innerWrapperClass: '', textarea: { rows: 10 } }"
+                      :options="{ wrapperClass: 'uk-margin', innerWrapperClass: '', textarea: { rows: 10 }, elementClass: 'uk-textarea' }"
                       v-model="editComment.content">
                   </v-validated-input>
 
