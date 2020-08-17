@@ -6,7 +6,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
-                    <li :id="role.id" class="uk-visible-hover" v-for="role in orderedRoles" :class="{'uk-active': current.id === role.id}" :key="role.id">
+                    <li :id="role.id" class="uk-visible-toggle" v-for="role in orderedRoles" :class="{'uk-active': current.id === role.id}" :key="role.id">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
                             <li><a class="pk-icon-edit pk-icon-hover" :title="$trans('Edit')" data-uk-tooltip="{delay: 500}" @click="edit(role)"></a></li>
                             <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
@@ -28,8 +28,8 @@
                     <thead>
                         <tr>
                             <th class="pk-table-min-width-200">{{ groupKey }}</th>
-                            <th class="pk-table-width-minimum"></th>
-                            <th class="pk-table-width-minimum"></th>
+                            <th class="bk-table-width-minimum"></th>
+                            <th class="bk-table-width-minimum"></th>
                         </tr>
                     </thead>
                     <tbody>

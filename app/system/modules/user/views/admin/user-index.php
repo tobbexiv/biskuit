@@ -31,17 +31,17 @@
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all:users.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
+                    <th class="bk-table-width-minimum"><input type="checkbox" v-check-all:users.number="{ watchedElementsSelector: 'input[name=id]', statusStorageSelector: 'selected' }"></th>
                     <th colspan="2" v-order:username="config.filter.order">
                         {{ 'User' | trans }}
                     </th>
-                    <th class="pk-table-width-100 uk-text-center">
+                    <th class="bk-table-width-100 uk-text-center">
                         <input-filter :title="$trans('Status')" :options="statuses" v-model="config.filter.status"></input-filter>
                     </th>
-                    <th class="pk-table-width-200" v-order:email="config.filter.order">
+                    <th class="bk-table-width-200" v-order:email="config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
-                    <th class="pk-table-width-100">
+                    <th class="bk-table-width-100">
                         <input-filter :title="$trans('Roles')" :options="roles" v-model="config.filter.role"></input-filter>
                     </th>
                 </tr>
@@ -49,7 +49,7 @@
             <tbody>
                 <tr class="check-item" v-for="user in users" :class="{'uk-active': active(user)}" :id="'user_' + user.id">
                     <td><input type="checkbox" name="id" :value="user.id" v-model="selected"></td>
-                    <td class="pk-table-width-minimum">
+                    <td class="bk-table-width-minimum">
                         <img class="uk-img-preserve uk-border-circle" width="40" height="40" :alt="user.name" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">

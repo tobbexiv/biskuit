@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.data.src">
+    <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-toggle" v-if="!video.data.src">
         <img width="60" height="60" :alt="$trans('Placeholder Video')" :src="$url('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Video' | trans }}</p>
         <a class="uk-position-cover" @click.prevent="config"></a>
@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
+    <div class="uk-overlay uk-overlay-hover uk-visible-toggle" v-else>
         <img :src="imageSrc" v-if="imageSrc">
         <video class="uk-responsive-width" :src="videoSrc" :width="width" :height="height" v-if="videoSrc"></video>
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>

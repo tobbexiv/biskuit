@@ -23,7 +23,7 @@ const CommentIndex = {
     mounted() {
         this.Comments = this.$resource('api/blog/comment{/id}');
         this.load();
-        UIkit.init(this.$el);
+        //UIkit.init(this.$el);
     },
 
     watch: {

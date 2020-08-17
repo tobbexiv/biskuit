@@ -22,7 +22,7 @@
                     <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
-                                <th class="pk-table-width-150">{{ 'Setting' | trans }}</th>
+                                <th class="bk-table-width-150">{{ 'Setting' | trans }}</th>
                                 <th>{{ 'Value' | trans }}</th>
                             </tr>
                         </thead>
@@ -49,7 +49,7 @@
                     <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
-                                <th class="pk-table-width-150">{{ 'Setting' | trans }}</th>
+                                <th class="bk-table-width-150">{{ 'Setting' | trans }}</th>
                                 <th>{{ 'Value' | trans }}</th>
                             </tr>
                         </thead>
@@ -80,7 +80,7 @@
                     <table class="uk-table uk-table-hover">
                         <thead>
                             <tr>
-                                <th class="pk-table-width-150">{{ 'Setting' | trans }}</th>
+                                <th class="bk-table-width-150">{{ 'Setting' | trans }}</th>
                                 <th>{{ 'Value' | trans }}</th>
                             </tr>
                         </thead>
@@ -108,7 +108,7 @@
                         <thead>
                             <tr>
                                 <th>{{ 'Path' | trans }}</th>
-                                <th class="pk-table-width-100">{{ 'Status' | trans }}</th>
+                                <th class="bk-table-width-100">{{ 'Status' | trans }}</th>
                             </tr>
                         </thead>
                         <tbody>

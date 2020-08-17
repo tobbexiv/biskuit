@@ -9,8 +9,8 @@
             <thead>
                 <tr>
                     <th class="pk-table-min-width-200">{{ groupKey }}</th>
-                    <th class="pk-table-width-minimum"></th>
-                    <th class="pk-table-width-minimum pk-table-max-width-100 uk-text-truncate uk-text-center" v-for="r in roles">{{ r.name }}</th>
+                    <th class="bk-table-width-minimum"></th>
+                    <th class="bk-table-width-minimum pk-table-max-width-100 uk-text-truncate uk-text-center" v-for="r in roles">{{ r.name }}</th>
                 </tr>
             </thead>
             <tbody>

@@ -38,7 +38,7 @@
         <th class="bk-table-width-100 uk-text-center">
           <input-filter :title="$trans('Status')" :options="statusOptions" v-model="config.filter.status"></input-filter>
         </th>
-        <th class="bk-table-width-200" :class="{'pk-filter': config.post, 'uk-active': config.post}">
+        <th class="bk-table-width-200" :class="{'bk-filter': config.post, 'uk-active': config.post}">
           <span v-if="!config.post">{{ 'Post' | trans }}</span>
           <span v-else>{{ config.post.title }}</span>
         </th>

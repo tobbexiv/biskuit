@@ -34,13 +34,16 @@ export default {
 
     mounted() {
         const vm = this;
+        /*
         this.pagination = UIkit.pagination(this.$el, { pages: this.pages, currentPage: this.page || 0 });
         this.pagination.on('select.uk.pagination', (e, page) => {
             vm.page = page;
         });
+         */
     },
 
     watch: {
+        /*
         value(newPage) {
             this.page = newPage;
         },
@@ -52,5 +55,6 @@ export default {
         pages(newPages) {
             this.pagination.render(newPages);
         }
+         */
     }
 };

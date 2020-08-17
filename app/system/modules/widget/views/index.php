@@ -71,11 +71,11 @@
             <div class="uk-overflow-container">
                 <template v-if="!position && emptyafterfilter()">
                     <div class="pk-table-fake pk-table-fake-header pk-table-fake-border">
-                        <div class="pk-table-width-minimum"><input type="checkbox"></div>
+                        <div class="bk-table-width-minimum"><input type="checkbox"></div>
                         <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
-                        <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
-                        <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
-                        <div class="pk-table-width-100">
+                        <div class="bk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
+                        <div class="bk-table-width-150">{{ 'Type' | trans }}</div>
+                        <div class="bk-table-width-100">
                             <input-filter :title="$trans('Pages')" :options="nodes" v-model.number="config.filter.node"></input-filter>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
 
                 <div class="uk-margin-bottom" :data-pos="pos.name" v-for="pos in positions" :key="pos.name + pos.widgets.length" v-if="show(pos)">
                     <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}" v-show="position || !emptyafterfilter(pos.widgets)">
-                        <div class="pk-table-width-minimum"><input type="checkbox" v-check-all:[pos.name].number="{ watchedElementsSelector: `div[data-pos=${pos.name}] input[name=id]`, statusStorageSelector: 'selected' }"></div>
+                        <div class="bk-table-width-minimum"><input type="checkbox" v-check-all:[pos.name].number="{ watchedElementsSelector: `div[data-pos=${pos.name}] input[name=id]`, statusStorageSelector: 'selected' }"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
-                        <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
-                        <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
-                        <div class="pk-table-width-100">
+                        <div class="bk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
+                        <div class="bk-table-width-150">{{ 'Type' | trans }}</div>
+                        <div class="bk-table-width-100">
                             <input-filter :title="$trans('Pages')" :options="nodes" v-model.number="config.filter.node"></input-filter>
                         </div>
                     </div>
@@ -98,18 +98,18 @@
                     <ul class="uk-sortable uk-list uk-margin-remove" v-sortable v-if="!emptyafterfilter(pos.widgets)" :data-position="pos.name">
                         <li class="check-item" :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" :data-id="widget.id" :key="widget.id" v-show="infilter(widget)">
                             <div class="uk-nestable-panel pk-table-fake uk-form">
-                                <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id" v-model="selected"></div>
+                                <div class="bk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id" v-model="selected"></div>
                                 <div class="pk-table-min-width-100">
                                     <a :href="$url.route('admin/site/widget/edit', {id: widget.id})" v-if="getType(widget)">{{ widget.title }}</a>
                                     <span v-else>{{ widget.title }}</span>
                                 </div>
-                                <div class="pk-table-width-100 uk-text-center">
+                                <div class="bk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">
                                         <a :class="{'pk-icon-circle-danger': !widget.status, 'pk-icon-circle-success': widget.status}" @click="toggleStatus(widget)"></a>
                                     </td>
                                 </div>
-                                <div class="pk-table-width-150">{{ getType(widget) }}</div>
-                                <div class="pk-table-width-100">{{ getPageFilter(widget) }}</div>
+                                <div class="bk-table-width-150">{{ getType(widget) }}</div>
+                                <div class="bk-table-width-100">{{ getPageFilter(widget) }}</div>
                             </div>
                         </li>
                     </ul>
