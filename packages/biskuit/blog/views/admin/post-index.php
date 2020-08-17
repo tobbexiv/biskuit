@@ -66,7 +66,7 @@
           <a :href="$url.route('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
         </td>
         <td class="uk-text-center">
-          <a class="uk-text-nowrap" :class="{'pk-link-icon': !post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :title="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments% pending', post.comments_pending, {comments:post.comments_pending})" data-uk-tooltip>
+          <a class="uk-text-nowrap uk-link-muted" :class="{'pk-link-icon': !post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :title="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments% pending', post.comments_pending, {comments:post.comments_pending})" data-uk-tooltip>
             <span uk-icon="comment"></span> {{ post.comment_count }}</a>
         </td>
         <td>
@@ -82,7 +82,7 @@
     </table>
   </div>
 
-  <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="posts && !posts.length">{{ 'No posts found.' | trans }}</h3>
+  <h3 class="uk-h3 uk-text-muted uk-text-center" v-show="posts && !posts.length">{{ 'No posts found.' | trans }}</h3>
 
   <v-pagination v-model="config.page" :pages="pages" v-show="pages > 1 || config.page > 0"></v-pagination>
 

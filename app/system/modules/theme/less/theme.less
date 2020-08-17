@@ -5,6 +5,16 @@
 ========================================================================== */
 html { overflow-y: scroll; }
 
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 300;
+    color: #666;
+    text-transform: none
+}
+
+.uk-link, a {
+    color: #3e89c6;
+}
+
 
 /* Font smoothing
  ========================================================================== */
@@ -25,12 +35,15 @@ body {
 html {
     background: #f9f9fb;
 }
+
 [class*='bk-inline'] {
     display: block;
 }
+
 .bk-header {
     background-image: linear-gradient(to left, #323b44, #24292e);
 }
+
 .uk-form-select {
     display: inline-block;
     vertical-align: middle;
@@ -38,7 +51,23 @@ html {
     overflow: hidden;
 }
 
-/* Table rules
+.uk-search-navbar .uk-search-icon {
+    width: 19px;
+    margin: 2px 0 0 20px;
+}
+
+.uk-search-navbar .uk-search-input {
+    font-size: 1.2rem;
+    margin: 0 0 0 9px;
+    position: relative;
+    top: 1px;
+}
+
+.uk-tab-left > li a, .uk-tab-right > li a {
+    padding: 14px 15px 14px 7px;
+}
+
+/* Table
 ========================================================================== */
 .bk-table-width-minimum {
     width: 1px
@@ -86,6 +115,11 @@ html {
 
 .bk-table-max-width-150 {
     max-width: 150px
+}
+
+.uk-table th {
+    font-size: 12px;
+    color: #909090;
 }
 
 /* Filter
