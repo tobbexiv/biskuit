@@ -60,9 +60,9 @@
                   <br><a class="uk-link-muted uk-text-meta" :href="'mailto:'+comment.email">{{ comment.email }}</a>
                 </div>
                 <div class="uk-flex uk-flex-middle">
-                  <ul class="uk-iconnav uk-margin-right uk-invisible-hover">
-                    <li><a href="" uk-icon="icon: pencil" :title="$trans('Edit')" data-uk-tooltip="{delay: 500}" @click.prevent="edit(comment)"></a></li>
-                    <li><a href="" uk-icon="icon: reply" :title="$trans('Reply')" data-uk-tooltip="{delay: 500}" @click.prevent="reply(comment)"></a></li>
+                  <ul class="uk-iconnav pk-subnav-icon uk-margin-right uk-invisible-hover">
+                    <li><a class="pk-icon-edit pk-icon-hover" uk-icon="icon: pencil" :title="$trans('Edit')" data-uk-tooltip="{delay: 500}" @click.prevent="edit(comment)"></a></li>
+                    <li><a class="pk-icon-reply pk-icon-hover" uk-icon="icon: reply" :title="$trans('Reply')" data-uk-tooltip="{delay: 500}" @click.prevent="reply(comment)"></a></li>
                   </ul>
                   <a class="uk-link-muted uk-text-meta" v-if="post.accessible" :href="$url.route(post.url.substr(1))+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
                   <span v-else>{{ comment.created | relativeDate }}</span>
@@ -81,7 +81,7 @@
                         rules="required"
                         label="Comment"
                         :error-messages="{ required: 'Comment cannot be blank.' }"
-                        :options="{ innerWrapperClass: '', textarea: { rows: 10 } }"
+                        :options="{ innerWrapperClass: '', textarea: { rows: 10 }, elementClass: 'uk-textarea' }"
                         v-model="replyComment.content">
                     </v-validated-input>
 
