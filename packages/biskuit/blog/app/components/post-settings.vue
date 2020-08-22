@@ -11,13 +11,12 @@
                 v-model="post.title">
             </v-validated-input>
             <div class="uk-margin">
-                <!--<textarea id="post-content" v-model="post.content" :options="{ markdown : post.data.markdown }"></textarea>-->
-              <textarea id="post-content" v-model="post.content" ref="markdownEditor"></textarea>
+                <v-editor id="post-content" v-model="post.content" :options="{ markdown : post.data.markdown, height: 250 }"></v-editor>
             </div>
             <div class="uk-margin">
                 <label for="form-post-excerpt" class="uk-form-label">{{ 'Excerpt' | trans }}</label>
                 <div class="uk-form-controls">
-                    <textarea class="uk-textarea" id="post-excerpt" v-model="post.excerpt" :options="{ markdown : post.data.markdown, height: 250 }"></textarea>
+                    <v-editor id="post-excerpt" v-model="post.excerpt" :options="{ markdown : post.data.markdown, height: 250 }"></v-editor>
                 </div>
             </div>
         </div>
@@ -68,11 +67,9 @@
                 </div>
                 <div class="uk-margin">
                     <span class="uk-form-label">{{ 'Options' | trans }}</span>
-                    <!--
                     <div class="uk-form-controls">
                         <label><input class="uk-checkbox" type="checkbox" v-model="post.data.markdown" value="1"> {{ 'Enable Markdown' | trans }}</label>
                     </div>
-                    -->
                     <div class="uk-form-controls">
                         <label><input class="uk-checkbox" type="checkbox" v-model="post.comment_status" value="1"> {{ 'Enable Comments' | trans }}</label>
                     </div>
@@ -83,8 +80,6 @@
 </template>
 
 <script>
-import EasyMDE from "easymde";
-
     export default {
         props: ['data', 'value'],
 
@@ -108,37 +103,6 @@ import EasyMDE from "easymde";
                 },
                 deep: true
             }
-        },
-
-        mounted() {
-          var easyMDE = new EasyMDE({
-            element: document.getElementById('post-content'),
-            spellChecker: false,
-            autosave: {
-              enabled: true,
-              uniqueId: "biskuit-editor",
-              delay: 1000 * 5,
-              submit_delay: 5000,
-              timeFormat: {
-                locale: 'en-US',
-                format: {
-                  year: 'numeric',
-                  month: 'long',
-                  day: '2-digit',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                },
-              },
-              text: "Autosaved: "
-            }
-          });
-
-          easyMDE.codemirror.on('change', (instance, changeObj) => {
-            if (changeObj.origin === 'setValue') {
-              return;
-            }
-            this.post.content = easyMDE.value();
-          });
         }
     };
 </script>
