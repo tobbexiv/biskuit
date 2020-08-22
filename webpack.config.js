@@ -3,21 +3,6 @@ const { sync }            = require('glob');
 const path                = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 
-const common  = {
-    module: {
-        rules: [
-            {test: /\.js$/,  exclude: [/node_modules/, /assets/, /vendor/],  use: ["babel-loader"]}
-        ],
-    },
-    resolve: {
-        alias: {
-            '@installer': path.resolve(__dirname, 'app/installer'),
-            '@system': path.resolve(__dirname, 'app/system')
-        }
-    },
-    externals: {"vue": "Vue", "uikit": "UIkit", "uikit-util": "UIkit.util"}
-};
-
 const build = (mode, dir, config) => {
     return merge({
         mode: mode,
@@ -27,8 +12,8 @@ const build = (mode, dir, config) => {
         },
         externals: {
             'vue': 'Vue',
-            'uikit': 'Uikit',
-            'uikit-util': 'Uikit.util'
+            'uikit': 'UIkit',
+            'uikit-util': 'UIkit.util'
         },
         module: {
             rules: [
