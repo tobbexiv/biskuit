@@ -9,12 +9,7 @@ module.exports = [
         },
         output: {
             filename: "./app/bundle/[name].js"
-        },
-        module: {
-            rules: [
-                { test: /\.vue$/, use: 'vue-loader' },
-            ],
-        },
+        }
     }
 
 ];
