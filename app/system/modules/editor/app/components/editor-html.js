@@ -50,7 +50,7 @@ export default {
                     text: this.$trans('Last autsave: ')
                 },*/
                 previewRender: this.renderPreview,
-                toolbar: false,
+                //toolbar: false,
             });
 
             editor.codemirror.on('change', (instance, changeObj) => {
@@ -61,19 +61,24 @@ export default {
             this.$watch('$parent.innerValue', function (value) {
                 if (value != editor.value()) {
                     editor.value(value);
+                    vm.renderContent(editor.value());
                 }
             });
+
+            this.renderContent(editor.value());
 
             this.$emit('ready');
 
             const data = {
-                id: this.id,
                 icons: [ // Array of { index: <int>, config: <string>|<object> }
                     { index: 100, config: '|' },
                     { index: 200, config: '|' },
                     { index: 300, config: '|' },
                     { index: 400, config: '|' },
-                    { index: 500, config: '|' }
+                    { index: 800, config: '|' },
+                    { index: 810, config: 'preview' },
+                    { index: 820, config: 'side-by-side' },
+                    { index: 830, config: 'fullscreen' }
                 ]
             };
             /*[
@@ -114,7 +119,7 @@ export default {
                 'guide'
             ]*/
             this.$emit('editor-html:toolbar', data);
-            editor.createToolbar(_.map(_.sortBy(data.icons, 'index'), 'config'));
+            //editor.createToolbar(_.map(_.sortBy(data.icons, 'index'), 'config'));
         });
     },
 
@@ -136,14 +141,13 @@ export default {
 
         renderContent(content) {
             const data = {
-                id: vm.id,
-                original: plainText,
-                rendered: plainText,
-                markdownEnabled: vm.markdownEnabled,
-                replaceInPreview: vm.replaceInPreview
+                original: content,
+                rendered: content,
+                markdownEnabled: this.markdownEnabled,
+                replaceInPreview: this.replaceInPreview
             };
-            vm.$emit('editor-html:render', data);
-            if(vm.markdownEnabled) {
+            this.$emit('editor-html:render', data);
+            if(this.markdownEnabled) {
                 data.rendered = window.marked(data.rendered);
             }
             return data.rendered;
@@ -151,6 +155,7 @@ export default {
 
         replaceInPreview(data, regexp, callback) {
             // Based on the Uikit 2 HTML Editor replaceInPreview function
+            const editor = this.$parent.editor.codemirror;
             const translateOffset = (offset) => {
                 const result = data.original.substring(0, offset).split('\n');
                 return { line: result.length - 1, ch: result[result.length - 1].length }
@@ -160,12 +165,15 @@ export default {
             let offset = -1;
             let index = 0;
 
-            data.rendered = data.rendered.replace(regexp, () => {
+            data.rendered = data.rendered.replace(regexp, function() {
                 offset = data.original.indexOf(arguments[0], ++offset);
                 const match = {
                     matches: arguments,
                     from   : translateOffset(offset),
                     to     : translateOffset(offset + arguments[0].length),
+                    replace: (value) => {
+                        editor.replaceRange(value, match.from, match.to);
+                    },
                     inRange: (cursor) => {
                         if (cursor.line === match.from.line && cursor.line === match.to.line) {
                             return cursor.ch >= match.from.ch && cursor.ch < match.to.ch;
