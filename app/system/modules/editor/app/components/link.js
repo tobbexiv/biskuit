@@ -8,28 +8,28 @@ export default {
 
     created() {
         const vm = this;
-        const editor = this.$parent.editor;
 
-        if (!editor || !editor.htmleditor) {
+        /*if (!editor || !editor.htmleditor) {
             return;
-        }
+        }*/
 
         this.$options.editor.previewData.links = {
             data: [],
             callback: vm.openModal
         };
 
-        editor
+        this.$options.editor
+            .$on('editor-html:toolbar', this.onToolbar)
+            .$on('editor-html:render', this.onRender);
+
+        /*editor
             .off('action.link')
             .on('action.link', (e, editor) => {
-                vm.openModal(_.find(vm.$options.editor.previewData.links.data, (link) => {
-                    return link.inRange(editor.getCursor());
-                }));
+
             })
             .on('render', () => {
-                const regexp = editor.getMode() != 'gfm' ? /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>/gi : /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
-                vm.$options.editor.previewData.links.data = editor.replaceInPreview(regexp, vm.replaceInPreview);
-            });
+
+            });*/
         this.$options.editor.previewComponents['link-preview'] = this.$options.components['link-preview'];
     },
 
@@ -37,12 +37,13 @@ export default {
         openModal(link) {
             const parser = new DOMParser();
             const editor = this.$parent.editor;
-            const cursor = editor.editor.getCursor();
+            const cursor = editor.codemirror.getCursor();
+            const vm = this;
 
             if (!link) {
                 link = {
                     replace: (value) => {
-                        editor.editor.replaceRange(value, cursor);
+                        editor.codemirror.replaceRange(value, cursor);
                     }
                 };
             }
@@ -55,7 +56,7 @@ export default {
             }).$mount()
                 .$on('select', (link) => {
                     let content;
-                    if ((link.tag || editor.getCursorMode()) == 'html') {
+                    if ((link.tag || !vm.$parent.options.markdown) == 'html') {
                         if (!link.anchor) {
                             link.anchor = parser.parseFromString('<a></a>', "text/html").body.childNodes[0];
                         }
@@ -86,6 +87,29 @@ export default {
             }
 
             return '<link-preview index="' + index + '"></link-preview>';
+        },
+
+        linkCallback(editor) {
+            this.openModal(_.find(this.$options.editor.previewData.links.data, (link) => {
+                return link.inRange(editor.codemirror.getCursor());
+            }))
+        },
+
+        onToolbar(data) {
+            data.icons.push({
+                index: 110,
+                config: {
+                    name: 'link',
+                    action: this.linkCallback,
+                    className: 'fa fab fa-github',
+                    title: 'Create Link'
+                }
+            });
+        },
+
+        onRender(data) {
+            const regexp = !data.markdownEnabled ? /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>/gi : /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
+            this.$options.editor.previewData.links.data = data.replaceInPreview(data, regexp, this.replaceInPreview);
         }
     },
 

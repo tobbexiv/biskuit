@@ -10,7 +10,6 @@
     <?php $view->style('theme', 'system/theme:css/theme.css') ?>
     <?php $view->style('theme', 'system/theme:css/theme.css') ?>
     <?php $view->script('theme', 'system/theme:js/theme.js', ['vue', 'uikit']) ?>
-    <?php $view->script('dashboard', 'system/dashboard:app/bundle/index.js', ['vue']) ?>
     <?php $view->script('uikit-icons', 'app/assets/uikit/dist/js/uikit-icons.js', ['uikit']) ?>
     <?= $view->render('head') ?>
 </head>

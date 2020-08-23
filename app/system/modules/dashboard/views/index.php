@@ -1,3 +1,5 @@
+<?php $view->script('dashboard', 'system/dashboard:app/bundle/index.js', ['vue']) ?>
+
 <div id="dashboard" v-cloak>
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap uk-flex-middle">
         <div>

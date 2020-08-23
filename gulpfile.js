@@ -34,7 +34,7 @@ var assetConfig = {
                 {module: 'marked', files: {src: ['marked*.js', 'LICENSE.md', 'package.json']}},
                 {module: 'uikit', files: {src: ['**']}},
                 {module: 'vue', files: {src: ['dist/**', 'LICENSE', 'package.json']}},
-                {module: 'easymde', files: {src: ['dist/**']}},
+                {module: 'easymde', files: {src: ['dist/**', 'LICENSE', 'package.json']}},
             ]
         }
     ]

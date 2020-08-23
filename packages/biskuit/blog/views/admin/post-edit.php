@@ -1,5 +1,4 @@
 <?php $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'editor', 'uikit']) ?>
-<?php $view->style('easymde', 'app/assets/easymde/easymde.min.css') ?>
 
 <validation-observer id="post" v-slot="{ handleSubmit }" slim>
   <form class="uk-form" @submit.prevent="handleSubmit(save)" v-cloak>
