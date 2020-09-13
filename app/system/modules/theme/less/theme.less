@@ -1,9 +1,10 @@
 @global-image-path: '../../images';
 
-
 /* Common
 ========================================================================== */
-html { overflow-y: scroll; }
+html {
+    overflow-y: scroll;
+}
 
 h1,h2,h3,h4,h5,h6 {
     font-weight: 300;
@@ -42,25 +43,25 @@ html {
 
 .bk-header {
     background-image: linear-gradient(to left, #323b44, #24292e);
+    margin-bottom: 65px;
 }
 
-.uk-form-select {
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    overflow: hidden;
+.uk-divider-vertical.bk-divider-vertical {
+    height: 42px;
 }
 
-.uk-search-navbar .uk-search-icon {
-    width: 19px;
-    margin: 2px 0 0 20px;
-}
+.uk-search-navbar {
+    .uk-search-icon {
+        width: 19px;
+        margin: 2px 0 0 20px;
+    }
 
-.uk-search-navbar .uk-search-input {
-    font-size: 1.2rem;
-    margin: 0 0 0 9px;
-    position: relative;
-    top: 1px;
+    .uk-search-input {
+        font-size: 1.2rem;
+        margin: 0 0 0 9px;
+        position: relative;
+        top: 1px;
+    }
 }
 
 .uk-tab-left > li a, .uk-tab-right > li a {
