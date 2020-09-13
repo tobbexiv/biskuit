@@ -7,7 +7,7 @@
             :error-messages="{ required: 'Link cannot be blank.' }"
             :options="{
                     wrapperClass: inputClass,
-                    innerWrapperClass: 'pk-form-link uk-width-1-1',
+                    innerWrapperClass: 'uk-width-1-1',
                     icon: {
                         type: 'link',
                         symbol: 'link',
@@ -18,21 +18,21 @@
             v-model.lazy="link">
         </v-validated-input>
 
-        <p class="uk-text-muted uk-margin-small-top uk-margin-bottom-remove" v-show="url">{{ url }}</p>
+        <p class="uk-text-muted uk-margin-small-top uk-margin-remove-bottom" v-show="url">{{ url }}</p>
 
         <v-modal ref="modal">
-            <form class="uk-form uk-form-stacked" @submit.prevent="update">
-                <div class="uk-modal-header">
-                    <h2>{{ 'Select Link' | trans }}</h2>
-                </div>
+            <template #header>
+                <h2 class="uk-modal-title">{{ 'Select Link' | trans }}</h2>
+            </template>
 
+            <form class="uk-form-stacked" @submit.prevent="update" ref="selectForm">
                 <panel-link @selection-changed="updateSelection"></panel-link>
-
-                <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                    <button class="uk-button uk-button-link" type="submit" :disabled="lastSelection == ''">{{ 'Update' | trans }}</button>
-                </div>
             </form>
+
+            <template #footer>
+                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" @click="update" :disabled="lastSelection == ''">{{ 'Update' | trans }}</button>
+            </template>
         </v-modal>
     </div>
 </template>
