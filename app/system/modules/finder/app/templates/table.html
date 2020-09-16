@@ -8,8 +8,8 @@
     <tbody>
         <tr v-for="folder in $parent.searchedFolders" class="uk-visible-toggle" :class="{'uk-active': $parent.isSelected(folder.name)}" @click.prevent="$parent.toggleSelect(folder.name)">
             <td><input type="checkbox" name="name" :value="folder.name" v-model="$parent.selected" @click.stop></td>
-            <td class="bk-table-width-minimum">
-                <i class="pk-icon-folder-circle"></i>
+            <td class="bk-table-width-minimum uk-active">
+                <span class="uk-icon-button" uk-icon="folder"></span>
             </td>
             <td class="pk-table-text-break pk-table-min-width-200"><a @click.stop="$parent.setPath(folder.path)">{{ folder.name }}</a></td>
             <td></td>
@@ -18,9 +18,9 @@
 
         <tr v-for="file in $parent.searchedFiles" class="uk-visible-toggle" :class="{'uk-active': $parent.isSelected(file.name)}" @click.prevent="$parent.toggleSelect(file.name)">
             <td><input type="checkbox" name="name" :value="file.name" v-model="$parent.selected" @click.stop></td>
-            <td class="bk-table-width-minimum">
-                <i v-if="$parent.isImage(file.url)" class="pk-icon-contain" v-lazy-background="$url(file.url)"></i>
-                <i v-else class="pk-icon-file-circle"></i>
+            <td class="bk-table-width-minimum uk-active">
+                <span v-if="$parent.isImage(file.url)" class="uk-icon uk-icon-image" v-lazy-background="$url(file.url)"></span>
+                <span v-else class="uk-icon-button" uk-icon="file-text"></span>
             </td>
             <td class="pk-table-text-break pk-table-min-width-200">{{ file.name }}</td>
             <td class="uk-text-right uk-text-nowrap">{{ file.size }}</td>
