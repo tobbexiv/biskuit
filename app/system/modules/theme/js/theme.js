@@ -1,9 +1,5 @@
 Vue.ready(function () {
-
-    var $ = jQuery;
-
     var Menu = Vue.extend({
-
         data: function () {
             return _.extend({
                 nav: null,
@@ -13,7 +9,6 @@ Vue.ready(function () {
         },
 
         created: function () {
-
             var menu = _(this.menu).sortBy('priority').groupBy('parent').value(),
                 item = _.find(menu.root, 'active');
 
@@ -24,7 +19,6 @@ Vue.ready(function () {
                 this.subnav = menu[item.id];
             }
         }
-
     });
 
     // mount menus
@@ -32,7 +26,7 @@ Vue.ready(function () {
     new Menu().$mount('#offcanvas');
     new Menu().$mount('#offcanvas-flip');
 
-    // main menu order
+    /*/ main menu order TODO - re-enable?
     $('#js-appnav').on('stop.uk.sortable', function () {
 
         var data = {};
@@ -42,20 +36,19 @@ Vue.ready(function () {
         });
 
         Vue.http.post('admin/adminmenu', {order: data});
-    });
+    });*/
 
     // show system messages
-    $('.pk-system-messages').children().each(function () {
-
-        var message = $(this), data = message.data();
+    UIkit.util.toNodes(UIkit.util.$('.pk-system-messages').children).forEach(function (message) {
+        var data = message.dataset;
 
         // remove success message faster
         if (data.status && data.status == 'success') {
             data.timeout = 2000;
         }
 
-        UIkit.notify(message.html(), data);
-        message.remove();
+        UIkit.notify(UIkit.util.html(message), data);
+        UIkit.util.remove(message);
     });
 
     // UIkit overrides

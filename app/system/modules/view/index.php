@@ -65,11 +65,10 @@ return [
 
         'view.scripts' => function ($event, $scripts) use ($app) {
             $scripts->register('codemirror', 'app/assets/codemirror/codemirror.js');
-            $scripts->register('jquery', 'app/assets/jquery/jquery.min.js'); // TODO: Remove
             $scripts->register('lodash', 'app/assets/lodash/lodash.min.js');
             $scripts->register('marked', 'app/assets/marked/marked.min.js');
             $scripts->register('uikit', 'app/assets/uikit/dist/js/uikit.min.js');
-            $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'uikit', 'jquery', 'lodash', 'locale']);
+            $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'uikit', 'lodash', 'locale']);
             $scripts->register('vue-dist', 'app/assets/vue/' . ($app->debug() ? 'vue.js' : 'vue.min.js'));
             $scripts->register('locale', $app->url('@system/intl', ['locale' => $app->module('system/intl')->getLocale(), 'v' => $scripts->getFactory()->getVersion()]), [], ['type' => 'url']);
         }
