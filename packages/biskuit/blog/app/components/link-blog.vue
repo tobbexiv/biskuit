@@ -2,7 +2,7 @@
     <div class="uk-margin">
         <label for="form-link-blog" class="uk-form-label">{{ 'View' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-link-blog" class="uk-width-1-1" v-model="innerLink">
+            <select id="form-link-blog" class="uk-select uk-width-1-1" v-model="innerLink">
                 <option value="@blog">{{ 'Posts View' | trans }}</option>
                 <optgroup :label="$trans('Posts')">
                     <option v-for="p in posts" :value="link(p)" :key="p.id">{{ p.title }}</option>

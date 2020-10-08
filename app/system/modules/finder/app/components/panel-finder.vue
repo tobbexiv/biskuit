@@ -1,58 +1,57 @@
 <template>
-    <div class="uk-form" v-show="items">
-        <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-            <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
-                <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice(count, {count:count}) }}</h2>
-                <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% File selected|]1,Inf[ %count% Files selected' | transChoice(selected.length, {count:selected.length}) }}</h2>
+    <div v-show="items">
+        <div class="uk-flex uk-flex-between uk-flex-wrap" uk-margin>
+            <div class="uk-flex uk-flex-middle uk-flex-wrap" uk-margin>
+                <h3 class="uk-margin-right uk-margin-remove-bottom" v-show="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice(count, {count:count}) }}</h3>
+                <h3 class="uk-margin-right uk-margin-remove-bottom uk-margin-remove-top" v-show="selected.length">{{ '{1} %count% File selected|]1,Inf[ %count% Files selected' | transChoice(selected.length, {count:selected.length}) }}</h3>
 
-                <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
-                    <ul class="uk-subnav pk-subnav-icon">
-                        <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" :title="$trans('Rename')" data-uk-tooltip="{delay: 500}" @click.prevent="rename"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
+                <div class="uk-margin-right" v-if="isWritable" v-show="selected.length">
+                    <ul class="uk-iconnav">
+                        <li v-show="selected.length === 1"><a uk-icon="file-edit" :title="$trans('Rename')" data-uk-tooltip="{delay: 500}" @click.prevent="rename"></a></li>
+                        <li><a uk-icon="trash" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
                     </ul>
                 </div>
 
-                <div class="pk-search">
-                    <div class="uk-search">
-                        <input class="uk-search-field" type="text" v-model="search">
-                    </div>
+                <hr class="uk-divider-vertical bk-divider-vertical uk-margin-remove" />
+
+                <div class="uk-search uk-search-navbar">
+                    <span uk-search-icon></span>
+                    <input class="uk-search-input" type="text" v-model="search">
                 </div>
             </div>
 
-            <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+            <div class="uk-flex uk-flex-middle uk-flex-wrap" uk-margin>
                 <div class="uk-margin-right">
-                    <ul class="uk-subnav pk-subnav-icon">
+                    <ul class="uk-iconnav">
                         <li :class="{'uk-active': innerView == 'template-table'}">
-                            <a class="pk-icon-table pk-icon-hover" :title="$trans('Table View')" data-uk-tooltip="{delay: 500}" @click.prevent="innerView = 'template-table'"></a>
+                            <a uk-icon="table" :title="$trans('Table View')" data-uk-tooltip="{delay: 500}" @click.prevent="innerView = 'template-table'"></a>
                         </li>
-                        <li class="{'uk-active': innerView == 'template-thumbnail'}">
-                            <a class="pk-icon-thumbnails pk-icon-hover" :title="$trans('Thumbnails View')" data-uk-tooltip="{delay: 500}" @click.prevent="innerView = 'template-thumbnail'"></a>
+                        <li :class="{'uk-active': innerView == 'template-thumbnail'}">
+                            <a uk-icon="grid" :title="$trans('Thumbnails View')" data-uk-tooltip="{delay: 500}" @click.prevent="innerView = 'template-thumbnail'"></a>
                         </li>
                     </ul>
                 </div>
 
                 <div>
-                    <button class="uk-button uk-margin-small-right" @click.prevent="createFolder()">{{ 'Add Folder' | trans }}</button>
-                    <div class="uk-form-file">
-                        <button class="uk-button" :class="{'uk-button-primary': !modal}">{{ 'Upload' | trans }}</button>
-                        <input type="file" name="files[]" multiple="multiple">
+                    <button class="uk-button uk-button-default uk-margin-small-right" @click.prevent="createFolder()">{{ 'Add Folder' | trans }}</button>
+                    <div uk-form-custom>
+                        <input class="bk-file-upload" type="file" name="files[]" multiple>
+                        <button class="uk-button" :class="{'uk-button-default': modal, 'uk-button-primary': !modal}" type="button" tabindex="-1">{{ 'Upload' | trans }}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <ul class="uk-breadcrumb uk-margin-large-top">
-            <li v-for="(bc, key) in breadcrumbs" :class="{'uk-active': bc.current}" :key="key">
+        <ul class="uk-breadcrumb uk-margin-top">
+            <li v-for="(bc, key) in breadcrumbs" :key="key">
                 <span v-if="bc.current">{{ bc.title }}</span>
                 <a v-else @click.prevent="setPath(bc.path)">{{ bc.title }}</a>
             </li>
         </ul>
 
-        <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
-            <div class="uk-progress-bar" :style="{width: upload.progress + '%'}"></div>
-        </div>
+        <progress v-show="upload.running" class="uk-progress" value="upload.progress" max="upload.total"></progress>
 
-        <div class="uk-overflow-container tm-overflow-container">
+        <div class="uk-overflow-auto">
             <component :is="innerView" v-show="count"></component>
             <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!count">{{ 'No files found.' | trans }}</h3>
         </div>
@@ -60,6 +59,8 @@
 </template>
 
 <script>
+    import { $, parents } from 'uikit-util';
+
     const PanelFinder = {
         name: 'panel-finder',
 
@@ -214,10 +215,11 @@
             },
 
             createFolder() {
-                UIkit.modal.prompt(this.$trans('Folder Name'), '', function (name) {
+                const vm = this;
+                UIkit.modal.prompt(this.$trans('Folder Name'), '').then((name) => {
                     if (!name) return;
-                    this.command('createfolder', {name: name});
-                }.bind(this));
+                    vm.command('createfolder', {name: name});
+                });
             },
 
             rename(oldname) {
@@ -227,10 +229,11 @@
 
                 if (!oldname) return;
 
-                UIkit.modal.prompt(this.$trans('Name'), oldname, function (newname) {
+                const vm = this;
+                UIkit.modal.prompt(this.$trans('Name'), oldname, { title: this.$trans('Rename') }).then((newname) => {
                     if (!newname) return;
-                    this.command('rename', {oldname: oldname, newname: newname});
-                }.bind(this), {title: this.$trans('Rename')});
+                    vm.command('rename', { oldname: oldname, newname: newname });
+                });
             },
 
             remove(names) {
@@ -287,26 +290,43 @@
             initUpload() {
                 const finder = this;
                 const settings = {
-                        action: this.$url.route('system/finder/upload'),
+                        url: this.$url.route('system/finder/upload'),
+                        multiple: true,
 
-                        before: function (options) {
-                            $.extend(options.params, {path: finder.innerPath, root: finder.getRoot(), _csrf: $biskuit.csrf});
+                        beforeAll(options) {
+                            _.extend(options.params, { path: finder.innerPath, root: finder.getRoot(), _csrf: $biskuit.csrf });
                         },
 
-                        loadstart: function () {
+                        loadStart(e) {
                             finder.$set(finder.upload, 'running', true);
-                            finder.$set(finder.upload, 'progress', 0);
+                            finder.$set(finder.upload, 'progress', e.loaded);
+                            finder.$set(finder.upload, 'total', e.total);
                         },
 
-                        progress: function (percent) {
-                            finder.$set(finder.upload, 'progress', Math.ceil(percent));
+                        progress(e) {
+                            finder.$set(finder.upload, 'progress', e.loaded);
+                            finder.$set(finder.upload, 'total', e.total);
                         },
 
-                        allcomplete: function (response) {
-                            var data = $.parseJSON(response);
+                        loadEnd(e) {
+                            finder.$set(finder.upload, 'progress', e.loaded);
+                            finder.$set(finder.upload, 'total', e.total);
+                        },
+
+                        completeAll(response) {
+                            let data = response;
+                            let message = 'Error uploading files.';
+                            let error = true;
+                            try{
+                                data = JSON.parse(data.responseText);
+                                message = data.message;
+                                error = data.error;
+                            } catch(e) {
+                                // Nothing implemented, yet.
+                            }
+
                             finder.load();
-                            finder.$notify(data.message, data.error ? 'danger' : '');
-                            finder.$set(finder.upload, 'progress', 100);
+                            finder.$notify(message, error ? 'danger' : '');
 
                             setTimeout(function () {
                                 finder.$set(finder.upload, 'running', false);
@@ -315,8 +335,8 @@
 
                     };
 
-                UIkit.uploadSelect(this.$el.querySelector('.uk-form-file > input'), settings);
-                UIkit.uploadDrop($(this.$el).parents('.uk-modal').length ? this.$el : $('html'), settings);
+                UIkit.upload($('.bk-file-upload', this.$el), settings);
+                UIkit.upload(parents(this.$el, '.uk-modal').length ? this.$el : $('html'), settings);
             }
         },
 

@@ -5,25 +5,23 @@
             <p class="uk-text-muted uk-margin-small-top">{{ 'Add Image' | trans }}</p>
         </a>
 
-        <div :class="'uk-overlay uk-overlay-hover uk-visible-hover ' + cls" v-else>
+        <div :class="'uk-inline uk-overlay uk-visible-toggle ' + cls" v-else>
             <img :src="$url(image.src)">
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
-            <a class="uk-position-cover" @click.prevent="pick"></a>
-            <div class="uk-panel-badge pk-panel-badge uk-hidden">
-                <ul class="uk-subnav pk-subnav-icon">
-                    <li>
-                        <a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a>
-                    </li>
-                </ul>
+
+            <div class="uk-overlay-default  uk-invisible-hover uk-position-cover">
+                <a class="uk-position-cover" :title="$trans('Select')" uk-tooltip="delay: 500" @click.prevent="pick"></a>
+                <div class="uk-position-center">
+                    <a class="uk-icon-link" uk-icon="icon: trash; ratio: 2" :title="$trans('Delete')" uk-tooltip="delay: 500" @click.prevent="remove"></a>
+                </div>
             </div>
         </div>
 
         <v-modal ref="modal">
-            <form class="uk-form uk-form-stacked" @submit="update">
-                <div class="uk-modal-header">
-                    <h2>{{ 'Image' | trans }}</h2>
-                </div>
+            <template #header>
+                <h2 class="uk-modal-title">{{ 'Image' | trans }}</h2>
+            </template>
 
+            <form class="uk-form-stacked" @submit.prevent="update">
                 <div class="uk-margin">
                     <input-image v-model="img.src"></input-image>
                 </div>
@@ -31,22 +29,22 @@
                 <div class="uk-margin">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-src" class="uk-width-1-1" type="text" v-model.lazy="img.src">
+                        <input id="form-src" class="uk-input uk-width-1-1" type="text" v-model.lazy="img.src">
                     </div>
                 </div>
 
                 <div class="uk-margin">
                     <label for="form-alt" class="uk-form-label">{{ 'Alt' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-alt" class="uk-width-1-1" type="text" v-model="img.alt">
+                        <input id="form-alt" class="uk-input uk-width-1-1" type="text" v-model="img.alt">
                     </div>
                 </div>
-
-                <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                    <button class="uk-button uk-button-link" type="button" @click.prevent="update">{{ 'Update' | trans }}</button>
-                </div>
             </form>
+
+            <template #footer>
+                <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link" @click="update" :disabled="lastSelection == ''">{{ 'Update' | trans }}</button>
+            </template>
         </v-modal>
     </div>
 </template>
@@ -121,7 +119,6 @@
     Vue.component('input-image-meta', (resolve, reject) => {
         Vue.asset({
             js: [
-                //'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }).then(function () {

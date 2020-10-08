@@ -2,7 +2,7 @@
     <div class="uk-margin">
         <label for="form-link-user" class="uk-form-label">{{ 'View' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-link-user" class="uk-width-1-1" v-model="innerLink">
+            <select id="form-link-user" class="uk-select uk-width-1-1" v-model="innerLink">
                 <option value="@user/login">{{ 'User Login' | trans }}</option>
                 <option value="@user/logout">{{ 'User Logout' | trans }}</option>
                 <option value="@user/registration">{{ 'User Registration' | trans }}</option>

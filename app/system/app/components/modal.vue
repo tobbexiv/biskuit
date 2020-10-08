@@ -1,14 +1,22 @@
 <template>
-    <div class="uk-modal">
-        <div class="uk-modal-dialog" :class="classes">
-            <div v-if="opened">
+    <div :class="wrapperClasses">
+        <div class="uk-modal-dialog" :class="dialogClasses" v-if="opened">
+            <div class="uk-modal-header" v-if="$slots.header">
+                <slot name="header"></slot>
+            </div>
+            <div class="uk-modal-body" v-if="$slots.default">
                 <slot></slot>
+            </div>
+            <div class="uk-modal-footer uk-text-right" v-if="$slots.footer">
+                <slot name="footer"></slot>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import { on } from 'uikit-util';
+
     export default {
         data() {
             return {
@@ -30,9 +38,9 @@
             const vm = this;
 
             document.querySelector('body').appendChild(this.$el);
+            this.modal = UIkit.modal(this.$el, _.extend({ stack: true }, this.options));
 
-            this.modal = UIkit.modal(this.$el, _.extend({modal: false}, this.options));
-            this.modal.on('hide.uk.modal', () => {
+            on(this.modal.$el, 'hidden', () => {
                 vm.opened = false;
                 if (vm.closed) {
                     vm.closed();
@@ -41,15 +49,21 @@
         },
 
         computed: {
-            classes() {
+            wrapperClasses() {
                 let classes = this.modifier.split(' ');
 
                 if (this.large) {
-                    classes.push('uk-modal-dialog-large');
+                    classes.push('uk-modal-container');
                 }
 
+                return classes;
+            },
+
+            dialogClasses() {
+                let classes = [];
+
                 if (this.lightbox) {
-                    classes.push('uk-modal-dialog-lightbox');
+                    classes.push('uk-width-auto');
                 }
 
                 return classes;

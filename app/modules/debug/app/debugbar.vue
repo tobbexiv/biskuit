@@ -1,11 +1,11 @@
 <template>
-    <div id="pk-profiler" class="pf-profiler">
+    <div id="bk-profiler" class="pf-profiler">
         <div class="pf-navbar">
             <ul v-if="data" class="pf-navbar-nav">
                 <li v-for="section in sections" :key="section.name" :is="section.name" :data="data[section.name]" @click.native="open(section.name)" />
             </ul>
 
-            <a class="pf-close" @click.prevent="close"></a>
+            <a class="pf-close" @click.prevent="close"><span class="pf-icon-medium pf-icon-close"></span></a>
         </div>
 
         <div class="pf-profiler-panel" ref="panel" :style="{ display: panel ? 'block' : 'none', height: height }"></div>

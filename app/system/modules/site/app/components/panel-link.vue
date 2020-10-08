@@ -3,7 +3,7 @@
         <div class="uk-margin">
             <label for="form-style" class="uk-form-label">{{ 'Extension' | trans }}</label>
             <div class="uk-form-controls">
-                <select id="form-style" class="uk-width-1-1" v-model="type">
+                <select id="form-style" class="uk-select uk-width-1-1" v-model="type">
                     <option v-for="type in types" :value="type.value">{{ type.text }}</option>
                 </select>
             </div>

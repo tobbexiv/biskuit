@@ -5,8 +5,8 @@ const handleUpdate = (el, binding, vnode) => {
     let options = {
         title: false,
         labels: {
-            Ok: buttons[0] || $trans('Ok'),
-            Cancel: buttons[1] || $trans('Cancel')
+            ok: buttons[0] || $trans('Ok'),
+            cancel: buttons[1] || $trans('Cancel')
         }
     };
 
@@ -27,9 +27,9 @@ const handleUpdate = (el, binding, vnode) => {
 
     let handler = vnode.data.on.click.fns;
     vnode.data.on.click.fns = (e) => {
-        UIkit.modal.confirm($trans(options.text), () => {
+        UIkit.modal.confirm($trans(options.text), options).then(() => {
             handler(e);
-        }, options);
+        });
     }
 };
 
