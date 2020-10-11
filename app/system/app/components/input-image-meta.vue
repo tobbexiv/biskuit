@@ -43,7 +43,7 @@
 
             <template #footer>
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" @click="update" :disabled="lastSelection == ''">{{ 'Update' | trans }}</button>
+                <button class="uk-button uk-button-primary" @click="update">{{ 'Update' | trans }}</button>
             </template>
         </v-modal>
     </div>
