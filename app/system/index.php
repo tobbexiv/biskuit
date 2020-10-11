@@ -146,7 +146,7 @@ return [
                 }
             }
 
-            $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
+            $event->setResult(sprintf('<div class="bk-system-messages">%s</div>', $result));
         },
 
         'view.meta' => [function ($event, $meta) use ($app) {
