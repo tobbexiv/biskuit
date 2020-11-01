@@ -1,8 +1,8 @@
 <?php $view->script('post-index', 'blog:app/bundle/post-index.js', 'vue') ?>
 
 <div id="post" v-cloak>
-  <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" data-uk-margin>
-    <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+  <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" uk-margin>
+    <div class="uk-flex uk-flex-middle uk-flex-wrap" uk-margin>
       <h3 class="uk-margin-remove" v-if="!selected.length">{{ '{0} %count% Posts|{1} %count% Post|]1,Inf[ %count% Posts' | transChoice(count, {count:count}) }}</h3>
 
       <template v-else>
@@ -10,26 +10,27 @@
 
         <div class="uk-margin-left" >
           <ul class="uk-iconnav">
-            <li><a title="Publish" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="check"></span></a></li>
-            <li><a title="Unpublish" data-uk-tooltip="{delay: 500}" @click="status(3)"><span uk-icon="close"></span></a></li>
-            <li><a title="Copy" data-uk-tooltip="{delay: 500}" @click="copy"><span uk-icon="copy"></span></a></li>
-            <li><a title="Delete" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
+            <li><a title="$trans('Publish')" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="check"></span></a></li>
+            <li><a title="$trans('Unpublish')" data-uk-tooltip="{delay: 500}" @click="status(3)"><span uk-icon="close"></span></a></li>
+            <li><a title="$trans('Copy')" data-uk-tooltip="{delay: 500}" @click="copy"><span uk-icon="copy"></span></a></li>
+            <li><a title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
           </ul>
         </div>
       </template>
+
+      <hr class="uk-divider-vertical bk-divider-vertical" />
 
       <form class="uk-search uk-search-navbar">
         <span uk-search-icon></span>
         <input class="uk-search-input" type="search" v-model="searchString">
       </form>
-
     </div>
-    <div data-uk-margin>
+    <div uk-margin>
       <a class="uk-button uk-button-primary" :href="$url.route('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
     </div>
   </div>
 
-  <div class="uk-overflow-container">
+  <div class="uk-overflow-auto">
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>

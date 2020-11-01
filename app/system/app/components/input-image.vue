@@ -21,7 +21,7 @@
 
             <template #footer>
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" @click.prevent="select" :disabled="lastSelection == ''">{{ 'Select' | trans }}</button>
+                <button class="uk-button uk-button-primary" @click.prevent="select" :disabled="lastSelection == ''">{{ 'Select' | trans }}</button>
             </template>
         </v-modal>
     </div>
@@ -67,7 +67,7 @@
             },
 
             updateSelected(event, params) {
-                this.lastSelection = params.selected ? params.selected[0] : '';
+                this.lastSelection = params.selected && params.selected.length ? params.selected[0] : '';
             }
         },
 

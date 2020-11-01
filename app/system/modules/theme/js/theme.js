@@ -39,7 +39,7 @@ Vue.ready(function () {
     });*/
 
     // show system messages
-    UIkit.util.toNodes(UIkit.util.$('.pk-system-messages').children).forEach(function (message) {
+    UIkit.util.toNodes(UIkit.util.$('.bk-system-messages').children).forEach(function (message) {
         var data = message.dataset;
 
         // remove success message faster

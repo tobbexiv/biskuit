@@ -1,5 +1,5 @@
 <template>
-    <div class="uk-form-select bk-filter" :class="{'uk-active': value }">
+    <div class="uk-form-custom bk-filter" :class="{'uk-active': value }">
         <span>{{ label }}</span>
         <select v-model="innerValue">
             <template v-for="option in list">

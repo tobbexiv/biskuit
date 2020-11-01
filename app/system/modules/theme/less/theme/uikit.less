@@ -1,0 +1,61 @@
+/***************************************************************************
+ *** Use this file to overwrite variables / implement hooks defined in   ***
+ *** the original UIkit theme.                                           ***
+ ***************************************************************************/
+
+/* variables.less
+========================================================================== */
+
+@global-link-color: #3e89c6;
+
+/* base.less
+========================================================================== */
+
+// Diverse
+.hook-base-misc() {
+    // Hide elements before Vue is loaded
+    [v-cloak] {
+        display:none;
+    }
+
+    //Font smoothing
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+// HTML element styling
+@base-body-background: #f9f9fb;
+.hook-base-body() {
+    // Force vertical overflow
+    overflow-y: scroll;
+}
+
+// Adjust heading stylesheet
+@base-heading-font-weight: 300;
+@base-heading-color: @global-color;
+@base-heading-text-transform: none
+
+/* navbar.less
+========================================================================== */
+
+@search-navbar-font-size: "1.2rem";
+@search-navbar-icon-width: 19px;
+
+/* tab.less
+========================================================================== */
+
+@tab-item-padding-horizontal: 15px;
+@tab-item-padding-vertical: 14px;
+
+/* table.less
+========================================================================== */
+
+@table-header-cell-font-size: 12px;
+@table-header-cell-color: #909090;
+.hook-table-misc() {
+    .uk-table td a {
+        text-decoration: none;
+    }
+}

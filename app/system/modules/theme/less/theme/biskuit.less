@@ -1,0 +1,142 @@
+/***************************************************************************
+ *** Use this file to define biskuit specific styles.                    ***
+ ***************************************************************************/
+
+
+ /* Pages for login, error, etc
+  ========================================================================== */
+ .bk-background {
+     background: url("../images/background.jpg") 50% 50% no-repeat;
+     background-size: cover;
+ }
+
+/* Theme
+========================================================================== */
+
+.bk-header {
+    background-image: linear-gradient(to left, #323b44, #24292e);
+    margin-bottom: 65px;
+}
+
+.bk-divider-vertical.uk-divider-vertical {
+    height: 42px;
+    margin: 0 @global-margin;
+}
+
+/* Sidebar
+========================================================================== */
+
+.bk-sidebar {
+    .uk-overlay {
+        padding: 0;
+    }
+
+    @media (min-width: @breakpoint-medium) {
+        width: 320px;
+    }
+}
+
+/* Table
+========================================================================== */
+
+.bk-table-width-minimum {
+    width: 1px;
+}
+
+.bk-table-width-36 {
+    width: 36px;
+}
+
+.bk-table-width-100 {
+    width: 100px;
+}
+
+.bk-table-width-150 {
+    width: 150px;
+}
+
+.bk-table-width-200 {
+    width: 200px;
+}
+
+.bk-table-text-break {
+    word-break: break-word;
+}
+
+.bk-table-min-width-100 {
+    min-width: 100px;
+}
+
+.bk-table-min-width-150 {
+    min-width: 150px;
+}
+
+.bk-table-min-width-200 {
+    min-width: 200px;
+}
+
+.bk-table-min-width-300 {
+    min-width: 300px;
+}
+
+.bk-table-max-width-100 {
+    max-width: 100px;
+}
+
+.bk-table-max-width-150 {
+    max-width: 150px;
+}
+
+/* Order
+========================================================================== */
+
+.bk-order {
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:hover, &.uk-active {
+        color: #666;
+    }
+}
+
+/* Filter
+========================================================================== */
+
+.bk-filter {
+    position: relative;
+
+    &:hover > *, &.uk-active > * {
+        color: @global-color;
+    }
+
+    &.uk-active > * {
+        font-weight: bold;
+    }
+
+    select {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0;
+        cursor: pointer;
+        -webkit-appearance: none;
+    }
+}
+
+/* Installer: Themes
+========================================================================== */
+
+.pk-panel-badge-bottom-right {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+}
+
+.uk-card:hover .pk-panel-badge-bottom-right {
+    display: block;
+}

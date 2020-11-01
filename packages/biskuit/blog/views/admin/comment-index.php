@@ -1,19 +1,13 @@
 <?php $view->script('comment-index', 'blog:app/bundle/comment-index.js', 'vue') ?>
 
 <div id="comments" v-cloak>
-  <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" data-uk-margin>
-    <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+  <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" uk-margin>
+    <div class="uk-flex uk-flex-middle uk-flex-wrap" uk-margin>
       <h3 class="uk-margin-remove" v-if="!selected.length">{{ '{0} %count% Comments|{1} %count% Comment|]1,Inf[ %count% Comments' | transChoice(count, {count:count}) }}</h3>
       <template v-else>
         <h3 class="uk-margin-remove">{{ '{1} %count% Comment selected|]1,Inf[ %count% Comments selected' | transChoice(selected.length, {count:selected.length}) }}</h3>
 
         <div class="uk-margin-left">
-          <ul class="uk-subnav pk-subnav-icon">
-            <li><a class="pk-icon-check pk-icon-hover" :title="$trans('Approve')" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
-            <li><a class="pk-icon-block pk-icon-hover" :title="$trans('Unapprove')" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
-            <li><a class="pk-icon-spam pk-icon-hover" :title="$trans('Mark as spam')" data-uk-tooltip="{delay: 500}" @click="status(2)"></a></li>
-            <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
-          </ul>
           <ul class="uk-iconnav">
             <li><a :title="$trans('Approve')" data-uk-tooltip="{delay: 500}" @click="status(1)"><span uk-icon="check"></span></a></li>
             <li><a :title="$trans('Unapprove')" data-uk-tooltip="{delay: 500}" @click="status(0)"><span uk-icon="close"></span></a></li>
@@ -22,6 +16,9 @@
           </ul>
         </div>
       </template>
+
+      <hr class="uk-divider-vertical bk-divider-vertical" />
+
       <form class="uk-search uk-search-navbar">
         <span uk-search-icon></span>
         <input class="uk-search-input" type="search" v-model="searchString">
@@ -29,7 +26,7 @@
     </div>
   </div>
 
-  <div class="uk-overflow-container">
+  <div class="uk-overflow-auto">
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
@@ -53,7 +50,7 @@
               <img class="uk-img-preserve uk-border-circle" width="40" height="40" :alt="comment.author" v-gravatar="comment.email">
             </td>
             <td>
-              <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" data-uk-margin>
+              <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" uk-margin>
                 <div>
                   <a :href="$url.route('admin/user/edit', { id: comment.user_id })" v-if="comment.user_id!=0">{{ comment.author }}</a>
                   <span v-else>{{ comment.author }}</span>
@@ -73,7 +70,7 @@
 
               <div class="uk-margin-top" v-if="replyComment.parent_id === comment.id">
                 <validation-observer v-slot="{ handleSubmit }" slim>
-                  <form class="uk-form" @submit.prevent="handleSubmit(submit)">
+                  <form @submit.prevent="handleSubmit(submit)">
                     <v-validated-input
                         :id="'form-reply-comment-' + comment.id"
                         name="content"
@@ -81,13 +78,13 @@
                         rules="required"
                         label="Comment"
                         :error-messages="{ required: 'Comment cannot be blank.' }"
-                        :options="{ innerWrapperClass: '', textarea: { rows: 10 }, elementClass: 'uk-textarea' }"
+                        :options="{ innerWrapperClass: '', textarea: { rows: 10 } }"
                         v-model="replyComment.content">
                     </v-validated-input>
 
                     <p>
                       <button class="uk-button uk-button-primary" type="submit">{{ 'Reply' | trans }}</button>
-                      <button class="uk-button" @click.prevent="cancel">{{ 'Cancel' | trans }}</button>
+                      <button class="uk-button uk-button-default" @click.prevent="cancel">{{ 'Cancel' | trans }}</button>
                     </p>
                   </form>
                 </validation-observer>
@@ -117,15 +114,15 @@
             </td>
             <td colspan="3">
               <validation-observer v-slot="{ handleSubmit }" slim>
-                <form class="uk-form uk-form-stacked" @submit.prevent="handleSubmit(submit)">
-                  <div class="uk-grid uk-grid-medium uk-grid-width-medium-1-3" data-uk-margin="{cls:'uk-margin-top'}">
+                <form class="uk-form-stacked" @submit.prevent="handleSubmit(submit)">
+                  <div class="uk-grid uk-grid-medium uk-child-width-1-3@m" uk-margin="{cls:'uk-margin-top'}">
                     <v-validated-input
                         :id="'form-edit-name-' + comment.id"
                         name="author"
                         rules="required"
                         label="Name"
                         :error-messages="{ required: 'Name cannot be blank.' }"
-                        :options="{ wrapperClass:'', innerWrapperClass: '', elementClass: 'uk-input' }"
+                        :options="{ wrapperClass:'', innerWrapperClass: '' }"
                         v-model="editComment.author">
                     </v-validated-input>
 
@@ -136,7 +133,7 @@
                         rules="email"
                         label="Email"
                         :error-messages="{ email: 'Email invalid.' }"
-                        :options="{ wrapperClass:'', innerWrapperClass: '', elementClass: 'uk-input' }"
+                        :options="{ wrapperClass:'', innerWrapperClass: '' }"
                         v-model="editComment.email">
                     </v-validated-input>
                     <div>
@@ -154,13 +151,13 @@
                       rules="required"
                       label="Comment"
                       :error-messages="{ required: 'Comment cannot be blank.' }"
-                      :options="{ wrapperClass: 'uk-margin', innerWrapperClass: '', textarea: { rows: 10 }, elementClass: 'uk-textarea' }"
+                      :options="{ innerWrapperClass: '', textarea: { rows: 10 } }"
                       v-model="editComment.content">
                   </v-validated-input>
 
                   <p>
                     <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-                    <button class="uk-button" @click.prevent="cancel">{{ 'Cancel' | trans }}</button>
+                    <button class="uk-button uk-button-default" @click.prevent="cancel">{{ 'Cancel' | trans }}</button>
                   </p>
                 </form>
               </validation-observer>

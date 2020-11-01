@@ -12,7 +12,7 @@
                     </ul>
                 </div>
 
-                <hr class="uk-divider-vertical bk-divider-vertical uk-margin-remove" />
+                <hr class="uk-divider-vertical bk-divider-vertical" />
 
                 <div class="uk-search uk-search-navbar">
                     <span uk-search-icon></span>
