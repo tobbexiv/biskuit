@@ -10,10 +10,10 @@
 
         <div class="uk-margin-left" >
           <ul class="uk-iconnav">
-            <li><a title="Publish" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="check"></span></a></li>
-            <li><a title="Unpublish" data-uk-tooltip="{delay: 500}" @click="status(3)"><span uk-icon="close"></span></a></li>
-            <li><a title="Copy" data-uk-tooltip="{delay: 500}" @click="copy"><span uk-icon="copy"></span></a></li>
-            <li><a title="Delete" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
+            <li><a title="$trans('Publish')" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="check"></span></a></li>
+            <li><a title="$trans('Unpublish')" data-uk-tooltip="{delay: 500}" @click="status(3)"><span uk-icon="close"></span></a></li>
+            <li><a title="$trans('Copy')" data-uk-tooltip="{delay: 500}" @click="copy"><span uk-icon="copy"></span></a></li>
+            <li><a title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
           </ul>
         </div>
       </template>

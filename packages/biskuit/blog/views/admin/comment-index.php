@@ -8,12 +8,6 @@
         <h3 class="uk-margin-remove">{{ '{1} %count% Comment selected|]1,Inf[ %count% Comments selected' | transChoice(selected.length, {count:selected.length}) }}</h3>
 
         <div class="uk-margin-left">
-          <ul class="uk-subnav pk-subnav-icon">
-            <li><a class="pk-icon-check pk-icon-hover" :title="$trans('Approve')" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
-            <li><a class="pk-icon-block pk-icon-hover" :title="$trans('Unapprove')" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
-            <li><a class="pk-icon-spam pk-icon-hover" :title="$trans('Mark as spam')" data-uk-tooltip="{delay: 500}" @click="status(2)"></a></li>
-            <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
-          </ul>
           <ul class="uk-iconnav">
             <li><a :title="$trans('Approve')" data-uk-tooltip="{delay: 500}" @click="status(1)"><span uk-icon="check"></span></a></li>
             <li><a :title="$trans('Unapprove')" data-uk-tooltip="{delay: 500}" @click="status(0)"><span uk-icon="close"></span></a></li>
