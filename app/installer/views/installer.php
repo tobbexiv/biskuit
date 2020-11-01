@@ -6,7 +6,7 @@
         <link href="app/system/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
         <?php $view->style('uikit', 'app/assets/uikit/dist/css/uikit.css') ?>
         <?php $view->style('installer', 'app/installer/assets/css/installer.css') ?>
-        <?php $view->script('installer', 'app/installer/app/views/installer.js', ['vue', 'uikit', 'uikit-form-password']) ?>
+        <?php $view->script('installer', 'app/installer/app/views/installer.js', ['vue']) ?>
         <?= $view->render('head') ?>
     </head>
     <body>
@@ -33,9 +33,9 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Choose language' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ "Select your site language." | trans }}</div>
 
-                        <form class="uk-form" @submit.prevent="stepLanguage">
+                        <form @submit.prevent="stepLanguage">
 
-                            <select class="uk-width-1-1" size="10" v-model="locale">
+                            <select class="uk-select" size="10" v-model="locale">
                                 <option v-for="(lang, key) in locales" :value="key">{{ lang }}</option>
                             </select>
 
@@ -65,15 +65,13 @@
 
                         <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" @submit.prevent="handleSubmit(stepDatabase)">
+                        <form @submit.prevent="handleSubmit(stepDatabase)">
                             <div class="uk-margin">
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <select id="form-dbdriver" class="uk-width-1-1" name="dbdriver" v-model="config.database.default">
-                                        <option value="sqlite" v-if="sqlite">SQLite</option>
-                                        <option value="mysql">MySQL</option>
-                                    </select>
-                                </div>
+                                  <select id="form-dbdriver" class="uk-select" name="dbdriver" v-model="config.database.default">
+                                      <option value="sqlite" v-if="sqlite">SQLite</option>
+                                      <option value="mysql">MySQL</option>
+                                  </select>
                             </div>
                             <div class="uk-margin" v-if="config.database.default == 'mysql'">
                                 <v-validated-input
