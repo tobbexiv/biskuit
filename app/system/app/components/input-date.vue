@@ -58,14 +58,14 @@
             time: {
                 get() {
                     const result = this.getDateFromAtomString(this.datetime);
-                    return this.getTimeString(result.getHours(), result.getMinutes(), result.getSeconds());
+                    return this.getTimeString(result.getHours(), result.getMinutes());
                 },
 
                 set(time) {
                     if(!time) return;
                     const result = this.getDateFromAtomString(this.datetime);
                     const timeInformation = this.getTimeInformationFromString(time);
-                    result.setHours(timeInformation.hours, timeInformation.minutes, timeInformation.seconds);
+                    result.setHours(timeInformation.hours, timeInformation.minutes, 0);
                     this.datetime = this.getAtomStringFromDate(result);
                 }
             },
@@ -82,14 +82,14 @@
                 const timeInformation = this.getTimeInformationFromString(splitted[1].split('+')[0]);
                 let date = new Date(0);
                 date.setUTCFullYear(dateInformation.year, dateInformation.month, dateInformation.day);
-                date.setUTCHours(timeInformation.hours, timeInformation.minutes, timeInformation.seconds);
+                date.setUTCHours(timeInformation.hours, timeInformation.minutes, 0);
                 return date;
             },
 
             getAtomStringFromDate(date) {
                 const year = (date.getUTCFullYear() >= 10000) || date.getUTCFullYear() <= 0 ? 1 : date.getUTCFullYear();
                 return this.getDateString(year, date.getUTCMonth(), date.getUTCDate()) +
-                        'T' + this.getTimeString(date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()) +
+                        'T' + this.getTimeString(date.getUTCHours(), date.getUTCMinutes()) + ':00' +
                         '+00:00';
             },
 
@@ -110,8 +110,7 @@
                 const splitted = timeString.split(':');
                 return {
                     hours: splitted[0] ? splitted[0] : 0,
-                    minutes: splitted[1] ? splitted[1] : 0,
-                    seconds: splitted[2] ? splitted[2] : 0,
+                    minutes: splitted[1] ? splitted[1] : 0
                 };
             },
 
@@ -119,8 +118,8 @@
                 return this.pad(year, 4) + '-' + this.pad(month + 1, 2) + '-' + this.pad(day, 2);
             },
 
-            getTimeString(hours, minutes, seconds) {
-                return this.pad(hours, 2) + ':' + this.pad(minutes, 2) + ':' + this.pad(seconds, 2);
+            getTimeString(hours, minutes) {
+                return this.pad(hours, 2) + ':' + this.pad(minutes, 2);
             },
 
             pad(input, digits) {
