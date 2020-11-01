@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600&amp;subset=<?= $subset ?>" rel="stylesheet">
-    <?php $view->style('uikit', 'app/assets/uikit/dist/css/uikit.css') ?>
     <?php $view->style('theme', 'system/theme:css/theme.css') ?>
     <?php $view->script('theme', 'system/theme:js/theme.js', ['vue', 'uikit']) ?>
     <?php $view->script('uikit-icons', 'app/assets/uikit/dist/js/uikit-icons.js', ['uikit']) ?>

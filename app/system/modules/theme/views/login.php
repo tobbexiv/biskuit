@@ -26,14 +26,14 @@
       <form class="js-login js-toggle uk-form tm-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
         <div class="uk-margin">
-          <div class="uk-inline bk-inline">
+          <div class="uk-inline uk-display-block">
             <span class="uk-form-icon" uk-icon="icon: user"></span>
             <input class="uk-input" type="text" name="credentials[username]" value="<?= $this->escape($last_username) ?>" placeholder="<?= __('Username') ?>" autofocus>
           </div>
         </div>
 
         <div class="uk-margin">
-          <div class="uk-inline bk-inline">
+          <div class="uk-inline uk-display-block">
             <span class="uk-form-icon" uk-icon="icon: lock"></span>
             <input class="uk-input" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
           </div>
