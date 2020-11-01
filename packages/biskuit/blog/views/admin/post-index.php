@@ -18,11 +18,12 @@
         </div>
       </template>
 
-      <form class="uk-search uk-search-navbar uk-margin-left">
+      <hr class="uk-divider-vertical bk-divider-vertical" />
+
+      <form class="uk-search uk-search-navbar">
         <span uk-search-icon></span>
         <input class="uk-search-input" type="search" v-model="searchString">
       </form>
-
     </div>
     <div uk-margin>
       <a class="uk-button uk-button-primary" :href="$url.route('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
