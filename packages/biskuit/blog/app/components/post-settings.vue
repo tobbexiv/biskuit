@@ -20,12 +20,12 @@
                 </div>
             </div>
         </div>
-        <div class="uk-width-auto@m">
+        <div class="uk-width-auto@m bk-sidebar">
             <div class="uk-panel">
                 <div class="uk-margin">
                     <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input-image-meta v-model="post.data.image" cls="pk-image-max-height"></input-image-meta>
+                        <input-image-meta v-model="postImage"></input-image-meta>
                     </div>
                 </div>
                 <div class="uk-margin">
@@ -53,8 +53,7 @@
                 <div class="uk-margin">
                     <span class="uk-form-label">{{ 'Publish on' | trans }}</span>
                     <div class="uk-form-controls">
-                        <!-- TODO: this input do not parse current value -->
-                        <input class="uk-input" type="date" v-model="post.date">
+                        <input-date v-model="post.date"></input-date>
                     </div>
                 </div>
                 <div class="uk-margin">
@@ -89,6 +88,7 @@
 
         data() {
             return {
+                postImage: this.value.data.image || {},
                 post: this.value
             };
         },
@@ -96,12 +96,16 @@
         watch: {
             value(newPost) {
                 this.post = newPost;
+                if(this.postImage != this.post.data.image) {
+                    this.postImage = this.post.data.image || {};
+                }
             },
-            post: {
-                handler(newPost) {
-                    this.$emit('input', newPost);
-                },
-                deep: true
+            postImage() {
+                this.post.data.image = this.postImage;
+                this.$emit('input', this.post);
+            },
+            post(newPost) {
+                this.$emit('input', newPost);
             }
         }
     };
