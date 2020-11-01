@@ -8,7 +8,7 @@ const BlogPostIndex = {
             posts: false,
             searchString: '',
             config: {
-                filter: this.$session.get('posts.filter', {order: 'date desc', limit:25})
+                filter: this.$session.get('posts.filter', { order: 'date desc', limit:25 })
             },
             pages: 0,
             count: '',
@@ -19,6 +19,7 @@ const BlogPostIndex = {
 
     created() {
         this.resource = this.$resource('api/blog/post{/id}');
+        this.searchString = this.config.filter.search || '';
         this.load();
     },
 

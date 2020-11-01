@@ -1,8 +1,8 @@
 <?php $view->script('post-index', 'blog:app/bundle/post-index.js', 'vue') ?>
 
 <div id="post" v-cloak>
-  <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" data-uk-margin>
-    <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+  <div class="uk-margin uk-flex uk-flex-between uk-flex-wrap" uk-margin>
+    <div class="uk-flex uk-flex-middle uk-flex-wrap" uk-margin>
       <h3 class="uk-margin-remove" v-if="!selected.length">{{ '{0} %count% Posts|{1} %count% Post|]1,Inf[ %count% Posts' | transChoice(count, {count:count}) }}</h3>
 
       <template v-else>
@@ -18,18 +18,18 @@
         </div>
       </template>
 
-      <form class="uk-search uk-search-navbar">
+      <form class="uk-search uk-search-navbar uk-margin-left">
         <span uk-search-icon></span>
         <input class="uk-search-input" type="search" v-model="searchString">
       </form>
 
     </div>
-    <div data-uk-margin>
+    <div uk-margin>
       <a class="uk-button uk-button-primary" :href="$url.route('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
     </div>
   </div>
 
-  <div class="uk-overflow-container">
+  <div class="uk-overflow-auto">
     <table class="uk-table uk-table-divider uk-table-hover">
       <thead>
       <tr>
