@@ -1,11 +1,11 @@
-import { $, on, data, append, empty, trigger, closest } from 'uikit-util';
+import { $, on, append, empty } from 'uikit-util';
 
 export default {
     template: '<ul class="uk-pagination uk-flex-center"></ul>',
 
     props: {
         value: {
-            default: 1
+            default: 0
         },
 
         pages: {
