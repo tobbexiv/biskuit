@@ -1,52 +1,52 @@
 <?php $view->script('role-index', 'system/user:app/bundle/role-index.js', 'vue') ?>
 
-<div id="roles" class="uk-form" v-cloak>
-    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
-        <div class="pk-width-sidebar">
+<div id="roles" v-cloak>
+    <div class="uk-grid" uk-grid-margin>
+        <div class="uk-first-column bk-sidebar bk-sidebar-small">
             <div class="uk-panel">
 
-                <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
+                <ul class="uk-tab uk-tab-left uk-sortable" uk-sortable="handle: .uk-sortable-handle; cls-custom: uk-text-uppercase">
                     <li :id="role.id" class="uk-visible-toggle" v-for="role in orderedRoles" :class="{'uk-active': current.id === role.id}" :key="role.id">
-                        <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
-                            <li><a class="pk-icon-edit pk-icon-hover" :title="$trans('Edit')" data-uk-tooltip="{delay: 500}" @click="edit(role)"></a></li>
-                            <li><a class="pk-icon-delete pk-icon-hover" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
+                        <a class="uk-sortable-handle uk-position-relative" @click.prevent="config.role = role.id">{{ role.name }}</a>
+                        <ul class="uk-invisible-hover uk-iconnav uk-position-center-right uk-margin-small-right" v-if="!role.locked">
+                            <li><a class="uk-icon-link" uk-icon="file-edit" :uk-tooltip="$trans('Edit')" @click="edit(role)"></a></li>
+                            <li><a class="uk-icon-link" uk-icon="trash" :uk-tooltip="$trans('Delete')" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
                         </ul>
-                        <a @click.prevent="config.role = role.id">{{ role.name }}</a>
                     </li>
                 </ul>
 
                 <p>
-                    <a class="uk-button" @click.prevent="edit()">{{ 'Add Role' | trans }}</a>
+                    <a class="uk-button uk-button-default" @click.prevent="edit()">{{ 'Add Role' | trans }}</a>
                 </p>
             </div>
         </div>
-        <div class="pk-width-content">
+        <div class="uk-width-expand">
             <h2>{{ current.name }}</h2>
 
-            <div class="uk-overflow-container uk-margin-large" v-for="(group, groupKey) in permissions" :key="groupKey">
-                <table class="uk-table uk-table-hover uk-table-middle">
+            <div class="uk-overflow-auto uk-margin" v-for="(group, groupKey) in permissions" :key="groupKey">
+                <table class="uk-table uk-table-hover uk-table-divider uk-table-middle">
                     <thead>
                         <tr>
-                            <th class="pk-table-min-width-200">{{ groupKey }}</th>
+                            <th class="bk-table-min-width-200">{{ groupKey }}</th>
                             <th class="bk-table-width-minimum"></th>
                             <th class="bk-table-width-minimum"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(permission, permissionKey) in group" :class="{'uk-visible-hover-inline': permission.trusted}">
-                            <td class="pk-table-text-break">
-                                <span :title="$trans(permission.description)" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
-                            </td>
+                        <tr v-for="(permission, permissionKey) in group" :class="{'uk-visible-toggle': permission.trusted}">
                             <td>
-                                <i class="pk-icon-warning uk-invisible" :title="$trans('Grant this permission to trusted roles only to avoid security implications.')" data-uk-tooltip v-if="permission.trusted"></i>
+                                <span :uk-tooltip="$trans(permission.description)" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
+                            </td>
+                            <td class="uk-preserve-width">
+                                <span class="uk-invisible-hover uk-text-danger" uk-icon="warning" :uk-tooltip="$trans('Grant this permission to trusted roles only to avoid security implications.')" v-if="permission.trusted"></span>
                             </td>
                             <td class="uk-text-center">
                                 <span class="uk-position-relative" v-if="showFakeCheckbox(current, permissionKey)">
-                                    <input type="checkbox" checked disabled>
+                                    <input class="uk-checkbox" type="checkbox" checked disabled>
                                     <span class="uk-position-cover" v-if="!current.administrator" @click="addPermission(current, permissionKey)" @click="savePermissions(current)"></span>
                                 </span>
 
-                                <input type="checkbox" :value="permissionKey" v-else v-model="current.permissions" @click="savePermissions(current)">
+                                <input class="uk-checkbox" type="checkbox" :value="permissionKey" v-else v-model="current.permissions" @click="savePermissions(current)">
                             </td>
                         </tr>
                     </tbody>
@@ -56,27 +56,25 @@
     </div>
 
     <v-modal ref="modal">
-        <validation-observer v-slot="{ handleSubmit }" slim>
-            <form class="uk-form uk-form-stacked" @submit.prevent="handleSubmit(save)">
-                <div class="uk-modal-header">
-                    <h2>{{ (role.id ? 'Edit Role':'Add Role') | trans }}</h2>
-                </div>
+        <template #header>
+            <h2 class="uk-modal-title">{{ (role.id ? 'Edit Role':'Add Role') | trans }}</h2>
+        </template>
 
-                <v-validated-input
-                    id="form-name"
-                    name="name"
-                    rules="required"
-                    label="Name"
-                    :error-messages="{ required: 'Name cannot be blank.' }"
-                    :options="{ elementClass: 'uk-width-1-1 uk-form-large' }"
-                    v-model="role.name">
-                </v-validated-input>
+        <form class="uk-form uk-form-stacked" @submit.prevent="handleSubmit(save)">
+            <v-validated-input
+                id="form-name"
+                name="name"
+                rules="required"
+                label="Name"
+                :error-messages="{ required: 'Name cannot be blank.' }"
+                :options="{ elementClass: 'uk-width-1-1 uk-form-large' }"
+                v-model="role.name">
+            </v-validated-input>
+        </form>
 
-                <div class="uk-modal-footer uk-text-right">
-                    <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                    <button class="uk-button uk-button-link" type="submit">{{ 'Save' | trans }}</button>
-                </div>
-            </form>
-        </validation-observer>
+        <template #footer="{ validationObserver }">
+            <button class="uk-button uk-button-link uk-modal-close">{{ 'Cancel' | trans }}</button>
+            <button class="uk-button uk-button-primary" @click.prevent="validationObserver.handleSubmit(save)">{{ 'Save' | trans }}</button>
+        </template>
     </v-modal>
 </div>

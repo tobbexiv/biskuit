@@ -1,3 +1,4 @@
+import { $, on } from 'uikit-util';
 import PermissionsLibrary from '../../lib/permissions';
 
 const Roles = {
@@ -13,7 +14,7 @@ const Roles = {
     },
 
     mounted() {
-        $(this.$el).on('change.uk.sortable', this.reorder);
+        on($(this.$el), 'added moved', this.reorder);
     },
 
     computed: {
@@ -28,7 +29,7 @@ const Roles = {
 
     methods: {
         edit(role) {
-            this.role = $.extend({}, role || {});
+            this.role = _.extend({}, role || {});
             this.$refs.modal.open();
         },
 
@@ -69,7 +70,7 @@ const Roles = {
                 return;
             }
 
-            sortable.element.children().each((index, element) => {
+            sortable.$el.childNodes.forEach((element, index) => {
                 vm.roles[_.findIndex(vm.roles, { id: parseInt(element.id) })].priority = index;
             });
 
