@@ -2,7 +2,7 @@
 
 <div id="settings" class="uk-form-horizontal" v-cloak>
   <div uk-grid>
-    <div class="uk-width-auto@m">
+    <div class="uk-first-column bk-sidebar bk-sidebar-small">
       <ul class="uk-tab-left" uk-tab="connect: #component-tab-left; animation: uk-animation-fade">
         <li><a><span uk-icon="settings"></span> {{ 'General' | trans }}</a></li>
         <li><a><span uk-icon="comments"></span> {{ 'Comments' | trans }}</a></li>

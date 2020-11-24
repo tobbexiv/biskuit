@@ -9,10 +9,10 @@
 
         <div class="uk-margin-left">
           <ul class="uk-iconnav">
-            <li><a :title="$trans('Approve')" data-uk-tooltip="{delay: 500}" @click="status(1)"><span uk-icon="check"></span></a></li>
-            <li><a :title="$trans('Unapprove')" data-uk-tooltip="{delay: 500}" @click="status(0)"><span uk-icon="close"></span></a></li>
-            <li><a :title="$trans('Mark as spam')" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="warning"></span></a></li>
-            <li><a :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove"><span uk-icon="trash"></span></a></li>
+            <li><a :uk-tooltip="$trans('Approve')" @click="status(1)"><span uk-icon="check"></span></a></li>
+            <li><a :uk-tooltip="$trans('Unapprove')" @click="status(0)"><span uk-icon="close"></span></a></li>
+            <li><a :uk-tooltip="$trans('Mark as spam')" @click="status(2)"><span uk-icon="warning"></span></a></li>
+            <li><a :uk-tooltip="$trans('Delete')" @click.prevent="remove"><span uk-icon="trash"></span></a></li>
           </ul>
         </div>
       </template>
@@ -57,9 +57,9 @@
                   <br><a class="uk-link-muted uk-text-meta" :href="'mailto:'+comment.email">{{ comment.email }}</a>
                 </div>
                 <div class="uk-flex uk-flex-middle">
-                  <ul class="uk-iconnav pk-subnav-icon uk-margin-right uk-invisible-hover">
-                    <li><a class="pk-icon-edit pk-icon-hover" uk-icon="icon: pencil" :title="$trans('Edit')" data-uk-tooltip="{delay: 500}" @click.prevent="edit(comment)"></a></li>
-                    <li><a class="pk-icon-reply pk-icon-hover" uk-icon="icon: reply" :title="$trans('Reply')" data-uk-tooltip="{delay: 500}" @click.prevent="reply(comment)"></a></li>
+                  <ul class="uk-iconnav uk-margin-right uk-invisible-hover">
+                    <li><a uk-icon="icon: pencil" :uk-tooltip="$trans('Edit')" @click.prevent="edit(comment)"></a></li>
+                    <li><a uk-icon="icon: reply" :uk-tooltip="$trans('Reply')" @click.prevent="reply(comment)"></a></li>
                   </ul>
                   <a class="uk-link-muted uk-text-meta" v-if="post.accessible" :href="$url.route(post.url.substr(1))+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
                   <span v-else>{{ comment.created | relativeDate }}</span>
@@ -100,7 +100,7 @@
             <td>
               <a :href="$url.route('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
               <br />
-              <a class="uk-text-nowrap uk-link-muted uk-text-meta" :class="{'pk-link-icon': !post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :title="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending', post.comments_pending, post)">
+              <a class="uk-text-nowrap uk-link-muted uk-text-meta" :class="{'uk-link-text': post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :uk-tooltip="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending', post.comments_pending, post)">
                 <span uk-icon="comment"></span>
                 {{ post.comment_count }}</a>
             </td>

@@ -10,10 +10,10 @@
 
         <div class="uk-margin-left" >
           <ul class="uk-iconnav">
-            <li><a title="$trans('Publish')" data-uk-tooltip="{delay: 500}" @click="status(2)"><span uk-icon="check"></span></a></li>
-            <li><a title="$trans('Unpublish')" data-uk-tooltip="{delay: 500}" @click="status(3)"><span uk-icon="close"></span></a></li>
-            <li><a title="$trans('Copy')" data-uk-tooltip="{delay: 500}" @click="copy"><span uk-icon="copy"></span></a></li>
-            <li><a title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
+            <li><a :uk-tooltip="$trans('Publish')" @click="status(2)"><span uk-icon="check"></span></a></li>
+            <li><a :uk-tooltip="$trans('Unpublish')" @click="status(3)"><span uk-icon="close"></span></a></li>
+            <li><a :uk-tooltip="$trans('Copy')" @click="copy"><span uk-icon="copy"></span></a></li>
+            <li><a :uk-tooltip="$trans('Delete')" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
           </ul>
         </div>
       </template>
@@ -56,9 +56,9 @@
         </td>
         <td class="uk-text-center">
           <a :title="getStatusText(post)" @click="toggleStatus(post)">
-            <span v-if="post.status == 0" uk-icon="check"></span>
+            <span v-if="post.status == 0" uk-icon="pencil"></span>
             <span v-if="post.status == 1" uk-icon="warning"></span>
-            <span v-if="post.status == 2 && post.published" uk-icon="pencil"></span>
+            <span v-if="post.status == 2 && post.published" uk-icon="check"></span>
             <span v-if="post.status == 3" uk-icon="close"></span>
             <span v-if="post.status == 2 && !post.published" uk-icon="calendar"></span>
           </a>
@@ -67,8 +67,9 @@
           <a :href="$url.route('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
         </td>
         <td class="uk-text-center">
-          <a class="uk-text-nowrap uk-link-muted" :class="{'pk-link-icon': !post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :title="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments% pending', post.comments_pending, {comments:post.comments_pending})" data-uk-tooltip>
-            <span uk-icon="comment"></span> {{ post.comment_count }}</a>
+          <a class="uk-text-nowrap uk-link-muted" :class="{'uk-link-text': post.comments_pending}" :href="$url.route('admin/blog/comment', { post: post.id })" :uk-tooltip="$transChoice('{0} No pending|{1} One pending|]1,Inf[ %comments% pending', post.comments_pending, {comments:post.comments_pending})">
+            <span uk-icon="comment"></span> {{ post.comment_count }}
+          </a>
         </td>
         <td>
           {{ post.date | date }}
