@@ -8,7 +8,7 @@
                 <canvas class="uk-responsive-width uk-display-block" width="1200" height="800"></canvas>
             </div>
             <div class="uk-card-footer uk-text-truncate">
-                <input type="checkbox" :value="folder.name" v-model="$parent.selected" @click.stop>
+                <input class="uk-checkbox" type="checkbox" :value="folder.name" v-model="$parent.selected" @click.stop>
                 <a @click.stop="$parent.setPath(folder.path, $event)">{{ folder.name }}</a>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <canvas class="uk-responsive-width uk-display-block" width="1200" height="800"></canvas>
             </div>
             <div class="uk-card-footer uk-text-nowrap uk-text-truncate">
-                <input type="checkbox" :value="file.name" v-model="$parent.selected" @click.stop>
+                <input class="uk-checkbox" type="checkbox" :value="file.name" v-model="$parent.selected" @click.stop>
                 {{ file.name }}
             </div>
         </div>

@@ -7,8 +7,8 @@
 
                 <div class="uk-margin-right" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-iconnav">
-                        <li v-show="selected.length === 1"><a uk-icon="file-edit" :title="$trans('Rename')" data-uk-tooltip="{delay: 500}" @click.prevent="rename"></a></li>
-                        <li><a uk-icon="trash" :title="$trans('Delete')" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
+                        <li v-show="selected.length === 1"><a uk-icon="file-edit" :uk-tooltip="$trans('Rename')" @click.prevent="rename"></a></li>
+                        <li><a uk-icon="trash" :uk-tooltip="$trans('Delete')" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
                     </ul>
                 </div>
 
@@ -24,10 +24,10 @@
                 <div class="uk-margin-right">
                     <ul class="uk-iconnav">
                         <li :class="{'uk-active': innerView == 'template-table'}">
-                            <a uk-icon="table" :title="$trans('Table View')" data-uk-tooltip="{delay: 500}" @click.prevent="innerView = 'template-table'"></a>
+                            <a uk-icon="table" :uk-tooltip="$trans('Table View')" @click.prevent="innerView = 'template-table'"></a>
                         </li>
                         <li :class="{'uk-active': innerView == 'template-thumbnail'}">
-                            <a uk-icon="grid" :title="$trans('Thumbnails View')" data-uk-tooltip="{delay: 500}" @click.prevent="innerView = 'template-thumbnail'"></a>
+                            <a uk-icon="grid" :uk-tooltip="$trans('Thumbnails View')" @click.prevent="innerView = 'template-thumbnail'"></a>
                         </li>
                     </ul>
                 </div>
