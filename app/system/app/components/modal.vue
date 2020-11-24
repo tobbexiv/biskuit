@@ -1,15 +1,17 @@
 <template>
     <div :class="wrapperClasses">
         <div class="uk-modal-dialog" :class="dialogClasses" v-if="opened">
-            <div class="uk-modal-header" v-if="$slots.header">
-                <slot name="header"></slot>
-            </div>
-            <div class="uk-modal-body" v-if="$slots.default">
-                <slot></slot>
-            </div>
-            <div class="uk-modal-footer uk-text-right" v-if="$slots.footer">
-                <slot name="footer"></slot>
-            </div>
+            <validation-observer v-slot="validationObserver" slim>
+                <div class="uk-modal-header" v-if="hasSlot('header')">
+                    <slot name="header" v-bind:validationObserver="validationObserver"></slot>
+                </div>
+                <div class="uk-modal-body" v-if="hasSlot('default')">
+                    <slot v-bind:validationObserver="validationObserver"></slot>
+                </div>
+                <div class="uk-modal-footer uk-text-right" v-if="hasSlot('footer')">
+                    <slot name="footer" v-bind:validationObserver="validationObserver"></slot>
+                </div>
+            </validation-observer>
         </div>
     </div>
 </template>
@@ -77,7 +79,13 @@
             },
             close() {
                 this.modal.hide();
-            }
+            },
+            hasSlot(name) {
+                const notScoped = this.$slots[name];
+                const nodes = this.$scopedSlots && this.$scopedSlots[name] && this.$scopedSlots[name]();
+                const scoped = nodes && nodes.length;
+                return notScoped || scoped;
+           }
         }
     }
 </script>
