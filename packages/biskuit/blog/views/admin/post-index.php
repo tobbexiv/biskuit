@@ -11,7 +11,7 @@
         <div class="uk-margin-left" >
           <ul class="uk-iconnav">
             <li><a :uk-tooltip="$trans('Publish')" @click="status(2)"><span uk-icon="check"></span></a></li>
-            <li><a :uk-tooltip="$trans('Unpublish')" @click="status(3)"><span uk-icon="close"></span></a></li>
+            <li><a :uk-tooltip="$trans('Unpublish')" @click="status(3)"><span uk-icon="ban"></span></a></li>
             <li><a :uk-tooltip="$trans('Copy')" @click="copy"><span uk-icon="copy"></span></a></li>
             <li><a :uk-tooltip="$trans('Delete')" @click="remove" v-confirm="'Delete Posts?'"><span uk-icon="trash"></span></a></li>
           </ul>
@@ -59,7 +59,7 @@
             <span v-if="post.status == 0" uk-icon="pencil"></span>
             <span v-if="post.status == 1" uk-icon="warning"></span>
             <span v-if="post.status == 2 && post.published" uk-icon="check"></span>
-            <span v-if="post.status == 3" uk-icon="close"></span>
+            <span v-if="post.status == 3" uk-icon="ban"></span>
             <span v-if="post.status == 2 && !post.published" uk-icon="calendar"></span>
           </a>
         </td>
