@@ -2,15 +2,17 @@
     <div v-show="items">
         <div class="uk-flex uk-flex-between uk-flex-wrap" uk-margin>
             <div class="uk-flex uk-flex-middle uk-flex-wrap" uk-margin>
-                <h3 class="uk-margin-right uk-margin-remove-bottom" v-show="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice(count, {count:count}) }}</h3>
-                <h3 class="uk-margin-right uk-margin-remove-bottom uk-margin-remove-top" v-show="selected.length">{{ '{1} %count% File selected|]1,Inf[ %count% Files selected' | transChoice(selected.length, {count:selected.length}) }}</h3>
+                <h3 class="uk-margin-remove" v-if="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice(count, {count:count}) }}</h3>
 
-                <div class="uk-margin-right" v-if="isWritable" v-show="selected.length">
-                    <ul class="uk-iconnav">
-                        <li v-show="selected.length === 1"><a uk-icon="file-edit" :uk-tooltip="$trans('Rename')" @click.prevent="rename"></a></li>
-                        <li><a uk-icon="trash" :uk-tooltip="$trans('Delete')" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
-                    </ul>
-                </div>
+                <template v-else>
+                    <h3 class="uk-margin-remove">{{ '{1} %count% File selected|]1,Inf[ %count% Files selected' | transChoice(selected.length, {count:selected.length}) }}</h3>
+                    <div class="uk-margin-left" v-if="isWritable">
+                        <ul class="uk-iconnav">
+                            <li v-show="selected.length === 1"><a uk-icon="file-edit" :uk-tooltip="$trans('Rename')" @click.prevent="rename"></a></li>
+                            <li><a uk-icon="trash" :uk-tooltip="$trans('Delete')" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
+                        </ul>
+                    </div>
+                </template>
 
                 <hr class="uk-divider-vertical bk-divider-vertical" />
 

@@ -28,8 +28,8 @@
                     <thead>
                         <tr>
                             <th class="bk-table-min-width-200">{{ groupKey }}</th>
-                            <th class="bk-table-width-minimum"></th>
-                            <th class="bk-table-width-minimum"></th>
+                            <th class="uk-table-shrink"></th>
+                            <th class="uk-table-shrink"></th>
                         </tr>
                     </thead>
                     <tbody>

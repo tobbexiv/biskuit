@@ -1,14 +1,14 @@
-<table class="uk-table uk-table-hover uk-table-middle">
+<table class="uk-table uk-table-divider uk-table-hover uk-table-middle">
     <thead>
-        <th class="bk-table-width-minimum"><input class="uk-checkbox" type="checkbox" v-check-all:items="{ watchedElementsSelector: 'input[name=name]', statusStorageSelector: '$parent.selected' }"></th>
+        <th class="uk-table-shrink"><input class="uk-checkbox" type="checkbox" v-check-all:items="{ watchedElementsSelector: 'input[name=name]', statusStorageSelector: '$parent.selected' }"></th>
         <th colspan="2">{{ 'Name' | trans }}</th>
-        <th class="bk-table-width-minimum uk-text-center">{{ 'Size' | trans }}</th>
-        <th class="bk-table-width-minimum">{{ 'Modified' | trans }}</th>
+        <th class="uk-table-shrink uk-text-center">{{ 'Size' | trans }}</th>
+        <th class="uk-table-shrink">{{ 'Modified' | trans }}</th>
     </thead>
     <tbody>
         <tr v-for="folder in $parent.searchedFolders" class="uk-visible-toggle" :class="{'uk-active': $parent.isSelected(folder.name)}" @click.prevent="$parent.toggleSelect(folder.name)">
             <td><input class="uk-checkbox" type="checkbox" name="name" :value="folder.name" v-model="$parent.selected" @click.stop></td>
-            <td class="bk-table-width-minimum uk-active">
+            <td class="uk-table-shrink uk-active">
                 <span class="uk-icon-button" uk-icon="folder"></span>
             </td>
             <td class="bk-table-min-width-200"><a @click.stop="$parent.setPath(folder.path)">{{ folder.name }}</a></td>
@@ -18,7 +18,7 @@
 
         <tr v-for="file in $parent.searchedFiles" class="uk-visible-toggle" :class="{'uk-active': $parent.isSelected(file.name)}" @click.prevent="$parent.toggleSelect(file.name)">
             <td><input class="uk-checkbox" type="checkbox" name="name" :value="file.name" v-model="$parent.selected" @click.stop></td>
-            <td class="bk-table-width-minimum uk-active">
+            <td class="uk-table-shrink uk-active">
                 <span v-if="$parent.isImage(file.url)" class="uk-icon uk-icon-image" v-lazy-background="$url(file.url)"></span>
                 <span v-else class="uk-icon-button" uk-icon="file-text"></span>
             </td>
