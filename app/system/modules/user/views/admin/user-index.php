@@ -58,7 +58,7 @@
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                      <a :title="user.statusText" @click="toggleStatus(user)">
+                      <a :uk-tooltip="$trans((user.status && !user.login ? 'New' : config.statuses[user.status]))" @click="toggleStatus(user)">
                         <span v-if="user.status && user.login" uk-icon="check"></span>
                         <span v-if="user.status && !user.login">(<span uk-icon="check"></span>)</span>
                         <span v-if="!user.status" uk-icon="ban"></span>
