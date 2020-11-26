@@ -2,23 +2,26 @@
     <validation-provider :vid="id" :customMessages="errorMessages" :rules="rules" v-slot="{ errors, required, ariaMsg, ariaInput }" slim>
         <div v-if="type !== 'password'" :class="getOption('wrapperClass')">
             <label v-if="label" :for="id" :class="getOption('labelClass')">{{ label | trans }} <span>{{ required ? ' *' : '' }}</span></label>
-            <div :class="getOption('innerWrapperClass')" class="uk-width-1-1 uk-inline">
+            <div :class="getOption('innerWrapperClass')">
                 <textarea v-if="tag === 'textarea'" :id="id" class="uk-textarea" :class="getOption('elementClass')" :rows="getOption('textarea.rows')" :name="name" :placeholder="placeholder" v-model="innerValue" v-bind="ariaInput" />
-                <template v-else>
+                <div class="uk-inline" :class="getOption('elementClass')" v-else>
                     <a v-if="getOption('icon.type') == 'link'" class="uk-form-icon uk-form-icon-flip" @click.prevent="getOption('icon.callback')"  :uk-tooltip="getOption('icon.label')" :uk-icon="getOption('icon.symbol')"></a>
                     <input :id="id" class="uk-input" :class="getOption('elementClass')" :type="type" :name="name" :placeholder="placeholder" :autocomplete="autocomplete" v-model="innerValue" v-bind="ariaInput" />
-                </template>
-                <p class="uk-form-help-block uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
+                </div>
+                <p class="uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
             </div>
         </div>
         <div v-else-if="type === 'password'" :class="getOption('wrapperClass')">
-            <label v-if="label" :for="id" :class="getOption('labelClass')">as{{ label | trans }} <span>{{ required ? ' *' : '' }}</span></label>
-            <div :class="getOption('innerWrapperClass')">
-                <div class="uk-inline uk-width-1-1">
+            <label v-if="label" :for="id" :class="getOption('labelClass')">{{ label | trans }} <span>{{ required ? ' *' : '' }}</span></label>
+            <div :class="getOption('innerWrapperClass')" class="uk-form-controls-text" v-if="!editingPassword">
+                <a href="#" @click.prevent="editingPassword = true">{{ 'Change password' | trans }}</a>
+            </div>
+            <div :class="getOption('innerWrapperClass')" v-else>
+                <div class="uk-inline" :class="getOption('elementClass')">
                     <a class="uk-form-icon uk-form-icon-flip" tabindex="-1" @click.prevent="hidePassword = !hidePassword" :uk-tooltip="hidePassword ? 'Show' : 'Hide' | trans" :uk-icon="hidePassword ? 'unlock' : 'lock'"></a>
-                    <input :id="id" class="uk-input" :class="getOption('elementClass')" :type="hidePassword ? 'password' : 'text'" :name="name" :placeholder="placeholder" autocomplete="off" v-model="innerValue" v-bind="ariaInput" />
+                    <input :id="id" class="uk-input" :class="getOption('elementClass')" :type="hidePassword ? 'password' : 'text'" :name="name" :placeholder="placeholder" :autocomplete="getOption('password.new') ? 'new-password' : 'off'" v-model="innerValue" v-bind="ariaInput" />
                 </div>
-                <p class="uk-form-help-block uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
+                <p class="uk-text-danger" v-if="errors[0]" v-bind="ariaMsg">{{ errors[0] | trans }}</p>
             </div>
         </div>
     </validation-provider>
@@ -73,6 +76,7 @@
         data() {
             return {
                 innerValue: '',
+                editingPassword: true,
                 hidePassword: true,
                 innerOptions: _.merge({
                     wrapperClass: 'uk-margin',
@@ -94,6 +98,9 @@
         created() {
             if (this.value) {
                 this.innerValue = this.value;
+            }
+            if(this.getOption('password.noImmediateEdit')) {
+                this.editingPassword = false;
             }
         },
 
