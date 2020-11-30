@@ -1,27 +1,28 @@
 <template>
     <div>
         <v-modal ref="login">
-            <div class="uk-text-center">
+            <div class="uk-text-center uk-margin-left uk-margin-right">
                 <img class="uk-margin" :src="$url('app/system/assets/images/biskuit-logo-text-black.svg')" alt="Biskuit">
                 <p class="uk-text-danger">{{ 'Session expired. Please log in again.' | trans }}</p>
 
-                <form class="uk-form tm-form" @submit.prevent="login" ref="loginForm">
-                    <div class="uk-panel uk-card">
-                        <div class="uk-margin">
-                            <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" :placeholder="$trans('Username')" autofocus v-model="credentials.username">
+                <form @submit.prevent="login" ref="loginForm">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <div class="uk-margin-medium-bottom uk-inline uk-width-1-1">
+                            <span class="uk-form-icon" uk-icon="icon: user"></span>
+                            <input class="uk-input uk-form-large uk-width-1-1" type="text" name="credentials[username]" :placeholder="$trans('Username')" autofocus v-model="credentials.username">
                         </div>
 
-                        <div class="uk-margin">
-                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" :placeholder="$trans('Password')" v-model="credentials.password" ref="password">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-form-large uk-width-1-1" type="password" name="credentials[password]" :placeholder="$trans('Password')" v-model="credentials.password" ref="password">
                         </div>
-
-                        <p class="uk-margin tm-panel-marginless-bottom">
-                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">{{ 'Login' | trans }}</button>
-                        </p>
+                    </div>
+                    <div>
+                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">{{ 'Login' | trans }}</button>
                     </div>
 
-                    <p>
-                        <label class="uk-form"><input type="checkbox" v-model="remember"> {{ 'Remember Me' | trans }}</label>
+                    <p class="uk-margin-remove-bottom">
+                        <label class="uk-form-label"><input class="uk-checkbox" type="checkbox" v-model="remember"> {{ 'Remember Me' | trans }}</label>
                     </p>
                 </form>
             </div>
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+    import { on } from 'uikit-util';
+
     export default {
         data() {
             return {
@@ -50,7 +53,7 @@
             const vm = this;
 
             this.$refs.login.open();
-            this.$refs.login.modal.on('hide.uk.modal', function () {
+            on(this.$refs.login.modal.$el, 'hide', () => {
                 vm.reject();
                 vm.$destroy();
             });

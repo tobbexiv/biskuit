@@ -5,14 +5,14 @@
 
 <?php else: ?>
 
-<form class="uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
+<form action="<?= $view->url('@user/authenticate') ?>" method="post">
 
     <div class="uk-margin">
-        <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $this->escape($last_username) ?>" placeholder="<?= __('username') ?>">
+        <input class="uk-width-1-1 uk-input" type="text" name="credentials[username]" value="<?= $this->escape($last_username) ?>" placeholder="<?= __('username') ?>">
     </div>
 
     <div class="uk-margin">
-        <input class="uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('password') ?>">
+        <input class="uk-width-1-1 uk-input" type="password" name="credentials[password]" value="" placeholder="<?= __('password') ?>">
     </div>
 
     <div class="uk-margin">
@@ -20,7 +20,7 @@
     </div>
 
     <p>
-        <label><input type="checkbox" name="remember_me"> <?= __('Remember Me') ?></label>
+        <label><input class="uk-checkbox" type="checkbox" name="remember_me"> <?= __('Remember Me') ?></label>
         <br><a href="<?= $view->url('@user/resetpassword') ?>"><?= __('Forgot Password?') ?></a>
         <?php if ($app->module('system/user')->config('registration') != 'admin'): ?>
         <br><a href="<?= $view->url('@user/registration') ?>"><?= __('Sign up') ?></a>
